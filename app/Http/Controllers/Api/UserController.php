@@ -1,0 +1,307 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Address;
+use App\Helper\Helper;
+use App\Http\Requests\Api\CamponyRequest;
+use App\Http\Requests\Api\GovernmentRequest;
+use App\Http\Requests\Api\PresonalRequest;
+use App\Http\Requests\Api\UpdateCamponyRequest;
+use App\Http\Requests\Api\UpdateGovernmentRequest;
+use App\Http\Requests\Api\UpdatePresonalRequest;
+use App\Http\Resources\Api\AddressCollection;
+use App\Http\Resources\Api\ProfileCollection;
+use App\Http\Resources\Api\StatusCollection;
+use App\Http\Resources\Api\UserCollection;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
+{
+    //
+
+
+
+    /*
+     *
+     *   'name', 'email', 'password',
+        'phone', 'name_of_head', 'house',
+        'type', 'image', 'address',
+        'bio', 'minstry_id', 'company_id',
+        'country_id', 'city_id'
+     * */
+    public function personal(PresonalRequest $request){
+      $user= User::create([
+          'name'=>$request->name,
+          'email'=>$request->email,
+          'phone'=>$request->phone,
+          'country_id'=>$request->country_id,
+          'city_id'=>$request->city_id,
+          'password'=> bcrypt($request->password),
+          'house'=>$request->house,
+          'type'=>'personal',
+      ]);
+      $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+      $request->request->add([
+          'grant_type'    => 'password',
+          'client_id'     => $client->id,
+          'client_secret' => $client->secret,
+          'username'      => $user['email'],
+          'password'      => $user['password'],
+          'scope'         => null,
+      ]);
+
+      // Fire off the internal request.
+      $proxy = Request::create(
+          'oauth/token',
+          'POST'
+      );
+
+      //return \Route::dispatch($proxy);
+      $user['token'] =  $user->createToken('MyApp')->accessToken;
+      return new UserCollection($user);
+  }
+
+
+
+    public function government(GovernmentRequest $request){
+        $user= User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'name_of_head'=>$request->name_of_head,
+            'country_id'=>$request->country_id,
+            'city_id'=>$request->city_id,
+            'minstry_id'=>$request->minstry_id,
+            'password'=> bcrypt($request->password),
+            'type'=>'government',
+        ]);
+        $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+        $request->request->add([
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
+            'client_secret' => $client->secret,
+            'username'      => $user['email'],
+            'password'      => $user['password'],
+            'scope'         => null,
+        ]);
+
+        // Fire off the internal request.
+        $proxy = Request::create(
+            'oauth/token',
+            'POST'
+        );
+
+        //return \Route::dispatch($proxy);
+        $user['token'] =  $user->createToken('MyApp')->accessToken;
+        return new UserCollection($user);
+    }
+
+    public function company(CamponyRequest $request){
+        $user= User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'name_of_head'=>$request->name_of_head,
+            'country_id'=>$request->country_id,
+            'city_id'=>$request->city_id,
+            'company_id'=>$request->company_id,
+            'password'=> bcrypt($request->password),
+            'type'=>'company',
+        ]);
+        $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+        $request->request->add([
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
+            'client_secret' => $client->secret,
+            'username'      => $user['email'],
+            'password'      => $user['password'],
+            'scope'         => null,
+        ]);
+
+        // Fire off the internal request.
+        $proxy = Request::create(
+            'oauth/token',
+            'POST'
+        );
+
+        //return \Route::dispatch($proxy);
+        $user['token'] =  $user->createToken('MyApp')->accessToken;
+        return new UserCollection($user);
+    }
+
+
+    public function login(Request $request){
+
+        $request->validate([
+            'email'=>'required',
+            'password'=>'required'
+        ]);
+        $user= User::where('email',$request->email)->first();
+        if(!$user){
+            return new StatusCollection(false,'اسم المستخدم او كلمه المرور خطاء ');
+
+        }
+        if(Hash::check($request->password, $user->password)){
+            $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+            $request->request->add([
+                'grant_type'    => 'password',
+                'client_id'     => $client->id,
+                'client_secret' => $client->secret,
+                'username'      => $user['email'],
+                'password'      => $user['password'],
+                'scope'         => null,
+                //'type'         => $user->hasRole('translator') ? 'translator' : 'user',
+            ]);
+
+            // Fire off the internal request.
+            $proxy = Request::create(
+                'oauth/token',
+                'POST'
+            );
+
+            //return \Route::dispatch($proxy);
+            $user['token'] =  $user->createToken('MyApp')->accessToken;
+
+
+            return new UserCollection($user);
+
+
+
+        }else{
+            return new StatusCollection(false,'اسم المستخدم او كلمه المرور خطاء ');
+        }
+    }
+
+    public function myProfile()
+    {
+        $id=auth()->user()->id;
+        $user = User::with('minstry','company','country','city')->findOrFail($id);
+        return new ProfileCollection($user);
+    }
+    public function Updatepersonal(UpdatePresonalRequest $request){
+        $id=auth()->user()->id;
+         $user = User::findOrFail($id);
+
+           $user->name      =        $request->name;
+           $user->email     =        $request->email;
+           $user->phone     =        $request->phone;
+           $user->country_id=        $request->country_id;
+           $user->city_id   =        $request->city_id;
+                     if (isset($request->password))
+           $user->password  =         bcrypt($request->password);
+           $user->house     =         $request->house;
+        $user->save();
+        return new StatusCollection(true,'تم التعديل بنجاح');
+    }
+
+    public function Updategovernment(UpdateGovernmentRequest $request){
+        $id=auth()->user()->id;
+        $user = User::findOrFail($id);
+
+        $user->name      =        $request->name;
+        $user->email     =        $request->email;
+        $user->phone     =        $request->phone;
+        $user->country_id=        $request->country_id;
+        $user->city_id   =        $request->city_id;
+        if (isset($request->password))
+            $user->password  =         bcrypt($request->password);
+         $user->name_of_head =    $request->name_of_head;
+         $user->minstry_id =    $request->minstry_id;
+        $user->save();
+
+        return new StatusCollection(true,'تم التعديل بنجاح');
+    }
+
+    public function Updatecompany(UpdateCamponyRequest $request){
+        $id=auth()->user()->id;
+        $user = User::findOrFail($id);
+
+        $user->name      =        $request->name;
+        $user->email     =        $request->email;
+        $user->phone     =        $request->phone;
+        $user->country_id=        $request->country_id;
+        $user->city_id   =        $request->city_id;
+        if (isset($request->password))
+            $user->password  =         bcrypt($request->password);
+        $user->name_of_head =    $request->name_of_head;
+        $user->company_id =    $request->company_id;
+        $user->save();
+
+        return new StatusCollection(true,'تم التعديل بنجاح');
+    }
+    public function edite_imge(Request $request)
+    {
+        $user = User::findOrFail(auth()->user()->id);
+
+        if ($request->hasFile('image')) {
+            if ($user->image !='') {
+
+                if (File::exists(public_path($user->image))) { // unlink or remove previous image from folder
+                    unlink(public_path($user->avatar_location));
+                }
+                $img_name = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move(public_path('uploads/avatars/'), $img_name);
+                $db_name = 'avatars/' . $img_name;
+
+
+            }
+            else{
+                $img_name = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move(public_path('uploads/avatars/'), $img_name);
+                $db_name = 'uploads/avatars/' . $img_name;
+            }
+        } else
+            $db_name = $user->image;
+
+        $user->update([
+            'image' => $db_name
+        ]);
+        return new StatusCollection(true,'تم التعديل بنجاح');
+
+    }
+
+    public function addAddress(Request $request)
+{
+    Address::create([
+        'user_id'=>auth()->user()->id,
+        'latitude'=>$request->latitude,
+        'longitude'=>$request->longitude,
+        'address'=>$request->address
+    ]);
+
+    return new StatusCollection(true,'تم اضافه عنوان');
+
+}
+
+public function getAllMyaderss()
+{
+    $address = Address::where('user_id',auth()->user()->id)->get();
+    return AddressCollection::collection($address);
+}
+
+    public function  test()
+   {
+    for($i = 1; $i <=  date('t'); $i++)
+    {
+        $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-".date("l", mktime(0,0,0,date('m'),str_pad($i, 2, '0', STR_PAD_LEFT),date('Y'))) ;
+      $dates[] =$dd;
+    }
+      // $dt = Carbon::createFromFormat($dates);
+
+      return $dates ;
+         // response()->json(['data'=>$dates]);
+         // response()->json(['data'=>$dates]);
+
+    }
+
+}
