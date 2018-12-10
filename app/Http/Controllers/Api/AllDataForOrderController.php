@@ -13,6 +13,7 @@ use App\Producet;
 use App\Time;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use  Date;
 
 class AllDataForOrderController extends Controller
 {
@@ -27,13 +28,23 @@ class AllDataForOrderController extends Controller
         for ($i = 1; $i <= 7; $i++) {
 
             {
-                Date::setLocale($request->lang);
+                Date::setLocale('ar');
 
-                $dates[] =Date::now()->addDays($i)->format(' l j F Y');
+                $dates1[] =Date::now()->addDays($i)->format(' l j F Y');
 
             }
                }
-        return  response()->json(['data'=>$dates]);
+
+        for ($i = 1; $i <= 7; $i++) {
+
+            {
+                Date::setLocale('en');
+
+                $dates2[] =Date::now()->addDays($i)->format(' l j F Y');
+
+            }
+        }
+        return  response()->json(['data_ar'=>$dates1,'data_en'=>$dates2]);
 
 
           }

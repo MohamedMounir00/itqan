@@ -13,17 +13,26 @@ use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 class OrderController extends Controller
 {
     //
+
     public function AddOrder(OrderRequest $request)
     {
+       ;
+        $request->date_en;
+
+        $name =[
+            'en'=> $request->date_en,
+            'ar'=> $request->date_ar,
+            // 'en'=>'Pm',
+            // 'ar'=>'مساء',
+        ];
         $order = new  Order();
         $order->desc = $request->desc;
         $order->category_id = $request->category_id;
         $order->time_id = $request->time_id;
-        $order->date = $request->date;
+        $order->date =serialize($name) ;
         $order->address_id = $request->address_id;
         $order->status = 'new';
         $order->user_id = auth()->user()->id;

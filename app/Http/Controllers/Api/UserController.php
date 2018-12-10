@@ -301,7 +301,7 @@ public function getAllMyaderss()
                //   $day[] = Carbon::now()->subDays($i)->format('D');
              Date::setLocale($request->lang);
 
-               $dates[] =Date::now()->addDays($i)->format(' l j F Y');
+              // $dates[] =Date::format('الاثنين 17 ديسمبر 2018');
                //  $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-". date('m').Carbon::now()->subDays(7)->format('D') ;
 
 
@@ -311,8 +311,9 @@ public function getAllMyaderss()
      //  Carbon::setLocale(config('app.locale'));
       // setlocale(LC_TIME, config('app.localeWithRegion'));
        //Carbon::setLocale('ar');
-
-       return  $dates;
+       Date::setLocale('en');
+       $dd=Date('الاثنين 17 ديسمبر 2018');
+       return  $dd;
 
          // response()->json(['data'=>$dates]);
          // response()->json(['data'=>$dates]);

@@ -51,11 +51,11 @@ elseif ($this->status=='need_parts')
         return [
             'id'=>$this->id,
             'desc'=>$this->desc,
-            'date'=>$this->date,
+            'date'=>unserialize($this->date)[$request->lang],
             'client'=>$this->user->name,
             'technical'=>isset($this->technical->name ) ? $this->technical->name : '',
             'status'=>$status,
-            'category'=>($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->cat->category->name)[$request->lang] ,
+            'category'=>($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,
             'address'=>new AddressCollection($this->address),
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
