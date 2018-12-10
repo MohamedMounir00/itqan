@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartOFOrdersTable extends Migration
+class CreateCartOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCartOFOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart_o_f_orders', function (Blueprint $table) {
+        Schema::create('cart_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('producet_id')->unsigned()->nullable();
-            $table->foreign('producet_id')->references('id')->on('producets')->onDelete('cascade');
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->boolean('status')->default(false);
+
             $table->timestamps();
         });
     }

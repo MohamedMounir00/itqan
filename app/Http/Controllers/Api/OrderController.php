@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Assian;
 use App\Cart;
+use App\CartOrder;
 use App\Http\Requests\Api\OrderRequest;
+use App\Http\Resources\Api\AllOrderCollection;
 use App\Http\Resources\Api\OrderCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Order;
@@ -19,7 +21,7 @@ class OrderController extends Controller
     {
         $order = new  Order();
         $order->desc = $request->desc;
-        $order->cat_id = $request->cat_id;
+        $order->category_id = $request->category_id;
         $order->time_id = $request->time_id;
         $order->date = $request->date;
         $order->address_id = $request->address_id;
@@ -27,10 +29,17 @@ class OrderController extends Controller
         $order->user_id = auth()->user()->id;
         $order->save();
         $order->storge()->sync(explode(',', $request->file_id));
-        $order->proudect()->sync(explode(',', $request->producet_id));
-        foreach (explode(',', $request->producet_id) as $value) {
+
+        foreach (explode(',', $request->product_id) as $value) {
+            CartOrder::create([
+                'product_id' => $value,
+                'order_id' => $order->id,
+                'status' => 1,
+            ]);
+        }
+        foreach (explode(',', $request->product_id) as $value) {
             Cart::create([
-                'producet_id' => $value,
+                'product_id' => $value,
                 'user_id' => auth()->user()->id,
             ]);
         }
@@ -41,10 +50,22 @@ class OrderController extends Controller
 
     public function allOrdersForClient()
     {
+        $statuses_Array1 = ['new','wating', 'consultation', 'delay', 'need_parts'];
+        $statuses_Array2 = ['done', 'can_not'];
+
         if (auth()->user()->type == 'personal' || 'government' || 'company')
-            $order = Order::with('cat', 'address', 'time', 'user', 'storge', 'proudect')->where('user_id', auth()->user()->id)
+        {
+            $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->whereIn('status', $statuses_Array1)
+                ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
                 ->get();
-        return OrderCollection::collection($order);
+
+            $oldorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->whereIn('status', $statuses_Array2)
+                ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
+                ->get();
+            return  new AllOrderCollection($courntorder,$oldorder);
+                //OrderCollection::collection($order);
+        }
+
     }
 
 

@@ -17,8 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('desc');
-            $table->integer('cat_id')->unsigned()->nullable();
-            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->integer('time_id')->unsigned()->nullable();
             $table->foreign('time_id')->references('id')->on('times')->onDelete('cascade');

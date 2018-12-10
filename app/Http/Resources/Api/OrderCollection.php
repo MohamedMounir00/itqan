@@ -55,11 +55,11 @@ elseif ($this->status=='need_parts')
             'client'=>$this->user->name,
             'technical'=>isset($this->technical->name ) ? $this->technical->name : '',
             'status'=>$status,
-            'cat'=>($request->lang =='ar') ? 'تصليح '.  unserialize($this->cat->main->name)[$request->lang]:'Repairing' .unserialize($this->cat->main->name)[$request->lang] ,
+            'category'=>($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->cat->category->name)[$request->lang] ,
             'address'=>new AddressCollection($this->address),
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
-            'proudect'=>ProudctCollection::collection($this->proudect),
+            'proudct'=>ProudctCollection::collection($this->proudect),
         ];
     }
 }

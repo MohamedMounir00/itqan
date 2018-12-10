@@ -17,11 +17,11 @@ class Order extends Model
 
     public function proudect()
     {
-        return $this->belongsToMany(Producet::class,'cart_o_f_orders','order_id');
+        return $this->belongsToMany(Product::class,'cart_orders','order_id');
     }
 
-    public  function  cat(){
-    return $this->belongsTo(Category::class,'cat_id')->with('main');
+    public  function  category(){
+    return $this->belongsTo(Category::class,'category_id')->with('main');
 
            }
 
