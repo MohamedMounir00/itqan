@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-
+use Date;
 class UserController extends Controller
 {
     //
@@ -289,16 +289,31 @@ public function getAllMyaderss()
     return AddressCollection::collection($address);
 }
 
-    public function  test()
+    public function  test(Request $request)
    {
-    for($i = 1; $i <=  date('t'); $i++)
-    {
-        $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-".date("l", mktime(0,0,0,date('m'),str_pad($i, 2, '0', STR_PAD_LEFT),date('Y'))) ;
-      $dates[] =$dd;
-    }
-      // $dt = Carbon::createFromFormat($dates);
 
-      return $dates ;
+
+       for ($m = 1; $m < 7; $m++) {
+           $day[] = Carbon::now()->subDays($m)->format('D');
+       }
+           for ($i = 1; $i <= 7; $i++) {
+
+               //   $day[] = Carbon::now()->subDays($i)->format('D');
+             Date::setLocale($request->lang);
+
+               $dates[] =Date::now()->addDays($i)->format(' l j F Y');
+               //  $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-". date('m').Carbon::now()->subDays(7)->format('D') ;
+
+
+       }
+      // $dt = Carbon::createFromFormat($dates);
+     //  setlocale(LC_TIME, 'ar_AE');
+     //  Carbon::setLocale(config('app.locale'));
+      // setlocale(LC_TIME, config('app.localeWithRegion'));
+       //Carbon::setLocale('ar');
+
+       return  $dates;
+
          // response()->json(['data'=>$dates]);
          // response()->json(['data'=>$dates]);
 

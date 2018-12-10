@@ -105,6 +105,7 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         ),
         'J' => 
         array (
+            'Jenssegers\\Date\\' => 16,
             'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
@@ -308,6 +309,10 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         array (
             0 => __DIR__ . '/..' . '/laravel/passport/src',
         ),
+        'Jenssegers\\Date\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jenssegers/date/src',
+        ),
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -413,6 +418,13 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
                 0 => __DIR__ . '/..' . '/mcamara/laravel-localization/src',
             ),
         ),
+        'L' => 
+        array (
+            'Laravelrus\\LocalizedCarbon\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/laravelrus/localized-carbon/src',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
@@ -438,7 +450,9 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'App\\Helper\\Helper' => __DIR__ . '/../..' . '/app/Helper/Helper.php',
         'App\\Http\\Controllers\\Api\\AllDataForOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AllDataForOrderController.php',
         'App\\Http\\Controllers\\Api\\DataRegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/DataRegisterController.php',
+        'App\\Http\\Controllers\\Api\\NotfiyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/NotfiyController.php',
         'App\\Http\\Controllers\\Api\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/OrderController.php',
+        'App\\Http\\Controllers\\Api\\OrderTechnicalController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/OrderTechnicalController.php',
         'App\\Http\\Controllers\\Api\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/RegisterController.php',
         'App\\Http\\Controllers\\Api\\StorgeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/StorgeController.php',
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
@@ -468,6 +482,7 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'App\\Http\\Resources\\Api\\CountryCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/CountryCollection.php',
         'App\\Http\\Resources\\Api\\DateCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/DateCollection.php',
         'App\\Http\\Resources\\Api\\MintstryCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/MintstryCollection.php',
+        'App\\Http\\Resources\\Api\\NotifyCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/NotifyCollection.php',
         'App\\Http\\Resources\\Api\\OrderCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/OrderCollection.php',
         'App\\Http\\Resources\\Api\\ProfileCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/ProfileCollection.php',
         'App\\Http\\Resources\\Api\\ProudctCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/ProudctCollection.php',
@@ -478,6 +493,7 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'App\\Http\\Resources\\Api\\UserCity' => __DIR__ . '/../..' . '/app/Http/Resources/Api/UserCity.php',
         'App\\Http\\Resources\\Api\\UserCollection' => __DIR__ . '/../..' . '/app/Http/Resources/Api/UserCollection.php',
         'App\\Ministry' => __DIR__ . '/../..' . '/app/Ministry.php',
+        'App\\NotfiyOrder' => __DIR__ . '/../..' . '/app/NotfiyOrder.php',
         'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
         'App\\Producet' => __DIR__ . '/../..' . '/app/Producet.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -2122,6 +2138,8 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
+        'Jenssegers\\Date\\Date' => __DIR__ . '/..' . '/jenssegers/date/src/Date.php',
+        'Jenssegers\\Date\\DateServiceProvider' => __DIR__ . '/..' . '/jenssegers/date/src/DateServiceProvider.php',
         'Laravel\\Passport\\ApiTokenCookieFactory' => __DIR__ . '/..' . '/laravel/passport/src/ApiTokenCookieFactory.php',
         'Laravel\\Passport\\AuthCode' => __DIR__ . '/..' . '/laravel/passport/src/AuthCode.php',
         'Laravel\\Passport\\Bridge\\AccessToken' => __DIR__ . '/..' . '/laravel/passport/src/Bridge/AccessToken.php',
@@ -2178,6 +2196,33 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFactoryFacade' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFactoryFacade.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatterFactory' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatterFactory.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\AfDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/AfDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\ArDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/ArDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\BgDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/BgDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\BnDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/BnDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\DeDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/DeDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\DiffFormatterInterface' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/DiffFormatterInterface.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\ElDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/ElDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\EnDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/EnDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\EsDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/EsDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\FaDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/FaDiffFotmatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\FrDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/FrDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\ItDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/ItDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\JaDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/JaDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\NlDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/NlDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\PtDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/PtDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\RoDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/RoDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\RuDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/RuDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\SkDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/SkDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\SvDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/SvDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\TrDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/TrDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\DiffFormatters\\UkDiffFormatter' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/DiffFormatters/UkDiffFormatter.php',
+        'Laravelrus\\LocalizedCarbon\\LocalizedCarbon' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/LocalizedCarbon.php',
+        'Laravelrus\\LocalizedCarbon\\LocalizedCarbonServiceProvider' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/LocalizedCarbonServiceProvider.php',
+        'Laravelrus\\LocalizedCarbon\\Models\\Eloquent' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/Models/Eloquent.php',
+        'Laravelrus\\LocalizedCarbon\\Traits\\LocalizedEloquentTrait' => __DIR__ . '/..' . '/laravelrus/localized-carbon/src/Laravelrus/LocalizedCarbon/Traits/LocalizedEloquentTrait.php',
         'Lcobucci\\JWT\\Builder' => __DIR__ . '/..' . '/lcobucci/jwt/src/Builder.php',
         'Lcobucci\\JWT\\Claim' => __DIR__ . '/..' . '/lcobucci/jwt/src/Claim.php',
         'Lcobucci\\JWT\\Claim\\Basic' => __DIR__ . '/..' . '/lcobucci/jwt/src/Claim/Basic.php',

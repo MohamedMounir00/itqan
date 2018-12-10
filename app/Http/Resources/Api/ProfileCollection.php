@@ -58,5 +58,20 @@ class ProfileCollection extends JsonResource
             ];
         }
 
+        elseif ($this->type =='technical'){
+            return [
+                'id'=>$this->id,
+                'name'=>$this->name,
+                'email'=>$this->email,
+                'type'=>$this->type,
+                'phone'=>$this->phone,
+                'country'=>new CountryCollection($this->country),
+                'city'=>new CityCollection($this->city),
+                'image'=>url($this->image),
+                'bio'=>$this->bio
+
+            ];
+        }
+
     }
 }

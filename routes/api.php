@@ -47,7 +47,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');
     Route::get('all_orders_for_client','Api\OrderController@allOrdersForClient');
-   // Route::post('update_status_to_wating','Api\OrderController@updateStatustoWating');
-    //Route::get('all_order_for_technical','Api\OrderController@allOrderForTechnical');
+    Route::get('get_notifay','Api\NotfiyController@getNotifay');
+    Route::post('assien_technical','Api\OrderController@assienTechnical');
+
+
+    //////////////////////////////////////////////////////////techainel
+    Route::get('all_order_for_technical','Api\OrderTechnicalController@allOrderForTechnical');
+    Route::post('update_status_order','Api\OrderTechnicalController@updateStatusOrder');
+    Route::post('make_proudect_for_order','Api\OrderTechnicalController@makeProudectForOrder');
+
+
 
 });

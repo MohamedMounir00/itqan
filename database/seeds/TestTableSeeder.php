@@ -19,8 +19,8 @@ class TestTableSeeder extends Seeder
 
 
           $name =[
-            'en'=>'basin',
-            'ar'=>'حوض',
+            'en'=>'تم تعين  فنى لطلبك',
+            'ar'=>'assien techamnal',
             // 'en'=>'Pm',
              // 'ar'=>'مساء',
           ];
@@ -34,10 +34,12 @@ class TestTableSeeder extends Seeder
 
          //  $user->save() ;
 
-        \App\Producet::create([
-           'name' =>serialize($name),
-            'price'=>100,
-            'cat_id'=>1
+        \App\NotfiyOrder::create([
+           'message' =>serialize($name),
+            'order_id'=>8,
+            'client_id'=>1,
+            'technical_id'=>5,
+
 
         ]);
 

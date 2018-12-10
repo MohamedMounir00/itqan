@@ -23,10 +23,15 @@ class AllDataForOrderController extends Controller
 
           return TimeCollection::collection($times);
     }
-    public function dateOrder(){
-          for($i = 1; $i <=  date('t'); $i++)
-          {
-              $dates[]= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-".date("l", mktime(0,0,0,date('m'),str_pad($i, 2, '0', STR_PAD_LEFT),date('Y'))) ;
+    public function dateOrder(Request $request){
+        for ($i = 1; $i <= 7; $i++) {
+
+            {
+                Date::setLocale($request->lang);
+
+                $dates[] =Date::now()->addDays($i)->format(' l j F Y');
+
+            }
                }
         return  response()->json(['data'=>$dates]);
 

@@ -20,7 +20,7 @@ class OrderCollection extends JsonResource
 if ($this->status=='new')
     $status= 'جارى تعين الفنى';
 elseif ($this->status=='wating')
-    $status= 'تم تعين الفني';
+    $status= 'طلب جديد';
 elseif ($this->status=='done')
     $status= 'تم التصليح';
 elseif ($this->status=='can_not')
@@ -34,11 +34,11 @@ elseif ($this->status=='need_parts')
     }
     else{
         if ($this->status=='new')
-            $status= 'New Order';
+            $status= 'Go to the technical report';
         elseif ($this->status=='wating')
-            $status= 'فى الانتظار';
+            $status= 'New Order';
         elseif ($this->status=='done')
-            $status= 'Waiting';
+            $status= 'Dne';
         elseif ($this->status=='can_not')
             $status= 'Can not be Fixed';
         elseif ($this->status=='consultation')
