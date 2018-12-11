@@ -62,9 +62,9 @@ class OrderController extends Controller
     {
         $statuses_Array1 = ['new','wating', 'consultation', 'delay', 'need_parts'];
         $statuses_Array2 = ['done', 'can_not'];
+        $user= User::findOrFail(auth()->user()->id);
 
-        if (auth()->user()->client->type == 'personal' || 'government' || 'company')
-        {
+
             $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->whereIn('status', $statuses_Array1)
                 ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
                 ->get();
@@ -74,7 +74,7 @@ class OrderController extends Controller
                 ->get();
             return  new AllOrderCollection($courntorder,$oldorder);
                 //OrderCollection::collection($order);
-        }
+      
 
     }
 
