@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Address;
+use App\Client;
 use App\Helper\Helper;
 use App\Http\Requests\Api\CamponyRequest;
 use App\Http\Requests\Api\GovernmentRequest;
@@ -29,11 +30,7 @@ class UserController extends Controller
 
     /*
      *
-     *   'name', 'email', 'password',
-        'phone', 'name_of_head', 'house',
-        'type', 'image', 'address',
-        'bio', 'minstry_id', 'company_id',
-        'country_id', 'city_id'
+     *
      * */
     public function personal(PresonalRequest $request){
       $user= User::create([
@@ -43,9 +40,13 @@ class UserController extends Controller
           'country_id'=>$request->country_id,
           'city_id'=>$request->city_id,
           'password'=> bcrypt($request->password),
-          'house'=>$request->house,
-          'type'=>'personal',
+
       ]);
+      $client1=  Client::create([
+            'user_id'=>$user->id,
+             'house'=>$request->house,
+            'type'=>'personal',
+        ]);
       $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
       $request->request->add([
@@ -65,6 +66,7 @@ class UserController extends Controller
 
       //return \Route::dispatch($proxy);
       $user['token'] =  $user->createToken('MyApp')->accessToken;
+      $user['type'] =  $client1->type;
       return new UserCollection($user);
   }
 
@@ -75,12 +77,16 @@ class UserController extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'phone'=>$request->phone,
-            'name_of_head'=>$request->name_of_head,
             'country_id'=>$request->country_id,
             'city_id'=>$request->city_id,
-            'minstry_id'=>$request->minstry_id,
             'password'=> bcrypt($request->password),
+        ]);
+        $client1 = Client::create([
+            'user_id'=>$user->id,
+            'minstry_id'=>$request->minstry_id,
             'type'=>'government',
+            'name_of_head'=>$request->name_of_head,
+
         ]);
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
@@ -101,6 +107,8 @@ class UserController extends Controller
 
         //return \Route::dispatch($proxy);
         $user['token'] =  $user->createToken('MyApp')->accessToken;
+        $user['type'] =  $client1->type;
+
         return new UserCollection($user);
     }
 
@@ -109,13 +117,18 @@ class UserController extends Controller
             'name'=>$request->name,
             'email'=>$request->email,
             'phone'=>$request->phone,
-            'name_of_head'=>$request->name_of_head,
             'country_id'=>$request->country_id,
             'city_id'=>$request->city_id,
-            'company_id'=>$request->company_id,
             'password'=> bcrypt($request->password),
-            'type'=>'company',
         ]);
+        $client1= Client::create([
+            'user_id'=>$user->id,
+            'company_id'=>$request->company_id,
+            'type'=>'company',
+            'name_of_head'=>$request->name_of_head,
+
+        ]);
+
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
@@ -135,6 +148,8 @@ class UserController extends Controller
 
         //return \Route::dispatch($proxy);
         $user['token'] =  $user->createToken('MyApp')->accessToken;
+        $user['type'] =  $client1->type;
+
         return new UserCollection($user);
     }
 
@@ -185,7 +200,7 @@ class UserController extends Controller
     public function myProfile()
     {
         $id=auth()->user()->id;
-        $user = User::with('minstry','company','country','city')->findOrFail($id);
+        $user = User::with('technical','client','country','city')->findOrFail($id);
         return new ProfileCollection($user);
     }
     public function Updatepersonal(UpdatePresonalRequest $request){
@@ -199,8 +214,11 @@ class UserController extends Controller
            $user->city_id   =        $request->city_id;
                      if (isset($request->password))
            $user->password  =         bcrypt($request->password);
-           $user->house     =         $request->house;
-        $user->save();
+         //  $user->house     =         $request->house;
+         $user->save ();
+       $user->client->update([
+           'house'=>$request->house
+       ]);
         return new StatusCollection(true,'تم التعديل بنجاح');
     }
 
@@ -215,10 +233,13 @@ class UserController extends Controller
         $user->city_id   =        $request->city_id;
         if (isset($request->password))
             $user->password  =         bcrypt($request->password);
-         $user->name_of_head =    $request->name_of_head;
-         $user->minstry_id =    $request->minstry_id;
+        // $user->name_of_head =    $request->name_of_head;
+      //   $user->minstry_id =    $request->minstry_id;
         $user->save();
-
+        $user->client->update([
+            'minstry_id'=>$request->minstry_id,
+            'name_of_head'=>$request->name_of_head
+        ]);
         return new StatusCollection(true,'تم التعديل بنجاح');
     }
 
@@ -236,7 +257,10 @@ class UserController extends Controller
         $user->name_of_head =    $request->name_of_head;
         $user->company_id =    $request->company_id;
         $user->save();
-
+        $user->client->update([
+            'company_id'=>$request->company_id,
+            'name_of_head'=>$request->name_of_head
+        ]);
         return new StatusCollection(true,'تم التعديل بنجاح');
     }
     public function edite_imge(Request $request)
@@ -272,14 +296,15 @@ class UserController extends Controller
 
     public function addAddress(Request $request)
 {
-    Address::create([
+   $dd= Address::create([
         'user_id'=>auth()->user()->id,
         'latitude'=>$request->latitude,
         'longitude'=>$request->longitude,
-        'address'=>$request->address
+        'address'=>$request->address,
+        'note'=>$request->note
     ]);
 
-    return new StatusCollection(true,'تم اضافه عنوان');
+    return response()->json(['message'=>'تم اضافه عنوان جديد','id'=>$dd->id]);
 
 }
 
@@ -298,8 +323,8 @@ public function getAllMyaderss()
        }
            for ($i = 1; $i <= 7; $i++) {
 
-               //   $day[] = Carbon::now()->subDays($i)->format('D');
-             Date::setLocale($request->lang);
+                  $day[] = Carbon::now()->subDays($i)->format('D');
+         //    Date::setLocale($request->lang);
 
               // $dates[] =Date::format('الاثنين 17 ديسمبر 2018');
                //  $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-". date('m').Carbon::now()->subDays(7)->format('D') ;
@@ -311,9 +336,9 @@ public function getAllMyaderss()
      //  Carbon::setLocale(config('app.locale'));
       // setlocale(LC_TIME, config('app.localeWithRegion'));
        //Carbon::setLocale('ar');
-       Date::setLocale('en');
-       $dd=Date('الاثنين 17 ديسمبر 2018');
-       return  $dd;
+      // Date::setLocale('en');
+     //  $dd=Date('الاثنين 17 ديسمبر 2018');
+     //  return explode('"',$day) ;
 
          // response()->json(['data'=>$dates]);
          // response()->json(['data'=>$dates]);

@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class NotfiyOrder extends Model
 {
     //
+    protected $fillable=['order_id','user_id','type','message','seen'];
 
-    public  function  technical(){
-        return $this->belongsTo(User::class,'technical_id');
 
-    }
     public  function  order(){
         return $this->belongsTo(Order::class,'order_id');
 
     }
+
+
 }

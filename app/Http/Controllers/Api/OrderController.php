@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Assian;
 use App\Cart;
 use App\CartOrder;
+use App\Helper\Helper;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\Api\AllOrderCollection;
 use App\Http\Resources\Api\OrderCollection;
@@ -62,7 +63,7 @@ class OrderController extends Controller
         $statuses_Array1 = ['new','wating', 'consultation', 'delay', 'need_parts'];
         $statuses_Array2 = ['done', 'can_not'];
 
-        if (auth()->user()->type == 'personal' || 'government' || 'company')
+        if (auth()->user()->client->type == 'personal' || 'government' || 'company')
         {
             $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->whereIn('status', $statuses_Array1)
                 ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
@@ -82,7 +83,7 @@ class OrderController extends Controller
     public function showOrder(Request $request)
     {
         $id = $request->order_id;
-        $order = Order::with('cat', 'address', 'time', 'user', 'storge', 'proudect')
+        $order = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
             ->findOrFail($id);
         return new OrderCollection($order);
 
@@ -92,31 +93,36 @@ class OrderController extends Controller
     {
 
         // assien techainal;
+        $notyfiy= $request->notyfiy_id;
         $id = $request->order_id;
         $status = $request->status;//yes Or no
         $technical_id = $request->technical_id;
+        $assin_id = $request->assin_id;
 
         $order = Order::findOrFail($id);
+        $assin= Assian::findOrFail($assin_id);
         if ($status == 'yes') {
-            $assein = Assian::create([
-                'order_id' => $id,
-                'user_id' => auth()->user()->id,
-                'status' => 'agree',
-
-            ]);
-
+            $assin->update(['status' => 'agree']);
             $order->status = 'wating';
             $order->technical_id = $technical_id;
             $order->save();
-            return new StatusCollection(true, 'تم تعين الفنى لهذه المهمه');
+            Helper::Notificationsuodate($notyfiy,1);
+            $name =[
+                'ar'=>'  تم تعينك لطلب تصليح '.unserialize($order->category->main->name)['ar'].'',
+                'en'=>'You have been assigned a repair request'.unserialize($order->category->main->name)['en'].''
+            ];
+              Helper::Notifications($id,$technical_id,$name,'order',0);
+
+            return new StatusCollection(true, 'تم قبول الفنى لهذه المهمه');
 
         } else {
-            $assein = Assian::create([
-                'order_id' => $id,
-                'user_id' => auth()->user()->id,
+            $assin->update([
+
                 'status' => 'dis_agree',
 
             ]);
+            Helper::Notificationsuodate($notyfiy,1);
+
             return new StatusCollection(true, 'تم رفض الفنى لهذه المهمه');
 
         }

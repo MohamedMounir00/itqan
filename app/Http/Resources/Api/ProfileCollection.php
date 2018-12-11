@@ -14,56 +14,52 @@ class ProfileCollection extends JsonResource
      */
     public function toArray($request)
     {
-        if ($this->type =='personal'){
+        if ($this->client->type =='personal'){
             return [
                 'id'=>$this->id,
                 'name'=>$this->name,
                 'email'=>$this->email,
-                'type'=>$this->type,
                 'phone'=>$this->phone,
                 'country'=>new CountryCollection($this->country),
                 'city'=>new CityCollection($this->city),
-                'house'=>$this->house,
+                'house'=>$this->client->house,
                 'image'=>url($this->image),
             ];
         }
-        elseif ($this->type =='company'){
+        elseif ($this->client->type =='company'){
             return [
                 'id'=>$this->id,
                 'name'=>$this->name,
-                'name_heade_personal'=>$this->name_of_head,
+                'name_heade_personal'=>$this->client->name_of_head,
                 'email'=>$this->email,
-                'type'=>$this->type,
-                'phone'=>$this->phone,
-                'country'=>new CountryCollection($this->country),
-                'city'=>new CityCollection($this->city),
-                'image'=>url($this->image),
-                'company'=>new CompanyCollection($this->company),
-
-            ];
-        }
-        elseif ($this->type =='government'){
-            return [
-                'id'=>$this->id,
-                'name'=>$this->name,
-                'name_heade_personal'=>$this->name_of_head,
-                'email'=>$this->email,
-                'type'=>$this->type,
                 'phone'=>$this->phone,
                 'country'=>new CountryCollection($this->country),
                 'city'=>new CityCollection($this->city),
                 'image'=>url($this->image),
-                'minstry'=>new CompanyCollection($this->minstry),
+                'company'=>new CompanyCollection($this->client->company),
+
+            ];
+        }
+        elseif ($this->client->type =='government'){
+            return [
+                'id'=>$this->id,
+                'name'=>$this->name,
+                'name_heade_personal'=>$this->client->name_of_head,
+                'email'=>$this->email,
+                'phone'=>$this->phone,
+                'country'=>new CountryCollection($this->country),
+                'city'=>new CityCollection($this->city),
+                'image'=>url($this->image),
+                'minstry'=>new CompanyCollection($this->client->minstry),
 
             ];
         }
 
-        elseif ($this->type =='technical'){
+        elseif ($this->technical->type =='technical'){
             return [
                 'id'=>$this->id,
                 'name'=>$this->name,
                 'email'=>$this->email,
-                'type'=>$this->type,
                 'phone'=>$this->phone,
                 'country'=>new CountryCollection($this->country),
                 'city'=>new CityCollection($this->city),

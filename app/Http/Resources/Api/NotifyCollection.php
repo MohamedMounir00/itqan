@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Assian;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -15,11 +16,19 @@ class NotifyCollection extends jsonResource
      */
     public function toArray($request)
     {
-        return [
-          'id'=>$this->id,
-          'message'=>unserialize($this->message)[$request->lang],
-          'technical'=> new  ProfileCollection($this->technical),
-          'order'=> new  OrderCollection($this->order),
-        ];
+        $assin = Assian::with('user')->where('order_id',$this->order_id)->where('status','watting')->first();
+
+
+            return [
+                'id'=>$this->id,
+                'message'=>unserialize($this->message)[$request->lang],
+                'assin'=>isset( $assin->id) ?  $assin->id : '',
+                'technical'=> isset($assin->user->name) ?  $assin->user->name : '',
+                'technical_id'=>isset( $assin->user->id) ?  $assin->user->id : '',
+                'order'=> new  OrderCollection($this->order),
+                'type'=>$this->type
+            ];
+
+
     }
 }

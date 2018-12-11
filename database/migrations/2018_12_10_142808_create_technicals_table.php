@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotfiyOrdersTable extends Migration
+class CreateTechnicalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateNotfiyOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('notfiy_orders', function (Blueprint $table) {
+        Schema::create('technicals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned()->nullable();
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('type',['order','product']);
-
-            $table->text('message');
+            $table->enum('type',['technical']);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ class CreateNotfiyOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notfiy_orders');
+        Schema::dropIfExists('technicals');
     }
 }

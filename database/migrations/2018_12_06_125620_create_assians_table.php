@@ -20,7 +20,9 @@ class CreateAssiansTable extends Migration
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status',['agree','dis_agree']);
+            $table->integer('technical_id')->unsigned()->nullable();
+            $table->foreign('technical_id')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('status',['watting','agree','dis_agree']);
 
             $table->timestamps();
         });

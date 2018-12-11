@@ -20,6 +20,7 @@ class AddressCollection extends JsonResource
             'latitude'=>$this->latitude,
             'longitude'=>$this->longitude,
             'address'=>$this->address,
+            'note'=>$this->note,
 
         ];
     }

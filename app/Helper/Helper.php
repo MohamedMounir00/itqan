@@ -7,24 +7,27 @@
  */
 
 namespace App\Helper;
+use App\NotfiyOrder;
 use App\Storge;
 
 class Helper
 {
-    public static function Uploadfile($request,$file)
+    public static function Notifications($order_id,$user_id,$message,$type,$seen)
 {
-    if($request->hasFile($file)) {
-
-        $image       = $request->file($file);
-        $img_name = time().'-'.rand(999,999999).$filee->getClientOriginalName();
-        $image->move(public_path('files/images/order'), $img_name);
-        $db_name = 'files/images/order' . $img_name;
-        Storge::create([
-          //  'url'=>$db_name,
-           // 'order_id'=>$item_id,
-
-        ]);
-
-    }
+    NotfiyOrder::create([
+        'order_id' =>$order_id,
+        'user_id' =>$user_id,
+        'message' =>serialize($message),
+        'type' =>$type,
+        'seen' =>$seen,
+    ]);
 }
+
+    public static function Notificationsuodate($id,$seen)
+    {
+        $n=NotfiyOrder::findOrFail($id);
+        $n->update([
+            'seen' =>$seen,
+        ]);
+    }
 }

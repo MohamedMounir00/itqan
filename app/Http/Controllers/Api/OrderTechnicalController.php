@@ -21,16 +21,13 @@ class OrderTechnicalController extends Controller
             $statuses_Array = ['wating', 'consultation', 'delay', 'need_parts'];
         else
             $statuses_Array = ['done', 'can_not'];
-        if (auth()->user()->type == 'technical') {
 
 
-            $order = Order::with('cat', 'address', 'time', 'user', 'storge', 'proudect')
+            $order = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
                 ->whereIn('status', $statuses_Array)
                 ->where('technical_id', auth()->user()->id)
                 ->get();
             return OrderCollection::collection($order);
-        }
-        return new StatusCollection(false, 'ليس لديك صلاحيه الفنى ');
 
     }
 

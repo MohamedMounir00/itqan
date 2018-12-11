@@ -13,9 +13,8 @@ class NotfiyController extends Controller
 
     public function getNotifay(Request $request)
     {
-        $notify=NotfiyOrder::with('technical','order')
-            ->where('client_id',auth()
-                ->user()->id)->orderBy('created_at', 'desc')
+        $notify=NotfiyOrder::with('order')
+            ->where('user_id',auth()->user()->id)->where('seen',0)->orderBy('created_at', 'desc')
             ->get();
         return NotifyCollection::collection($notify);
     }

@@ -19,11 +19,11 @@ class TestTableSeeder extends Seeder
 
 
           $name =[
-            'en'=>'تم تعين  فنى لطلبك',
-            'ar'=>'assien techamnal',
-            // 'en'=>'Pm',
+            'ar'=>'تم تعين  فنى لطلبك',
+           'en'=>'assien techamnal',
+           // 'en'=>'Pm',
              // 'ar'=>'مساء',
-          ];
+         ];
 
 
            // $user = new \App\TypeCompany() ;
@@ -34,17 +34,23 @@ class TestTableSeeder extends Seeder
 
          //  $user->save() ;
 
-        \App\NotfiyOrder::create([
-           'message' =>serialize($name),
-            'order_id'=>8,
-            'client_id'=>1,
-            'technical_id'=>5,
+      //  \App\NotfiyOrder::create([
+       //    'message' =>serialize($name),
+        //    'order_id'=>8,
+         //   'client_id'=>1,
+         //   'technical_id'=>5,
 
 
+      //  ]);
+
+        $assin=\App\Assian::create([
+           'order_id'=>14,
+           'user_id'=> 1,
+           'technical_id'=> 5,
+           'status'=> 'watting',
         ]);
 
-
-
+    App\Helper\Helper::Notifications($assin->order_id,$assin->user_id,$name,'order',0);
 
 
     }

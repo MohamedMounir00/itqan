@@ -9,7 +9,7 @@ class Address extends Model
     //
 
     protected $fillable = [
-        'user_id','latitude','longitude','address'
+        'user_id','latitude','longitude','address','note'
     ];
 
 }

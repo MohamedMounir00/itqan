@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Producet::class,'carts','user_id');
     }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class ,'user_id');
+    }
+
+    public function technical()
+    {
+        return $this->hasOne(Technical::class ,'user_id');
+    }
 }
