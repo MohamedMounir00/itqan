@@ -25,6 +25,12 @@ class OrderRequest extends FormRequest
     {
         return [
             //
+            'desc'=>'required',
+            'category_id'=>'required',
+            'time_id'=>'required',
+            'date_en'=>'required',
+            'date_ar'=>'required',
+            'address_id'=>'required',
         ];
     }
 }
