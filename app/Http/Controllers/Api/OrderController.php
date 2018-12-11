@@ -74,7 +74,7 @@ class OrderController extends Controller
                 ->get();
             return  new AllOrderCollection($courntorder,$oldorder);
                 //OrderCollection::collection($order);
-      
+
 
     }
 
