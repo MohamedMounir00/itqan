@@ -40,21 +40,25 @@ class OrderController extends Controller
         $order->status = 'new';
         $order->user_id = auth()->user()->id;
         $order->save();
+        if ($request->file_id !="")
         $order->storge()->sync(explode(',', $request->file_id));
+        if ($request->product_id !="")
+        {
+            foreach (explode(',', $request->product_id) as $value) {
+                CartOrder::create([
+                    'product_id' => $value,
+                    'order_id' => $order->id,
+                    'status' => 1,
+                ]);
+            }
+            foreach (explode(',', $request->product_id) as $value) {
+                Cart::create([
+                    'product_id' => $value,
+                    'user_id' => auth()->user()->id,
+                ]);
+            }
+        }
 
-        foreach (explode(',', $request->product_id) as $value) {
-            CartOrder::create([
-                'product_id' => $value,
-                'order_id' => $order->id,
-                'status' => 1,
-            ]);
-        }
-        foreach (explode(',', $request->product_id) as $value) {
-            Cart::create([
-                'product_id' => $value,
-                'user_id' => auth()->user()->id,
-            ]);
-        }
 
         return new StatusCollection(true, 'تم الاضافه بنجاح');
 
