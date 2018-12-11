@@ -49,6 +49,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('all_orders_for_client','Api\OrderController@allOrdersForClient');
     Route::get('get_notifay','Api\NotfiyController@getNotifay');
     Route::post('assien_technical','Api\OrderController@assienTechnical');
+    Route::get('get_product','Api\OrderController@getproduct');
+    Route::post('update_product','Api\OrderController@updateproduct');
 
 
     //////////////////////////////////////////////////////////techainel

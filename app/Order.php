@@ -17,7 +17,11 @@ class Order extends Model
 
     public function proudect()
     {
-        return $this->belongsToMany(Product::class,'cart_orders','order_id');
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1);
+    }
+    public function proudectnotactive()
+    {
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',0);
     }
 
     public  function  category(){

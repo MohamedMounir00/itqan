@@ -22,81 +22,41 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Date;
+
 class UserController extends Controller
 {
     //
-
 
 
     /*
      *
      *
      * */
-    public function personal(PresonalRequest $request){
-      $user= User::create([
-          'name'=>$request->name,
-          'email'=>$request->email,
-          'phone'=>$request->phone,
-          'country_id'=>$request->country_id,
-          'city_id'=>$request->city_id,
-          'password'=> bcrypt($request->password),
+    public function personal(PresonalRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country_id' => $request->country_id,
+            'city_id' => $request->city_id,
+            'password' => bcrypt($request->password),
 
-      ]);
-      $client1=  Client::create([
-            'user_id'=>$user->id,
-             'house'=>$request->house,
-            'type'=>'personal',
-        ]);
-      $client = \Laravel\Passport\Client::where('password_client', 1)->first();
-
-      $request->request->add([
-          'grant_type'    => 'password',
-          'client_id'     => $client->id,
-          'client_secret' => $client->secret,
-          'username'      => $user['email'],
-          'password'      => $user['password'],
-          'scope'         => null,
-      ]);
-
-      // Fire off the internal request.
-      $proxy = Request::create(
-          'oauth/token',
-          'POST'
-      );
-
-      //return \Route::dispatch($proxy);
-      $user['token'] =  $user->createToken('MyApp')->accessToken;
-      $user['type'] =  $client1->type;
-      return new UserCollection($user);
-  }
-
-
-
-    public function government(GovernmentRequest $request){
-        $user= User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'country_id'=>$request->country_id,
-            'city_id'=>$request->city_id,
-            'password'=> bcrypt($request->password),
         ]);
         $client1 = Client::create([
-            'user_id'=>$user->id,
-            'minstry_id'=>$request->minstry_id,
-            'type'=>'government',
-            'name_of_head'=>$request->name_of_head,
-
+            'user_id' => $user->id,
+            'house' => $request->house,
+            'type' => 'personal',
         ]);
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
-            'grant_type'    => 'password',
-            'client_id'     => $client->id,
+            'grant_type' => 'password',
+            'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'username'      => $user['email'],
-            'password'      => $user['password'],
-            'scope'         => null,
+            'username' => $user['email'],
+            'password' => $user['password'],
+            'scope' => null,
         ]);
 
         // Fire off the internal request.
@@ -106,38 +66,38 @@ class UserController extends Controller
         );
 
         //return \Route::dispatch($proxy);
-        $user['token'] =  $user->createToken('MyApp')->accessToken;
-        $user['type'] =  $client1->type;
-
+        $user['token'] = $user->createToken('MyApp')->accessToken;
+        $user['type'] = $client1->type;
         return new UserCollection($user);
     }
 
-    public function company(CamponyRequest $request){
-        $user= User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'country_id'=>$request->country_id,
-            'city_id'=>$request->city_id,
-            'password'=> bcrypt($request->password),
+
+    public function government(GovernmentRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country_id' => $request->country_id,
+            'city_id' => $request->city_id,
+            'password' => bcrypt($request->password),
         ]);
-        $client1= Client::create([
-            'user_id'=>$user->id,
-            'company_id'=>$request->company_id,
-            'type'=>'company',
-            'name_of_head'=>$request->name_of_head,
+        $client1 = Client::create([
+            'user_id' => $user->id,
+            'minstry_id' => $request->minstry_id,
+            'type' => 'government',
+            'name_of_head' => $request->name_of_head,
 
         ]);
-
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
-            'grant_type'    => 'password',
-            'client_id'     => $client->id,
+            'grant_type' => 'password',
+            'client_id' => $client->id,
             'client_secret' => $client->secret,
-            'username'      => $user['email'],
-            'password'      => $user['password'],
-            'scope'         => null,
+            'username' => $user['email'],
+            'password' => $user['password'],
+            'scope' => null,
         ]);
 
         // Fire off the internal request.
@@ -147,34 +107,77 @@ class UserController extends Controller
         );
 
         //return \Route::dispatch($proxy);
-        $user['token'] =  $user->createToken('MyApp')->accessToken;
-        $user['type'] =  $client1->type;
+        $user['token'] = $user->createToken('MyApp')->accessToken;
+        $user['type'] = $client1->type;
+
+        return new UserCollection($user);
+    }
+
+    public function company(CamponyRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country_id' => $request->country_id,
+            'city_id' => $request->city_id,
+            'password' => bcrypt($request->password),
+        ]);
+        $client1 = Client::create([
+            'user_id' => $user->id,
+            'company_id' => $request->company_id,
+            'type' => 'company',
+            'name_of_head' => $request->name_of_head,
+
+        ]);
+
+        $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+        $request->request->add([
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $user['email'],
+            'password' => $user['password'],
+            'scope' => null,
+        ]);
+
+        // Fire off the internal request.
+        $proxy = Request::create(
+            'oauth/token',
+            'POST'
+        );
+
+        //return \Route::dispatch($proxy);
+        $user['token'] = $user->createToken('MyApp')->accessToken;
+        $user['type'] = $client1->type;
 
         return new UserCollection($user);
     }
 
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $request->validate([
-            'email'=>'required',
-            'password'=>'required'
+            'email' => 'required',
+            'password' => 'required'
         ]);
-        $user= User::where('email',$request->email)->first();
-        if(!$user){
-            return new StatusCollection(false,'اسم المستخدم او كلمه المرور خطاء ');
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return new StatusCollection(false, 'اسم المستخدم او كلمه المرور خطاء ');
 
         }
-        if(Hash::check($request->password, $user->password)){
+        if (Hash::check($request->password, $user->password)) {
             $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
             $request->request->add([
-                'grant_type'    => 'password',
-                'client_id'     => $client->id,
+                'grant_type' => 'password',
+                'client_id' => $client->id,
                 'client_secret' => $client->secret,
-                'username'      => $user['email'],
-                'password'      => $user['password'],
-                'scope'         => null,
+                'username' => $user['email'],
+                'password' => $user['password'],
+                'scope' => null,
                 //'type'         => $user->hasRole('translator') ? 'translator' : 'user',
             ]);
 
@@ -185,90 +188,98 @@ class UserController extends Controller
             );
 
             //return \Route::dispatch($proxy);
-            $user['token'] =  $user->createToken('MyApp')->accessToken;
-
+            $user['token'] = $user->createToken('MyApp')->accessToken;
+         //
+             if (isset($user->technical->type))
+                 $user['type'] = $user->technical->type;
+                   else
+              $user['type'] = $user->client->type;
 
             return new UserCollection($user);
 
 
-
-        }else{
-            return new StatusCollection(false,'اسم المستخدم او كلمه المرور خطاء ');
+        } else {
+            return new StatusCollection(false, 'اسم المستخدم او كلمه المرور خطاء ');
         }
     }
 
     public function myProfile()
     {
-        $id=auth()->user()->id;
-        $user = User::with('technical','client','country','city')->findOrFail($id);
+        $id = auth()->user()->id;
+        $user = User::with('technical', 'client', 'country', 'city')->findOrFail($id);
         return new ProfileCollection($user);
     }
-    public function Updatepersonal(UpdatePresonalRequest $request){
-        $id=auth()->user()->id;
-         $user = User::findOrFail($id);
 
-           $user->name      =        $request->name;
-           $user->email     =        $request->email;
-           $user->phone     =        $request->phone;
-           $user->country_id=        $request->country_id;
-           $user->city_id   =        $request->city_id;
-                     if (isset($request->password))
-           $user->password  =         bcrypt($request->password);
-         //  $user->house     =         $request->house;
-         $user->save ();
-       $user->client->update([
-           'house'=>$request->house
-       ]);
-        return new StatusCollection(true,'تم التعديل بنجاح');
-    }
-
-    public function Updategovernment(UpdateGovernmentRequest $request){
-        $id=auth()->user()->id;
+    public function Updatepersonal(UpdatePresonalRequest $request)
+    {
+        $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $user->name      =        $request->name;
-        $user->email     =        $request->email;
-        $user->phone     =        $request->phone;
-        $user->country_id=        $request->country_id;
-        $user->city_id   =        $request->city_id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->country_id = $request->country_id;
+        $user->city_id = $request->city_id;
         if (isset($request->password))
-            $user->password  =         bcrypt($request->password);
+            $user->password = bcrypt($request->password);
+        //  $user->house     =         $request->house;
+        $user->save();
+        $user->client->update([
+            'house' => $request->house
+        ]);
+        return new StatusCollection(true, 'تم التعديل بنجاح');
+    }
+
+    public function Updategovernment(UpdateGovernmentRequest $request)
+    {
+        $id = auth()->user()->id;
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->country_id = $request->country_id;
+        $user->city_id = $request->city_id;
+        if (isset($request->password))
+            $user->password = bcrypt($request->password);
         // $user->name_of_head =    $request->name_of_head;
-      //   $user->minstry_id =    $request->minstry_id;
+        //   $user->minstry_id =    $request->minstry_id;
         $user->save();
         $user->client->update([
-            'minstry_id'=>$request->minstry_id,
-            'name_of_head'=>$request->name_of_head
+            'minstry_id' => $request->minstry_id,
+            'name_of_head' => $request->name_of_head
         ]);
-        return new StatusCollection(true,'تم التعديل بنجاح');
+        return new StatusCollection(true, 'تم التعديل بنجاح');
     }
 
-    public function Updatecompany(UpdateCamponyRequest $request){
-        $id=auth()->user()->id;
+    public function Updatecompany(UpdateCamponyRequest $request)
+    {
+        $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $user->name      =        $request->name;
-        $user->email     =        $request->email;
-        $user->phone     =        $request->phone;
-        $user->country_id=        $request->country_id;
-        $user->city_id   =        $request->city_id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->country_id = $request->country_id;
+        $user->city_id = $request->city_id;
         if (isset($request->password))
-            $user->password  =         bcrypt($request->password);
-        $user->name_of_head =    $request->name_of_head;
-        $user->company_id =    $request->company_id;
+            $user->password = bcrypt($request->password);
+        $user->name_of_head = $request->name_of_head;
+        $user->company_id = $request->company_id;
         $user->save();
         $user->client->update([
-            'company_id'=>$request->company_id,
-            'name_of_head'=>$request->name_of_head
+            'company_id' => $request->company_id,
+            'name_of_head' => $request->name_of_head
         ]);
-        return new StatusCollection(true,'تم التعديل بنجاح');
+        return new StatusCollection(true, 'تم التعديل بنجاح');
     }
+
     public function edite_imge(Request $request)
     {
         $user = User::findOrFail(auth()->user()->id);
 
         if ($request->hasFile('image')) {
-            if ($user->image !='') {
+            if ($user->image != '') {
 
                 if (File::exists(public_path($user->image))) { // unlink or remove previous image from folder
                     unlink(public_path($user->avatar_location));
@@ -278,8 +289,7 @@ class UserController extends Controller
                 $db_name = 'avatars/' . $img_name;
 
 
-            }
-            else{
+            } else {
                 $img_name = time() . '.' . $request->image->getClientOriginalExtension();
                 $request->image->move(public_path('uploads/avatars/'), $img_name);
                 $db_name = 'uploads/avatars/' . $img_name;
@@ -290,59 +300,29 @@ class UserController extends Controller
         $user->update([
             'image' => $db_name
         ]);
-        return new StatusCollection(true,'تم التعديل بنجاح');
+        return new StatusCollection(true, 'تم التعديل بنجاح');
 
     }
 
     public function addAddress(Request $request)
-{
-   $dd= Address::create([
-        'user_id'=>auth()->user()->id,
-        'latitude'=>$request->latitude,
-        'longitude'=>$request->longitude,
-        'address'=>$request->address,
-        'note'=>$request->note
-    ]);
+    {
+        $dd = Address::create([
+            'user_id' => auth()->user()->id,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'address' => $request->address,
+            'note' => $request->note
+        ]);
 
-    return response()->json(['message'=>'تم اضافه عنوان جديد','id'=>$dd->id]);
-
-}
-
-public function getAllMyaderss()
-{
-    $address = Address::where('user_id',auth()->user()->id)->get();
-    return AddressCollection::collection($address);
-}
-
-    public function  test(Request $request)
-   {
-
-
-       for ($m = 1; $m < 7; $m++) {
-           $day[] = Carbon::now()->subDays($m)->format('D');
-       }
-           for ($i = 1; $i <= 7; $i++) {
-
-                  $day[] = Carbon::now()->subDays($i)->format('D');
-         //    Date::setLocale($request->lang);
-
-              // $dates[] =Date::format('الاثنين 17 ديسمبر 2018');
-               //  $dd= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-". date('m').Carbon::now()->subDays(7)->format('D') ;
-
-
-       }
-      // $dt = Carbon::createFromFormat($dates);
-     //  setlocale(LC_TIME, 'ar_AE');
-     //  Carbon::setLocale(config('app.locale'));
-      // setlocale(LC_TIME, config('app.localeWithRegion'));
-       //Carbon::setLocale('ar');
-      // Date::setLocale('en');
-     //  $dd=Date('الاثنين 17 ديسمبر 2018');
-     //  return explode('"',$day) ;
-
-         // response()->json(['data'=>$dates]);
-         // response()->json(['data'=>$dates]);
+        return response()->json(['message' => 'تم اضافه عنوان جديد', 'id' => $dd->id]);
 
     }
+
+    public function getAllMyaderss()
+    {
+        $address = Address::where('user_id', auth()->user()->id)->get();
+        return AddressCollection::collection($address);
+    }
+
 
 }

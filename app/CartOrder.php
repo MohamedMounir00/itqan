@@ -12,4 +12,8 @@ class CartOrder extends Model
         'order_id',
         'status'
         ];
+
+    public function product(){
+        return $this->belongsTo(Product::class , 'product_id') ;
+    }
 }

@@ -8,9 +8,12 @@ use App\CartOrder;
 use App\Helper\Helper;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\Api\AllOrderCollection;
+use App\Http\Resources\Api\CardProductCollection;
 use App\Http\Resources\Api\OrderCollection;
+use App\Http\Resources\Api\ProudctCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Order;
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,8 +29,7 @@ class OrderController extends Controller
         $name =[
             'en'=> $request->date_en,
             'ar'=> $request->date_ar,
-            // 'en'=>'Pm',
-            // 'ar'=>'مساء',
+
         ];
         $order = new  Order();
         $order->desc = $request->desc;
@@ -128,5 +130,43 @@ class OrderController extends Controller
         }
 
 
+
+
+    }
+
+    /////////////////////////////////////////////getproduct Not active
+
+    public function getproduct(Request $request)
+    {
+          $id= $request->order_id;
+          $order = Order::findOrFail($id);
+          $cart= CartOrder::with('product')->where('status',0)->where('order_id',$order->id)->get();
+          return CardProductCollection::collection($cart) ;
+    }
+    public function updateproduct(Request $request)
+    {
+        $order_id= $request->order_id;
+        $order = Order::findOrFail($order_id);
+        foreach (explode(',', $request->id_product_not_active) as $value) {
+            $product = CartOrder::findOrFail($value);
+
+            $product->update([
+                'status' => 1,
+            ]);
+        }
+        foreach (explode(',', $request->id_product_not_active) as $value) {
+            $product = CartOrder::findOrFail($value);
+
+            Cart::create([
+                'product_id' => $product->product_id,
+                'user_id' => auth()->user()->id,
+            ]);
+        }
+        $name =[
+            'ar'=>'    تم قبول المنتجات الخاص بطلب تصليح  '.unserialize($order->category->main->name)['ar'].'',
+            'en'=>'  Product Accpected  '.unserialize($order->category->main->name)['en'].''
+        ];
+        Helper::Notifications($order_id,$order->technical_id,$name,'product',0);
+        return new StatusCollection(true, 'تم قبول المنتج بنجاح');
     }
 }
