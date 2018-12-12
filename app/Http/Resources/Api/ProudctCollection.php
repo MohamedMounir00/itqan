@@ -17,7 +17,8 @@ class ProudctCollection extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>unserialize($this->name)[$request->lang],
-            'price'=>$this->price
+            'price'=>$this->price,
+            'image'=>''
 
         ];
     }
