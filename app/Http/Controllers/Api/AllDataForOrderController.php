@@ -54,8 +54,11 @@ class AllDataForOrderController extends Controller
         return CategoryCollection::collection($cat);
     }
     public function AllSubCat(Request $request){
+        $offset = $request->offset_id;
+
         $id=$request->id;
-        $cat = Category::where('sub_id',$id)->get();
+        $cat = Category::where('sub_id',$id)->skip($offset)
+            ->take(10)->get();
         return CategoryCollection::collection($cat);
     }
 
