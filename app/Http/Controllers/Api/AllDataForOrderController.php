@@ -63,8 +63,14 @@ class AllDataForOrderController extends Controller
     }
 
     public function AllCatProudect()
+{
+    $cat= CatProduct::with('products')->get();
+    return CategoryProductCollection::collection($cat);
+
+}
+    public function FourCatProudect()
     {
-        $cat= CatProduct::with('products')->get();
+        $cat= CatProduct::with('products')->take(4)->get();
         return CategoryProductCollection::collection($cat);
 
     }

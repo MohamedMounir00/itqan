@@ -39,6 +39,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('get_all_my_aderss','Api\UserController@getAllMyaderss');
     Route::get('times_order','Api\AllDataForOrderController@timesOrder');
     Route::get('date_Order','Api\AllDataForOrderController@dateOrder');
+    Route::get('four_cat_proudect','Api\AllDataForOrderController@FourCatProudect');
     Route::get('all_categories','Api\AllDataForOrderController@AllCats');
     Route::get('all_sub','Api\AllDataForOrderController@AllSubCat');
     Route::get('all_cat_proudect','Api\AllDataForOrderController@AllCatProudect');

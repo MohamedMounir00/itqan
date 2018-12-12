@@ -24,8 +24,6 @@ class OrderTechnicalController extends Controller
             $statuses_Array = ['wating', 'consultation', 'delay', 'need_parts'];
         else
             $statuses_Array = ['done', 'can_not'];
-
-
             $order = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
                 ->whereIn('status', $statuses_Array)
                 ->where('technical_id', auth()->user()->id)
@@ -36,21 +34,23 @@ class OrderTechnicalController extends Controller
 
     public function updateStatusOrder(Request $request)
     {
+        $lang=$request->lang;
         $status = $request->status;
         $id = $request->order_id;
         $user= User::findOrFail(auth()->user()->id);
-        if ($user->technical->type == 'technical') {
+        if ($user->technical->type == 'technical')
+        {
             $order = Order::findOrFail($id);
             $order->status = $status;
             $order->save();
             $name =[
-                'ar'=>'  تم تغير حاله طلب تصليح '.unserialize($order->category->main->name)['ar'].'',
-                'en'=>'The status of the request has changed'.unserialize($order->category->main->name)['en'].''
+                'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
+                'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
             ];
             Helper::Notifications($order->id,$order->user_id,$name,'order',0);
-            return new StatusCollection(true, 'تم تغير حاله الطلب');
+            return new StatusCollection(true, trans('api.status_uodated_order',[],$lang));
         }
-        return new StatusCollection(false, 'ليس لديك صلاحيه الفنى ');
+        return new StatusCollection(false, trans('api.no_premssion',[],$lang));
 
 
     }
