@@ -8,8 +8,6 @@ class Order extends Model
 {
     //
 
-
-
     public function storge()
     {
         return $this->belongsToMany(Storge::class,'files','order_id');
@@ -17,7 +15,7 @@ class Order extends Model
 
     public function proudect()
     {
-        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1);
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1)->withPivot('amount');
     }
     public function proudectnotactive()
     {

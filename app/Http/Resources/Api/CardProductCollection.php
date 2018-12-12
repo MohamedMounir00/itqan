@@ -16,6 +16,7 @@ class CardProductCollection extends JsonResource
     {
         return [
             'id_product_not_active'=>$this->id,
+            'amount'=>$this->amount,
             'order_id'=>$this->order_id,
             'product'=>new  ProudctCollection($this->product)
         ];

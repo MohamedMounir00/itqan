@@ -44,17 +44,22 @@ class OrderController extends Controller
         $order->storge()->sync(explode(',', $request->file_id));
         if ($request->product_id !="")
         {
-            foreach (explode(',', $request->product_id) as $value) {
+            foreach (explode(',', $request->product_id) as $key=>$value) {
+
                 CartOrder::create([
                     'product_id' => $value,
                     'order_id' => $order->id,
                     'status' => 1,
+                   'amount' => explode(',', $request->amount)[$key],
                 ]);
             }
-            foreach (explode(',', $request->product_id) as $value) {
+            foreach (explode(',', $request->product_id) as $key=> $value) {
+
                 Cart::create([
                     'product_id' => $value,
                     'user_id' => auth()->user()->id,
+                    'amount' => explode(',', $request->amount)[$key],
+
                 ]);
             }
         }
@@ -164,6 +169,7 @@ class OrderController extends Controller
             Cart::create([
                 'product_id' => $product->product_id,
                 'user_id' => auth()->user()->id,
+                'amount' => $product->amount,
             ]);
         }
         $name =[

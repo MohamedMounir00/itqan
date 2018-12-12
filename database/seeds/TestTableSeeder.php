@@ -44,7 +44,7 @@ class TestTableSeeder extends Seeder
       //  ]);
 
         $assin=\App\Assian::create([
-           'order_id'=>14,
+           'order_id'=>26,
            'user_id'=> 1,
            'technical_id'=> 5,
            'status'=> 'watting',
@@ -55,3 +55,4 @@ class TestTableSeeder extends Seeder
 
     }
 }
+// php artisan db:seed --class=TestTableSeeder

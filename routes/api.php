@@ -52,7 +52,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('get_product','Api\OrderController@getproduct');
     Route::post('update_product','Api\OrderController@updateproduct');
     Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
-
+    Route::post('add_rating','Api\RatingController@addRating');
 
     //////////////////////////////////////////////////////////techainel
     Route::get('all_order_for_technical','Api\OrderTechnicalController@allOrderForTechnical');

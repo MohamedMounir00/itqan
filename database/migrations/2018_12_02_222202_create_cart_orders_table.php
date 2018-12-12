@@ -19,6 +19,8 @@ class CreateCartOrdersTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->integer('order_id')->unsigned()->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->string('amount')->nullable();
+
             $table->boolean('status')->default(false);
 
             $table->timestamps();

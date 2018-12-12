@@ -66,11 +66,13 @@ class OrderTechnicalController extends Controller
                 return new StatusCollection(false, 'هذ الطلب لايمكن اضافه منتجات فيه ');
 
             } else {
-                foreach (explode(',', $request->product_id) as $value) {
+                foreach (explode(',', $request->product_id) as $key=> $value) {
                     CartOrder::create([
                         'product_id' => $value,
                         'order_id' => $order->id,
                         'status' => 0,
+                        'amount' => explode(',', $request->amount)[$key],
+
                     ]);
                 }
                 $name = [
