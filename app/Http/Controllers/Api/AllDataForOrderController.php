@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Category;
 use App\CatProduct;
 use App\Http\Resources\Api\CategoryCollection;
+use App\Http\Resources\Api\CategoryProductCollection;
 use App\Http\Resources\Api\DateCollection;
 use App\Http\Resources\Api\ProfileCollection;
 use App\Http\Resources\Api\ProudctCollection;
@@ -64,7 +65,7 @@ class AllDataForOrderController extends Controller
     public function AllCatProudect()
     {
         $cat= CatProduct::with('products')->get();
-        return CategoryCollection::collection($cat);
+        return CategoryProductCollection::collection($cat);
 
     }
     public function AllProudect(Request $request)

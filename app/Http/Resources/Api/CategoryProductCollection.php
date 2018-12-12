@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryCollection extends JsonResource
+class CategoryProductCollection extends JsonResource
 {
     /**
      * Transform the resource collection into an array.
@@ -17,6 +17,7 @@ class CategoryCollection extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>unserialize($this->name)[$request->lang],
+            'proudct'=>ProudctCollection::collection($this->products),
         ];
     }
 }
