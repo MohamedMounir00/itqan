@@ -9,7 +9,7 @@ use App\Http\Resources\Api\DateCollection;
 use App\Http\Resources\Api\ProfileCollection;
 use App\Http\Resources\Api\ProudctCollection;
 use App\Http\Resources\Api\TimeCollection;
-use App\Producet;
+use App\Product;
 use App\Time;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,25 +54,37 @@ class AllDataForOrderController extends Controller
         return CategoryCollection::collection($cat);
     }
     public function AllSubCat(Request $request){
-        $offset = $request->offset_id;
 
         $id=$request->id;
-        $cat = Category::where('sub_id',$id)->skip($offset)
-            ->take(10)->get();
+        $cat = Category::where('sub_id',$id)
+          ->get();
         return CategoryCollection::collection($cat);
     }
 
     public function AllCatProudect()
     {
-        $cat= CatProduct::all();
+        $cat= CatProduct::with('products')->get();
         return CategoryCollection::collection($cat);
 
     }
     public function AllProudect(Request $request)
     {
         $id= $request->id;
+        $offset = $request->offset_id;
 
-        $p= Producet::where('cat_id',$id)->get();
+        $p= Product::where('cat_id',$id)->skip($offset)
+            ->take(10)->get();
+        return ProudctCollection::collection($p);
+
+    }
+
+    public function serchProduct(Request $request)
+    {
+        $offset = $request->offset_id;
+        $serch = $request->name;
+
+        $p= Product::where('name','LIKE','%'.$serch.'%')->skip($offset)
+            ->take(10)->get();
         return ProudctCollection::collection($p);
 
     }

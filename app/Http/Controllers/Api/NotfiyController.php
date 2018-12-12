@@ -13,9 +13,12 @@ class NotfiyController extends Controller
 
     public function getNotifay(Request $request)
     {
+        $offset = $request->offset_id;
+
         $notify=NotfiyOrder::with('order')
             ->where('user_id',auth()->user()->id)->where('seen',0)->orderBy('created_at', 'desc')
-            ->get();
+            ->skip($offset)
+            ->take(10)->get();
         return NotifyCollection::collection($notify);
     }
 }

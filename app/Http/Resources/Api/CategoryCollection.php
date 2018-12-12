@@ -17,6 +17,7 @@ class CategoryCollection extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>unserialize($this->name)[$request->lang],
+            'proudct'=>ProudctCollection::collection($this->products),
         ];
     }
 }

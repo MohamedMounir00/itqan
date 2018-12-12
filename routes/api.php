@@ -51,6 +51,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('assien_technical','Api\OrderController@assienTechnical');
     Route::get('get_product','Api\OrderController@getproduct');
     Route::post('update_product','Api\OrderController@updateproduct');
+    Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
 
 
     //////////////////////////////////////////////////////////techainel
