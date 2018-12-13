@@ -35,28 +35,28 @@ class UserController extends Controller
     public function personal(PresonalRequest $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'country_id' => $request->country_id,
-            'city_id' => $request->city_id,
-            'password' => bcrypt($request->password),
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'country_id'  => $request->country_id,
+            'city_id'     => $request->city_id,
+            'password'    => bcrypt($request->password),
 
         ]);
         $client1 = Client::create([
-            'user_id' => $user->id,
-            'house' => $request->house,
-            'type' => 'personal',
+            'user_id'    => $user->id,
+            'house'      => $request->house,
+            'type'       => 'personal',
         ]);
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
-            'grant_type' => 'password',
-            'client_id' => $client->id,
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
             'client_secret' => $client->secret,
-            'username' => $user['email'],
-            'password' => $user['password'],
-            'scope' => null,
+            'username'      => $user['email'],
+            'password'      => $user['password'],
+            'scope'         => null,
         ]);
 
         // Fire off the internal request.
@@ -66,8 +66,8 @@ class UserController extends Controller
         );
 
         //return \Route::dispatch($proxy);
-        $user['token'] = $user->createToken('MyApp')->accessToken;
-        $user['type'] = $client1->type;
+        $user['token']  = $user->createToken('MyApp')->accessToken;
+        $user['type']   = $client1->type;
         return new UserCollection($user);
     }
 
@@ -75,29 +75,29 @@ class UserController extends Controller
     public function government(GovernmentRequest $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'phone'      => $request->phone,
             'country_id' => $request->country_id,
-            'city_id' => $request->city_id,
-            'password' => bcrypt($request->password),
+            'city_id'    => $request->city_id,
+            'password'   => bcrypt($request->password),
         ]);
         $client1 = Client::create([
-            'user_id' => $user->id,
-            'minstry_id' => $request->minstry_id,
-            'type' => 'government',
+            'user_id'      => $user->id,
+            'minstry_id'   => $request->minstry_id,
+            'type'         => 'government',
             'name_of_head' => $request->name_of_head,
 
         ]);
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
-            'grant_type' => 'password',
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'username' => $user['email'],
-            'password' => $user['password'],
-            'scope' => null,
+            'grant_type'     => 'password',
+            'client_id'      => $client->id,
+            'client_secret'  => $client->secret,
+            'username'       => $user['email'],
+            'password'       => $user['password'],
+            'scope'          => null,
         ]);
 
         // Fire off the internal request.
@@ -108,7 +108,7 @@ class UserController extends Controller
 
         //return \Route::dispatch($proxy);
         $user['token'] = $user->createToken('MyApp')->accessToken;
-        $user['type'] = $client1->type;
+        $user['type']  = $client1->type;
 
         return new UserCollection($user);
     }
@@ -116,17 +116,17 @@ class UserController extends Controller
     public function company(CamponyRequest $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'country_id' => $request->country_id,
-            'city_id' => $request->city_id,
-            'password' => bcrypt($request->password),
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'country_id'  => $request->country_id,
+            'city_id'     => $request->city_id,
+            'password'    => bcrypt($request->password),
         ]);
         $client1 = Client::create([
-            'user_id' => $user->id,
-            'company_id' => $request->company_id,
-            'type' => 'company',
+            'user_id'      => $user->id,
+            'company_id'   => $request->company_id,
+            'type'         => 'company',
             'name_of_head' => $request->name_of_head,
 
         ]);
@@ -134,12 +134,12 @@ class UserController extends Controller
         $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
         $request->request->add([
-            'grant_type' => 'password',
-            'client_id' => $client->id,
+            'grant_type'    => 'password',
+            'client_id'     => $client->id,
             'client_secret' => $client->secret,
-            'username' => $user['email'],
-            'password' => $user['password'],
-            'scope' => null,
+            'username'      => $user['email'],
+            'password'      => $user['password'],
+            'scope'         => null,
         ]);
 
         // Fire off the internal request.
@@ -158,27 +158,26 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $lang = $request->lang;
 
         $request->validate([
-            'email' => 'required',
+            'email'    => 'required',
             'password' => 'required'
         ]);
         $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return new StatusCollection(false, 'اسم المستخدم او كلمه المرور خطاء ');
+        if (!$user)
+            return new StatusCollection(false, trans('api.login_false', [], $lang));
 
-        }
         if (Hash::check($request->password, $user->password)) {
             $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
             $request->request->add([
-                'grant_type' => 'password',
-                'client_id' => $client->id,
+                'grant_type'    => 'password',
+                'client_id'     => $client->id,
                 'client_secret' => $client->secret,
-                'username' => $user['email'],
-                'password' => $user['password'],
-                'scope' => null,
-                //'type'         => $user->hasRole('translator') ? 'translator' : 'user',
+                'username'      => $user['email'],
+                'password'      => $user['password'],
+                'scope'         => null,
             ]);
 
             // Fire off the internal request.
@@ -188,19 +187,17 @@ class UserController extends Controller
             );
 
             //return \Route::dispatch($proxy);
-            $user['token'] = $user->createToken('MyApp')->accessToken;
-         //
-             if (isset($user->technical->type))
-                 $user['type'] = $user->technical->type;
-                   else
-              $user['type'] = $user->client->type;
+            $user['token']    = $user->createToken('MyApp')->accessToken;
+            if (isset($user->technical->type))
+                $user['type'] = $user->technical->type;
+            else
+                $user['type'] = $user->client->type;
 
             return new UserCollection($user);
 
+        } else
+            return new StatusCollection(false, trans('api.login_false', [], $lang));
 
-        } else {
-            return new StatusCollection(false, 'اسم المستخدم او كلمه المرور خطاء ');
-        }
     }
 
     public function myProfile()
@@ -212,70 +209,76 @@ class UserController extends Controller
 
     public function Updatepersonal(UpdatePresonalRequest $request)
     {
+        $lang = $request->lang;
+
         $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->country_id = $request->country_id;
-        $user->city_id = $request->city_id;
+        $user->name         = $request->name;
+        $user->email        = $request->email;
+        $user->phone        = $request->phone;
+        $user->country_id   = $request->country_id;
+        $user->city_id      = $request->city_id;
         if (isset($request->password))
             $user->password = bcrypt($request->password);
-        //  $user->house     =         $request->house;
         $user->save();
         $user->client->update([
-            'house' => $request->house
+            'house'         => $request->house
         ]);
-        return new StatusCollection(true, 'تم التعديل بنجاح');
+        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
     }
 
     public function Updategovernment(UpdateGovernmentRequest $request)
     {
+        $lang = $request->lang;
+
         $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->country_id = $request->country_id;
+        $user->name        = $request->name;
+        $user->email       = $request->email;
+        $user->phone       = $request->phone;
+        $user->country_id  = $request->country_id;
         $user->city_id = $request->city_id;
         if (isset($request->password))
             $user->password = bcrypt($request->password);
-        // $user->name_of_head =    $request->name_of_head;
-        //   $user->minstry_id =    $request->minstry_id;
+
         $user->save();
         $user->client->update([
-            'minstry_id' => $request->minstry_id,
+            'minstry_id'   => $request->minstry_id,
             'name_of_head' => $request->name_of_head
         ]);
-        return new StatusCollection(true, 'تم التعديل بنجاح');
+        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
     }
 
     public function Updatecompany(UpdateCamponyRequest $request)
     {
+        $lang = $request->lang;
+
         $id = auth()->user()->id;
         $user = User::findOrFail($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->country_id = $request->country_id;
-        $user->city_id = $request->city_id;
+        $user->name         = $request->name;
+        $user->email        = $request->email;
+        $user->phone        = $request->phone;
+        $user->country_id   = $request->country_id;
+        $user->city_id      = $request->city_id;
         if (isset($request->password))
             $user->password = bcrypt($request->password);
         $user->name_of_head = $request->name_of_head;
-        $user->company_id = $request->company_id;
+        $user->company_id   = $request->company_id;
         $user->save();
         $user->client->update([
-            'company_id' => $request->company_id,
-            'name_of_head' => $request->name_of_head
+            'company_id'    => $request->company_id,
+            'name_of_head'  => $request->name_of_head
         ]);
-        return new StatusCollection(true, 'تم التعديل بنجاح');
+        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
     }
 
     public function edite_imge(Request $request)
     {
+        $lang = $request->lang;
+
         $user = User::findOrFail(auth()->user()->id);
 
         if ($request->hasFile('image')) {
@@ -292,7 +295,7 @@ class UserController extends Controller
             } else {
                 $img_name = time() . '.' . $request->image->getClientOriginalExtension();
                 $request->image->move(public_path('uploads/avatars/'), $img_name);
-                $db_name = 'uploads/avatars/' . $img_name;
+                $db_name  = 'uploads/avatars/' . $img_name;
             }
         } else
             $db_name = $user->image;
@@ -300,21 +303,23 @@ class UserController extends Controller
         $user->update([
             'image' => $db_name
         ]);
-        return new StatusCollection(true, 'تم التعديل بنجاح');
+        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
 
     }
 
     public function addAddress(Request $request)
     {
+        $lang = $request->lang;
+
         $dd = Address::create([
-            'user_id' => auth()->user()->id,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'address' => $request->address,
-            'note' => $request->note
+            'user_id'    => auth()->user()->id,
+            'latitude'   => $request->latitude,
+            'longitude'  => $request->longitude,
+            'address'    => $request->address,
+            'note'       => $request->note
         ]);
 
-        return response()->json(['message' => 'تم اضافه عنوان جديد', 'id' => $dd->id]);
+        return response()->json(['message' => trans('api.add_adderss', [], $lang), 'id' => $dd->id]);
 
     }
 

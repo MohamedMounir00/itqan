@@ -34,10 +34,10 @@ class OrderTechnicalController extends Controller
 
     public function updateStatusOrder(Request $request)
     {
-        $lang=$request->lang;
+        $lang   = $request->lang;
         $status = $request->status;
-        $id = $request->order_id;
-        $user= User::findOrFail(auth()->user()->id);
+        $id     = $request->order_id;
+        $user   = User::findOrFail(auth()->user()->id);
         if ($user->technical->type == 'technical')
         {
             $order = Order::findOrFail($id);
@@ -57,30 +57,31 @@ class OrderTechnicalController extends Controller
 
     public function makeProudectForOrder(Request $request)
     {
-        $id = $request->order_id;
-        $user= User::findOrFail(auth()->user()->id);
+        $lang  = $request->lang;
+        $id    = $request->order_id;
+        $user  = User::findOrFail(auth()->user()->id);
         $order = Order::findOrFail($id);
 
         if ($user->technical->type == 'technical') {
-            if ($order->status == 'done') {
-                return new StatusCollection(false, 'هذ الطلب لايمكن اضافه منتجات فيه ');
-
-            } else {
+            if ($order->status == 'done'||$order->status == 'done')
+                return new StatusCollection(false, trans('api.can_not_add_product',[],$lang));
+            else
+                {
                 foreach (explode(',', $request->product_id) as $key=> $value) {
                     CartOrder::create([
                         'product_id' => $value,
-                        'order_id' => $order->id,
-                        'status' => 0,
-                        'amount' => explode(',', $request->amount)[$key],
+                        'order_id'   => $order->id,
+                        'status'     => 0,
+                        'amount'     => explode(',', $request->amount)[$key],
 
                     ]);
                 }
                 $name = [
-                    'ar' => '  لقد قام الفنى لاضافه منتجات الى طلب تصليح ' . unserialize($order->category->main->name)['ar'] . '',
-                    'en' => 'The technician added products to a repair request' . unserialize($order->category->main->name)['en'] . ''
+                    'ar' =>  trans('api.tech_add_prodect',[],'ar'). unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.tech_add_prodect',[],'en') . unserialize($order->category->main->name)['en'] . ''
                 ];
                 Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
-                return new StatusCollection(true, 'تم اضافه منتج الى الطلب');
+                return new StatusCollection(true, trans('api.watting_product',[],$lang));
             }
 
         }

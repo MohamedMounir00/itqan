@@ -11,32 +11,7 @@ use App\Http\Controllers\Controller;
 
 class StorgeController extends Controller
 {
-    //
-    public function upload(Request $request) {
 
-        if ($request->hasFile('url')) {
-            $files= $request->file('url');
-            foreach ($files as $file){
-                $logo_rename =time().'-'.rand(999,999999).$file->getClientOriginalExtension();
-
-               // $file->move(public_path('uploads/orders'), $logo_rename);
-                $img = Image::make($file)->resize(300,200)->save(public_path('uploads/orders'), $logo_rename,60);
-
-                $db_name = 'uploads/orders/' . $logo_rename;
-
-                $saveFiles = Storge::create([
-                    'path' => $db_name,
-                    //'item_id' => $answer_id,
-                   // 'type' => 'offer',
-                ]);
-
-            }
-
-
-        }
-
-
-    }
     public function store(Request $request)
     {
 

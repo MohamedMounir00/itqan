@@ -21,14 +21,14 @@ class DateCollection extends Resource
     public function toArray($request)
     {
 
-        for($i = 1; $i <=  date('t'); $i++)
-        {
-            $dates[]= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-".date("l", mktime(0,0,0,date('m'),str_pad($i, 2, '0', STR_PAD_LEFT),date('Y'))) ;
+      //  for($i = 1; $i <=  date('t'); $i++)
+       // {
+           // $dates[]= date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT) ."-".date("l", mktime(0,0,0,date('m'),str_pad($i, 2, '0', STR_PAD_LEFT),date('Y'))) ;
             // $dates[] =$dd;
-        }
+       // }
         return array(
             //'times'=>TimeCollection::collection($this->times),
-                'date'=>$dates
+             //   'date'=>$dates
         );
     }
 }

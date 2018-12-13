@@ -14,14 +14,16 @@ class TimeCollection extends JsonResource
      */
     public function toArray($request)
     {
+        $lang=$request->lang;
       if ($this->timing =='am')
-           $am=($request->lang == 'ar') ? 'صباحا' : 'Am';
+           $am=trans('api.am',[],$lang);
        else
-           $am=($request->lang == 'ar') ? 'مساءا' : 'Pm';
+           $am=trans('api.pm',[],$lang);
 
        return [
             'id'=>$this->id,
-         'time'=>($request->lang=='ar')?' من'.$this->from .'الى '.$this->to .'-'.$am :'from '.$this->from .' to '.$this->to .'-'.$am
+         'time'=>trans('api.from',[],$lang).$this->from .trans('api.to',[],$lang).$this->to .'-'.$am,
+            // ($request->lang=='ar')?' من'.$this->from .'الى '.$this->to .'-'.$am :'from '.$this->from .' to '.$this->to .'-'.$am
       ];
     }
 }

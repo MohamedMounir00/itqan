@@ -15,39 +15,22 @@ class OrderCollection extends JsonResource
      */
     public function toArray($request)
     {
-    if ($request->lang =='ar')
-    {
-if ($this->status=='new')
-    $status= 'جارى تعين الفنى';
-elseif ($this->status=='wating')
-    $status= 'طلب جديد';
-elseif ($this->status=='done')
-    $status= 'تم التصليح';
-elseif ($this->status=='can_not')
-    $status= 'لايمكن اصلاحه';
-elseif ($this->status=='consultation')
-    $status= ' يتطلب استشاره خبير';
-elseif ($this->status=='delay')
-    $status= 'تاجيل لرغبه العميل';
-elseif ($this->status=='need_parts')
-    $status= 'يحتاج قطع غيار';
-    }
-    else{
+        $lang=$request->lang;
         if ($this->status=='new')
-            $status= 'Go to the technical report';
+            $status=trans('api.watting_techaincall',[],$lang);
         elseif ($this->status=='wating')
-            $status= 'New Order';
+            $status=trans('api.new_order',[],$lang);
         elseif ($this->status=='done')
-            $status= 'Dne';
+            $status=trans('api.done_order',[],$lang);
         elseif ($this->status=='can_not')
-            $status= 'Can not be Fixed';
+            $status=trans('api.can_not',[],$lang);
         elseif ($this->status=='consultation')
-            $status= 'Requires expert consultation';
+            $status=trans('api.consultation',[],$lang);
         elseif ($this->status=='delay')
-            $status= 'Suspension of customer desire';
+            $status=trans('api.delay',[],$lang);
         elseif ($this->status=='need_parts')
-            $status= 'Needs spare parts';
-    }
+            $status=trans('api.need_parts',[],$lang);
+
         return [
             'id'=>$this->id,
             'desc'=>$this->desc,
@@ -55,7 +38,8 @@ elseif ($this->status=='need_parts')
             'client'=>$this->user->name,
             'technical'=>isset($this->technical->name ) ? $this->technical->name : '',
             'status'=>$status,
-            'category'=>($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,
+            'category'=>trans('api.repairing',[],$lang).unserialize($this->category->main->name)[$lang],
+            // ($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,
             'address'=>new AddressCollection($this->address),
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
