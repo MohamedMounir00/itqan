@@ -183,6 +183,49 @@ class OrderController extends Controller
             'en' => trans('api.accpeted_product', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
         Helper::Notifications($order_id, $order->technical_id, $name, 'product', 0);
-        return new StatusCollection(true, trans('api.accpeted_product', [], $lang));
+        return new StatusCollection(true, trans('api.addedProduct', [], $lang));
+    }
+
+
+    public function SendProductToOrder(Request $request)
+    {
+        $lang = $request->lang;
+        $order_id = $request->order_id;
+        $order = Order::findOrFail($order_id);
+        foreach (explode(',', $request->product_id) as $key => $value)
+        {
+
+            CartOrder::create([
+                'product_id' => $value,
+                'order_id' => $order->id,
+                'status' => 1,
+                'amount' => explode(',', $request->amount)[$key],
+            ]);
+        }
+        foreach (explode(',', $request->product_id) as $key => $value)
+        {
+
+            Cart::create([
+                'product_id' => $value,
+                'user_id' => auth()->user()->id,
+                'amount' => explode(',', $request->amount)[$key],
+
+            ]);
+        }
+
+        return new StatusCollection(true, trans('api.addedProduct', [], $lang));
+    }
+
+
+    public function GetCurrentOrderWithPrice()
+    {
+        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts'];
+
+        $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
+            ->whereIn('status', $statuses_Array1)
+            ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
+            ->get();
+
+       return OrderCollection::collection($courntorder);
     }
 }

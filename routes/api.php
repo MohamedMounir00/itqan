@@ -31,6 +31,7 @@ Route::get('test','Api\UserController@test');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('my_profile','Api\UserController@myProfile');
+    Route::get('profile_technical','Api\UserController@ProfileTechnical');
     Route::post('update_personal','Api\UserController@Updatepersonal');
     Route::post('update_government','Api\UserController@Updategovernment');
     Route::post('update_company','Api\UserController@Updatecompany');
@@ -48,11 +49,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');
     Route::get('all_orders_for_client','Api\OrderController@allOrdersForClient');
+    Route::get('get_current_order_price','Api\OrderController@GetCurrentOrderWithPrice');
     Route::get('get_notifay','Api\NotfiyController@getNotifay');
     Route::post('assien_technical','Api\OrderController@assienTechnical');
     Route::get('get_product','Api\OrderController@getproduct');
     Route::post('update_product','Api\OrderController@updateproduct');
+    Route::post('send_product_order','Api\OrderController@SendProductToOrder');
     Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
+    /////////////////////////////////rating
     Route::post('add_rating','Api\RatingController@addRating');
 
     //////////////////////////////////////////////////////////techainel

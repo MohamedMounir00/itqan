@@ -14,13 +14,12 @@ class ProudctCollection extends JsonResource
      */
     public function toArray($request)
     {
-
             return [
                 'id'=>$this->id,
                 'name'=>unserialize($this->name)[$request->lang],
                 'price'=>$this->price,
                 'image'=>'',
-                'amount'=>isset($this->pivot->amount)?$this->pivot->amount:''
+                'amount'=>isset($this->pivot->amount)?$this->pivot->amount:'',
 
             ];
         }

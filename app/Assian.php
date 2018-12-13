@@ -10,6 +10,7 @@ class Assian extends Model
     protected $fillable = [
         'order_id',
         'user_id',
+        'technical_id',
         'status',
 ];
     public  function  user(){

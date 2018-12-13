@@ -328,6 +328,15 @@ class UserController extends Controller
         $address = Address::where('user_id', auth()->user()->id)->get();
         return AddressCollection::collection($address);
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public function ProfileTechnical(Request $request)
+    {
+        $id = $request->id;
+        $user = User::with('technical', 'client', 'country', 'city')->findOrFail($id);
+        return new ProfileCollection($user);
+    }
 
 
 }

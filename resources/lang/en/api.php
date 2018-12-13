@@ -3,6 +3,7 @@ return [
     'login_false'=>'Username or password is incorrec',
     'uodate_Profile'=>'Modified successfully',
     'add_adderss'=>'Added new address',
+    'addedProduct'=>'Product Added',
 
     'add_order_done'=>'Add Order',
     'add_techainel_order' =>  '   You have been assigned a repair request ',

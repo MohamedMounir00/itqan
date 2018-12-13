@@ -44,6 +44,7 @@ class OrderCollection extends JsonResource
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
             'proudct'=>ProudctCollection::collection($this->proudect),
+            'total_price_of_proudect'=>$this->proudect->sum('price'),
         ];
     }
 }
