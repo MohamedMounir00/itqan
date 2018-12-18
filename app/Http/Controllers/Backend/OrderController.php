@@ -112,7 +112,7 @@ class OrderController extends Controller
     public function  assien(Request $request)
     {
         $id=$request->order_id;
-        $data = Order::findOrFail($id);
+        $data = Order::with('category')->findOrFail($id);
 $assien = Assian::where('order_id',$id)->where('status','watting')->count();
 if (!$assien >0)
 {
@@ -122,9 +122,10 @@ if (!$assien >0)
             'technical_id'=> $request->technical_id,
             'status'=> 'watting',
         ]);
+        $technical= User::findOrFail($request->technical_id);
         $name =[
-            'ar'=>'تم تعين  فنى لطلبك',
-            'en'=>'assien techamnal',
+            'ar'=>' للعمل على طلبك '.' '.trans('api.repairing',[],'ar').unserialize($data->category->main->name)['ar'].' '.$technical->name.' تم تعين  ',
+            'en'=> $technical->name .' '.' assien techamnal '.trans('api.repairing',[],'en').unserialize($data->category->main->name)['en'],
 
         ];
         Helper::Notifications($assin->order_id,$assin->user_id,$name,'order',0);
