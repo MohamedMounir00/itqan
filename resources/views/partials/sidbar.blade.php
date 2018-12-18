@@ -46,6 +46,15 @@
                         </ul>
                     </li>
 
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.categoriesOfProduct')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('category_product.index')}}">{{trans('backend.all_categories')}} </a></li>
+
+                            <li><a href="{{route('category_product.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
 

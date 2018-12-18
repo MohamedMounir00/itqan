@@ -19,6 +19,7 @@ return[
     'back'=>'Back',
     'create'=>'Create',
     'name_'=>' Name Of',
+    'price'=>' Price',
 
 
 

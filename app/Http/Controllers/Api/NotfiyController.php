@@ -16,9 +16,20 @@ class NotfiyController extends Controller
         $offset = $request->offset_id;
 
         $notify=NotfiyOrder::with('order')
-            ->where('user_id',auth()->user()->id)->where('seen',0)->orderBy('created_at', 'desc')
+            ->where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')
             ->skip($offset)
             ->take(10)->get();
         return NotifyCollection::collection($notify);
     }
+
+    public function updateNotify(Request $request)
+{
+    $id      =       $request->id;
+    $seen    =       $request->seen;
+    $notfay  =       NotfiyOrder::findOrFail($id);
+    $notfay  ->      seen=$seen;
+    $notfay  ->      save();
+
+}
+
 }

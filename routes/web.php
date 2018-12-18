@@ -35,4 +35,11 @@ Route::group([
     Route::get('category/sub_category/{id}','Backend\CategoryController@getsubDate')->name('category.sub_category');
     Route::delete('category/sub/category_sub_delete/{id}','Backend\CategoryController@delete')->name('category_sub_delete');
     Route::resource('category','Backend\CategoryController');
+    ////////////////////////////////////////////////////////////category_product
+        Route::get('category_product/get_category','Backend\CategoryProductController@getAnyDate')->name('category_product.get_category');
+    Route::resource('category_product','Backend\CategoryProductController');
+
+//////////////////////////////////////////////product
+    Route::get('product/get_product','Backend\ProductController@getAnyDate')->name('product.get_product');
+    Route::resource('product','Backend\ProductController');
 });

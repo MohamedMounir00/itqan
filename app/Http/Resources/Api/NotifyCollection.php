@@ -23,6 +23,7 @@ class NotifyCollection extends jsonResource
        return [
            'id'=>$this->id,
            'type'=>$this->type,
+           'seen'=>$this->seen,
 
            'message'=>unserialize($this->message)[$request->lang],
            'assign'=>isset( $assin->id) ?  $assin->id : '',
@@ -35,11 +36,13 @@ class NotifyCollection extends jsonResource
             return [
                 'id'=>$this->id,
                 'type'=>$this->type,
+                'seen'=>$this->seen,
                 'message'=>unserialize($this->message)[$request->lang],
                 'technical'=> isset($this->order->technical->name) ?  $this->order->technical->name : '',
                 'technical_id'=>isset( $this->order->technical->id) ? $this->order->technical->id : '',
                 'order'=> new  OrderCollection($this->order),
                 'new_product'=>   ProudctCollection::collection($this->order->proudectnotactive),
+
             ];
         }
 
