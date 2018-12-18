@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Category;
-use App\CatProduct;
+use App\CategoryProduct;
 use App\Http\Resources\Api\CategoryCollection;
 use App\Http\Resources\Api\CategoryProductCollection;
 use App\Http\Resources\Api\DateCollection;
@@ -64,13 +64,13 @@ class AllDataForOrderController extends Controller
 
     public function AllCatProudect()
 {
-    $cat= CatProduct::with('products')->get();
+    $cat= CategoryProduct::with('products')->get();
     return CategoryProductCollection::collection($cat);
 
 }
     public function FourCatProudect()
     {
-        $cat= CatProduct::with('products')->take(4)->get();
+        $cat= CategoryProduct::with('products')->take(4)->get();
         return CategoryProductCollection::collection($cat);
 
     }
@@ -79,7 +79,7 @@ class AllDataForOrderController extends Controller
         $id= $request->id;
         $offset = $request->offset_id;
 
-        $p= Product::where('cat_id',$id)->skip($offset)
+        $p= Product::where('category_id',$id)->skip($offset)
             ->take(10)->get();
         return ProudctCollection::collection($p);
 

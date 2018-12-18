@@ -17,9 +17,10 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->string('price');
+            $table->string('image');
             $table->text('desc');
-            $table->integer('cat_id')->unsigned()->nullable();
-            $table->foreign('cat_id')->references('id')->on('cat_products')->onDelete('cascade');
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories_products')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
