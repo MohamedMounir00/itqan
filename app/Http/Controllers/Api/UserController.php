@@ -285,7 +285,7 @@ class UserController extends Controller
             if ($user->image != '') {
 
                 if (File::exists(public_path($user->image))) { // unlink or remove previous image from folder
-                    unlink(public_path($user->avatar_location));
+                    unlink(public_path($user->image));
                 }
                 $img_name = time() . '.' . $request->image->getClientOriginalExtension();
                 $request->image->move(public_path('uploads/avatars/'), $img_name);

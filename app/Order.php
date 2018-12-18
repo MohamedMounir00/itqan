@@ -23,7 +23,7 @@ class Order extends Model
     }
 
     public  function  category(){
-    return $this->belongsTo(Category::class,'category_id')->with('main');
+    return $this->belongsTo(Category::class,'category_id')->with('main')->withTrashed();
 
            }
 

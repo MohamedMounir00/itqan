@@ -21,7 +21,7 @@ class OrderTechnicalController extends Controller
         $status = $request->status; //['current','old']
 
         if ($status == 'current')
-            $statuses_Array = ['wating', 'consultation', 'delay', 'need_parts'];
+            $statuses_Array = ['wating', 'consultation', 'delay', 'need_parts','another_visit_works'];
         else
             $statuses_Array = ['done', 'can_not'];
             $order = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')

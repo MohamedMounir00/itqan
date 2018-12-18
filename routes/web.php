@@ -29,5 +29,10 @@ Route::group([
     Route::get('project/get_project','Backend\OrderController@getAnyDate')->name('project.get_project');
     Route::post('project/assien','Backend\OrderController@assien')->name('project.assien');
     Route::resource('project','Backend\OrderController');
-
+////////////////////////////////////////////////////// cat
+    Route::get('category/get_category','Backend\CategoryController@getAnyDate')->name('category.get_category');
+    Route::get('category/sub/{id}','Backend\CategoryController@AllSub')->name('category.sub');
+    Route::get('category/sub_category/{id}','Backend\CategoryController@getsubDate')->name('category.sub_category');
+    Route::delete('category/sub/category_sub_delete/{id}','Backend\CategoryController@delete')->name('category_sub_delete');
+    Route::resource('category','Backend\CategoryController');
 });

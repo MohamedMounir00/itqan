@@ -29,6 +29,7 @@ return [
     'consultation'=>'Requires expert consultation',
     'delay'=>'Suspension of customer desire',
     'need_parts'=>'Needs spare parts',
+    'another_visit_works'=>'Another visit  works',
     'repairing'=>' Repairing ',
 
     //////////////////////////////////////////////////time

@@ -30,7 +30,8 @@ class OrderCollection extends JsonResource
             $status=trans('api.delay',[],$lang);
         elseif ($this->status=='need_parts')
             $status=trans('api.need_parts',[],$lang);
-
+        elseif ($this->status=='another_visit_works')
+            $status=trans('api.another_visit_works',[],$lang);
         return [
             'id'=>$this->id,
             'desc'=>$this->desc,
@@ -43,8 +44,8 @@ class OrderCollection extends JsonResource
             'address'=>new AddressCollection($this->address),
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
-            'proudct'=>ProudctCollection::collection($this->proudect),
-            'total_price_of_proudect'=>$this->proudect->sum('price'),
+            'product'=>ProudctCollection::collection($this->proudect),
+            'total_price_of_product'=>$this->proudect->sum('price'),
         ];
     }
 }

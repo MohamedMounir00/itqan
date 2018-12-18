@@ -74,7 +74,7 @@ class OrderController extends Controller
 
     public function allOrdersForClient()
     {
-        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts'];
+        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts','another_visit_works'];
         $statuses_Array2 = ['done', 'can_not'];
 
         $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
@@ -110,7 +110,7 @@ class OrderController extends Controller
         $id = $request->order_id;
         $status = $request->status;//yes Or no
         $technical_id = $request->technical_id;
-        $assin_id = $request->assin_id;
+        $assin_id = $request->assign_id;
 
         $order = Order::findOrFail($id);
         $assin = Assian::findOrFail($assin_id);
@@ -219,7 +219,7 @@ class OrderController extends Controller
 
     public function GetCurrentOrderWithPrice()
     {
-        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts'];
+        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts','another_visit_works'];
 
         $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
             ->whereIn('status', $statuses_Array1)

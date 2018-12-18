@@ -25,7 +25,7 @@ class NotifyCollection extends jsonResource
            'type'=>$this->type,
 
            'message'=>unserialize($this->message)[$request->lang],
-           'assin'=>isset( $assin->id) ?  $assin->id : '',
+           'assign'=>isset( $assin->id) ?  $assin->id : '',
            'technical'=> isset($assin->user->name) ?  $assin->user->name : '',
            'technical_id'=>isset( $assin->user->id) ?  $assin->user->id : '',
            'order'=> new  OrderCollection($this->order),
