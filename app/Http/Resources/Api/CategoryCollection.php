@@ -17,6 +17,8 @@ class CategoryCollection extends JsonResource
         return[
             'id'=>$this->id,
             'name'=>unserialize($this->name)[$request->lang],
+            'image'=>url($this->image),
+
         ];
     }
 }
