@@ -95,7 +95,7 @@
                                         >*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select  name="sub_id" id="heard" class="form-control" >
+                                        <select  name="category_id" id="heard" class="form-control" >
                                             <option >اختر قسم المنتجات</option>
                                             @foreach($main as $data)
                                                 <option value="{{$data->id}}">{{unserialize($data->name)[ LaravelLocalization::getCurrentLocale()]}}</option>

@@ -20,6 +20,7 @@ class ProudctCollection extends JsonResource
                 'price'=>$this->price,
                 'image'=>'',
                 'amount'=>isset($this->pivot->amount)?$this->pivot->amount:'',
+                'id_rel'=>isset($this->pivot->id)?$this->pivot->id:'',
 
             ];
         }

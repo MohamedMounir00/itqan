@@ -16,10 +16,25 @@ return[
     'image'=>'صوره',
     'back'=>'رجوع',
     'create'=>'انشاء',
-    'all_categories'=>' كل الاقسام',
+    'all_categories'=>' جميع الاقسام',
     'name_'=>'الاسم ب',
-    'categoriesOfProduct'=>'الاقسان الخاصه بالمنتجات',
+    'categoriesOfProduct'=>'الاقسام الخاصه بالمنتجات',
     'price'=>'السعر',
+    'ask_delete'=>' هل تريد الحذف',
+    'category'=>'القسم',
+    'product'=>'المنتجات',
+    'product_all'=>'جميع المنتجات ',
+    'am' => ' صباحا ',
+    'pm' => ' مساءا ',
+    'from' => '  من ',
+    'to' => ' الى ',
+    'timing'=>'التوقيت',
+
+
+
+
+
+
 
 
 

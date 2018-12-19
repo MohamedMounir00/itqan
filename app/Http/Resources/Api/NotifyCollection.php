@@ -17,6 +17,7 @@ class NotifyCollection extends jsonResource
     public function toArray($request)
     {
         $assin = Assian::with('user')->where('order_id',$this->order_id)->where('status','watting')->first();
+     //   $cart = CartOrder::with('product')->where('status', 0)->where('order_id', $order->id)->get();
 
    if ($this->type =='order')
    {

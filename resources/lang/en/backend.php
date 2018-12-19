@@ -20,6 +20,18 @@ return[
     'create'=>'Create',
     'name_'=>' Name Of',
     'price'=>' Price',
+    'ask_delete'=>'Are you sure?',
+    'categoriesOfProduct'=>'Categories Of Product',
+    'category'=>'Category',
+    'product'=>'Products',
+    'product_all'=>'All Products ',
+    'am'=>' Am ',
+    'pm'=>' Pm ',
+    'from'=>' From ',
+    'to'=>' To ',
+    'timing'=>'Timing',
+
+
 
 
 

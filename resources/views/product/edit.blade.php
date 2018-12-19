@@ -36,7 +36,7 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['category.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['product.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -74,19 +74,27 @@
                                 </div>
 
                                 <div class="clearfix"></div>
-                               @if($data->type =='sub')
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.price')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="number" id="first-name" name="price" required class="form-control col-md-7 col-xs-12" value="{{$data->price}}">
+
+                                    </div>
+                                </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.categories')}} <span
                                         >*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select  name="sub_id" id="heard" class="form-control" >
+                                        <select  name="category_id" id="heard" class="form-control" >
                                             @foreach($main as $m)
-                                                <option value="{{$m->id}}"{{($data->sub_id == $m->id) ? 'selected' : ''}}>{{unserialize($m->name)[LaravelLocalization::getCurrentLocale()]}}</option>
+                                                <option value="{{$m->id}}"{{($data->category_id == $m->id) ? 'selected' : ''}}>{{unserialize($m->name)[LaravelLocalization::getCurrentLocale()]}}</option>
                                             @endforeach
                                         </select>                                </div>
                                 </div>
-                                @endif
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span
                                         >*</span>
@@ -117,7 +125,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('category.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{route('product.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>

@@ -42,4 +42,8 @@ Route::group([
 //////////////////////////////////////////////product
     Route::get('product/get_product','Backend\ProductController@getAnyDate')->name('product.get_product');
     Route::resource('product','Backend\ProductController');
+
+    //////////////////////////////////////////////time
+    Route::get('time_work/get_time','Backend\TimeController@getAnyDate')->name('time_work.get_time');
+    Route::resource('time_work','Backend\TimeController');
 });
