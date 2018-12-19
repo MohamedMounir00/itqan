@@ -160,7 +160,12 @@ class OrderController extends Controller
         $lang = $request->lang;
         $order_id = $request->order_id;
         $order = Order::findOrFail($order_id);
-        foreach (explode(',', $request->id_product_not_active) as $value)
+        $status= $request->status;
+        if ($status=='yes')
+        {
+
+
+        foreach (explode(',', $request->id_rel) as $value)
         {
             $product = CartOrder::findOrFail($value);
 
@@ -168,7 +173,7 @@ class OrderController extends Controller
                 'status' => 1,
             ]);
         }
-        foreach (explode(',', $request->id_product_not_active) as $value)
+        foreach (explode(',', $request->id_rel) as $value)
         {
             $product = CartOrder::findOrFail($value);
 
@@ -184,6 +189,14 @@ class OrderController extends Controller
         ];
         Helper::Notifications($order_id, $order->technical_id, $name, 'product', 0);
         return new StatusCollection(true, trans('api.addedProduct', [], $lang));
+        }
+        else{
+            $product = CartOrder::findOrFail($request->id_rel);
+
+            $product->delete();
+            return new StatusCollection(true, trans('api.deleteProduct', [], $lang));
+
+        }
     }
 
 

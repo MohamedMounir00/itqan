@@ -37,6 +37,7 @@ return [
     'from' => '  من ',
     'to' => ' الى ',
     'test' =>'  تم تعين   :username : ,order  للعمل على طلبك',
+    'deleteProduct' =>' تم رفض المنتج',
 
 
 ];

@@ -38,6 +38,8 @@ return [
     'from'=>' From ',
     'to'=>' To ',
     'test' => 'assigen  :username  to work : order',
+    'deleteProduct' =>'refused product',
+
 
 
 
