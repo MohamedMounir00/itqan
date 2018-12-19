@@ -115,7 +115,7 @@ class ProductController extends Controller
 
             } else {
                 $img_name = time() . '.' . $request->image->getClientOriginalExtension();
-                $request->image->move(public_path('uploads/category/'), $img_name);
+                $request->image->move(public_path('uploads/product/'), $img_name);
                 $db_name = 'uploads/product/' . $img_name;
             }
         } else
