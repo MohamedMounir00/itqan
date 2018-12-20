@@ -26,7 +26,7 @@ class CamponyRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|email|max:255|unique:users',
-            'phone'=>'required',
+            //'phone'=>'required',
             'country_id'=>'required',
             'city_id'=>'required',
             'password'=> 'required',
