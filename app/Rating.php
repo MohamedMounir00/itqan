@@ -11,4 +11,9 @@ class Rating extends Model
         'rating_stars','rating_time','rating_clean_workspace',
         'rating_skill_repairs','rating_explain_problem','comment'
     ];
+
+    public  function  user(){
+        return $this->belongsTo(User::class,'user_id');
+
+    }
 }

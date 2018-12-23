@@ -32,7 +32,7 @@ class ProfileCollection extends JsonResource
                 'phone'=>$this->phone,
                 'country'=>new CountryCollection($this->country),
                 'city'=>new CityCollection($this->city),
-                'image'=>url($this->image),
+                'image'=>isset($this->image)?url($this->image):'',
                 'bio'=>$this->bio,
                 'rating_stars'=>isset($rating)?$rating_stars:0,
                 'rating_time'=>isset($rating)?$rating_time:0,
