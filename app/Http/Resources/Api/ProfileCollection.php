@@ -18,11 +18,12 @@ class ProfileCollection extends JsonResource
         if (isset($this->technical->type))
         {
             $rating= Rating::where('technical_id',$this->id)->get();
-            $rating_stars=floatval($rating->avg('rating_stars'));
             $rating_time=floatval($rating->avg('rating_time'));
             $rating_clean_workspace=floatval($rating->avg('rating_clean_workspace'));
             $rating_skill_repairs=floatval($rating->avg('rating_skill_repairs'));
             $rating_explain_problems=floatval($rating->avg('rating_explain_problem'));
+            $rating_stars=collect([$rating_time,$rating_clean_workspace,$rating_skill_repairs,$rating_explain_problems])->avg();
+
             //$comment=$rating->comment;
             return [
                 'id'=>$this->id,
