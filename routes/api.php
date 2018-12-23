@@ -43,8 +43,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('four_cat_proudect','Api\AllDataForOrderController@FourCatProudect');
     Route::get('all_categories','Api\AllDataForOrderController@AllCats');
     Route::get('all_sub','Api\AllDataForOrderController@AllSubCat');
-    Route::get('all_cat_proudect','Api\AllDataForOrderController@AllCatProudect');
-    Route::get('all_proudect','Api\AllDataForOrderController@AllProudect');
+    Route::get('all_categories_product','Api\AllDataForOrderController@AllCatProudect');
+    Route::get('all_products','Api\AllDataForOrderController@AllProudect');
     Route::post('upload','Api\StorgeController@store');
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');

@@ -275,6 +275,10 @@ class UserController extends Controller
         return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
     }
 
+
+
+
+
     public function edite_imge(Request $request)
     {
         $lang = $request->lang;
