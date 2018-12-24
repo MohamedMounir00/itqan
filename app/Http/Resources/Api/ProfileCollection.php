@@ -56,6 +56,7 @@ class ProfileCollection extends JsonResource
                     'city'=>new CityCollection($this->city),
                     'house'=>$this->client->house,
                     'image'=>isset($this->image)?url($this->image):'',
+                    'type'=>$this->client->type
                 ];
             }
             elseif ($this->client->type =='company'){
@@ -69,6 +70,8 @@ class ProfileCollection extends JsonResource
                     'city'=>new CityCollection($this->city),
                     'image'=>isset($this->image)?url($this->image):'',
                     'company'=>new CompanyCollection($this->client->company),
+                    'type'=>$this->client->type
+
 
                 ];
             }
@@ -83,6 +86,7 @@ class ProfileCollection extends JsonResource
                     'city'=>new CityCollection($this->city),
                     'image'=>isset($this->image)?url($this->image):'',
                     'minstry'=>new CompanyCollection($this->client->minstry),
+                    'type'=>$this->client->type
 
                 ];
             }
