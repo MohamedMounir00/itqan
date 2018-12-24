@@ -33,7 +33,7 @@ class CreateOrdersTable extends Migration
 
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
-            $table->enum('status',['new','wating','done','can_not','consultation','delay','need_parts']);
+            $table->enum('status',['new','wating','done','can_not','consultation','delay','need_parts','another_visit_works']);
 
             $table->timestamps();
         });

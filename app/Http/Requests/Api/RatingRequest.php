@@ -25,7 +25,6 @@ class RatingRequest extends FormRequest
     {
         return [
             'order_id'=>'required|integer',
-            'rating_stars'=>'required|integer',
             'rating_time'=>'required|integer',
             'rating_clean_workspace'=>'required|integer',
             'rating_skill_repairs'=>'required|integer',
