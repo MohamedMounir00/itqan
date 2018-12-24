@@ -27,7 +27,6 @@ Route::post('personal_register','Api\UserController@personal');
 Route::post('government_register','Api\UserController@government');
 Route::post('company_register','Api\UserController@company');
 Route::post('login','Api\UserController@login');
-Route::get('test','Api\UserController@test');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('my_profile','Api\UserController@myProfile');
