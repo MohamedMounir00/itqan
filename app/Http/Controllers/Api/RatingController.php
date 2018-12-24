@@ -27,7 +27,7 @@ class RatingController extends Controller
             'order_id'                 =>$order_id,
             'user_id'                  =>auth()->user()->id,
             'technical_id'             =>$order->technical_id,
-            'rating_stars'             =>$request->rating_stars,
+           // 'rating_stars'             =>$request->rating_stars,
             'rating_time'              =>$request->rating_time,
             'rating_clean_workspace'   =>$request->rating_clean_workspace,
             'rating_skill_repairs'     =>$request->rating_skill_repairs,
