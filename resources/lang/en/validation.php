@@ -141,6 +141,30 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email'=>'ُEmail',
+        'name'=>'Name',
+        'country_id'=>'Country',
+        'city_id'=>'City',
+        'password'=> 'Password',
+        'company_id'=>'Company',
+        'name_of_head'=>'name of head perosnal',
+        'minstry_id'=>'Minsitry',
+        'desc'=>'Description',
+        'category_id'=>'Category',
+        'time_id'=>'Time',
+        'date_en'=>'Date Of En',
+        'date_ar'=>'Date Of Arabic',
+        'address_id'=>'Address',
+        'express'=>'Access status',
+        'house'=>'Type Of Hose',
+        'order_id'=>'Order',
+        'rating_time'=>'Respect time',
+        'rating_clean_workspace'=>'Clean working place',
+        'rating_skill_repairs'=>'Skill in repairs',
+        'rating_explain_problem'=>'Explain the problem',
+        'comment'=>'Comment',
+        'phone'=>'Phone',
+    ],
 
 ];
