@@ -62,6 +62,7 @@ return [
         'rating_clean_workspace'=>'نظاقه المكان العمل',
         'rating_skill_repairs'=>'المهاره فى التصليح',
         'rating_explain_problem'=>'شرح المشكله',
-        'comment'=>'التعليق'
+        'comment'=>'التعليق',
+        'phone'=>'رقم الجوال',
         ],
 ];
