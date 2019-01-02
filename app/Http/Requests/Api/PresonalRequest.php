@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class PresonalRequest extends FormRequest
 {
@@ -21,8 +22,9 @@ class PresonalRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+
         return [
             'name'=>'required',
             'email'=>'required|email|max:255|unique:users',

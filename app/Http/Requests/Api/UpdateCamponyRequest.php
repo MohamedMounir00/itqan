@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class UpdateCamponyRequest extends FormRequest
 {
@@ -23,6 +24,7 @@ class UpdateCamponyRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'name'=>'required',
             'email' => 'required|email|unique:users,email,'. $this->user()->id,

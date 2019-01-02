@@ -31,7 +31,7 @@ class OrderRequest extends FormRequest
             'date_en'=>'required',
             'date_ar'=>'required',
             'address_id'=>'required',
-            'express'=>'required',
+            //'express'=>'required',
         ];
     }
 }

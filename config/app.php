@@ -151,6 +151,7 @@ return [
    //   'Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
 
+           Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Package Service Providers...
