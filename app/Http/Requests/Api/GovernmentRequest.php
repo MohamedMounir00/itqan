@@ -29,7 +29,7 @@ class GovernmentRequest extends FormRequest
         //    'phone'=>'required',
             'country_id'=>'required',
             'city_id'=>'required',
-            'password'=> 'required',
+            'password'=> 'required|min:6',
             'minstry_id'=>'required',
             'name_of_head'=>'required',
         ];

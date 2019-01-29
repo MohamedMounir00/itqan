@@ -343,4 +343,84 @@ class UserController extends Controller
     }
 
 
+
+    public function loginsochal(Request $request){
+
+        if ($request->email){
+            $user= User::where('email',$request->email)->first();
+
+        }
+        else{
+            $user_email = $request->email ?: "{$request->id}@{$request->name}.com";
+            $user= User::where('email',$user_email)->first();
+
+        }
+
+        if($user){
+            $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+            $request->request->add([
+                'grant_type'    => 'password',
+                'client_id'     => $client->id,
+                'client_secret' => $client->secret,
+                'username'      => $user['email'],
+                'password'      => $user['password'],
+                'scope'         => null,
+            ]);
+
+            // Fire off the internal request.
+            $proxy = Request::create(
+                'oauth/token',
+                'POST'
+            );
+
+            //return \Route::dispatch($proxy);
+            $user['token'] =  $user->createToken('MyApp')->accessToken;
+
+            $user['type'] = $user->client->type;
+            return new UserCollection($user);
+
+
+
+        }else{
+            $user_email = $request->email ?: "{$request->id}@{$request->name}.com";
+//return $user_email;
+            // $nameParts = $this->getNameParts($request->getName());
+
+            $user = User::create([
+                'name'  => $request->name,
+                'email' => $user_email,
+                'password' => null,
+            ]);
+            $client1 = Client::create([
+                'user_id'    => $user->id,
+                'type'       => 'personal',
+            ]);
+            $client = \Laravel\Passport\Client::where('password_client', 1)->first();
+
+            $request->request->add([
+                'grant_type'    => 'password',
+                'client_id'     => $client->id,
+                'client_secret' => $client->secret,
+                'username'      => $user['email'],
+                'password'      => $user['password'],
+                'scope'         => null,
+                //'type'         => $user->hasRole('translator') ? 'translator' : 'user',
+            ]);
+
+            // Fire off the internal request.
+            $proxy = Request::create(
+                'oauth/token',
+                'POST'
+            );
+
+            //return \Route::dispatch($proxy);
+            $user['token'] =  $user->createToken('MyApp')->accessToken;
+            $user['type']   = $client1->type;
+            return new UserCollection($user);
+
+        }
+    }
+
+
 }

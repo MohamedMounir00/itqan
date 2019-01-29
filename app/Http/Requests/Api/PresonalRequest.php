@@ -28,10 +28,10 @@ class PresonalRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|email|max:255|unique:users',
-            'phone'=>'required',
+            'phone'=>'required|min:9',
             'country_id'=>'required',
             'city_id'=>'required',
-            'password'=> 'required',
+            'password'=> 'required|min:6',
             'house'=>'required',
         ];
     }

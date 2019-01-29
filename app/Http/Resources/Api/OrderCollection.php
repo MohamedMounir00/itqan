@@ -46,6 +46,7 @@ class OrderCollection extends JsonResource
             'storge'=>StorgeCollection::collection($this->storge),
             'product'=>ProudctCollection::collection($this->proudect),
             'total_price_of_product'=>$this->proudect->sum('price'),
+            'real_status'=>$this->status,
         ];
     }
 }
