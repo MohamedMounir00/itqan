@@ -39,7 +39,20 @@ return [
    'unique'  => ':attribute مسجل من قبل.',
    'url'  => 'تنسيق حقل :attribute  غير صالح .',
    'recaptcha'  => 'حقل :attribute غير صحيح',
-   'recaptcha_response_field'  => 'حقل :attribute غير صحيح',
+   'recaptcha_response_field'  => 'حقل :attribute غير صحيح'
+    ,
+    'max'                  => [
+        'numeric' => 'يجب أن تكون قيمة :attribute مساوية أو أصغر من :max.',
+        'file'    => 'يجب أن لا يتجاوز حجم الملف :attribute :max كيلوبايت.',
+        'string'  => 'يجب أن لا يتجاوز طول النّص :attribute :max حروفٍ/حرفًا.',
+        'array'   => 'يجب أن لا يحتوي :attribute على أكثر من :max عناصر/عنصر.',
+    ],
+    'min'                  => [
+        'numeric' => 'يجب أن تكون قيمة :attribute مساوية أو أكبر من :min.',
+        'file'    => 'يجب أن يكون حجم الملف :attribute على الأقل :min كيلوبايت.',
+        'string'  => 'يجب أن يكون طول النص :attribute على الأقل :min حروفٍ/حرفًا.',
+        'array'   => 'يجب أن يحتوي :attribute على الأقل على :min عُنصرًا/عناصر.',
+    ],
     'attributes' => [
         'email'=>'البريد الالكتروني',
         'name'=>'الاسم',
