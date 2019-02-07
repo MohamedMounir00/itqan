@@ -208,13 +208,23 @@ class OrderController extends Controller
         $order = Order::findOrFail($order_id);
         foreach (explode(',', $request->product_id) as $key => $value)
         {
+            $like_product= CartOrder::where('product_id',$value)->where('order_id',$order->id)->count();
+if ($like_product==0)
+{
+    CartOrder::create([
+        'product_id' => $value,
+        'order_id' => $order->id,
+        'status' => 1,
+        'amount' => explode(',', $request->amount)[$key],
+    ]);
+}
+else{
+    $add_product= CartOrder::where('product_id',$value)->where('order_id',$order->id)->first();
+    $add_product->update([
+        'amount' =>$add_product->amount+ explode(',', $request->amount)[$key],
+    ]);
+}
 
-            CartOrder::create([
-                'product_id' => $value,
-                'order_id' => $order->id,
-                'status' => 1,
-                'amount' => explode(',', $request->amount)[$key],
-            ]);
         }
         foreach (explode(',', $request->product_id) as $key => $value)
         {
