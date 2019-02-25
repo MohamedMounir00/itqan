@@ -307,7 +307,8 @@ class UserController extends Controller
         $user->update([
             'image' => $db_name
         ]);
-        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang));
+    $key=url($db_name);
+        return new StatusCollection(true, trans('api.uodate_Profile', [], $lang),$key);
 
     }
 
