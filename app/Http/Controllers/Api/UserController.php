@@ -293,7 +293,7 @@ class UserController extends Controller
                 }
                 $img_name = time() . '.' . $request->image->getClientOriginalExtension();
                 $request->image->move(public_path('uploads/avatars/'), $img_name);
-                $db_name = 'avatars/' . $img_name;
+                $db_name = 'uploads/avatars/' . $img_name;
 
 
             } else {
