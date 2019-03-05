@@ -26,7 +26,7 @@ class AllDataForOrderController extends Controller
           return TimeCollection::collection($times);
     }
     public function dateOrder(Request $request){
-        for ($i = 1; $i <= 7; $i++) {
+        for ($i =0; $i <= 7; $i++) {
 
             {
                 Date::setLocale('ar');
@@ -36,7 +36,7 @@ class AllDataForOrderController extends Controller
             }
                }
 
-        for ($i = 1; $i <= 7; $i++) {
+        for ($i = 0; $i <= 7; $i++) {
 
             {
                 Date::setLocale('en');
