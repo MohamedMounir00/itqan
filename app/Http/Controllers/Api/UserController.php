@@ -318,12 +318,11 @@ class UserController extends Controller
 
         $dd = Address::create([
             'user_id'    => auth()->user()->id,
-            'latitude'   => $request->latitude,
-            'longitude'  => $request->longitude,
+            'latitude'   => (isset($request->latitude))?$request->latitude:'22.994111',
+            'longitude'  => (isset($request->longitude))?$request->longitude:'45.886055',
             'address'    => $request->address,
             'note'       => $request->note
         ]);
-
         return response()->json(['message' => trans('api.add_adderss', [], $lang), 'id' => $dd->id]);
 
     }
