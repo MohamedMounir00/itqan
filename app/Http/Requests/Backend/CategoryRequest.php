@@ -18,22 +18,25 @@ class CategoryRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the request. system_clocks','price','price_emergency'
      *
      * @return array
      */
     public function rules()
     {
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        {
+
             return [
                 //
-                'name'=>'required',
+               // 'name.ar'=>'required|min:5',
+                //'name.en'=>'required|min:5',
+                'system_clocks'=>'required',
+                'price'=>'required|not_in:0',
+                'price_emergency'=>'required|not_in:0',
                 'image'=>'required'
+
 
             ];
         }
 
 
-    }
 }

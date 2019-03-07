@@ -13,7 +13,13 @@
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('/', function () {
-        return view('welcome');
+
+        if (Auth::check()) {
+            //The user is logged in...
+            return redirect('/home');
+        } else {
+            return view('auth.login');
+        }
     });
     Auth::routes();
 });
@@ -25,10 +31,41 @@ Route::group([
     'middleware' => ['auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+/////////////////////////order controll
+    Route::get('order/get_order','Backend\OrderController@getAnyDate')->name('order.get_order');
 
-    Route::get('project/get_project','Backend\OrderController@getAnyDate')->name('project.get_project');
-    Route::post('project/assien','Backend\OrderController@assien')->name('project.assien');
-    Route::resource('project','Backend\OrderController');
+    Route::get('order/get_order_view','Backend\OrderController@get_order_view')->name('order.get_order_view');
+    Route::get('order/get_order_assign','Backend\OrderController@getAnyAssien')->name('order.get_order_assign');
+
+    ///////////////////////////////////////////////////
+    Route::get('order/get_consultation_view','Backend\OrderController@get_consultation_view')->name('order.get_consultation_view');
+    Route::get('order/get_consultation','Backend\OrderController@get_consultation')->name('order.get_consultation');
+    /// //////////////////////////    ///////////////////////////////////////////////////
+    Route::get('order/get_delay_view','Backend\OrderController@get_delay_view')->name('order.get_delay_view');
+    Route::get('order/get_delay','Backend\OrderController@get_delay')->name('order.get_delay');
+    /// //////////////////////////    ///////////////////////////////////////////////////
+    Route::get('order/get_need_parts_view','Backend\OrderController@get_need_parts_view')->name('order.get_need_parts_view');
+    Route::get('order/get_need_parts','Backend\OrderController@get_need_parts')->name('order.get_need_parts');
+    /// //////////////////////////    ///////////////////////////////////////////////////
+    Route::get('order/get_another_visit_works_view','Backend\OrderController@get_another_visit_works_view')->name('order.get_another_visit_works_view');
+    Route::get('order/get_another_visit_works','Backend\OrderController@get_another_visit_works')->name('order.get_another_visit_works');
+    /// //////////////////////////    ///////////////////////////////////////////////////
+
+    Route::get('order/get_finish_view','Backend\OrderController@get_finish_view')->name('order.get_finish_view');
+    Route::get('order/get_finish','Backend\OrderController@get_finish')->name('order.get_finish');
+    ///////////////////////////////////////// actions
+    Route::get('order/get_status_view/{id}','Backend\OrderController@get_status_view')->name('order.get_status_view');
+    Route::get('order/get_store_view/{id}','Backend\OrderController@get_store_view')->name('order.get_store_view');
+
+
+    /// //////////////////////////    ///////////////////////////////////////////////////
+
+
+    Route::post('order/assien','Backend\OrderController@assien')->name('order.assien');
+    Route::resource('order','Backend\OrderController');
+    Route::post('get_product','Backend\OrderController@product')->name('get_product');
+    Route::post('add_product','Backend\OrderController@add_product')->name('add_product');
+
 ////////////////////////////////////////////////////// cat
     Route::get('category/get_category','Backend\CategoryController@getAnyDate')->name('category.get_category');
     Route::get('category/sub/{id}','Backend\CategoryController@AllSub')->name('category.sub');
@@ -46,4 +83,16 @@ Route::group([
     //////////////////////////////////////////////time
     Route::get('time_work/get_time','Backend\TimeController@getAnyDate')->name('time_work.get_time');
     Route::resource('time_work','Backend\TimeController');
+
+    //////////////////////////////////////////////////////////// techail
+    Route::get('technical/get_technical','Backend\TechnicalController@getAnyDate')->name('technical.get_technical');
+    Route::resource('technical','Backend\TechnicalController');
+    ////////////////////////////////////////////////////////////     Currency
+
+    Route::get('currency/get_currency','Backend\CurrencyControler@getAnyDate')->name('currency.get_currency');
+    Route::resource('currency','Backend\CurrencyControler');
+//////////////////////////////////////coupons/////////////////
+    Route::get('coupons/get_coupons','Backend\CouponsController@getAnyDate')->name('coupons.get_coupons');
+    Route::resource('coupons','Backend\CouponsController');
 });
+

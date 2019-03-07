@@ -10,20 +10,16 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.create')}}</h3>
+                            <h3>{{trans('backend.create_product')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
 
-                                </li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
+
 
                         @if(isset($errors) > 0)
                             @if(Session::has('errors'))
@@ -49,7 +45,7 @@
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
                                         <li role="presentation" class=""><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
-                                                                            data-toggle="tab" aria-expanded="false">{{$properties['native']}}</a>
+                                                                            data-toggle="tab" aria-expanded="false">{{trans('backend.'.$properties['name'])}}</a>
                                         </li>
                                     @endforeach
 
@@ -62,11 +58,11 @@
                                              aria-labelledby="profile-tab">
                                             <div class="tab-pane " id="{{ $properties['native'] }}">
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_').$properties['native']}} <span
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_'.$properties['name'])}} <span
                                                         >*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12" maxlength="25" >
                                                     </div>
                                                 </div>
 
@@ -85,7 +81,7 @@
                                         >*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" id="first-name" name="price" required class="form-control col-md-7 col-xs-12">
+                                        <input type="number" id="first-name" name="price" required class="form-control col-md-7 col-xs-12" value="{{old('price')}}">
 
                                     </div>
                                 </div>
@@ -96,11 +92,25 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select  name="category_id" id="heard" class="form-control" >
-                                            <option >اختر قسم المنتجات</option>
+                                            <option value="" >{{trans('backend.chosse_category_product')}}</option>
                                             @foreach($main as $data)
                                                 <option value="{{$data->id}}">{{unserialize($data->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
                                             @endforeach
-                                        </select>                                </div>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.currency')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select  name="currency_id" id="heard" class="form-control" >
+                                            <option value=""> {{trans('backend.chosse_currency')}}</option>
+                                            @foreach($currency as $c)
+                                                <option value="{{$c->id}}">{{unserialize($c->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span
@@ -115,7 +125,7 @@
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
                                         <button id="send" type="submit" class="btn btn-success">{{trans('backend.save')}}</button>
-                                        <a href="{{route('category.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                        <a href="{{route('product.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                     </div>
                                 </div>

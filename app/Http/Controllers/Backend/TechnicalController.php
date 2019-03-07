@@ -1,0 +1,205 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Category;
+use App\Country;
+use App\Helper\Helper;
+use App\Http\Requests\Backend\TechnicalRequest;
+use App\Http\Requests\Backend\TechnicalUpdateRequest;
+use App\Technical;
+use App\Time;
+use App\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Yajra\Datatables\Datatables;
+use Alert;
+class TechnicalController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        return view('technical.index');
+
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        $main = Category::where('type', 'main')->get();
+
+        $time=Time::all();
+        $nationality=Country::all();
+        return view('technical.create',compact('time','nationality','main'));
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(TechnicalRequest $request)
+    {
+
+        $user = User::create([
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'country_id'  => $request->country_id,
+            'image'       => Helper::UploadImge($request,'uploads/avatars/','image'),
+            'password'    => bcrypt($request->password),
+
+        ]);
+       Technical::create([
+            'user_id'          => $user->id,
+            'type'             => 'technical',
+            'identification'   => $request->identification,
+            'category_id'      => $request->category_id,
+        ]);
+        $user->time()->sync($request->time_id);
+
+        Alert::success(trans('backend.created'))->persistent("Close");
+
+        return redirect()->route('technical.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+        $data =User::findOrFail($id);
+        $time=Time::all();
+        $nationality=Country::all();
+        $main = Category::where('type', 'main')->get();
+
+        return view('technical.edit',compact('data','time','nationality','main'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+        $data=User::findOrFail($id);
+        $request->validate([
+            //   'decs'=>'required',
+
+            'name'=>'required',
+            'email' => 'required|email|unique:users,email,'. $data->id,
+            'password' => 'nullable|min:6',
+            'phone'=>'required|min:6',
+            'country_id'=>'required',
+            'identification'=>'required|min:15|not_in:0',
+            'category_id'=>'required',
+
+        ]);
+
+
+        $data->update([
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'image'       => Helper::UpdateImage($request,'uploads/avatars/','image',$data->image),
+            'country_id'  => $request->country_id,
+            'password'    => bcrypt($request->password),
+        ]);
+        $data->technical->update([
+            'house'         => $request->house,
+            'identification'   => $request->identification,
+            'category_id'      => $request->category_id,
+        ]);
+
+        $data->time()->sync($request->time_id);
+
+        Alert::success(trans('backend.updateFash'))->persistent("Close");
+
+        return redirect()->route('technical.index');
+
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $data = User::findOrFail($id);
+
+        $data->delete();
+        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+    }
+
+
+
+
+    public function getAnyDate()
+    {
+        $data =  User::whereHas('technical', function ($q) {
+            $q->where('type', 'technical');
+        })->get();;
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '<a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
+               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i></button>
+    
+                ';
+            })
+            ->addColumn('image', function ($data) { $url=asset($data->image);
+            if ($data->image=='')
+                return '<img src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" border="0" width="40" class="img-rounded" align="center" />';
+
+            else
+                return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
+
+            })
+            ->addColumn('category', function ($data) {
+                return unserialize($data->technical->category->name)[LaravelLocalization::getCurrentLocale()];
+
+            })
+            ->rawColumns(['action', 'name','image','category'])
+            ->make(true);
+    }
+}

@@ -4,7 +4,7 @@
 
     <div class="x_panel">
             <div class="x_title">
-                <h2>{{trans('backend.categories')}}</h2>
+                <h2>{{trans('backend.categoriesOfProduct')}}</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -82,6 +82,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                buttons: ['{{trans('backend.no')}}', '{{trans('backend.yes')}}'],
+
                 closeOnConfirm: false
             }).then(function(yes) {
                 if (yes) {

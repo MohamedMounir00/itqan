@@ -10,7 +10,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.create')}}</h3>
+                            <h3>{{trans('backend.category_order_create')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -49,7 +49,7 @@
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
                                         <li role="presentation" class=""><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
-                                                                            data-toggle="tab" aria-expanded="false">{{$properties['native']}}</a>
+                                                                            data-toggle="tab" aria-expanded="false">{{trans('backend.'.$properties['name'])}}</a>
                                         </li>
                                     @endforeach
 
@@ -58,15 +58,15 @@
 
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
-                                        <div role="tabpanel" class="tab-pane fade  {{$loop->iteration == 2 ? 'active' : '' }} in" id="{{$properties['native']}}"
+                                        <div role="tabpanel" class="tab-pane fade   {{$loop->iteration == 2 ? 'active' : '' }} in" id="{{$properties['native']}}"
                                              aria-labelledby="profile-tab">
                                             <div class="tab-pane " id="{{ $properties['native'] }}">
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_').$properties['native']}} <span
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_'.$properties['name'])}} <span
                                                         >*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12" maxlength="25">
                                                     </div>
                                                 </div>
 
@@ -77,20 +77,61 @@
                                     @endforeach
 
                                 </div>
+                                <div class="clearfix"></div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.price')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" name="price" required class="form-control col-md-7 col-xs-12" value="{{old('price')}}" maxlength="10">
+                                    </div>
+                                </div>
 
                                 <div class="clearfix"></div>
-
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.price_emergency')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" name="price_emergency" required class="form-control col-md-7 col-xs-12" value="{{old('price_emergency')}}">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.currency')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select  name="currency_id" id="heard" class="form-control" >
+                                            <option value=""> {{trans('backend.chosse_currency')}}</option>
+                                            @foreach($currency as $c)
+                                                <option value="{{$c->id}}">{{unserialize($c->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.categories')}} <span
                                         >*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select  name="sub_id" id="heard" class="form-control" >
-                                            <option value="0">اختر قسم رائيسي</option>
+                                            <option value="0">{{trans('backend.main_cat')}}</option>
                                             @foreach($main as $data)
                                                 <option value="{{$data->id}}">{{unserialize($data->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
                                             @endforeach
                                         </select>                                </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.system_clocks')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select  name="system_clocks" id="heard" class="form-control" >
+                                                <option value="yes">{{trans('backend.yes')}}</option>
+                                                <option value="no">{{trans('backend.no')}}</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span

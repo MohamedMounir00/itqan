@@ -1,8 +1,7 @@
 <!-- footer content -->
 <footer class="hidden-print">
     <div class="pull-left">
-        Gentelella - قالب پنل مدیریت بوت استرپ <a href="https://colorlib.com">Colorlib</a> | پارسی شده توسط <a
-                href="https://morteza-karimi.ir">مرتضی کریمی</a>
+      {{trans('backend.footer')}}
     </div>
     <div class="clearfix"></div>
 </footer>
@@ -30,20 +29,15 @@
 <!-- Bootstrap -->
 <script src="{{asset('vendors')}}/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="{{asset('vendors')}}/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
-<script src="{{asset('vendors')}}/nprogress/nprogress.js"></script>
 <!-- bootstrap-progressbar -->
-<script src="{{asset('vendors')}}/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 <!-- iCheck -->
-<script src="{{asset('vendors')}}/iCheck/icheck.min.js"></script>
 
 <!-- bootstrap-daterangepicker -->
 <script src="{{asset('vendors')}}/moment/min/moment.min.js"></script>
 
 <script src="{{asset('vendors')}}/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="{{asset('vendors')}}/select2/dist/js/select2.full.min.js"></script>
-<script src="{{asset('vendors')}}/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
 <script src="{{asset('vendors')}}/validator/validator.js"></script>
 
 <!-- Custom Theme Scripts -->
@@ -52,9 +46,7 @@
 <!-- Include this after the sweet alert js file -->
 
 <!-- Chart.js -->
-<script src="{{asset('vendors')}}/Chart.js/dist/Chart.min.js"></script>
 <!-- jQuery Sparklines -->
-<script src="{{asset('vendors')}}/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 @if($lang == "ar")
 
 <script src="{{asset('build')}}/js/custom.js"></script>
@@ -64,7 +56,13 @@
 
    <script src="{{asset('js')}}/swetalert.js"></script>
 <script></script>
-
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 @include('sweet::alert')
 
 @yield('scripts')

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\CategoryProduct;
+use App\Currency;
+use App\Helper\Helper;
 use App\Http\Requests\Backend\ProductRequest;
 use App\Http\Requests\Backend\UpdateProductRequest;
 use App\Product;
@@ -13,6 +15,7 @@ use phpDocumentor\Reflection\Project;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\Datatables\Datatables;
 use Alert;
+
 class ProductController extends Controller
 {
     public function index()
@@ -31,8 +34,9 @@ class ProductController extends Controller
     {
         //
         $main = CategoryProduct::all();
+        $currency = Currency::all();
 
-        return view('product.create',compact('main'));
+        return view('product.create', compact('main', 'currency'));
     }
 
     /**
@@ -44,23 +48,28 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
 
-        if ($request->hasFile('image')) {
+        if ($request->name['ar'] == null || $request->name['en'] == null) {
+            session()->flash('error', trans('backend.filds_required'));
+            return back();
 
-            $img_name = time() . '.' . $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('uploads/product/'), $img_name);
-            $db_name = 'uploads/product/' . $img_name;
+        } else {
+            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
+                session()->flash('error', trans('backend.litter'));
+                return back();
+            } else {
+                Product::create([
+                    'name' => serialize($request->name),
+                    'price' => $request->price,
+                    'category_id' => $request->category_id,
+                    'currency_id' => $request->currency_id,
+                    'image' => Helper::UploadImge($request, 'uploads/product/', 'image'),
+                ]);
+                Alert::success(trans('backend.created'))->persistent("Close");
+
+                return redirect()->route('product.index');
+            }
 
         }
-        Product::create([
-            'name'=>serialize($request->name),
-            'price'=>$request->price,
-            'category_id'=>$request->category_id,
-            'image'=>$db_name
-            ]);
-        Alert::success(trans('backend.created'))->persistent("Close");
-
-        return redirect()->route('product.index');
-
 
     }
 
@@ -85,10 +94,11 @@ class ProductController extends Controller
     {
         //
         $main = CategoryProduct::all();
+        $currency = Currency::all();
 
         $data = Product::findOrFail($id);
 
-        return view('product.edit', compact('data','main'));
+        return view('product.edit', compact('data', 'main', 'currency'));
 
     }
 
@@ -101,35 +111,29 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        $data = Product::findOrFail($id);
-        if ($request->hasFile('image')) {
-            if ($data->image != '') {
+        if ($request->name['ar'] == null || $request->name['en'] == null) {
+            session()->flash('error', trans('backend.filds_required'));
+            return back();
 
-                if (File::exists(public_path($data->image))) { // unlink or remove previous image from folder
-                    unlink(public_path($data->image));
-                }
-                $img_name = time() . '.' . $request->image->getClientOriginalExtension();
-                $request->image->move(public_path('uploads/product/'), $img_name);
-                $db_name =  'uploads/product/' . $img_name;
-
-
+        } else {
+            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
+                session()->flash('error', trans('backend.litter'));
+                return back();
             } else {
-                $img_name = time() . '.' . $request->image->getClientOriginalExtension();
-                $request->image->move(public_path('uploads/product/'), $img_name);
-                $db_name = 'uploads/product/' . $img_name;
+                $data = Product::findOrFail($id);
+                $data->update([
+                    'name' => serialize($request->name),
+                    'price' => $request->price,
+                    'category_id' => $request->category_id,
+                    'currency_id' => $request->currency_id,
+                    'image' => Helper::UpdateImage($request, 'uploads/category/', 'image', $data->image)
+                ]);
+
+                Alert::success(trans('backend.updateFash'))->persistent("Close");
+
+                return redirect()->route('product.index');
             }
-        } else
-            $db_name = $data->image;
-        $data->update([
-            'name'=>serialize($request->name),
-            'price'=>$request->price,
-            'category_id'=>$request->category_id,
-            'image'=>$db_name
-        ]);
-
-        Alert::success(trans('backend.updateFash'))->persistent("Close");
-
-        return redirect()->route('product.index');
+        }
     }
 
     /**
@@ -151,8 +155,6 @@ class ProductController extends Controller
     }
 
 
-
-
     public function getAnyDate()
     {
         $data = Product::with('category')->get();
@@ -172,9 +174,15 @@ class ProductController extends Controller
                 return unserialize($data->category->name)[LaravelLocalization::getCurrentLocale()];
 
             })
-            ->addColumn('image', function ($data) { $url=asset($data->image);
-                return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />'; })
-            ->rawColumns(['action', 'name','image','category'])
+            ->addColumn('currency', function ($data) {
+                return unserialize($data->currency->name)[LaravelLocalization::getCurrentLocale()];
+
+            })
+            ->addColumn('image', function ($data) {
+                $url = asset($data->image);
+                return '<img src=' . $url . ' border="0" width="40" class="img-rounded" align="center"  />';
+            })
+            ->rawColumns(['action', 'name', 'image', 'category', 'currency'])
             ->make(true);
     }
 }

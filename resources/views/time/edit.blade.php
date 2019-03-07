@@ -36,26 +36,48 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['tag.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['time_work.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.title')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.from')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="first-name" name="title" required class="form-control col-md-7 col-xs-12" value="{{$data->title}}">
+                                    <input type="number" id="first-name" name="from" required class="form-control col-md-7 col-xs-12" value="{{$data->from}}">
                                 </div>
                             </div>
 
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.to')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="first-name" name="to" required class="form-control col-md-7 col-xs-12" value="{{$data->to}}">
+                                </div>
+                            </div>
 
-                >
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.timing')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select  name="timing" id="heard" class="form-control" >
+                                        <option value="am" {{($data->timing=='am')?'selected':''}}>{{trans('backend.am')}}</option>
+                                        <option value="pm" {{($data->timing=='pm')?'selected':''}}>{{trans('backend.pm')}}</option>
+
+                                    </select>                                  </div>
+                            </div>
+
+
+
+                            >
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('tag.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{route('time_work.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>

@@ -10,7 +10,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.create')}}</h3>
+                            <h3>{{trans('backend.category_product_create')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -49,7 +49,7 @@
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
                                         <li role="presentation" class=""><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
-                                                                            data-toggle="tab" aria-expanded="false">{{$properties['native']}}</a>
+                                                                            data-toggle="tab" aria-expanded="false">{{trans('backend.'.$properties['name'])}}</a>
                                         </li>
                                     @endforeach
 
@@ -62,11 +62,11 @@
                                              aria-labelledby="profile-tab">
                                             <div class="tab-pane " id="{{ $properties['native'] }}">
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_').$properties['native']}} <span
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_'.$properties['name'])}} <span
                                                         >*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12">
+                                                        <input type="text" id="first-name" maxlength="25" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 

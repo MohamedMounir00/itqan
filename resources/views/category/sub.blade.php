@@ -24,7 +24,13 @@
                     <thead>
                     <tr>
                         <th>{{trans('backend.name')}}</th>
+                        <th>{{trans('backend.price')}}</th>
+                        <th>{{trans('backend.price_emergency')}}</th>
+                        <th>{{trans('backend.currency')}}</th>
+
+                        <th>{{trans('backend.system_clocks')}}</th>
                         <th>{{trans('backend.image')}}</th>
+
                         <th>{{trans('backend.date')}}</th>
 
                         <th>{{trans('backend.action')}}</th>
@@ -38,7 +44,10 @@
 
 
                     </tbody>
+
                 </table>
+                    <a href="{{route('category.index')}}"  class="btn btn-primary " style="margin: 5px auto; display: block ;width: 100px">{{trans('backend.back')}}</a>
+
                 </div>
             </div>
         </div>
@@ -54,6 +63,10 @@
                 ajax: '{!! route('category.sub_category',$id) !!}',
                 columns: [
                     { data: 'name', name: 'name' },
+                    { data: 'price_emergency', name: 'price_emergency' },
+                    { data: 'price', name: 'price' },
+                    { data: 'currency', name: 'currency' },
+                    { data: 'system_clocks', name: 'system_clocks' },
                     { data: 'image', name: 'image' },
                     { data: 'created_at', name: 'created_at' },
 
@@ -84,6 +97,7 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                buttons: ['{{trans('backend.no')}}', '{{trans('backend.yes')}}'],
                 closeOnConfirm: false
             }).then(function(yes) {
                 if (yes) {

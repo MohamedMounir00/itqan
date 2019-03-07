@@ -7,7 +7,7 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.update')}}</h3>
+                            <h3>{{trans('backend.category_order_update')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -44,7 +44,7 @@
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
                                         <li role="presentation" class=""><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
-                                                                            data-toggle="tab" aria-expanded="false">{{$properties['native']}}</a>
+                                                                            data-toggle="tab" aria-expanded="false">{{trans('backend.'.$properties['name'])}}</a>
                                         </li>
                                     @endforeach
 
@@ -57,11 +57,11 @@
                                              aria-labelledby="profile-tab">
                                             <div class="tab-pane " id="{{ $properties['native'] }}">
                                                 <div class="item form-group">
-                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_').$properties['native']}} <span
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.name_'.$properties['name'])}} <span
                                                         >*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12" value="{{unserialize($data->name)[$localeCode]}}">
+                                                        <input type="text" id="first-name" name="name[{{$localeCode}}]" maxlength="25" required class="form-control col-md-7 col-xs-12" value="{{unserialize($data->name)[$localeCode]}}">
                                                     </div>
                                                 </div>
 
@@ -74,6 +74,37 @@
                                 </div>
 
                                 <div class="clearfix"></div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.price')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" name="price" required class="form-control col-md-7 col-xs-12" value="{{$data->price}}" maxlength="10">
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.price_emergency')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" name="price_emergency" required class="form-control col-md-7 col-xs-12" value="{{$data->price_emergency}}">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.currency')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select  name="currency_id" id="heard" class="form-control" >
+                                            @foreach($currency as $c)
+                                                <option value="{{$c->id}}"{{($data->currency_id == $c->id) ? 'selected' : ''}}>{{unserialize($c->name)[LaravelLocalization::getCurrentLocale()]}}</option>
+                                            @endforeach
+                                        </select>                                </div>
+                                </div>
                                @if($data->type =='sub')
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.categories')}} <span
@@ -87,6 +118,19 @@
                                         </select>                                </div>
                                 </div>
                                 @endif
+
+
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.system_clocks')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select  name="system_clocks" id="heard" class="form-control" >
+                                            <option value="yes" {{($data->system_clocks=='yes')? 'selected':''}}>{{trans('backend.yes')}}</option>
+                                            <option value="no" {{($data->system_clocks=='no')? 'selected':''}}>{{trans('backend.no')}}</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span
                                         >*</span>

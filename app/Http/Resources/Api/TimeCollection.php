@@ -22,7 +22,7 @@ class TimeCollection extends JsonResource
 
        return [
             'id'=>$this->id,
-         'time'=>trans('api.from',[],$lang).$this->from .trans('api.to',[],$lang).$this->to .'-'.$am,
+            'time'=>trans('api.from',[],$lang).$this->from .trans('api.to',[],$lang).$this->to .'-'.$am,
             // ($request->lang=='ar')?' من'.$this->from .'الى '.$this->to .'-'.$am :'from '.$this->from .' to '.$this->to .'-'.$am
       ];
     }

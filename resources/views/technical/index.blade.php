@@ -1,20 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials.messages')
 
     <div class="x_panel">
             <div class="x_title">
-                <h2>{{trans('backend.tag')}}</h2>
+                <h2>{{trans('backend.technical')}}</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
 
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
+             
 
+                    <li><a   href="{{route('technical.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                     </li>
-
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -24,10 +22,13 @@
                 <table id="table1" class="table table-striped table-bordered bulk_action table1">
                     <thead>
                     <tr>
-                        <th>الطلب</th>
-                        <th>التاريخ</th>
-
-                        <th>اضف فنى</th>
+                        <th>{{trans('backend.name')}}</th>
+                        <th>{{trans('backend.image')}}</th>
+                        <th>{{trans('backend.email')}}</th>
+                        <th>{{trans('backend.phone')}}</th>
+                        <th>{{trans('backend.job')}}</th>
+                        <th>{{trans('backend.date')}}</th>
+                        <th>{{trans('backend.action')}}</th>
 
                     </tr>
                     </thead>
@@ -42,7 +43,7 @@
                 </div>
             </div>
         </div>
-    </div>@endsection
+  @endsection
 @section('scripts')
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -51,9 +52,15 @@
             $('#table1').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('project.get_project') !!}',
+                ajax: '{!! route('technical.get_technical') !!}',
                 columns: [
-                    { data: 'desc', name: 'desc' },
+                    { data: 'name', name: 'name' },
+
+                    { data: 'image', name: 'image' } ,
+                    { data: 'email', name: 'email' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'category', name: 'category' },
+
                     { data: 'created_at', name: 'created_at' },
 
                     {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -83,6 +90,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                buttons: ['{{trans('backend.no')}}', '{{trans('backend.yes')}}'],
+
                 closeOnConfirm: false
             }).then(function(yes) {
                 if (yes) {

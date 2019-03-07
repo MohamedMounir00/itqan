@@ -7,7 +7,7 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.update')}}</h3>
+                            <h3>{{trans('backend.add_techanel')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -36,20 +36,18 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['project.assien'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['order.assien'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">العنوان <span
-                                    >*</span>
-                                </label>
+
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="hidden" id="first-name" name="order_id" required class="form-control col-md-7 col-xs-12" value="{{$data->id}}">
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">اختر الفنى <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.assigen_order')}}<span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -64,8 +62,8 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button id="send" type="submit" class="btn btn-success">تعين</button>
-                                    <a href="{{route('project.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <button id="send" type="submit" class="btn btn-success">{{trans('backend.assigen')}}</button>
+                                    <a href="{{route('order.get_order_view')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>

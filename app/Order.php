@@ -44,4 +44,8 @@ class Order extends Model
         return $this->belongsTo(User::class,'technical_id');
 
     }
+    public  function  assiens(){
+        return $this->hasMany(Assian::class,'order_id');
+
+    }
 }

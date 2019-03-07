@@ -2215,10 +2215,10 @@ function init_validator() {
     validator.message.empty = 'هذا الحقل مطلوب';
     validator.message.select = 'لطفا یک گزینه را انتخاب کنید';
     validator.message.number_min = 'خیلی کم';
-    validator.message.number_max = 'خیلی زیاد';
+    validator.message.number_max = 'عدد الحروف يجب ان لا يزيد عن ';
     validator.message.url = 'URL نا معتبر';
-    validator.message.number = 'عدد نمی‌باشد';
-    validator.message.email = 'آدرس ایمیل نا معتبر است.';
+    validator.message.number = 'هذا الحقل يجب ان يكون ارقام';
+    validator.message.email = ' البريد الالكترونى يجب ان يكون صحيح.';
     validator.message.email_repeat = 'تکرار ایمیل با ایمیل مطابقت ندارد';
     validator.message.date = 'تاریخ نامعتبر';
     validator.message.time = 'زمان نامعتبر';

@@ -165,6 +165,11 @@ return [
         'rating_explain_problem'=>'Explain the problem',
         'comment'=>'Comment',
         'phone'=>'Phone',
+        'currency_id'=>'currency',
+ 'system_clocks'=>'Working hours',
+    'price'=>'price',
+    'price_emergency'=>'Price in case of emergency',
     ],
+
 
 ];

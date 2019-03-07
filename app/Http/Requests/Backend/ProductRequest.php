@@ -25,9 +25,10 @@ class ProductRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'price'=>'required',
+            'price'=>'required|not_in:0',
             'category_id'=>'required',
             'image'=>'required',
+            'currency_id'=>'required',
         ];
     }
 }

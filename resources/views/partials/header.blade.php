@@ -11,8 +11,7 @@
     <meta name="fontiran.com:license" content="Y68A9">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" href="../build/images/favicon.ico" type="image/ico"/>
-    <title>Gentelella Alela! | قالب مدیریت رایگان </title>
+    <title>{{trans('backend.title')}}</title>
 
     <!-- Bootstrap -->
 
@@ -31,24 +30,23 @@
         <!-- Font Awesome -->
     <link href="{{asset('vendors')}}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="{{asset('vendors')}}/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="{{asset('vendors')}}/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+
     <!-- iCheck -->
-    <link href="{{asset('vendors')}}/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('vendors')}}/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <link href="{{asset('vendors')}}/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/dropify@0.2.2/dist/css/dropify.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link href="{{asset('vendors')}}/select2/dist/css/select2.min.css" rel="stylesheet">
-    <link href="{{asset('vendors')}}/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- starrr -->
-    <link href="{{asset('vendors')}}/starrr/dist/starrr.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     @if($lang == "ar")
-
+        <style>
+            .product_gallery {
+                float: right;
+            }
+        </style>
     <link href="{{asset('build')}}/css/custom.min.css" rel="stylesheet">
     @else
         <link href="{{asset('build2')}}/css/custom.min.css" rel="stylesheet">

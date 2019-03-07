@@ -77,5 +77,10 @@ return [
         'rating_explain_problem'=>'شرح المشكله',
         'comment'=>'التعليق',
         'phone'=>'رقم الجوال',
+        'currency_id'=>'العمله',
+        'system_clocks'=>'العمل بنظام الساعات',
+        'price'=>'السعر',
+        'price_emergency'=>'السعر فى حاله الطوارئ',
+        'identification'=>'رقم الهويه الوطنيه',
         ],
 ];

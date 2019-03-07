@@ -41,12 +41,22 @@ class CategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-          CategoryProduct::create(['name'=>serialize($request->name)]);
-            Alert::success(trans('backend.created'))->persistent("Close");
+        if ($request->name['ar'] == null || $request->name['en'] == null) {
+            session()->flash('error', trans('backend.filds_required'));
+            return back();
 
-            return redirect()->route('category_product.index');
+        } else {
+            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
+                session()->flash('error', trans('backend.litter'));
+                return back();
+            } else {
+                CategoryProduct::create(['name' => serialize($request->name)]);
+                Alert::success(trans('backend.created'))->persistent("Close");
 
+                return redirect()->route('category_product.index');
 
+            }
+        }
     }
 
     /**
@@ -85,15 +95,25 @@ class CategoryProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = CategoryProduct::findOrFail($id);
+        if ($request->name['ar'] == null || $request->name['en'] == null) {
+            session()->flash('error', trans('backend.filds_required'));
+            return back();
 
-        $data->update(['name'=>serialize($request->name)]);
+        } else {
+            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
+                session()->flash('error', trans('backend.litter'));
+                return back();
+            } else {
+                $data = CategoryProduct::findOrFail($id);
 
-            Alert::success(trans('backend.updateFash'))->persistent("Close");
+                $data->update(['name' => serialize($request->name)]);
 
-        return redirect()->route('category_product.index');
+                Alert::success(trans('backend.updateFash'))->persistent("Close");
+
+                return redirect()->route('category_product.index');
+            }
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      *

@@ -13,7 +13,7 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="dropdown">
+                <li class="dropdown" style=" margin-left: 30px">
 
 
                     <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="fa fa-language"></i>
@@ -30,7 +30,7 @@
 
 
                                 <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                    <img width="20px"  src='{{ asset("backend/assets/$localeCode-flag.png") }}' alt="">
+                                    <img width="20px"  src='{{ asset("$localeCode-flag.png") }}' alt="">
                                     {{ $properties['native'] }}
                                 </a>
 

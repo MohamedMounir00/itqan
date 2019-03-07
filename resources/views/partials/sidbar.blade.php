@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col hidden-print">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>
+            <a href="#" class="site_title"> <span>
                     @if(app()->getLocale()=='ar' )
 
                         لوحه تحكم اتقان
@@ -28,11 +28,31 @@
             <div class="menu_section">
                 <ul class="nav side-menu">
 
-                    <li><a><i class="fa fa-edit"></i> الطلبات <span class="fa fa-chevron-down"></span></a>
+
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.technical_controller')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('technical.index')}}">{{trans('backend.technical')}} </a></li>
+
+                            <li><a href="{{route('technical.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.orders')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
 
-                            <li><a href="{{route('project.index')}}"> الطلبات</a></li>
-
+                            <li><a href="{{route('order.index')}}"> {{trans('backend.all_order')}}</a></li>
+                            <li><a href="{{route('order.get_order_view')}}"> {{trans('backend.order_view')}} </a></li>
+                            <li><a href="{{route('order.get_finish_view')}}"> {{trans('backend.finish_order')}} </a></li>
+                            <li><a><i class="fa fa-edit"></i> {{trans('backend.scheduled_order')}} <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                            <li><a href="{{route('order.get_consultation_view')}}"> {{trans('backend.consultation_view')}} </a></li>
+                            <li><a href="{{route('order.get_delay_view')}}"> {{trans('backend.delay_view')}} </a></li>
+                            <li><a href="{{route('order.get_need_parts_view')}}">{{trans('backend.need_parts')}} </a></li>
+                            <li><a href="{{route('order.get_another_visit_works_view')}}"> {{trans('backend.another_visit')}} </a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
@@ -64,6 +84,33 @@
                         </ul>
                     </li>
 
+
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.currency')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('currency.index')}}">{{trans('backend.currency_controller')}} </a></li>
+
+                            <li><a href="{{route('currency.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.time_work')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('time_work.index')}}">{{trans('backend.time_controller')}} </a></li>
+
+                            <li><a href="{{route('time_work.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+                    {{---
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.coupons')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('coupons.index')}}">{{trans('backend.coupons')}} </a></li>
+
+                            <li><a href="{{route('coupons.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+--}}
                 </ul>
             </div>
 
@@ -72,16 +119,14 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="تنظیمات">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="تمام صفحه" onclick="toggleFullScreen();">
+
+            <a data-toggle="tooltip" data-placement="top" title="{{trans('backend.full')}}" onclick="toggleFullScreen();">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="قفل" class="lock_btn">
+            <a data-toggle="tooltip" data-placement="top" title="{{trans('backend.close')}}" class="lock_btn">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="خروج" href="{{ route('logout') }}"     onclick="event.preventDefault();
+            <a data-toggle="tooltip" data-placement="top" title="{{trans('admin.logout')}}" href="{{ route('logout') }}"     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>

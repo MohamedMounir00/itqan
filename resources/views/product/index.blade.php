@@ -25,6 +25,7 @@
                     <tr>
                         <th>{{trans('backend.name')}}</th>
                         <th>{{trans('backend.price')}}</th>
+                        <th>{{trans('backend.currency')}}</th>
                         <th>{{trans('backend.image')}}</th>
                         <th>{{trans('backend.category')}}</th>
                         <th>{{trans('backend.date')}}</th>
@@ -57,6 +58,7 @@
                 columns: [
                     { data: 'name', name: 'name' },
                     { data: 'price', name: 'price' },
+                    { data: 'currency', name: 'currency' },
                    { data: 'image', name: 'image' } ,
                    { data: 'category', name: 'category' } ,
                     { data: 'created_at', name: 'created_at' },
@@ -88,6 +90,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                buttons: ['{{trans('backend.no')}}', '{{trans('backend.yes')}}'],
+
                 closeOnConfirm: false
             }).then(function(yes) {
                 if (yes) {

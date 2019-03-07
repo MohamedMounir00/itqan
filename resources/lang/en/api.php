@@ -15,6 +15,7 @@ return [
     'no_premssion'=>'No Premssion ',
     'can_not_add_product'=>' This application can not add products in it  ',
     'tech_add_prodect'=>'  The technician added products to a repair request  ',
+    'admin_add_prodect'=>'  The admin added products to a repair request  ',
     'watting_product'=>'The products have been sent to the customer, please wait for approval',
     'add_rating_noty'=>' You have been evaluated for a repair request ',
     'add_rating'=>'Successfully ratting',

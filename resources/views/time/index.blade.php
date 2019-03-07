@@ -92,6 +92,8 @@
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete it!",
+                buttons: ['{{trans('backend.no')}}', '{{trans('backend.yes')}}'],
+
                 closeOnConfirm: false
             }).then(function(yes) {
                 if (yes) {
