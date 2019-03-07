@@ -343,10 +343,11 @@ class OrderController extends Controller
             ->addColumn('created_at', function ($data) {
                 $language = LaravelLocalization::getCurrentLocale();
                 Carbon::setLocale($language);
-                if ($data->created_at < Carbon::now()->subMinutes('15')|| $data->reply == 'yes')
-                    return '<span class="btn btn-danger">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
-                else
+                if ($data->created_at > Carbon::now()->subMinutes('15')|| $data->reply == 'yes')
                     return '<span class="btn btn-default">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
+
+                else
+                return '<span class="btn btn-danger">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
 
             })
             ->addColumn('details', function ($data) {
