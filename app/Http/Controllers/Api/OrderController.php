@@ -133,6 +133,9 @@ class OrderController extends Controller
         }
         else
             {
+                $order-> reply = 'yes';
+                $order->save();
+
             $assin->update([
 
                 'status' => 'dis_agree',
