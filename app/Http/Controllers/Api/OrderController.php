@@ -133,7 +133,7 @@ class OrderController extends Controller
         }
         else
             {
-                $order-> reply = 'yes';
+                $order-> reply = 'no';
                 $order->save();
 
             $assin->update([
