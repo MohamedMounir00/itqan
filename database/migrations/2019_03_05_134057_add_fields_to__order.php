@@ -13,7 +13,7 @@ class AddFieldsToOrder extends Migration
      */
     public function up()
     {
-        Schema::table('Orders', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
             //
             $table->enum('reply',['no','yes'])->default('no');
 

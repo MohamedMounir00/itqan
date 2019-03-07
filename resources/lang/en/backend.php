@@ -115,7 +115,9 @@ return[
     'close'=>' close screen',
 
     'assigen_order'=>' chose a technician',
-    'assigen'=>'assign'
+    'assigen'=>'assign',
+    'id_pross'=>'Id'
+
 
 
 

@@ -114,7 +114,8 @@ return[
     'full'=>'تكبير الشاشه',
     'close'=>' غلق الشاشه',
     'assigen_order'=>'اختار فنى',
-    'assigen'=>'تعين'
+    'assigen'=>'تعين',
+    'id_pross'=>'رقم العمليه'
 
 
 
