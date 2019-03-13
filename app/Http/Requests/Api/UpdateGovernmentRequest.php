@@ -27,7 +27,7 @@ class UpdateGovernmentRequest extends FormRequest
             'name'=>'required',
             'email' => 'required|email|unique:users,email,'. $this->user()->id,
             'password' => 'nullable|min:6',
-            'phone'=>'required',
+            'phone'=>'required|min:10',
             'country_id'=>'required',
             'city_id'=>'required',
             'minstry_id'=>'required',
