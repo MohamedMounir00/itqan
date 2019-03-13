@@ -210,15 +210,11 @@ class TechnicalController extends Controller
 
             })
 
-            ->addColumn('city', function ($data) {
-                if (LaravelLocalization::getCurrentLocale()=='ar')
-                    return $data->city->name_ar;
-                else
-                    return $data->city->name_en;
 
 
-            })
-            ->rawColumns(['action', 'name','image','category', 'country','city'])
+
+
+            ->rawColumns(['action', 'name','image','category', 'country'])
             ->make(true);
     }
 }

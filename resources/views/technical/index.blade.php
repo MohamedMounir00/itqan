@@ -28,7 +28,6 @@
                         <th>{{trans('backend.phone')}}</th>
                         <th>{{trans('backend.job')}}</th>
                         <th>{{trans('backend.country')}}</th>
-                        <th>{{trans('backend.city')}}</th>
                         <th>{{trans('backend.date')}}</th>
                         <th>{{trans('backend.action')}}</th>
 
@@ -63,7 +62,6 @@
                     { data: 'phone', name: 'phone' },
                     { data: 'category', name: 'category' },
                     { data: 'country', name: 'country' },
-                    { data: 'city', name: 'city' },
                     { data: 'created_at', name: 'created_at' },
 
                     {data: 'action', name: 'action', orderable: false, searchable: false},
