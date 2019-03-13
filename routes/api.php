@@ -49,6 +49,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');
     Route::get('all_orders_for_client','Api\OrderController@allOrdersForClient');
+    Route::get('oeder_details','Api\OrderController@oeder_details');
     Route::get('get_current_order_price','Api\OrderController@GetCurrentOrderWithPrice');
     Route::get('get_notifications','Api\NotfiyController@getNotifay');
     Route::post('assgin_technical','Api\OrderController@assienTechnical');

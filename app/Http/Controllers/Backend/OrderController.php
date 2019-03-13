@@ -12,13 +12,14 @@ use App\Http\Resources\Api\ProudctCollection;
 use App\NotfiyOrder;
 use App\Order;
 use App\Product;
+use App\Technical;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\Datatables\Datatables;
 use Alert;
-
+use DB;
 class OrderController extends Controller
 {
 
@@ -87,7 +88,30 @@ class OrderController extends Controller
 
         return view('order.actions.add_product',compact('category','id'));
     }
+    ////////////////////////////// update sratus
+    public function update_status_view($id)
+    {
+        $order = Order::findOrFail($id);
 
+        return view('order.actions.update_status',compact('order'));
+    }
+
+    ////////////////////////////// update sratus post
+    public function update_status(Request $request)
+    {
+
+        $order = Order::findOrFail($request->order_id);
+        $order->status = $request->status;
+        $order->save();
+        $name =[
+            'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
+            'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
+        ];
+        Helper::Notifications($order->id,$order->user_id,$name,'order',0);
+        Alert::success(trans('backend.updateFash'))->persistent("Close");
+
+        return back();
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -138,9 +162,12 @@ class OrderController extends Controller
         //
 
         $data = Order::findOrFail($id);
-        $users = User::whereHas('technical', function ($q) {
-            $q->where('type', 'technical');
-        })->get();
+
+    $users=Technical::select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
+     + sin( radians(' . $data->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance'))
+    ->orderBy('distance', 'asc')->with('user')->get();
         return view('order.edit', compact('data', 'users'));
 
     }
@@ -268,7 +295,7 @@ class OrderController extends Controller
     }
 
 
-    /////////////////////////////Order request for another visit
+    /////////////////////////////Order request for finish
     public function get_finish()
     {
         $status=[ 'done', 'can_not'];
@@ -298,8 +325,8 @@ class OrderController extends Controller
     {
         $id = $request->order_id;
         $data = Order::with('category')->findOrFail($id);
-        $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
-        if (!$assien > 0) {
+      //  $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
+
             $assin = Assian::create([
                 'order_id' => $id,
                 'user_id' => $data->user_id,
@@ -318,10 +345,9 @@ class OrderController extends Controller
 
             Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent("Close");
             return redirect()->route('order.get_order_view');
-        } else {
-            Alert::success(trans('backend.assigen_technical_alredy'))->persistent("Close");
-            return redirect()->route('order.get_order_view');
-        }
+
+
+
     }
 
 
@@ -342,8 +368,9 @@ class OrderController extends Controller
             })
             ->addColumn('created_at', function ($data) {
                 $language = LaravelLocalization::getCurrentLocale();
+                $time=Helper::make_decision()->value;
                 Carbon::setLocale($language);
-                if ($data->created_at > Carbon::now()->subMinutes('15')|| $data->reply == 'yes')
+                if ($data->created_at > Carbon::now()->subMinutes($time)|| $data->reply == 'yes')
                     return '<span class="btn btn-default">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
 
                 else
@@ -393,6 +420,9 @@ class OrderController extends Controller
                     'product_id' => $value,
                     'order_id' => $order->id,
                     'status' => 0,
+                    'status_admin' => 1,
+                    'user_id' => auth()->user()->id,
+
                     'amount' => 1,
 
                 ]);
@@ -406,4 +436,68 @@ class OrderController extends Controller
             return back();
         }
     }
+
+
+    ////////////////////////////////////////get   the products from the technician for approval//////////////////
+    public function get_product_fromTechinel_view($id)
+    {
+
+        $cart = CartOrder::with('product')->where('order_id',$id)->where('status',0)->where('status_admin',0)->get();
+
+        return view('order.actions.get_product',compact('cart'));
+    }
+
+    public function refused_request($id)
+    {
+        $data = CartOrder::findOrFail($id);
+
+        $data->delete();
+        //Alert::success(trans('backend.refusedFlash'))->persistent("Close");
+
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+    }
+    public function accpet_request($id)
+    {
+        $data = CartOrder::findOrFail($id);
+
+        $data->status=true;
+        $data->save();
+    //    Alert::success(trans('backend.accpetdFlash'))->persistent("Close");
+
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+    }
+
+
+
+   // ////////////////////////////////////الضمان
+
+    public function get_warranty_view()
+    {
+
+
+        return view('order.warranty');
+    }
+
+
+    public function get_warranty()
+    {
+        $data = Order::with('category')->where('warranty', 1)->orderBy('updated_at', 'DESC');
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i></a>';
+            })
+            ->addColumn('client', function ($data) {
+                return $data->user->name;
+            })
+            ->rawColumns(['action', 'client'])
+            ->make(true);
+    }
+
+/////////////////////////////
+
 }

@@ -18,6 +18,7 @@ class ProudctCollection extends JsonResource
                 'id'=>$this->id,
                 'name'=>unserialize($this->name)[$request->lang],
                 'price'=>$this->price,
+                'currency'=>unserialize($this->currency->name)[$request->lang],
                 'image'=>url($this->image),
                 'amount'=>isset($this->pivot->amount)?$this->pivot->amount:'',
                 'id_rel'=>isset($this->pivot->id)?$this->pivot->id:'',

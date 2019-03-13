@@ -15,42 +15,11 @@ class TestTableSeeder extends Seeder
     {
         //
 
-
-
-
-          $name =[
-            'ar'=>'تم تعين  فنى لطلبك',
-           'en'=>'assien techamnal',
-           // 'en'=>'Pm',
-             // 'ar'=>'مساء',
-         ];
-
-
-           // $user = new \App\TypeCompany() ;
-
-           // $user->name = serialize($name);
-            //    $user->name = 'تجربه'[$key];
-
-
-         //  $user->save() ;
-
-      //  \App\NotfiyOrder::create([
-       //    'message' =>serialize($name),
-        //    'order_id'=>8,
-         //   'client_id'=>1,
-         //   'technical_id'=>5,
-
-
-      //  ]);
-
-        $assin=\App\Assian::create([
-           'order_id'=>26,
-           'user_id'=> 1,
-           'technical_id'=> 5,
-           'status'=> 'watting',
+ DB::table('appsetings')->insert([
+            'key' => 'make_decision_time',
+            'value' => '15',
         ]);
 
-    App\Helper\Helper::Notifications($assin->order_id,$assin->user_id,$name,'order',0);
 
 
     }

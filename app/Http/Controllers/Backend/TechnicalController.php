@@ -162,8 +162,10 @@ class TechnicalController extends Controller
     public function destroy($id)
     {
         $data = User::findOrFail($id);
+        $data2 = Technical::where('user_id',$id)->first();
 
         $data->delete();
+        $data2->delete();
         Alert::success(trans('backend.deleteFlash'))->persistent("Close");
 
         return response()->json([
@@ -199,7 +201,24 @@ class TechnicalController extends Controller
                 return unserialize($data->technical->category->name)[LaravelLocalization::getCurrentLocale()];
 
             })
-            ->rawColumns(['action', 'name','image','category'])
+            ->addColumn('country', function ($data) {
+                if (LaravelLocalization::getCurrentLocale()=='ar')
+                    return $data->country->name_ar;
+                else
+                    return $data->country->name_en;
+
+
+            })
+
+            ->addColumn('city', function ($data) {
+                if (LaravelLocalization::getCurrentLocale()=='ar')
+                    return $data->city->name_ar;
+                else
+                    return $data->city->name_en;
+
+
+            })
+            ->rawColumns(['action', 'name','image','category', 'country','city'])
             ->make(true);
     }
 }

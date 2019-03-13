@@ -42,6 +42,8 @@
 
                     </tbody>
                 </table>
+                <br>
+                <span > <label class="btn btn-danger"></label> {{trans('backend.desc_assigen_index')}}</span>
             </div>
         </div>
     </div>

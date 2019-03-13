@@ -4,7 +4,7 @@
 
     <div class="x_panel">
             <div class="x_title">
-                <h2>{{trans('backend.technical')}}</h2>
+                <h2>{{trans('backend.clients')}}</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -26,7 +26,6 @@
                         <th>{{trans('backend.image')}}</th>
                         <th>{{trans('backend.email')}}</th>
                         <th>{{trans('backend.phone')}}</th>
-                        <th>{{trans('backend.job')}}</th>
                         <th>{{trans('backend.country')}}</th>
                         <th>{{trans('backend.city')}}</th>
                         <th>{{trans('backend.date')}}</th>
@@ -55,15 +54,16 @@
             $('#table1').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('technical.get_technical') !!}',
+                ajax: '{!! route('clients.get_clients') !!}',
                 columns: [
                     { data: 'name', name: 'name' },
+
                     { data: 'image', name: 'image' } ,
                     { data: 'email', name: 'email' },
                     { data: 'phone', name: 'phone' },
-                    { data: 'category', name: 'category' },
                     { data: 'country', name: 'country' },
                     { data: 'city', name: 'city' },
+
                     { data: 'created_at', name: 'created_at' },
 
                     {data: 'action', name: 'action', orderable: false, searchable: false},

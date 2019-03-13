@@ -4,7 +4,7 @@
         @foreach($order->proudect as $item)
 
 
-            <a>
+            <a href="{{route('product.show', $item->id)}}">
                 {{unserialize($item->name)[$lang]}}
                 <img src="{{url($item->image)}}" alt="..."/>
             </a>

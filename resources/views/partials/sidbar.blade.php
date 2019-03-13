@@ -37,80 +37,99 @@
 
                         </ul>
                     </li>
-
-
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.orders')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-
-                            <li><a href="{{route('order.index')}}"> {{trans('backend.all_order')}}</a></li>
-                            <li><a href="{{route('order.get_order_view')}}"> {{trans('backend.order_view')}} </a></li>
-                            <li><a href="{{route('order.get_finish_view')}}"> {{trans('backend.finish_order')}} </a></li>
-                            <li><a><i class="fa fa-edit"></i> {{trans('backend.scheduled_order')}} <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                            <li><a href="{{route('order.get_consultation_view')}}"> {{trans('backend.consultation_view')}} </a></li>
-                            <li><a href="{{route('order.get_delay_view')}}"> {{trans('backend.delay_view')}} </a></li>
-                            <li><a href="{{route('order.get_need_parts_view')}}">{{trans('backend.need_parts')}} </a></li>
-                            <li><a href="{{route('order.get_another_visit_works_view')}}"> {{trans('backend.another_visit')}} </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.categories')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('category.index')}}">{{trans('backend.all_categories')}} </a></li>
-
-                                <li><a href="{{route('category.create')}}">{{trans('backend.create')}} </a></li>
-
-                        </ul>
-                    </li>
-
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.categoriesOfProduct')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('category_product.index')}}">{{trans('backend.all_categories')}} </a></li>
-
-                            <li><a href="{{route('category_product.create')}}">{{trans('backend.create')}} </a></li>
-
-                        </ul>
-                    </li>
-
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.product')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('product.index')}}">{{trans('backend.product_all')}} </a></li>
-
-                            <li><a href="{{route('product.create')}}">{{trans('backend.create')}} </a></li>
-
-                        </ul>
-                    </li>
-
-
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.currency')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('currency.index')}}">{{trans('backend.currency_controller')}} </a></li>
-
-                            <li><a href="{{route('currency.create')}}">{{trans('backend.create')}} </a></li>
-
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.time_work')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('time_work.index')}}">{{trans('backend.time_controller')}} </a></li>
-
-                            <li><a href="{{route('time_work.create')}}">{{trans('backend.create')}} </a></li>
-
-                        </ul>
-                    </li>
                     {{---
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.coupons')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('coupons.index')}}">{{trans('backend.coupons')}} </a></li>
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.clients_controller')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('clients.index')}}">{{trans('backend.clients')}} </a></li>
 
-                            <li><a href="{{route('coupons.create')}}">{{trans('backend.create')}} </a></li>
 
-                        </ul>
-                    </li>
---}}
+                                            </ul>
+                                        </li>
+                    --}}
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.orders')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+
+                                                <li><a href="{{route('order.index')}}"> {{trans('backend.all_order')}}</a></li>
+                                                <li><a href="{{route('order.get_order_view')}}"> {{trans('backend.order_view')}} </a></li>
+                                                <li><a href="{{route('order.get_finish_view')}}"> {{trans('backend.finish_order')}} </a></li>
+                                                <li><a href="{{route('order.get_warranty_view')}}"> {{trans('backend.warranty')}} </a></li>
+                                                <li><a><i class="fa fa-edit"></i> {{trans('backend.scheduled_order')}} <span class="fa fa-chevron-down"></span></a>
+                                                    <ul class="nav child_menu">
+                                                <li><a href="{{route('order.get_consultation_view')}}"> {{trans('backend.consultation_view')}} </a></li>
+                                                <li><a href="{{route('order.get_delay_view')}}"> {{trans('backend.delay_view')}} </a></li>
+                                                <li><a href="{{route('order.get_need_parts_view')}}">{{trans('backend.need_parts')}} </a></li>
+                                                <li><a href="{{route('order.get_another_visit_works_view')}}"> {{trans('backend.another_visit')}} </a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.categories')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('category.index')}}">{{trans('backend.all_categories')}} </a></li>
+
+                                                    <li><a href="{{route('category.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.categoriesOfProduct')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('category_product.index')}}">{{trans('backend.all_categories')}} </a></li>
+
+                                                <li><a href="{{route('category_product.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.product')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('product.index')}}">{{trans('backend.product_all')}} </a></li>
+
+                                                <li><a href="{{route('product.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.currency')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('currency.index')}}">{{trans('backend.currency_controller')}} </a></li>
+
+                                                <li><a href="{{route('currency.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.time_work')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('time_work.index')}}">{{trans('backend.time_controller')}} </a></li>
+
+                                                <li><a href="{{route('time_work.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.get_settings')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('get_settings')}}">{{trans('backend.get_settingsr_controller')}} </a></li>
+
+
+                                            </ul>
+                                        </li>
+
+
+                                        {{---
+                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.coupons')}} <span class="fa fa-chevron-down"></span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="{{route('coupons.index')}}">{{trans('backend.coupons')}} </a></li>
+
+                                                <li><a href="{{route('coupons.create')}}">{{trans('backend.create')}} </a></li>
+
+                                            </ul>
+                                        </li>
+                    --}}
                 </ul>
             </div>
 

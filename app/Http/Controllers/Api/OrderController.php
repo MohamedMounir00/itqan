@@ -33,31 +33,30 @@ class OrderController extends Controller
 
         ];
         $order = new  Order();
-        $order->desc =          $request->desc;
-        $order->category_id =   $request->category_id;
-        $order->time_id     =   $request->time_id;
-        $order->date        =   serialize($name);
-        $order->address_id  =   $request->address_id;
-        $order->status      =   'new';
-        $order->user_id     =    auth()->user()->id;
-        $order->express     =    $request->express;
+        $order->desc = $request->desc;
+        $order->category_id = $request->category_id;
+        $order->time_id = $request->time_id;
+        $order->date = serialize($name);
+        $order->address_id = $request->address_id;
+        $order->status = 'new';
+        $order->user_id = auth()->user()->id;
+        $order->express = $request->express;
         $order->save();
         if ($request->file_id != "")
             $order->storge()->sync(explode(',', $request->file_id));
-        if ($request->product_id != "")
-        {
-            foreach (explode(',', $request->product_id) as $key => $value)
-            {
+        if ($request->product_id != "") {
+            foreach (explode(',', $request->product_id) as $key => $value) {
 
                 CartOrder::create([
                     'product_id' => $value,
                     'order_id' => $order->id,
                     'status' => 1,
+                    'user_id' => auth()->user()->id,
+
                     'amount' => explode(',', $request->amount)[$key],
                 ]);
             }
-            foreach (explode(',', $request->product_id) as $key => $value)
-            {
+            foreach (explode(',', $request->product_id) as $key => $value) {
 
                 Cart::create([
                     'product_id' => $value,
@@ -75,7 +74,7 @@ class OrderController extends Controller
 
     public function allOrdersForClient()
     {
-        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts','another_visit_works'];
+        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts', 'another_visit_works'];
         $statuses_Array2 = ['done', 'can_not'];
 
         $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
@@ -91,7 +90,12 @@ class OrderController extends Controller
         return new AllOrderCollection($courntorder, $oldorder);
 
     }
-
+    public function oeder_details(Request $request)
+    {
+        $id=$request->order_id;
+        $odder= Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->findOrFail($id);
+        return new OrderCollection($odder);
+    }
 
     public function showOrder(Request $request)
     {
@@ -112,11 +116,11 @@ class OrderController extends Controller
         $status = $request->status;//yes Or no
         $technical_id = $request->technical_id;
         $assin_id = $request->assign_id;
+        $reason = $request->reason_rejection;
 
         $order = Order::findOrFail($id);
         $assin = Assian::findOrFail($assin_id);
-        if ($status == 'yes')
-        {
+        if ($status == 'yes') {
             $assin->update(['status' => 'agree']);
             $order->status = 'wating';
             $order->technical_id = $technical_id;
@@ -130,15 +134,15 @@ class OrderController extends Controller
 
             return new StatusCollection(true, trans('api.accpeted_techaincal', [], $lang));
 
-        }
-        else
-            {
-                $order-> reply = 'no';
-                $order->save();
+        } else {
+            $order->reply = 'no';
+            $order->save();
 
             $assin->update([
 
                 'status' => 'dis_agree',
+                'reason_rejection'=>$reason
+
 
             ]);
             Helper::Notificationsuodate($notyfiy, 1);
@@ -164,37 +168,33 @@ class OrderController extends Controller
         $lang = $request->lang;
         $order_id = $request->order_id;
         $order = Order::findOrFail($order_id);
-        $status= $request->status;
-        if ($status=='yes')
-        {
+        $status = $request->status;
+        if ($status == 'yes') {
 
 
-        foreach (explode(',', $request->id_rel) as $value)
-        {
-            $product = CartOrder::findOrFail($value);
+            foreach (explode(',', $request->id_rel) as $value) {
+                $product = CartOrder::findOrFail($value);
 
-            $product->update([
-                'status' => 1,
-            ]);
-        }
-        foreach (explode(',', $request->id_rel) as $value)
-        {
-            $product = CartOrder::findOrFail($value);
+                $product->update([
+                    'status' => 1,
+                ]);
+            }
+            foreach (explode(',', $request->id_rel) as $value) {
+                $product = CartOrder::findOrFail($value);
 
-            Cart::create([
-                'product_id' => $product->product_id,
-                'user_id' => auth()->user()->id,
-                'amount' => $product->amount,
-            ]);
-        }
-        $name = [
-            'ar' => trans('api.accpeted_product', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-            'en' => trans('api.accpeted_product', [], 'en') . unserialize($order->category->main->name)['en'] . ''
-        ];
-        Helper::Notifications($order_id, $order->technical_id, $name, 'product', 0);
-        return new StatusCollection(true, trans('api.addedProduct', [], $lang));
-        }
-        else{
+                Cart::create([
+                    'product_id' => $product->product_id,
+                    'user_id' => auth()->user()->id,
+                    'amount' => $product->amount,
+                ]);
+            }
+            $name = [
+                'ar' => trans('api.accpeted_product', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.accpeted_product', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::Notifications($order_id, $order->technical_id, $name, 'product', 0);
+            return new StatusCollection(true, trans('api.addedProduct', [], $lang));
+        } else {
             $product = CartOrder::findOrFail($request->id_rel);
 
             $product->delete();
@@ -209,28 +209,26 @@ class OrderController extends Controller
         $lang = $request->lang;
         $order_id = $request->order_id;
         $order = Order::findOrFail($order_id);
-        foreach (explode(',', $request->product_id) as $key => $value)
-        {
-            $like_product= CartOrder::where('product_id',$value)->where('order_id',$order->id)->count();
-if ($like_product==0)
-{
-    CartOrder::create([
-        'product_id' => $value,
-        'order_id' => $order->id,
-        'status' => 1,
-        'amount' => explode(',', $request->amount)[$key],
-    ]);
-}
-else{
-    $add_product= CartOrder::where('product_id',$value)->where('order_id',$order->id)->first();
-    $add_product->update([
-        'amount' =>$add_product->amount+ explode(',', $request->amount)[$key],
-    ]);
-}
+        foreach (explode(',', $request->product_id) as $key => $value) {
+            $like_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->count();
+            if ($like_product == 0) {
+                CartOrder::create([
+                    'product_id' => $value,
+                    'order_id' => $order->id,
+                    'status' => 1,
+                    'user_id' => auth()->user()->id,
+
+                    'amount' => explode(',', $request->amount)[$key],
+                ]);
+            } else {
+                $add_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->first();
+                $add_product->update([
+                    'amount' => $add_product->amount + explode(',', $request->amount)[$key],
+                ]);
+            }
 
         }
-        foreach (explode(',', $request->product_id) as $key => $value)
-        {
+        foreach (explode(',', $request->product_id) as $key => $value) {
 
             Cart::create([
                 'product_id' => $value,
@@ -246,13 +244,17 @@ else{
 
     public function GetCurrentOrderWithPrice()
     {
-        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts','another_visit_works'];
+        $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts', 'another_visit_works'];
 
         $courntorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
             ->whereIn('status', $statuses_Array1)
             ->where('user_id', auth()->user()->id)->orderByDesc('created_at')
             ->get();
 
-       return OrderCollection::collection($courntorder);
+        return OrderCollection::collection($courntorder);
     }
+
+    //// open warranty
+
+
 }

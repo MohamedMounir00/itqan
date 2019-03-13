@@ -42,6 +42,7 @@ class OrderTechnicalController extends Controller
         {
             $order = Order::findOrFail($id);
             $order->status = $status;
+
             $order->save();
             $name =[
                 'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
@@ -72,6 +73,8 @@ class OrderTechnicalController extends Controller
                         'product_id' => $value,
                         'order_id'   => $order->id,
                         'status'     => 0,
+                        'user_id' => auth()->user()->id,
+
                         'amount'     => explode(',', $request->amount)[$key],
 
                     ]);

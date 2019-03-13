@@ -82,6 +82,10 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $product= Product::withTrashed()->findOrFail($id);
+
+        return view('product.show',compact('product'));
+
     }
 
     /**
@@ -163,6 +167,7 @@ class ProductController extends Controller
             ->addColumn('action', function ($data) {
                 return '<a href="' . route('product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="product/' . $data->id . '"><i class="fa fa-remove"></i></button>
+              <a href="' . route('product.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i></a>
     
                 ';
             })

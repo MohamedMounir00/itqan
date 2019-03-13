@@ -116,7 +116,42 @@ return[
 
     'assigen_order'=>' chose a technician',
     'assigen'=>'assign',
-    'id_pross'=>'Id'
+    'id_pross'=>'Id',
+    'details_product'=>'Product Details',
+    'product_assign_techinal'=>' Products Added by Technical',
+    'desc_product_assign_techinal'=>'You may accept or reject the products added by the technician on this application before sending them to the customer ',
+    'amount'=>'Amount',
+    'ask_refused'=>'Do you want to reject these products already?',
+    'ask_agree'=>'You already want to accept these products',
+    'accpetdFlash'=>'The products have been accepted and sent to the customer',
+    'refusedFlash'=>'Products have been rejected',
+    'product_wating'=>'Products awaiting approval for addiction',
+    'warranty'=>'order  warranty ',
+    'update_status_order'=>'The status of the order changed',
+    'desc_update_status_order'=>'You can change the status of the order according to the customer or technical position',
+    'desc_assigen_index'=>'In case more than 15 minutes have passed on the request and no response has been received or a technician has been appointed for this application',
+    'product_was_deleted'=>'This product has been deleted by one administrator',
+    'make_decision_time'=>'Time of decision making',
+    'get_settings'=>'Settings',
+    'get_settingsr_controller'=>' Control settings',
+    'distance'=>'Away from the order',
+    'clients'=>'Clients',
+    'profile'=>'Profile',
+    'personal'=>'؛ersonal',
+    'government'=>'Governmental entity',
+    'company'=>'Private company',
+
+    'country'=>'Country',
+    'city'=>'City',
+    'clients_controller'=>'Customer control',
+
+
+
+
+
+
+
+
 
 
 

@@ -50,12 +50,21 @@ Route::group([
     Route::get('order/get_another_visit_works_view','Backend\OrderController@get_another_visit_works_view')->name('order.get_another_visit_works_view');
     Route::get('order/get_another_visit_works','Backend\OrderController@get_another_visit_works')->name('order.get_another_visit_works');
     /// //////////////////////////    ///////////////////////////////////////////////////
-
+    Route::get('order/get_warranty_view','Backend\OrderController@get_warranty_view')->name('order.get_warranty_view');
+    Route::get('order/get_warranty','Backend\OrderController@get_warranty')->name('order.get_warranty');
+/////////////////////////////////////////////////////////////////////////////////////update status
+    Route::get('order/update_status/{id}','Backend\OrderController@update_status_view')->name('order.update_status');
+    Route::post('order/update_status','Backend\OrderController@update_status')->name('order.update_status');
+////////////////////////////////////////////////////////////////////////
     Route::get('order/get_finish_view','Backend\OrderController@get_finish_view')->name('order.get_finish_view');
     Route::get('order/get_finish','Backend\OrderController@get_finish')->name('order.get_finish');
     ///////////////////////////////////////// actions
     Route::get('order/get_status_view/{id}','Backend\OrderController@get_status_view')->name('order.get_status_view');
     Route::get('order/get_store_view/{id}','Backend\OrderController@get_store_view')->name('order.get_store_view');
+    //////////////////////////////// approve product from admin
+    Route::get('order/get_product_view/{id}','Backend\OrderController@get_product_fromTechinel_view')->name('order.get_product_view');
+    Route::delete('order/get_product_view/{id}','Backend\OrderController@refused_request')->name('order.get_product_view');
+    Route::post('order/get_product_view/{id}','Backend\OrderController@accpet_request')->name('order.get_product_view');
 
 
     /// //////////////////////////    ///////////////////////////////////////////////////
@@ -94,5 +103,13 @@ Route::group([
 //////////////////////////////////////coupons/////////////////
     Route::get('coupons/get_coupons','Backend\CouponsController@getAnyDate')->name('coupons.get_coupons');
     Route::resource('coupons','Backend\CouponsController');
+
+
+    /////////////////////////////////////////////////////////setting
+    Route::get('get_settings','Backend\AppSettingController@get_setting')->name('get_settings');
+    Route::post('post_settings','Backend\AppSettingController@post_settings')->name('post_settings');
+    //////////////////////////////////////////////////////////// clients
+    Route::get('clients/get_clients','Backend\ClientsController@getAnyDate')->name('clients.get_clients');
+    Route::resource('clients','Backend\ClientsController');
 });
 

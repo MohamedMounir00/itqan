@@ -21,6 +21,10 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',0)->withPivot('amount','id')->withTrashed();
     }
+    public function proudect_wating_admin()
+    {
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',0)->where('status_admin',0)->withPivot('amount','id')->withTrashed();
+    }
 
     public  function  category(){
     return $this->belongsTo(Category::class,'category_id')->with('main')->withTrashed();

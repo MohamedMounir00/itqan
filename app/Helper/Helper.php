@@ -7,6 +7,7 @@
  */
 
 namespace App\Helper;
+use App\Appseting;
 use App\NotfiyOrder;
 use App\Storge;
 use Illuminate\Support\Facades\File;
@@ -73,6 +74,13 @@ public static function UpdateImage($request,$path,$input,$model)
     return $db_name;
 
 }
+
+public static function make_decision()
+{
+    return Appseting::where('key','make_decision_time')->first();
+}
+
+
 
 }
 

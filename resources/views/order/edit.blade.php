@@ -53,7 +53,9 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select  name="technical_id" id="heard" class="form-control" required>
                                         @foreach($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                            <option value="{{$user->user->id}}">{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
+
+
                                         @endforeach
                                     </select>                                </div>
                             </div>

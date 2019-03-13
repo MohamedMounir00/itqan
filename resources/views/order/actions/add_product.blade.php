@@ -1,9 +1,4 @@
 
-
-
-
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -67,7 +62,8 @@
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-3">
                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.save')}}</button>
-
+                    <button  class="btn btn-default"><a href="{{route('order.show', $id)}}
+                                ">{{trans('backend.back')}}</a></button>
                 </div>
             </div>
 
@@ -90,7 +86,7 @@
                     $dropdown.empty()
                     $.each(result.data, function() {
 
-                        $dropdown.append($("<option />").val(this.id).text(this.name+' {{trans('backend.price')}}  '+this.price));
+                        $dropdown.append($("<option img-url='"+this.image+"' />").val(this.id).html(this.name+' - {{trans('backend.price')}} '+this.price));
                     });
                 }});
         }
@@ -100,7 +96,19 @@
         });
     </script>
     <script type="text/javascript">
+        function formatState (state) {
+
+            if (!state.id) { return state.text; }
+            var image_url = $(state.element).attr('img-url');
+            var $state = $(
+                '<span><img src="' +  image_url +
+                '" class="img-flag" height="35" /> ' +
+                state.text +     '</span>'
+            );
+            return $state;
+        };
         $('.select2').select2({
+            templateResult: formatState,
             placeholder: '{{trans('backend.chosse_category_product')}}'
         });
     </script>
