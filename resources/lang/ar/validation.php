@@ -59,7 +59,7 @@ return [
         'country_id'=>'الدوله',
         'city_id'=>'المدينه',
         'password'=> 'الرقم السري',
-        'company_id'=>'الشركه',
+        'company_id'=>'المؤسسه ',
         'name_of_head'=>'اسم الشخص المسئول',
         'minstry_id'=>'الوزاره',
         'desc'=>'وصف المشكله',
