@@ -30,6 +30,7 @@ class NotifyCollection extends jsonResource
            'assign'=>isset( $assin->id) ?  $assin->id : '',
            'technical'=> isset($assin->user->name) ?  $assin->user->name : '',
            'technical_id'=>isset( $assin->user->id) ?  $assin->user->id : '',
+           'status_assign'=>isset( $assin->status) ?  $assin->status : '',
            'real_order_status'=>$this->order->status,
 
            'order'=> new  OrderCollection($this->order),
