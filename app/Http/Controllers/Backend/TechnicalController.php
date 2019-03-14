@@ -115,6 +115,7 @@ class TechnicalController extends Controller
     public function update(Request $request, $id)
     {
         //
+
         $data=User::findOrFail($id);
         $request->validate([
             //   'decs'=>'required',
@@ -130,14 +131,15 @@ class TechnicalController extends Controller
         ]);
 
 
-        $data->update([
-            'name'        => $request->name,
-            'email'       => $request->email,
-            'phone'       => $request->phone,
-            'image'       => Helper::UpdateImage($request,'uploads/avatars/','image',$data->image),
-            'country_id'  => $request->country_id,
-            'password'    => bcrypt($request->password),
-        ]);
+       // $data->update([
+        $data->name     = $request->name;
+        $data->email      = $request->email;
+        $data->phone       = $request->phone;
+        $data->image       = Helper::UpdateImage($request,'uploads/avatars/','image',$data->image);
+        $data->country_id  = $request->country_id;
+        if (isset($request->password))
+            $data->password = bcrypt($request->password);      //  ]);
+        $data->save();
         $data->technical->update([
             'house'         => $request->house,
             'identification'   => $request->identification,
