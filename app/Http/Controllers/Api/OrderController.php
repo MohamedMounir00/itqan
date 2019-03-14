@@ -33,50 +33,53 @@ class OrderController extends Controller
             'ar' => $request->date_ar,
 
         ];
-       // Order::where('user_id', auth()->user()->id)
+        $ordercount = Order::where('user_id', auth()->user()->id)
+            ->where('created_at', '>=', Carbon::now()->subMinutes(1))
+            ->count();
 
-          //  ->where('created_at', '>=',  Carbon::now()->subMinutes(15))
-          //  ->count();
+        if ($ordercount != 0) {
+            return new StatusCollection(true, trans('عفو لا يمكنك اضافه طلب قبل 15 دقيقه'));
 
+        } else {
+            $order = new  Order();
+            $order->desc = $request->desc;
+            $order->category_id = $request->category_id;
+            $order->time_id = $request->time_id;
+            $order->date = serialize($name);
+            $order->address_id = $request->address_id;
+            $order->status = 'new';
+            $order->user_id = auth()->user()->id;
+            $order->express = $request->express;
+            $order->save();
+            if ($request->file_id != "")
+                $order->storge()->sync(explode(',', $request->file_id));
+            if ($request->product_id != "") {
+                foreach (explode(',', $request->product_id) as $key => $value) {
 
-        $order = new  Order();
-        $order->desc = $request->desc;
-        $order->category_id = $request->category_id;
-        $order->time_id = $request->time_id;
-        $order->date = serialize($name);
-        $order->address_id = $request->address_id;
-        $order->status = 'new';
-        $order->user_id = auth()->user()->id;
-        $order->express = $request->express;
-        $order->save();
-        if ($request->file_id != "")
-            $order->storge()->sync(explode(',', $request->file_id));
-        if ($request->product_id != "") {
-            foreach (explode(',', $request->product_id) as $key => $value) {
+                    CartOrder::create([
+                        'product_id' => $value,
+                        'order_id' => $order->id,
+                        'status' => 1,
+                        'user_id' => auth()->user()->id,
 
-                CartOrder::create([
-                    'product_id' => $value,
-                    'order_id' => $order->id,
-                    'status' => 1,
-                    'user_id' => auth()->user()->id,
+                        'amount' => explode(',', $request->amount)[$key],
+                    ]);
+                }
+                foreach (explode(',', $request->product_id) as $key => $value) {
 
-                    'amount' => explode(',', $request->amount)[$key],
-                ]);
+                    Cart::create([
+                        'product_id' => $value,
+                        'user_id' => auth()->user()->id,
+                        'amount' => explode(',', $request->amount)[$key],
+
+                    ]);
+                }
             }
-            foreach (explode(',', $request->product_id) as $key => $value) {
 
-                Cart::create([
-                    'product_id' => $value,
-                    'user_id' => auth()->user()->id,
-                    'amount' => explode(',', $request->amount)[$key],
 
-                ]);
-            }
+            return new StatusCollection(true, trans('api.add_order_done', [], $lang));
+
         }
-
-
-        return new StatusCollection(true, trans('api.add_order_done', [], $lang));
-
     }
 
     public function allOrdersForClient()
