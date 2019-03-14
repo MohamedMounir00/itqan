@@ -92,7 +92,7 @@ return[
     'scheduled_order'=>' الطلبات تم جدولتها',
 
     'client'=>'مقدم الطلب',
-    'details'=>'التفاصيل',
+    'details'=>'  التفاصيل ',
     'order_id'=>'رقم الطلب',
     'status_admin'=>'موقف الاداره',
     'add_techanel'=>'اضف فنى',

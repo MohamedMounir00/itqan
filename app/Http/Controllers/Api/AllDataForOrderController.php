@@ -77,10 +77,17 @@ class AllDataForOrderController extends Controller
     public function AllProudect(Request $request)
     {
         $id= $request->id;
-        $offset = $request->offset_id;
 
-        $p= Product::where('category_id',$id)->skip($offset)
-            ->take(10)->get();
+        $offset = $request->offset_id;
+if ($id==0)
+{
+    $p= Product::skip($offset)->take(10)->get();
+}
+else{
+    $p= Product::where('category_id',$id)->skip($offset)
+        ->take(10)->get();
+}
+
         return ProudctCollection::collection($p);
 
     }
