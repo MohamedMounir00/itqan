@@ -265,8 +265,8 @@ class UserController extends Controller
         $user->city_id      = $request->city_id;
         if (isset($request->password))
             $user->password = bcrypt($request->password);
-        $user->name_of_head = $request->name_of_head;
-        $user->company_id   = $request->company_id;
+      //  $user->name_of_head = $request->name_of_head;
+       // $user->company_id   = $request->company_id;
         $user->save();
         $user->client->update([
             'company_id'    => $request->company_id,

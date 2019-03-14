@@ -15,6 +15,7 @@ use App\Http\Resources\Api\StatusCollection;
 use App\Order;
 use App\Product;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -32,6 +33,12 @@ class OrderController extends Controller
             'ar' => $request->date_ar,
 
         ];
+       // Order::where('user_id', auth()->user()->id)
+
+          //  ->where('created_at', '>=',  Carbon::now()->subMinutes(15))
+          //  ->count();
+
+
         $order = new  Order();
         $order->desc = $request->desc;
         $order->category_id = $request->category_id;
