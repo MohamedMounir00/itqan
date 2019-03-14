@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-
+{{--
 <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="x_panel">
 
@@ -67,9 +67,9 @@
                 <div class="jumbotron">
                     <h1>{{trans('backend.add_techanel_period')}}</h1>
                     <p>{{trans('backend.desc_add_techanel_period')}} </p>
-{{--
+
                     <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
---}}
+
 
                 </div>
             </div>
@@ -77,7 +77,7 @@
         </div>
     </div>
 </div>
-
+--}}
 
 <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="x_panel">
