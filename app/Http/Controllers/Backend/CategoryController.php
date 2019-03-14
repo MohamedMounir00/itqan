@@ -201,8 +201,8 @@ class CategoryController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category/' . $data->id . '"><i class="fa fa-remove"></i></button>
+                return '<a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
+              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
             })
@@ -212,7 +212,7 @@ class CategoryController extends Controller
 
             })
             ->addColumn('sub', function ($data) {
-                return '<a href="' . route('category.sub', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i></a>';
+                return '<a href="' . route('category.sub', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
 
 
             })->addColumn('image', function ($data) {

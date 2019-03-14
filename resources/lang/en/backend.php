@@ -144,6 +144,7 @@ return[
     'country'=>'Country',
     'city'=>'City',
     'clients_controller'=>'Customer control',
+    'delete'=>' Delete '
 
 
 

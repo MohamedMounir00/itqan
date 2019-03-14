@@ -358,7 +358,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>';
+                return '<a href="' . route('order.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-plus-square"></i>'.trans('backend.add').'</a>';
             })
             ->addColumn('reply', function ($data) {
                 if ($data->reply == 'yes')
