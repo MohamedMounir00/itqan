@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Rating;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -15,6 +16,8 @@ class OrderCollection extends JsonResource
      */
     public function toArray($request)
     {
+        $rating=Rating::where('order_id',$this->id)->count();
+
         $lang=$request->lang;
         if ($this->status=='new')
             $status=trans('api.watting_techaincall',[],$lang);
@@ -47,6 +50,7 @@ class OrderCollection extends JsonResource
             'product'=>ProudctCollection::collection($this->proudect),
             'total_price_of_product'=>$this->proudect->sum('price'),
             'real_status'=>$this->status,
+            'rating'=>($rating==0)?false:true
         ];
     }
 }
