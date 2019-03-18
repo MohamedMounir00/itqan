@@ -196,15 +196,8 @@ class ClientsController extends Controller
 
             })
 
-            ->addColumn('city', function ($data) {
-                if (LaravelLocalization::getCurrentLocale()=='ar')
-                    return $data->city->name_ar;
-                else
-                    return $data->city->name_en;
 
-
-            })
-            ->rawColumns(['action', 'country','image','city'])
+            ->rawColumns(['action', 'country','image'])
             ->make(true);
     }
 }

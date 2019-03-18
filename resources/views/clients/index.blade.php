@@ -27,7 +27,6 @@
                         <th>{{trans('backend.email')}}</th>
                         <th>{{trans('backend.phone')}}</th>
                         <th>{{trans('backend.country')}}</th>
-                        <th>{{trans('backend.city')}}</th>
                         <th>{{trans('backend.date')}}</th>
                         <th>{{trans('backend.action')}}</th>
 
@@ -62,7 +61,6 @@
                     { data: 'email', name: 'email' },
                     { data: 'phone', name: 'phone' },
                     { data: 'country', name: 'country' },
-                    { data: 'city', name: 'city' },
 
                     { data: 'created_at', name: 'created_at' },
 
