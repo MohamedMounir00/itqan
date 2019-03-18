@@ -144,7 +144,19 @@ return[
     'country'=>'Country',
     'city'=>'City',
     'clients_controller'=>'Customer control',
-    'delete'=>' Delete '
+    'delete'=>' Delete ',
+    'minstry_of'=>' ministry ',
+    'company_of'=>' company ',
+    'type_hose'=>'Type  ',
+    'flat'=>'Flat',
+    'villa'=>'villa',
+    'palace'=>'Palace',
+    'count_order'=>'Count Order',
+    'technical_'=>' technical ',
+
+    'type_account'=>'account type'
+
+
 
 
 

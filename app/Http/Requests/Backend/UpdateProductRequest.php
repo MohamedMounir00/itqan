@@ -24,9 +24,11 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'price'=>'required',
+            'name.ar'=>'required|min:3|max:25',
+            'name.en'=>'required|min:3|max:25',
+            'price'=>'required|not_in:0',
             'category_id'=>'required',
+            'currency_id'=>'required',
         ];
     }
 }

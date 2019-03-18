@@ -36,7 +36,7 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['technical.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true,'autocomplete'=>'off']) !!}
+                            {!! Form::open(['route'=>['clients.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true,'autocomplete'=>'off']) !!}
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.user_name')}} <span
@@ -75,52 +75,52 @@
                                 </div>
                             </div>
 
+                            @if($data->client->type=='personal')
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.identification')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.type_hose')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="first-name" name="identification" required class="form-control col-md-7 col-xs-12" value="{{$data->technical->identification}}" >
-
+                                    <select  name="house" id="heard" class="form-control"  required>
+                                  <option value="flat" {{($data->client->house=='flat')?'selected':''}}>{{trans('backend.flat')}}</option>
+                                  <option value="villa" {{($data->client->house=='villa')?'selected':''}}>{{trans('backend.villa')}}</option>
+                                  <option value="palace" {{($data->client->house=='palace')?'selected':''}}>{{trans('backend.palace')}}</option>
+                                    </select>
                                 </div>
                             </div>
+                       @endif
+                            @if($data->client->type=='government')
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.job')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.minstry_of')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select  name="category_id" id="heard" class="form-control"  required>
-                                        <option value="">{{trans('backend.job')}}</option>
-                                        @foreach($main as $data1)
-                                            <option value="{{$data1->id}}" {{($data->technical->category_id==$data1->id)?'selected':''}}>{{unserialize($data1->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                                    <select  name="minstry_id" id="heard" class="form-control"  required>
+                                        @foreach($ministry as $data1)
+                                            <option value="{{$data1->id}}" {{($data->client->minstry_id==$data1->id)?'selected':''}}>{{unserialize($data1->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            @endif
+
+                                @if($data->client->type=='company')
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.time_id')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.company_of')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select  name="time_id[]" id="heard" class="form-control select2" multiple  required>
-                                        @foreach($time as $t)
-                                            <option value="{{$t->id}}"
-                                                    @foreach($data->time as $t2)
-                                                    @if($t2->id == $t->id)
-                                                    selected
-                                                    @endif
-                                                    @endforeach
-                                            >
-
-                                                {{trans('backend.from').$t->from .'-'.trans('backend.to').$t->to.'-'.($t->timing=='am' ? trans('backend.am') : trans('backend.pm'))}}
-                                            </option>
+                                    <select  name="company_id" id="heard" class="form-control"  required>
+                                        @foreach($company as $data2)
+                                            <option value="{{$data2->id}}" {{($data->client->company_id==$data2->id)?'selected':''}}>{{unserialize($data2->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            @endif
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.nationality')}} <span
@@ -175,7 +175,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('technical.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{route('clients.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>
@@ -210,9 +210,5 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $('.select2').select2({
-            placeholder: '{{trans('backend.choose__time')}}'
-        });
-    </script>
+
 @endsection

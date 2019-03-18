@@ -48,30 +48,21 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
 
-        if ($request->name['ar'] == null || $request->name['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
 
-        } else {
-            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
-                session()->flash('error', trans('backend.litter'));
-                return back();
-            } else {
-                Product::create([
+              $p=  Product::create([
                     'name' => serialize($request->name),
                     'price' => $request->price,
                     'category_id' => $request->category_id,
                     'currency_id' => $request->currency_id,
                     'image' => Helper::UploadImge($request, 'uploads/product/', 'image'),
                 ]);
+        if ($p)
                 Alert::success(trans('backend.created'))->persistent("Close");
 
                 return redirect()->route('product.index');
             }
 
-        }
 
-    }
 
     /**
      * Display the specified resource.
@@ -115,15 +106,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-        if ($request->name['ar'] == null || $request->name['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
 
-        } else {
-            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
-                session()->flash('error', trans('backend.litter'));
-                return back();
-            } else {
                 $data = Product::findOrFail($id);
                 $data->update([
                     'name' => serialize($request->name),
@@ -132,13 +115,12 @@ class ProductController extends Controller
                     'currency_id' => $request->currency_id,
                     'image' => Helper::UpdateImage($request, 'uploads/category/', 'image', $data->image)
                 ]);
-
+         if ($data)
                 Alert::success(trans('backend.updateFash'))->persistent("Close");
 
                 return redirect()->route('product.index');
             }
-        }
-    }
+
 
     /**
      * Remove the specified resource from storage.

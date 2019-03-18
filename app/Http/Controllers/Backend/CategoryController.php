@@ -48,15 +48,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        if ($request->name['ar'] == null || $request->name['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
 
-        } else {
-            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
-                session()->flash('error', trans('backend.litter'));
-                return back();
-            } else {
 
                 $category = new Category();
                 $type = $request->sub_id;
@@ -79,8 +71,8 @@ class CategoryController extends Controller
                 }
 
             }
-        }
-    }
+
+
 
     /**
      * Display the specified resource.
@@ -122,15 +114,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        if ($request->name['ar'] == null || $request->name['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
 
-        } else {
-            if (strlen($request->name['ar']) > 40 || strlen($request->name['en']) > 40) {
-                session()->flash('error', trans('backend.litter'));
-                return back();
-            } else {
                 $type = $request->sub_id;
                 if ($type == 0) {
                     $category->type = 'main';
@@ -150,8 +134,6 @@ class CategoryController extends Controller
 
                 return redirect()->route('category.index');
             }
-        }
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -170,8 +152,8 @@ class CategoryController extends Controller
             }
         }
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
-
+        if ($data)
+            Alert::success(trans('backend.updateFash'))->persistent("Close");
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);

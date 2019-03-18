@@ -7,9 +7,11 @@ use App\Country;
 use App\Helper\Helper;
 use App\Http\Requests\Backend\TechnicalRequest;
 use App\Http\Requests\Backend\TechnicalUpdateRequest;
+use App\Order;
 use App\Technical;
 use App\Time;
 use App\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -70,7 +72,7 @@ class TechnicalController extends Controller
             'category_id'      => $request->category_id,
         ]);
         $user->time()->sync($request->time_id);
-
+         if ($user)
         Alert::success(trans('backend.created'))->persistent("Close");
 
         return redirect()->route('technical.index');
@@ -84,7 +86,17 @@ class TechnicalController extends Controller
      */
     public function show($id)
     {
+
+        $user= User::with('technical')->findOrFail($id);
+        $wating=Order::where('status','wating')->where('technical_id',$id)->count();
+        $done=Order::where('status','done')->where('technical_id',$id)->count();
+        $can_not=Order::where('status','can_not')->where('technical_id',$id)->count();
+        $consultation=Order::where('status','consultation')->where('technical_id',$id)->count();
+        $delay=Order::where('status','delay')->where('technical_id',$id)->count();
+        $need_parts=Order::where('status','need_parts')->where('technical_id',$id)->count();
+        $another_visit_works=Order::where('status','another_visit_works')->where('technical_id',$id)->count();
         //
+        return view('technical.show',compact('user','wating','done','can_not','consultation','delay','need_parts','another_visit_works'));
     }
 
     /**
@@ -141,13 +153,12 @@ class TechnicalController extends Controller
             $data->password = bcrypt($request->password);      //  ]);
         $data->save();
         $data->technical->update([
-            'house'         => $request->house,
             'identification'   => $request->identification,
             'category_id'      => $request->category_id,
         ]);
 
         $data->time()->sync($request->time_id);
-
+        if ($data)
         Alert::success(trans('backend.updateFash'))->persistent("Close");
 
         return redirect()->route('technical.index');
@@ -186,7 +197,8 @@ class TechnicalController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
+                return '<a href="' . route('technical.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>
+                <a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
                <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';

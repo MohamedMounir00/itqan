@@ -206,7 +206,8 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
+
             })
             ->addColumn('status', function ($data) {
                 if ($data->status=='new')
@@ -240,7 +241,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->rawColumns(['action', 'client'])
             ->make(true);
@@ -272,7 +273,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->rawColumns(['action', 'client'])
             ->make(true);
@@ -288,7 +289,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->rawColumns(['action', 'client'])
             ->make(true);
@@ -306,7 +307,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->addColumn('status', function ($data) {
                       if ($data->status=='done')
@@ -381,7 +382,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->rawColumns(['action', 'details', 'reply', 'created_at', 'client'])
             ->make(true);
@@ -492,7 +493,7 @@ class OrderController extends Controller
                 return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
-                return $data->user->name;
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
             })
             ->rawColumns(['action', 'client'])
             ->make(true);

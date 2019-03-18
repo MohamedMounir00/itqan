@@ -37,7 +37,7 @@
 
                         </ul>
                     </li>
-                    {{---
+
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.clients_controller')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('clients.index')}}">{{trans('backend.clients')}} </a></li>
@@ -45,7 +45,7 @@
 
                                             </ul>
                                         </li>
-                    --}}
+
 
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.orders')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">

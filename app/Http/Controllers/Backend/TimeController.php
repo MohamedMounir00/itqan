@@ -41,6 +41,7 @@ class TimeController extends Controller
             'to'=>$request->to,
             'timing'=>$request->timing,
         ]);
+        if ($data)
         Alert::success(trans('backend.created'))->persistent("Close");
 
         return redirect()->route('time_work.index');
@@ -90,6 +91,7 @@ class TimeController extends Controller
             'timing'=>$request->timing,
 
         ]);
+        if ($data)
         Alert::success(trans('backend.updateFash'))->persistent("Close");
 
         return redirect()->route('time_work.index');

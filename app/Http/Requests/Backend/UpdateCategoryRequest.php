@@ -24,14 +24,16 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        {
+
             return [
                 //
-                'name'=>'required',
-
+                'name.ar'=>'required|min:3|max:25',
+                'name.en'=>'required|min:3|max:25',
+                'system_clocks'=>'required',
+                'price'=>'required|not_in:0',
+                'price_emergency'=>'required|not_in:0',
             ];
-        }
+
 
 
     }

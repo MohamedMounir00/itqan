@@ -43,7 +43,7 @@
                                 <ul id="myTab" class="nav nav-tabs bar_tabs right" role="tablist">
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
-                                        <li role="presentation" class=""><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
+                                        <li role="presentation" class="{{$loop->iteration === 2 ? 'active' : '' }}"><a href="#{{ $properties['native'] }}" role="tab" id="profile-tab"
                                                                             data-toggle="tab" aria-expanded="false">{{trans('backend.'.$properties['name'])}}</a>
                                         </li>
                                     @endforeach

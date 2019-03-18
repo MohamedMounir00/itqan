@@ -27,8 +27,8 @@ class CategoryRequest extends FormRequest
 
             return [
                 //
-               // 'name.ar'=>'required|min:5',
-                //'name.en'=>'required|min:5',
+               'name.ar'=>'required|min:3|max:25',
+                'name.en'=>'required|min:3|max:25',
                 'system_clocks'=>'required',
                 'price'=>'required|not_in:0',
                 'price_emergency'=>'required|not_in:0',

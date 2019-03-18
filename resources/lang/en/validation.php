@@ -169,6 +169,8 @@ return [
  'system_clocks'=>'Working hours',
     'price'=>'price',
     'price_emergency'=>'Price in case of emergency',
+        'name.ar'=>'Name Of Arabic',
+        'name.en'=>'Name Of English'
     ],
 
 

@@ -50,7 +50,8 @@ class CurrencyControler extends Controller
         }
         else
         {
-            Currency::create(['name'=>serialize($request->name)]);
+           $c= Currency::create(['name'=>serialize($request->name)]);
+           if ($c)
             Alert::success(trans('backend.created'))->persistent("Close");
 
             return redirect()->route('currency.index');
@@ -105,7 +106,7 @@ class CurrencyControler extends Controller
         }
         else {
             $data->update(['name' => serialize($request->name)]);
-
+         if ($data)
             Alert::success(trans('backend.updateFash'))->persistent("Close");
 
             return redirect()->route('currency.index');

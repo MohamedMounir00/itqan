@@ -2,7 +2,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @php
+        $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()
 
+
+
+    @endphp
 
     <div class="x_panel">
         <div class="x_title">
@@ -17,10 +22,10 @@
                 <div class="profile_img">
                     <div id="crop-avatar">
                         <!-- Current avatar -->
-                        @if($user->image=='')
+                        @if($user->image!=null)
 
                         <img class="img-responsive avatar-view"
-                             src="{{$user->image}}"
+                             src="{{url($user->image)}}"
 
 
                              alt="Avatar"
@@ -50,9 +55,13 @@
                             {{trans('backend.personal')}}
                         @elseif($user->client->type=='government')
                             {{trans('backend.government')}}
-
+                            --
+                            {{trans('backend.minstry_of') . unserialize($user->client->minstry->name)[$lang]}}
                         @else
                          {{trans('backend.company')}}
+                            --
+                            {{trans('backend.company_of') . unserialize($user->client->company->name)[$lang]}}
+
                         @endif
                     </li>
 
@@ -60,9 +69,26 @@
                         <i class="fa fa-mobile user-profile-icon"></i>
                         {{$user->phone}}
                     </li>
+                    @if($user->client->type=='personal')
+
+
+                    <li class="m-top-xs">
+                        <i class="fa fa-house user-profile-icon">{{trans('backend.type_hose')}}</i>
+                       @if($user->client->house=='flat')
+                            {{trans('backend.flat')}}
+                           @elseif($user->client->house=='villa')
+                            {{trans('backend.villa')}}
+                           @else
+                            {{trans('backend.palace')}}
+                        @endif
+
+                    </li>
+                    @endif
                 </ul>
 
-                <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>&nbsp;{{trans('backend.update')}}</a>
+                <a href="{{route('clients.edit', $user->id)}}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>&nbsp;{{trans('backend.update')}}</a>
+                <a href="{{route('clients.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+
                 <br/>
 
 
@@ -84,19 +110,61 @@
                     <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#tab_content1" id="home-tab"
                                                                   role="tab" data-toggle="tab"
-                                                                  aria-expanded="true">فعالیت اخیر</a>
+                                                                  aria-expanded="true">{{trans('backend.count_order')}}</a>
                         </li>
 
                         <li role="presentation" class=""><a href="#tab_content3" role="tab"
                                                             id="profile-tab2" data-toggle="tab"
-                                                            aria-expanded="false">پروفایل</a>
+                                                            aria-expanded="false">{{trans('backend.profile')}}</a>
                         </li>
                     </ul>
                     <div id="myTabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1"
                              aria-labelledby="home-tab">
 
-                            <!-- start recent activity -->
+                            <!-- start recent activity          //'new','wating','done','can_not','consultation','delay','need_parts','another_visit_works'
+     -->
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$new}}</span>
+                              {{trans('api.watting_techaincall')}}
+                            </a>
+
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$wating}}</span>
+                                {{trans('api.new_order')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$done}}</span>
+                                {{trans('api.done_order')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$can_not}}</span>
+                                {{trans('api.can_not')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$consultation}}</span>
+                                {{trans('api.consultation')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$delay}}</span>
+                                {{trans('api.delay')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$need_parts}}</span>
+                                {{trans('api.need_parts')}}
+                            </a>
+
+                            <a class="btn btn-app">
+                                <span class="badge bg-red">{{$another_visit_works}}</span>
+                                {{trans('api.another_visit_works')}}
+                            </a>
 
                             <!-- end recent activity -->
 
@@ -104,7 +172,116 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="tab_content3"
                              aria-labelledby="profile-tab">
-                            <p>در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                       for="">{{trans('backend.user_name')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" name="name" required
+                                           class="form-control col-md-7 col-xs-12" value="{{$user->name}}" disabled>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                       for="">{{trans('backend.email')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="email" id="first-name" name="email" required
+                                           class="form-control col-md-7 col-xs-12" value="{{$user->email}}"
+                                           autocomplete="new_email" disabled>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <br>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                       for="">{{trans('backend.phone')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" id="first-name" name="phone" required
+                                           class="form-control col-md-7 col-xs-12" value="{{$user->phone}}" disabled>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <br>
+
+
+
+
+
+
+                            @if($user->client->type=='personal')
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="">{{trans('backend.type_account')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" required
+                                               class="form-control col-md-7 col-xs-12" value="{{trans('backend.personal')}}" disabled>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <br>
+
+
+                            @elseif($user->client->type=='government')
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="">{{trans('backend.government')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name"  required
+                                               class="form-control col-md-7 col-xs-12" value="{{trans('backend.minstry_of') . unserialize($user->client->minstry->name)[$lang]}}" disabled>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <br>
+
+
+                            @else
+                                <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="">{{trans('backend.company')}} <span
+                                        >*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="first-name" " required
+                                               class="form-control col-md-7 col-xs-12" value="{{trans('backend.company_of') . unserialize($user->client->company->name)[$lang]}}" disabled>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <br>
+
+
+                            @endif
+
+
+                                        <div class="clearfix"></div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>

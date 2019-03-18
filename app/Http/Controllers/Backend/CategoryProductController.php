@@ -50,7 +50,8 @@ class CategoryProductController extends Controller
                 session()->flash('error', trans('backend.litter'));
                 return back();
             } else {
-                CategoryProduct::create(['name' => serialize($request->name)]);
+               $c= CategoryProduct::create(['name' => serialize($request->name)]);
+               if ($c)
                 Alert::success(trans('backend.created'))->persistent("Close");
 
                 return redirect()->route('category_product.index');
@@ -108,8 +109,8 @@ class CategoryProductController extends Controller
 
                 $data->update(['name' => serialize($request->name)]);
 
-                Alert::success(trans('backend.updateFash'))->persistent("Close");
-
+                if ($data)
+                    Alert::success(trans('backend.updateFash'))->persistent("Close");
                 return redirect()->route('category_product.index');
             }
         }

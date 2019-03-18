@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Client;
+use App\Country;
+use App\Helper\Helper;
+use App\Ministry;
+use App\Order;
+use App\TypeCompany;
 use App\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -44,7 +49,7 @@ class ClientsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TechnicalRequest $request)
+    public function store(Request $request)
     {
 
 
@@ -58,9 +63,18 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        //
+        //'new','wating','done','can_not','consultation','delay','need_parts','another_visit_works'
         $user= User::with('client')->findOrFail($id);
-        return View('clients.show',compact('user'));
+        $new=Order::where('status','new')->where('user_id',$id)->count();
+        $wating=Order::where('status','wating')->where('user_id',$id)->count();
+        $done=Order::where('status','done')->where('user_id',$id)->count();
+        $can_not=Order::where('status','can_not')->where('user_id',$id)->count();
+        $consultation=Order::where('status','consultation')->where('user_id',$id)->count();
+        $delay=Order::where('status','delay')->where('user_id',$id)->count();
+        $need_parts=Order::where('status','need_parts')->where('user_id',$id)->count();
+        $another_visit_works=Order::where('status','another_visit_works')->where('user_id',$id)->count();
+
+        return View('clients.show',compact('user','new','wating','done','can_not','consultation','delay','need_parts','another_visit_works'));
     }
 
     /**
@@ -73,11 +87,10 @@ class ClientsController extends Controller
     {
         //
         $data =User::findOrFail($id);
-        $time=Time::all();
         $nationality=Country::all();
-        $main = Category::where('type', 'main')->get();
-
-        return view('technical.edit',compact('data','time','nationality','main'));
+        $ministry= Ministry::all();
+        $company=TypeCompany::all();
+        return view('clients.edit',compact('data','nationality','ministry','company'));
 
     }
 
@@ -90,41 +103,39 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
         $data=User::findOrFail($id);
         $request->validate([
-            //   'decs'=>'required',
 
             'name'=>'required',
             'email' => 'required|email|unique:users,email,'. $data->id,
             'password' => 'nullable|min:6',
             'phone'=>'required|min:6',
             'country_id'=>'required',
-            'identification'=>'required|min:15|not_in:0',
-            'category_id'=>'required',
 
         ]);
 
 
-        $data->update([
-            'name'        => $request->name,
-            'email'       => $request->email,
-            'phone'       => $request->phone,
-            'image'       => Helper::UpdateImage($request,'uploads/avatars/','image',$data->image),
-            'country_id'  => $request->country_id,
-            'password'    => bcrypt($request->password),
-        ]);
-        $data->technical->update([
+        $data->name     = $request->name;
+        $data->email      = $request->email;
+        $data->phone       = $request->phone;
+        $data->image       = Helper::UpdateImage($request,'uploads/avatars/','image',$data->image);
+        $data->country_id  = $request->country_id;
+        if (isset($request->password))
+            $data->password = bcrypt($request->password);
+        $data->save();
+        $data->client->update([
             'house'         => $request->house,
-            'identification'   => $request->identification,
-            'category_id'      => $request->category_id,
+            'name_of_head' => $request->name_of_head,
+            'company_id'   => $request->company_id,
+            'minstry_id'   => $request->minstry_id,
+
         ]);
 
-        $data->time()->sync($request->time_id);
-
+       if ($data)
         Alert::success(trans('backend.updateFash'))->persistent("Close");
 
-        return redirect()->route('technical.index');
+        return redirect()->route('clients.index');
 
 
     }
@@ -161,8 +172,10 @@ class ClientsController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('clients.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
-               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i></button>
+                return '
+                <a href="' . route('clients.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>
+                <a href="' . route('clients.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
+               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>
     
                 ';
             })

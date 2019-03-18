@@ -142,11 +142,18 @@ return[
     'country'=>'الدوله',
     'city'=>'المدينه',
     'clients_controller'=>'التحكم فى العملاء',
-    'delete'=>'  حذف  '
+    'delete'=>'  حذف  ',
+    'minstry_of'=>' وزاره ',
+    'company_of'=>'شركه  ',
+    'type_hose'=>'نوع العقار  ',
+    'flat'=>'شقه',
+    'villa'=>'فيلا',
+    'palace'=>'قصر',
 
+'count_order'=>'عدد الطلبات',
+'technical_'=>' فنى ',
 
-
-
+'type_account'=>'نوع الحساب'
 
 
 

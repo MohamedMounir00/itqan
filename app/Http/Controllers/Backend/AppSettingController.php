@@ -27,6 +27,7 @@ class AppSettingController extends Controller
                 'value'=> $request[$setting->key],
             ]);
         }
+        if ($setting)
         Alert::success(trans('backend.updateFash'))->persistent("Close");
 
         return back();
