@@ -153,10 +153,23 @@ return[
 'count_order'=>'عدد الطلبات',
 'technical_'=>' فنى ',
 
-'type_account'=>'نوع الحساب'
+'type_account'=>'نوع الحساب',
 
+////////////////////////////////data table
+ "No_data_available_in_table"=>"لا توجد بيانات متاحة في الجدول",
+    "Showing_0_to_0_of_0_entries"=>"عرض 0 إلى 0 من 0 إدخالات",
+    "entries"=>"اجمالى",
+    "show_t"=>"عرض",
+    "search"=>"        بحث        ",
+    "No_matching_records_found"=>"لم يتم العثور على سجلات متطابقة",
+    "First"=>"أول",
+    "Last"=>"الاخير",
+    "Next"=>"التالى",
+    "Previous"=>"سابق",
+    "showing"=>"عرض",
+    "of"=>"من",
 
-
+    'processing'=>'قيد التنفيذ',
 
 
 ];

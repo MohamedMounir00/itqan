@@ -6,16 +6,7 @@
     <div class="x_panel">
             <div class="x_title">
                 <h2>{{trans('backend.all_order')}}</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
 
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-
-
-
-                </ul>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -64,7 +55,27 @@
 
                    {data: 'action', name: 'action', orderable: false, searchable: false},
 
-                ]
+                ],
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "{{trans('backend.No_data_available_in_table')}}",
+                    "infoEmpty": "{{trans('backend.Showing_0_to_0_of_0_entries')}}",
+                    "info":           "{{trans('backend.showing')}}_START_ {{trans('backend.to')}} _END_ {{trans('backend.of')}} _TOTAL_{{trans('backend.entries')}} ",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "{{trans('backend.show_t')}}_MENU_ {{trans('backend.entries')}}",
+                    "search": "{{trans('backend.search')}}",
+                    "zeroRecords": "{{trans('backend.No_matching_records_found')}}",
+                    "processing":     "{{trans('backend.processing')}}",
+
+                    "paginate": {
+                        "first": "{{trans('backend.First')}}",
+                        "last": "{{trans('backend.Last')}}",
+                        "next": "{{trans('backend.Next')}}",
+                        "previous": "{{trans('backend.Previous')}}"
+                    }
+
+                }
             });
         });
     </script>

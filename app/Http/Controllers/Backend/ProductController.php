@@ -115,7 +115,7 @@ class ProductController extends Controller
                     'currency_id' => $request->currency_id,
                     'image' => Helper::UpdateImage($request, 'uploads/category/', 'image', $data->image)
                 ]);
-         if ($data)
+if ($data)
                 Alert::success(trans('backend.updateFash'))->persistent("Close");
 
                 return redirect()->route('product.index');

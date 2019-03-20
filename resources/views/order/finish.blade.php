@@ -64,7 +64,27 @@
 
                    {data: 'action', name: 'action', orderable: false, searchable: false},
 
-                ]
+                ],
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "{{trans('backend.No_data_available_in_table')}}",
+                    "infoEmpty": "{{trans('backend.Showing_0_to_0_of_0_entries')}}",
+                    "info":           "{{trans('backend.showing')}}_START_ {{trans('backend.to')}} _END_ {{trans('backend.of')}} _TOTAL_{{trans('backend.entries')}} ",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "{{trans('backend.show_t')}}_MENU_ {{trans('backend.entries')}}",
+                    "search": "{{trans('backend.search')}}",
+                    "zeroRecords": "{{trans('backend.No_matching_records_found')}}",
+                    "processing":     "{{trans('backend.processing')}}",
+
+                    "paginate": {
+                        "first": "{{trans('backend.First')}}",
+                        "last": "{{trans('backend.Last')}}",
+                        "next": "{{trans('backend.Next')}}",
+                        "previous": "{{trans('backend.Previous')}}"
+                    }
+
+                }
             });
         });
     </script>
