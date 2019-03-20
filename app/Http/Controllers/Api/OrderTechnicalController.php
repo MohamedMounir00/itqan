@@ -69,15 +69,18 @@ class OrderTechnicalController extends Controller
             else
                 {
                 foreach (explode(',', $request->product_id) as $key=> $value) {
-                    CartOrder::create([
-                        'product_id' => $value,
-                        'order_id'   => $order->id,
-                        'status'     => 0,
-                        'user_id' => auth()->user()->id,
+                    if (explode(',', $request->amount)[$key] != 0) {
 
-                        'amount'     => explode(',', $request->amount)[$key],
+                        CartOrder::create([
+                            'product_id' => $value,
+                            'order_id' => $order->id,
+                            'status' => 0,
+                            'user_id' => auth()->user()->id,
 
-                    ]);
+                            'amount' => explode(',', $request->amount)[$key],
+
+                        ]);
+                    }
                 }
                 $name = [
                     'ar' =>  trans('api.tech_add_prodect',[],'ar'). unserialize($order->category->main->name)['ar'] . '',

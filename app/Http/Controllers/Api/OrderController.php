@@ -55,24 +55,26 @@ class OrderController extends Controller
                 $order->storge()->sync(explode(',', $request->file_id));
             if ($request->product_id != "") {
                 foreach (explode(',', $request->product_id) as $key => $value) {
+                        if ( explode(',', $request->amount)[$key]!=0) {
+                            CartOrder::create([
+                                'product_id' => $value,
+                                'order_id' => $order->id,
+                                'status' => 1,
+                                'user_id' => auth()->user()->id,
 
-                    CartOrder::create([
-                        'product_id' => $value,
-                        'order_id' => $order->id,
-                        'status' => 1,
-                        'user_id' => auth()->user()->id,
-
-                        'amount' => explode(',', $request->amount)[$key],
-                    ]);
+                                'amount' => explode(',', $request->amount)[$key],
+                            ]);
+                        }
                 }
                 foreach (explode(',', $request->product_id) as $key => $value) {
+                    if (explode(',', $request->amount)[$key] != 0) {
+                        Cart::create([
+                            'product_id' => $value,
+                            'user_id' => auth()->user()->id,
+                            'amount' => explode(',', $request->amount)[$key],
 
-                    Cart::create([
-                        'product_id' => $value,
-                        'user_id' => auth()->user()->id,
-                        'amount' => explode(',', $request->amount)[$key],
-
-                    ]);
+                        ]);
+                    }
                 }
             }
 
@@ -222,21 +224,24 @@ class OrderController extends Controller
         foreach (explode(',', $request->product_id) as $key => $value) {
             $like_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->count();
             if ($like_product == 0) {
-                CartOrder::create([
-                    'product_id' => $value,
-                    'order_id' => $order->id,
-                    'status' => 1,
-                    'user_id' => auth()->user()->id,
+                if (explode(',', $request->amount)[$key] != 0) {
 
-                    'amount' => explode(',', $request->amount)[$key],
-                ]);
+                    CartOrder::create([
+                        'product_id' => $value,
+                        'order_id' => $order->id,
+                        'status' => 1,
+                        'user_id' => auth()->user()->id,
+
+                        'amount' => explode(',', $request->amount)[$key],
+                    ]);
+
             } else {
                 $add_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->first();
                 $add_product->update([
                     'amount' => $add_product->amount + explode(',', $request->amount)[$key],
                 ]);
             }
-
+            }
         }
         foreach (explode(',', $request->product_id) as $key => $value) {
 
