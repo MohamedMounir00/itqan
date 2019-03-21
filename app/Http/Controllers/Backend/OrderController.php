@@ -462,6 +462,7 @@ class OrderController extends Controller
     public function accpet_request($id)
     {
         $data = CartOrder::findOrFail($id);
+        $order = Order::findOrFail($data->order_id);
 
         $data->status_admin=true;
         $data->save();
