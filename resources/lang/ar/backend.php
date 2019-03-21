@@ -170,6 +170,20 @@ return[
     "of"=>"من",
 
     'processing'=>'قيد التنفيذ',
+    ///////////////////////////////
+    'ministries'=>'الجهات الحكوميه',
+    'ministries_create'=>'انشاء جهه حكوميه',
+    'ministries_update'=>'تعديل جهه حكوميه',
 
+    'companies'=>'الشركات',
+    'companies_create'=>'انشاء شركه',
+    'companies_update'=>'تعديل شركه',
+
+    'nationalityl'=>'التحكم فى الجنسيات',
+    'nationality_create'=>'انشاء جنسيه',
+    'nationality_update'=>'تعديل جنسيه',
+    'country_ar'=>'اسم الجنسيه بالعربيه',
+    'country_en'=>'اسم الجنسيه بالانجليزيه',
+    'order_by'=>'الترتيب'
 
 ];

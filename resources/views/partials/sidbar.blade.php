@@ -111,6 +111,34 @@
                                             </ul>
                                         </li>
 
+                                     <li><a><i class="fa fa-edit"></i> {{trans('backend.ministries')}} <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{route('ministries.index')}}">{{trans('backend.ministries')}} </a></li>
+
+                                            <li><a href="{{route('ministries.create')}}">{{trans('backend.create')}} </a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-edit"></i> {{trans('backend.companies')}} <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{route('companies.index')}}">{{trans('backend.companies')}} </a></li>
+
+                                            <li><a href="{{route('companies.create')}}">{{trans('backend.create')}} </a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-edit"></i> {{trans('backend.nationalityl')}} <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="{{route('nationality.index')}}">{{trans('backend.nationality')}} </a></li>
+
+                                            <li><a href="{{route('nationality.create')}}">{{trans('backend.create')}} </a></li>
+
+                                        </ul>
+                                    </li>
+
+
+
+
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.get_settings')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('get_settings')}}">{{trans('backend.get_settingsr_controller')}} </a></li>

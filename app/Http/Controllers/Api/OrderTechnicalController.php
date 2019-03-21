@@ -82,11 +82,7 @@ class OrderTechnicalController extends Controller
                         ]);
                     }
                 }
-                $name = [
-                    'ar' =>  trans('api.tech_add_prodect',[],'ar'). unserialize($order->category->main->name)['ar'] . '',
-                    'en' => trans('api.tech_add_prodect',[],'en') . unserialize($order->category->main->name)['en'] . ''
-                ];
-                Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+             
                 return new StatusCollection(true, trans('api.watting_product',[],$lang));
             }
 

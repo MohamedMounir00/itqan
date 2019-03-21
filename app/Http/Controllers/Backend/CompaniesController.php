@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\CategoryProduct;
-use App\Http\Requests\Backend\DataRequest;
+use App\Http\Requests\Backend\CompaniesRequest;
+use App\TypeCompany;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\Datatables\Datatables;
 use Alert;
-class CategoryProductController extends Controller
+class CompaniesController extends Controller
 {
-
-    //
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function index()
     {
 
 
-        return view('category_product.index');
+        return view('companies.index');
     }
 
     /**
@@ -31,7 +33,7 @@ class CategoryProductController extends Controller
     {
         //
 
-        return view('category_product.create');
+        return view('companies.create');
     }
 
     /**
@@ -40,17 +42,16 @@ class CategoryProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DataRequest $request)
+    public function store(CompaniesRequest $request)
     {
 
-               $c= CategoryProduct::create(['name' => serialize($request->name)]);
-               if ($c)
-                Alert::success(trans('backend.created'))->persistent("Close");
+        $c= TypeCompany::create(['name' => serialize($request->name)]);
+        if ($c)
+            Alert::success(trans('backend.created'))->persistent("Close");
 
-                return redirect()->route('category_product.index');
+        return redirect()->route('companies.index');
 
-            }
-
+    }
 
 
     /**
@@ -74,9 +75,9 @@ class CategoryProductController extends Controller
     {
         //
 
-        $data = CategoryProduct::findOrFail($id);
+        $data = TypeCompany::findOrFail($id);
 
-        return view('category_product.edit', compact('data'));
+        return view('companies.edit', compact('data'));
 
     }
 
@@ -87,17 +88,18 @@ class CategoryProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DataRequest $request, $id)
+    public function update(CompaniesRequest $request, $id)
     {
 
-                $data = CategoryProduct::findOrFail($id);
+        $data = TypeCompany::findOrFail($id);
 
-                $data->update(['name' => serialize($request->name)]);
+        $data->update(['name' => serialize($request->name)]);
 
-                if ($data)
-                    Alert::success(trans('backend.updateFash'))->persistent("Close");
-                return redirect()->route('category_product.index');
-            }
+        if ($data)
+            Alert::success(trans('backend.updateFash'))->persistent("Close");
+        return redirect()->route('companies.index');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -107,7 +109,7 @@ class CategoryProductController extends Controller
      */
     public function destroy($id)
     {
-        $data = CategoryProduct::findOrFail($id);
+        $data = TypeCompany::findOrFail($id);
 
         $data->delete();
         Alert::success(trans('backend.deleteFlash'))->persistent("Close");
@@ -122,12 +124,12 @@ class CategoryProductController extends Controller
 
     public function getAnyDate()
     {
-        $data = CategoryProduct::all();
+        $data = TypeCompany::all();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('category_product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                return '<a href="' . route('companies.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
+              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="companies/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
             })
@@ -139,12 +141,4 @@ class CategoryProductController extends Controller
             ->rawColumns(['action', 'name'])
             ->make(true);
     }
-
-
-
-
-
-
-
-
 }

@@ -5,13 +5,14 @@
 
 
 
+            <div class="clearfix"></div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.category_product_update')}}</h3>
+                            <h3>{{trans('backend.companies_create')}}</h3>
 
-                            <ul class="nav navbar-right panel_toolbox">
 
-                            </ul>
                             <div class="clearfix"></div>
                         </div>
 
@@ -29,10 +30,9 @@
                                 </div>
                             @endif
                         @endif
-
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['category_product.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['companies.store'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -57,7 +57,7 @@
                                                         >*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <input type="text" id="first-name" maxlength="25" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12" value="{{unserialize($data->name)[$localeCode]}}">
+                                                        <input type="text" id="first-name" maxlength="25" name="name[{{$localeCode}}]" required class="form-control col-md-7 col-xs-12">
                                                     </div>
                                                 </div>
 
@@ -69,22 +69,21 @@
 
                                 </div>
 
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button id="send" type="submit" class="btn btn-success">{{trans('backend.save')}}</button>
+                                        <a href="{{route('companies.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('category_product.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
-
+                                    </div>
                                 </div>
                             </div>
 
                             {!! Form::close() !!}
 
-
-
                         </div>
                     </div>
-                    </div>
+                </div>
+
 
 @endsection
 
@@ -107,4 +106,6 @@
             }
         });
     </script>
+
+
 @endsection

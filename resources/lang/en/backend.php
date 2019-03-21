@@ -169,11 +169,21 @@ return[
     "showing"=>"Showing",
     'processing'=>'Processing',
     "of"=>"of",
+    'ministries'=>'Government agencies',
+    'ministries_create'=>'create of a governmental body',
+    'ministries_update'=>'update of a governmental body',
 
 
+    'companies'=>'companies',
+    'companies_create'=>'create companies',
+    'companies_update'=>'update companies',
 
-
-
+    'nationalityl'=>'Control of nationalities',
+    'nationality_create'=>'create nationality',
+    'nationality_update'=>'update nationality',
+    'country_ar'=>'Arabic Nationality Name',
+    'country_en'=>'English Nationality Name',
+    'order_by'=>'Ordering'
 
 
 

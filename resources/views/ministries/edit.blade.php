@@ -7,7 +7,7 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.category_product_update')}}</h3>
+                            <h3>{{trans('backend.ministries_update')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
 
@@ -32,7 +32,7 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['category_product.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['ministries.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
                             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('category_product.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{route('ministries.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>

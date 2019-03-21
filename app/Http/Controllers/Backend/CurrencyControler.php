@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Currency;
+use App\Http\Requests\Backend\DataRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -39,23 +40,16 @@ class CurrencyControler extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DataRequest $request)
     {
 
-        if ($request->name['ar']==null ||$request->name['en']==null)
-        {
-            session()->flash('error' ,trans('backend.filds_required'));
-            return back();
 
-        }
-        else
-        {
            $c= Currency::create(['name'=>serialize($request->name)]);
            if ($c)
             Alert::success(trans('backend.created'))->persistent("Close");
 
             return redirect()->route('currency.index');
-        }
+
 
 
 
@@ -95,23 +89,17 @@ class CurrencyControler extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DataRequest $request, $id)
     {
         $data = Currency::findOrFail($id);
-        if ($request->name['ar']==null ||$request->name['en']==null)
-        {
-            session()->flash('error' ,trans('backend.filds_required'));
-            return back();
 
-        }
-        else {
             $data->update(['name' => serialize($request->name)]);
          if ($data)
             Alert::success(trans('backend.updateFash'))->persistent("Close");
 
             return redirect()->route('currency.index');
         }
-    }
+
 
     /**
      * Remove the specified resource from storage.
