@@ -45,15 +45,15 @@
 
                     <tbody>
                     @foreach($cart as $a)
-                        <tr id="{{$a->id}}">
+                        <tr id="{{$a->id++}}">
                             <td><a href="{{route('product.show', $a->product->id)}}">{{unserialize($a->product->name)[$lang]}}</a></td>
                             <td>{{$a->product->price}}</td>
                             <td>{{$a->amount}}</td>
                             <td>{{unserialize($a->product->currency->name)[$lang]}}</td>
 
                             <td>
-                                <button class="btn btn-delete btn btn-round  btn-danger" data-remote="{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-remove"></i></button>
-                                <button class="btn btn-agree btn btn-round  btn-success" data-remote="{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-check"></i></button>
+                               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="refused_request/{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-remove"></i></button>
+                                <button class="btn btn-agree btn btn-round  btn-success" data-remote="accpet_request/{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-check"></i></button>
                             </td>
                         </tr>
                     @endforeach

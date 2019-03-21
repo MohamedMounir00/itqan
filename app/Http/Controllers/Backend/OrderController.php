@@ -463,10 +463,14 @@ class OrderController extends Controller
     {
         $data = CartOrder::findOrFail($id);
 
-        $data->status=true;
+        $data->status_admin=true;
         $data->save();
     //    Alert::success(trans('backend.accpetdFlash'))->persistent("Close");
-
+                $name = [
+                    'ar' =>  trans('api.tech_add_prodect',[],'ar'). unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.tech_add_prodect',[],'en') . unserialize($order->category->main->name)['en'] . ''
+                ];
+                Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);

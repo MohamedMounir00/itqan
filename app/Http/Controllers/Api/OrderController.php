@@ -171,7 +171,7 @@ class OrderController extends Controller
     {
         $id = $request->order_id;
         $order = Order::findOrFail($id);
-        $cart = CartOrder::with('product')->where('status', 0)->where('order_id', $order->id)->get();
+        $cart = CartOrder::with('product')->where('status', 0)->where('status_admin', 1)->where('order_id', $order->id)->get();
         return CardProductCollection::collection($cart);
     }
 

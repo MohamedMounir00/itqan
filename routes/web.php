@@ -28,7 +28,7 @@ Auth::routes();
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['auth', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    'middleware' => ['auth', 'admin','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 /////////////////////////order controll
@@ -63,8 +63,8 @@ Route::group([
     Route::get('order/get_store_view/{id}','Backend\OrderController@get_store_view')->name('order.get_store_view');
     //////////////////////////////// approve product from admin
     Route::get('order/get_product_view/{id}','Backend\OrderController@get_product_fromTechinel_view')->name('order.get_product_view');
-    Route::delete('order/get_product_view/{id}','Backend\OrderController@refused_request')->name('order.get_product_view');
-    Route::post('order/get_product_view/{id}','Backend\OrderController@accpet_request')->name('order.get_product_view');
+    Route::delete('order/get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('refused_request');
+    Route::post('order/get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('accpet_request');
 
 
     /// //////////////////////////    ///////////////////////////////////////////////////
@@ -111,5 +111,17 @@ Route::group([
     //////////////////////////////////////////////////////////// clients
     Route::get('clients/get_clients','Backend\ClientsController@getAnyDate')->name('clients.get_clients');
     Route::resource('clients','Backend\ClientsController');
+    //////////////////////////////////////ministries
+
+    Route::get('ministries/get_ministries','Backend\MinistriesController@getAnyDate')->name('ministries.get_ministries');
+    Route::resource('ministries','Backend\MinistriesController');
+
+    //////////////////////////////////////companies
+
+    Route::get('companies/get_companies','Backend\CompaniesController@getAnyDate')->name('companies.get_companies');
+    Route::resource('companies','Backend\CompaniesController');
+    //////////////////////////////////////country
+    Route::resource('nationality','Backend\CountriesController');
+
 });
 
