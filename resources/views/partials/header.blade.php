@@ -47,7 +47,7 @@
                 float: right;
             }
         </style>
-    <link href="{{asset('build')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('build')}}/css/custom1.css" rel="stylesheet">
     @else
         <link href="{{asset('build2')}}/css/custom.min.css" rel="stylesheet">
     @endif
