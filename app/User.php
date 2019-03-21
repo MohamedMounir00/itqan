@@ -68,4 +68,8 @@ class User extends Authenticatable
     public function time(){
         return $this->belongsToMany(Time::class,'time_rels','user_id','time_id');
     }
+    public function admins()
+    {
+        return $this->hasOne(Admin::class ,'user_id');
+    }
 }
