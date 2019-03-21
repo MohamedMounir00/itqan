@@ -19,7 +19,7 @@
 
 
     <!-- Custom Theme Style -->
-    <link href="{{asset('build')}}/css/custom.css" rel="stylesheet">
+    <link href="{{asset('build')}}/css/custom1.css" rel="stylesheet">
 </head>
 
 <body class="login">
