@@ -45,7 +45,7 @@
 
                     <tbody>
                     @foreach($cart as $a)
-                        <tr id="{{$a->id++}}">
+                        <tr id="{{$a->id}}">
                             <td><a href="{{route('product.show', $a->product->id)}}">{{unserialize($a->product->name)[$lang]}}</a></td>
                             <td>{{$a->product->price}}</td>
                             <td>{{$a->amount}}</td>
