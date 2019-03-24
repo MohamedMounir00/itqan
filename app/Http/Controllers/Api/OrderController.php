@@ -223,8 +223,9 @@ class OrderController extends Controller
         $order = Order::findOrFail($order_id);
         foreach (explode(',', $request->product_id) as $key => $value) {
             $like_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->count();
+            if (explode(',', $request->amount)[$key] != 0) {
             if ($like_product == 0) {
-                if (explode(',', $request->amount)[$key] != 0) {
+
 
                     CartOrder::create([
                         'product_id' => $value,
