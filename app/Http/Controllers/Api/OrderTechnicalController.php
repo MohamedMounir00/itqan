@@ -8,6 +8,7 @@ use App\Helper\Helper;
 use App\Http\Resources\Api\OrderCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Order;
+use App\StatusOrder;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,7 @@ class OrderTechnicalController extends Controller
         $lang   = $request->lang;
         $status = $request->status;
         $id     = $request->order_id;
+        $reason = $request->reason;
         $user   = User::findOrFail(auth()->user()->id);
         if ($user->technical->type == 'technical')
         {
@@ -44,6 +46,12 @@ class OrderTechnicalController extends Controller
             $order->status = $status;
 
             $order->save();
+            StatusOrder::create([
+                'status'=>$status,
+                'user_id'=>auth()->user()->id,
+                'order_id'=>$id,
+                'reason'=>$reason
+            ]);
             $name =[
                 'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
                 'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''

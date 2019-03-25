@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Assian;
+use App\StatusOrder;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -18,6 +19,7 @@ class NotifyCollection extends jsonResource
     {
         $assin = Assian::with('user')->where('order_id',$this->order_id)->where('status','watting')->first();
      //   $cart = CartOrder::with('product')->where('status', 0)->where('order_id', $order->id)->get();
+        $reason= StatusOrder::where('order_id',$this->order_id)->where('status',$this->order->status)->first();
 
    if ($this->type =='order')
    {
@@ -34,6 +36,7 @@ class NotifyCollection extends jsonResource
            'real_order_status'=>$this->order->status,
 
            'order'=> new  OrderCollection($this->order),
+           'reason'=>isset($reason->reason) ? $reason->reason : ''
        ];
    }
         else{
