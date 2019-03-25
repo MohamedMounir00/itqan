@@ -284,7 +284,7 @@ class OrderController extends Controller
       Rescheduled::create([
           'user_id'=> auth()->user()->id,
           'order_id'=>$request->order_id,
-          'date'=>$name,
+          'date'=>serialize($name),
           'time_id'=>$request->time_id,
 
       ]);
