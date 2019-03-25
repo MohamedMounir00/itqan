@@ -29,9 +29,9 @@ class AllDataForOrderController extends Controller
         for ($i =0; $i <= 7; $i++) {
 
             {
-                Date::setLocale('ar');
+             Date::setLocale('en');
 
-                $dates1[] =Date::now()->addDays($i)->format(' l j F Y');
+                $dates1[] =Date::now()->addDays($i)->format('d-m-Y');
 
             }
                }
@@ -41,7 +41,7 @@ class AllDataForOrderController extends Controller
             {
                 Date::setLocale('en');
 
-                $dates2[] =Date::now()->addDays($i)->format(' l j F Y');
+                $dates2[] =Date::now()->addDays($i)->format('d-m-Y');
 
             }
         }
