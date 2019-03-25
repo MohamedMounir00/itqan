@@ -39,6 +39,6 @@ return [
     'to' => ' الى ',
     'test' =>'  تم تعين   :username : ,order  للعمل على طلبك',
     'deleteProduct' =>' تم رفض المنتج',
-
+   'rescheduled_order'=>'تم اعاده جدوله الطلب برجاء انتظار رد الاداره',
 
 ];

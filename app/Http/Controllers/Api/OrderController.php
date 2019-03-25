@@ -14,6 +14,7 @@ use App\Http\Resources\Api\ProudctCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Order;
 use App\Product;
+use App\Rescheduled;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -270,7 +271,25 @@ class OrderController extends Controller
         return OrderCollection::collection($courntorder);
     }
 
-    //// open warranty
 
+  public function  rescheduled_order(Request $request)
+  {
+      $lang = $request->lang;
+
+      $name = [
+          'en' => $request->date_en,
+          'ar' => $request->date_ar,
+
+      ];
+      Rescheduled::create([
+          'user_id'=> auth()->user()->id,
+          'order_id'=>$request->order_id,
+          'date'=>$name,
+          'time_id'=>$request->time_id,
+
+      ]);
+      return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
+
+  }
 
 }

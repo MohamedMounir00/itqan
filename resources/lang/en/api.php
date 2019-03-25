@@ -40,6 +40,7 @@ return [
     'to'=>' To ',
     'test' => 'assigen  :username  to work : order',
     'deleteProduct' =>'refused product',
+    'rescheduled_order'=>'The application schedule has been reset. Please wait for the response',
 
 
 
