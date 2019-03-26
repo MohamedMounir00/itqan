@@ -16,7 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('date_Order','Api\AllDataForOrderController@dateOrder');
 
+Route::post('check_time_order','Api\OrderController@check_time_order');
 
 Route::get('country','Api\DataRegisterController@country');
 Route::get('city','Api\DataRegisterController@city');
@@ -39,7 +41,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('add_address','Api\UserController@addAddress');
     Route::get('get_all_my_aderss','Api\UserController@getAllMyaderss');
     Route::get('times_order','Api\AllDataForOrderController@timesOrder');
-    Route::get('date_Order','Api\AllDataForOrderController@dateOrder');
     Route::get('four_cat_proudect','Api\AllDataForOrderController@FourCatProudect');
     Route::get('all_categories','Api\AllDataForOrderController@AllCats');
     Route::get('all_sub','Api\AllDataForOrderController@AllSubCat');

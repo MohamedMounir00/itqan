@@ -183,7 +183,16 @@ return[
     'nationality_update'=>'update nationality',
     'country_ar'=>'Arabic Nationality Name',
     'country_en'=>'English Nationality Name',
-    'order_by'=>'Ordering'
+    'order_by'=>'Ordering',
+    'active'=>'Activation of vacation',
+    'dis_active'=>'Cancel activation of vacation',
+    'day'=>'Vacation Control',
+    'ask_holday'=>'Are you OK to change the status of the special',
+    'holiday'=>'Days of leave',
+    'working'=>'workdays',
+    'friday'=>'Sorry, you can not cancel activation of the Friday holiday'
+
+
 
 
 

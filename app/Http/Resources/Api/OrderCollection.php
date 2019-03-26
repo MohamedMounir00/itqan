@@ -38,7 +38,7 @@ class OrderCollection extends JsonResource
         return [
             'id'=>$this->id,
             'desc'=>$this->desc,
-            'date'=>unserialize($this->date)[$request->lang],
+            'date'=>$this->date,
             'client'=>$this->user->name,
             'phone'=>isset($this->user->phone)?$this->user->phone :'',
             'technical'=>isset($this->technical->name ) ? $this->technical->name : '',

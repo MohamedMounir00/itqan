@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\CategoryProduct;
+use App\Holiday;
 use App\Http\Resources\Api\CategoryCollection;
 use App\Http\Resources\Api\CategoryProductCollection;
 use App\Http\Resources\Api\DateCollection;
@@ -26,29 +27,37 @@ class AllDataForOrderController extends Controller
           return TimeCollection::collection($times);
     }
     public function dateOrder(Request $request){
-        for ($i =0; $i <= 7; $i++) {
+        $holidays_arr = Holiday::where('active',0)->get()->pluck('day_number')->toArray();
 
-            {
-             Date::setLocale('en');
-
-                $dates1[] =Date::now()->addDays($i)->format('d-m-Y');
-
-            }
-               }
-
-        for ($i = 0; $i <= 7; $i++) {
+//return $holidays_arr;
+        for ($i =0; $i <= (7 + sizeof($holidays_arr)); $i++) {
 
             {
                 Date::setLocale('en');
 
-                $dates2[] =Date::now()->addDays($i)->format('d-m-Y');
+                $date = Date::now()->addDays($i);
+
+                if(!in_array($date->format('N'), $holidays_arr))
+                    $dates1[] = $date->format('d-m-Y');
+            }
+        }
+
+        for ($i = 0; $i <= (7 + sizeof($holidays_arr)); $i++) {
+
+            {
+                Date::setLocale('en');
+
+                $date = Date::now()->addDays($i);
+
+                if(!in_array($date->format('N'), $holidays_arr))
+                    $dates2[] = $date->format('d-m-Y');
 
             }
         }
-        return  response()->json(['data_ar'=>$dates1,'data_en'=>$dates2]);
+        return  response()->json(['data_ar' =>$dates1,'data_en' =>$dates2]);
 
 
-          }
+    }
 
     public function AllCats(Request $request){
         $cat = Category::where('type','main')->get();

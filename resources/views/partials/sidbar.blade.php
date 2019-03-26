@@ -137,7 +137,9 @@
                                     </li>
 
 
+                    <li><a href="{{route('holidays.index')}}"><i class="fa fa-edit"></i> {{trans('backend.day')}} <span class="fa fa-chevron-down"></span></a>
 
+                    </li>
 
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.get_settings')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
@@ -146,6 +148,7 @@
 
                                             </ul>
                                         </li>
+
 
 
                                         {{---

@@ -15,10 +15,12 @@ use App\Http\Resources\Api\StatusCollection;
 use App\Order;
 use App\Product;
 use App\Rescheduled;
+use App\Technical;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use function PHPSTORM_META\type;
 
 class OrderController extends Controller
 {
@@ -29,11 +31,7 @@ class OrderController extends Controller
 
         $lang = $request->lang;
 
-        $name = [
-            'en' => $request->date_en,
-            'ar' => $request->date_ar,
 
-        ];
         $ordercount = Order::where('user_id', auth()->user()->id)
             ->where('created_at', '>=', Carbon::now()->subMinutes(1))
             ->count();
@@ -46,7 +44,7 @@ class OrderController extends Controller
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
             $order->time_id = $request->time_id;
-            $order->date = serialize($name);
+            $order->date = $request->date;
             $order->address_id = $request->address_id;
             $order->status = 'new';
             $order->user_id = auth()->user()->id;
@@ -78,6 +76,10 @@ class OrderController extends Controller
                     }
                 }
             }
+
+             if ($order->express!=1)
+              Helper::assignDynamic($order);
+
 
 
             return new StatusCollection(true, trans('api.add_order_done', [], $lang));
@@ -291,5 +293,38 @@ class OrderController extends Controller
       return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
 
   }
+
+  public  function check_time_order(Request $request){
+        $date= $request->date;
+        $time= $request->time_id;
+      $lang = $request->lang;
+
+        $technical= User::whereHas('technical', function ($q) {
+            $q->where('type', 'technical');
+         //   $q->where('active', 1);
+        })->whereHas('time', function ($q)use($time) {
+            $q->where('time_id', $time);
+        })->with(['check' => function ($query)use($time,$date) {
+            $query->where('time_id','!=', $time)->where('date','!=',$date);
+        }])
+
+
+
+            ->count();
+
+
+
+
+
+         if ($technical==0)
+             return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
+
+         else
+             return new StatusCollection(true, trans('api.continue', [], $lang));
+
+
+  }
+
+
 
 }

@@ -122,6 +122,10 @@ Route::group([
     Route::resource('companies','Backend\CompaniesController');
     //////////////////////////////////////country
     Route::resource('nationality','Backend\CountriesController');
+/////////////////////////////////////////
+
+    Route::get('holidays/get_holidays','Backend\HolidaysController@getAnyDate')->name('holidays.get_holidays');
+    Route::resource('holidays','Backend\HolidaysController');
 
 });
 

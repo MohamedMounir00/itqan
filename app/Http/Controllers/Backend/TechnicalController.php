@@ -193,7 +193,7 @@ class TechnicalController extends Controller
     {
         $data =  User::whereHas('technical', function ($q) {
             $q->where('type', 'technical');
-        })->get();;
+        })->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {

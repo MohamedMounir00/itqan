@@ -28,8 +28,7 @@ class OrderRequest extends FormRequest
             'desc'=>'required',
             'category_id'=>'required',
             'time_id'=>'required',
-            'date_en'=>'required',
-            'date_ar'=>'required',
+            'date'=>'required',
             'address_id'=>'required',
             //'express'=>'required',
         ];
