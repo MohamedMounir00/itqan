@@ -75,7 +75,7 @@
         </h2>
         <ul class="list-inline prod_size">
             <li>
-                <span> {{unserialize($order->date)[$lang]}}</span>
+                <span> {{$order->date}}</span>
             </li>
 
         </ul>

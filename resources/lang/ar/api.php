@@ -40,5 +40,7 @@ return [
     'test' =>'  تم تعين   :username : ,order  للعمل على طلبك',
     'deleteProduct' =>' تم رفض المنتج',
    'rescheduled_order'=>'تم اعاده جدوله الطلب برجاء انتظار رد الاداره',
+   'select_anoter_time'=>'هذا التوقيت غير متاح بيه فنيين من فضلك اختر توقيت اخر',
+   'continue'=>'استمر',
 
 ];
