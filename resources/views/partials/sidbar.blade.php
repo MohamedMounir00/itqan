@@ -49,20 +49,18 @@
 
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.orders')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
+                                                <li><a href="{{route('reschedules.index')}}"> {{trans('backend.reschedules_order')}} </a></li>
 
                                                 <li><a href="{{route('order.index')}}"> {{trans('backend.all_order')}}</a></li>
                                                 <li><a href="{{route('order.get_order_view')}}"> {{trans('backend.order_view')}} </a></li>
                                                 <li><a href="{{route('order.get_finish_view')}}"> {{trans('backend.finish_order')}} </a></li>
                                                 <li><a href="{{route('order.get_warranty_view')}}"> {{trans('backend.warranty')}} </a></li>
-                                                <li><a><i class="fa fa-edit"></i> {{trans('backend.scheduled_order')}} <span class="fa fa-chevron-down"></span></a>
-                                                    <ul class="nav child_menu">
+
                                                 <li><a href="{{route('order.get_consultation_view')}}"> {{trans('backend.consultation_view')}} </a></li>
                                                 <li><a href="{{route('order.get_delay_view')}}"> {{trans('backend.delay_view')}} </a></li>
                                                 <li><a href="{{route('order.get_need_parts_view')}}">{{trans('backend.need_parts')}} </a></li>
                                                 <li><a href="{{route('order.get_another_visit_works_view')}}"> {{trans('backend.another_visit')}} </a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+
                                         </li>
 
 
