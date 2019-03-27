@@ -79,7 +79,7 @@ class OrderController extends Controller
                     }
                 }
             }
-
+             if ($order->express!=1)
               Helper::assignDynamic($order);
 
 
