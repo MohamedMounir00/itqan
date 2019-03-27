@@ -32,14 +32,17 @@ class OrderController extends Controller
         $lang = $request->lang;
 
 
-        $ordercount = Order::where('user_id', auth()->user()->id)
-            ->where('created_at', '>=', Carbon::now()->subMinutes(1))
-            ->count();
+      //  $ordercount = Order::where('user_id', auth()->user()->id)
+          //  ->where('created_at', '>=', Carbon::now()->subMinutes(1))
+         //   ->count();
 
-        if ($ordercount != 0) {
-            return new StatusCollection(true, trans('عفو لا يمكنك اضافه طلب قبل 15 دقيقه'));
+     //   if ($ordercount != 0) {
+         //   return new StatusCollection(true, trans('عفو لا يمكنك اضافه طلب قبل 15 دقيقه'));
 
-        } else {
+      //  } else {
+
+
+
             $order = new  Order();
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
@@ -77,7 +80,6 @@ class OrderController extends Controller
                 }
             }
 
-             if ($order->express!=1)
               Helper::assignDynamic($order);
 
 
@@ -85,7 +87,7 @@ class OrderController extends Controller
             return new StatusCollection(true, trans('api.add_order_done', [], $lang));
 
         }
-    }
+    //}
 
     public function allOrdersForClient()
     {
@@ -304,13 +306,9 @@ class OrderController extends Controller
          //   $q->where('active', 1);
         })->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
-        })->with(['check' => function ($query)use($time,$date) {
-            $query->where('time_id','!=', $time)->where('date','!=',$date);
-        }])
-
-
-
-            ->count();
+        })->whereDoesntHave('check', function ($q)use($time,$date) {
+            $q->where('time_id','=', $time)->where('date','=',$date);
+        })->count();
 
 
 

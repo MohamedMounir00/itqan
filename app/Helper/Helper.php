@@ -93,9 +93,9 @@ public  static function  assignDynamic($order)
         $q->where('active', 1);
     })->whereHas('time', function ($q)use($time) {
         $q->where('time_id', $time);
-    })->with(['check' => function ($query)use($time,$date) {
-        $query->where('time_id','!=', $time)->where('date','!=',$date);
-    }])
+    })->whereDoesntHave('check', function ($q)use($time,$date) {
+        $q->where('time_id','=', $time)->where('date','=',$date);
+    })
         ->join('technicals', function ($join) {
             $join->on('users.id', '=', 'technicals.user_id');
         })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
