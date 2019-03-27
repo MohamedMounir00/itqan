@@ -280,16 +280,13 @@ class OrderController extends Controller
   {
       $lang = $request->lang;
 
-      $name = [
-          'en' => $request->date_en,
-          'ar' => $request->date_ar,
 
-      ];
       Rescheduled::create([
           'user_id'=> auth()->user()->id,
           'order_id'=>$request->order_id,
-          'date'=>serialize($name),
+          'date'=>$request->date,
           'time_id'=>$request->time_id,
+          'status'=>$request->status,
 
       ]);
       return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
