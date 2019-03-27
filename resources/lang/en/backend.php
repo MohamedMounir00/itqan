@@ -190,7 +190,17 @@ return[
     'ask_holday'=>'Are you OK to change the status of the special',
     'holiday'=>'Days of leave',
     'working'=>'workdays',
-    'friday'=>'Sorry, you can not cancel activation of the Friday holiday'
+    'friday'=>'Sorry, you can not cancel activation of the Friday holiday',
+    'reschedules_order'=>'Scheduled order',
+    'reschedules'=>'reschedules order',
+    'time_reschedules'=>'The available time of the reschedules',
+    'date_reschedules'=>'The available date of the reschedules',
+    'technical_reschedules'=>'The technician assigned to the schedule',
+    'ask_reschedules'=>'Do you agree to reschedule this order',
+    'reschedules_notify' => ' The administration has approved the restoration of the repair order schedules  ',
+
+
+
 
 
 

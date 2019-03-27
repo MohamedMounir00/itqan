@@ -127,5 +127,12 @@ Route::group([
     Route::get('holidays/get_holidays','Backend\HolidaysController@getAnyDate')->name('holidays.get_holidays');
     Route::resource('holidays','Backend\HolidaysController');
 
+///////////////////////////////////////// reschedules
+
+    Route::get('reschedules/get_reschedules','Backend\RescheduledsController@getAnyDate')->name('reschedules.get_reschedules');
+    Route::resource('reschedules','Backend\RescheduledsController');
+
+
+
 });
 
