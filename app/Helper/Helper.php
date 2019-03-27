@@ -125,5 +125,43 @@ public  static function  assignDynamic($order)
 
 }
 
+
+
+
+    public  static function  assignDynamicForRescheduleds($order)
+    {
+
+        $date= $order->date;
+        $time= $order->time_id;
+
+        $technical= User::whereHas('technical', function ($q) {
+            $q->where('type', 'technical');
+            $q->where('active', 1);
+        })->whereHas('time', function ($q)use($time) {
+            $q->where('time_id', $time);
+        })->whereDoesntHave('check', function ($q)use($time,$date) {
+            $q->where('time_id','=', $time)->where('date','=',$date);
+        })
+            ->join('technicals', function ($join) {
+                $join->on('users.id', '=', 'technicals.user_id');
+            })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
+     + sin( radians(' . $order->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance')))
+            ->orderBy('distance', 'ASC')->first();
+
+        $id = $order->id;
+
+
+        $assin = Assian::create([
+            'order_id' => $id,
+            'user_id' => $order->user_id,
+            'technical_id' => $technical->user_id,
+            'status' => 'agree',
+        ]);
+
+      return $technical->user_id ;
+    }
+
 }
 

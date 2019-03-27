@@ -279,16 +279,18 @@ class OrderController extends Controller
   public function  rescheduled_order(Request $request)
   {
       $lang = $request->lang;
+      $order = Order::findOrFail($request->order_id);
 
 
       Rescheduled::create([
-          'user_id'=> auth()->user()->id,
+          'technical_id'=> Helper::assignDynamicForRescheduleds($order),
           'order_id'=>$request->order_id,
           'date'=>$request->date,
           'time_id'=>$request->time_id,
           'status'=>$request->status,
 
       ]);
+
       return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
 
   }
