@@ -283,7 +283,7 @@ class OrderController extends Controller
 
 
       Rescheduled::create([
-          'technical_id'=> Helper::assignDynamicForRescheduleds($order)->user_id,
+          'user_id'=> Helper::assignDynamicForRescheduleds($order),
           'order_id'=>$request->order_id,
           'date'=>$request->date,
           'time_id'=>$request->time_id,
@@ -302,7 +302,7 @@ class OrderController extends Controller
 
         $technical= User::whereHas('technical', function ($q) {
             $q->where('type', 'technical');
-            $q->where('active', 1);
+         //   $q->where('active', 1);
         })->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
         })->whereDoesntHave('check', function ($q)use($time,$date) {
