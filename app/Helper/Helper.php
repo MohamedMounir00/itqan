@@ -124,6 +124,8 @@ public  static function  assignDynamic($order)
      sin( radians( latitude ) ) ) ) AS distance')))
             ->orderBy('distance', 'ASC')->first();
 
+        if ($technical->count() == 0)
+            return false;
         Assian::create([
             'order_id' => $order->id,
             'user_id' => $order->user_id,

@@ -286,6 +286,8 @@ class OrderController extends Controller
           return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
       else {
           $order = Order::findOrFail($request->order_id);
+          if (Helper::assignDynamicForRescheduleds($order) == false)
+              return new StatusCollection(false, "fail");
 
           Rescheduled::create([
               'technical_id'=> Helper::assignDynamicForRescheduleds($order)->user_id,
