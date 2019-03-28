@@ -46,6 +46,7 @@ class OrderCollection extends JsonResource
             'technical_id'=>isset($this->technical_id) ? $this->technical_id: '',
             'status'=>$status,
             'category'=>trans('api.repairing',[],$lang).unserialize($this->category->main->name)[$lang],
+            'sub_category'=>unserialize($this->category->name)[$lang],
             // ($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,
             'address'=>new AddressCollection($this->address),
             'time'=>new TimeCollection($this->time),
@@ -55,6 +56,7 @@ class OrderCollection extends JsonResource
             'real_status'=>$this->status,
             'rating'=>($rating==0)?false:true,
             'total_price_of_order'=>Helper::totalPrice($this->id),
+            'express'=>$this->express,
 
         ];
     }
