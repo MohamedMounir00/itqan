@@ -280,7 +280,7 @@ class OrderController extends Controller
   {
       $lang = $request->lang;
       $order = Order::findOrFail($request->order_id);
-
+    return Helper::assignDynamicForRescheduleds($order);
 
       Rescheduled::create([
           'technical_id'=> Helper::assignDynamicForRescheduleds($order),

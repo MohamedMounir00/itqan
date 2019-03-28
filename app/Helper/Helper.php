@@ -10,6 +10,7 @@ namespace App\Helper;
 use App\Appseting;
 use App\Assian;
 use App\NotfiyOrder;
+use App\Order;
 use App\Storge;
 use App\User;
 use Illuminate\Support\Facades\File;
@@ -128,7 +129,7 @@ public  static function  assignDynamic($order)
 
 
 
-    public  static function  assignDynamicForRescheduleds($order)
+    public  static function  assignDynamicForRescheduleds(Order $order)
     {
 
         $date= $order->date;
@@ -148,8 +149,8 @@ public  static function  assignDynamic($order)
      * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
      + sin( radians(' . $order->address->latitude . ') ) *
      sin( radians( latitude ) ) ) ) AS distance')))
-            ->orderBy('distance', 'ASC')->first();
-
+            ->orderBy('distance', 'ASC')->count();
+return $technical;
         $id = $order->id;
 
 

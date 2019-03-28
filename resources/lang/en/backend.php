@@ -198,6 +198,7 @@ return[
     'technical_reschedules'=>'The technician assigned to the schedule',
     'ask_reschedules'=>'Do you agree to reschedule this order',
     'reschedules_notify' => ' The administration has approved the restoration of the repair order schedules  ',
+    'reschedules_order_update' => 'Modify edit scheduler request',
 
 
 
