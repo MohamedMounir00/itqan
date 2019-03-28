@@ -96,13 +96,7 @@ public  static function  assignDynamic($order)
     })->whereDoesntHave('check', function ($q)use($time,$date) {
         $q->where('time_id','=', $time)->where('date','=',$date);
     })
-        ->join('technicals', function ($join) {
-            $join->on('users.id', '=', 'technicals.user_id');
-        })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
-     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
-     + sin( radians(' . $order->address->latitude . ') ) *
-     sin( radians( latitude ) ) ) ) AS distance')))
-        ->orderBy('distance', 'ASC')->first();
+        ->first();
 
     $id = $order->id;
 
@@ -142,13 +136,7 @@ public  static function  assignDynamic($order)
         })->whereDoesntHave('check', function ($q)use($time,$date) {
             $q->where('time_id','=', $time)->where('date','=',$date);
         })
-            ->join('technicals', function ($join) {
-                $join->on('users.id', '=', 'technicals.user_id');
-            })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
-     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
-     + sin( radians(' . $order->address->latitude . ') ) *
-     sin( radians( latitude ) ) ) ) AS distance')))
-            ->orderBy('distance', 'ASC')->first();
+            ->first();
 
         $id = $order->id;
 
