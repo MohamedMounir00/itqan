@@ -43,6 +43,7 @@ return [
     'rescheduled_order'=>'The application schedule has been reset. Please wait for the response',
     'select_anoter_time'=>'This time is not available. Please select another timing',
     'continue'=>'continue',
+    'select_payment'=>'Please select your payment method'
 
 
 

@@ -57,6 +57,14 @@ class OrderTechnicalController extends Controller
                 'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
             ];
             Helper::Notifications($order->id,$order->user_id,$name,'status',0);
+            if ($status=='can_not'||$status=='done')
+            {
+                $name2 =[
+                    'ar'=>trans('api.select_payment',[],'ar'),
+                    'en'=>trans('api.select_payment',[],'ar')
+                ];
+                Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
+            }
             return new StatusCollection(true, trans('api.status_uodated_order',[],$lang));
         }
         return new StatusCollection(false, trans('api.no_premssion',[],$lang));
