@@ -107,7 +107,7 @@ class OrderController extends Controller
         return new AllOrderCollection($courntorder, $oldorder);
 
     }
-    public function order_details(Request $request)
+    public function oeder_details(Request $request)
     {
         $id=$request->order_id;
         $odder= Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->findOrFail($id);
@@ -279,47 +279,50 @@ class OrderController extends Controller
   public function  rescheduled_order(Request $request)
   {
       $lang = $request->lang;
-      $order = Order::findOrFail($request->order_id);
-    return Helper::assignDynamicForRescheduleds($order);
 
-      Rescheduled::create([
-          'technical_id'=> Helper::assignDynamicForRescheduleds($order),
-          'order_id'=>$request->order_id,
-          'date'=>$request->date,
-          'time_id'=>$request->time_id,
-          'status'=>$request->status,
+      $technical = $this->getAllAvailableTechnicals($request);
 
-      ]);
+      if ($technical==0)
+          return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
+      else {
+          $order = Order::findOrFail($request->order_id);
 
-      return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
+          Rescheduled::create([
+              'technical_id'=> Helper::assignDynamicForRescheduleds($order)->user_id,
+              'order_id'=>$request->order_id,
+              'date'=>$request->date,
+              'time_id'=>$request->time_id,
+              'status'=>$request->status,
+          ]);
 
+          return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
+      }
   }
 
   public  function check_time_order(Request $request){
-        $date= $request->date;
-        $time= $request->time_id;
-      $lang = $request->lang;
+        $lang = $request->lang;
+      $technical = $this->getAllAvailableTechnicals($request);
+      if ($technical==0)
+          return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
+      else
+          return new StatusCollection(true, trans('api.continue', [], $lang));
 
-        $technical= User::whereHas('technical', function ($q) {
-            $q->where('type', 'technical');
-            $q->where('active', 1);
-        })->whereHas('time', function ($q)use($time) {
-            $q->where('time_id', $time);
-        })->whereDoesntHave('check', function ($q)use($time,$date) {
-            $q->where('time_id','=', $time)->where('date','=',$date);
-        })->count();
+  }
 
+  private function getAllAvailableTechnicals($request)
+  {
+      $date= $request->date;
+      $time= $request->time_id;
+      $technical= User::whereHas('technical', function ($q) {
+          $q->where('type', 'technical');
+          $q->where('active', 1);
+      })->whereHas('time', function ($q)use($time) {
+          $q->where('time_id', $time);
+      })->whereDoesntHave('check', function ($q)use($time,$date) {
+          $q->where('time_id','=', $time)->where('date','=',$date);
+      })->count();
 
-return $technical;
-
-
-         if ($technical==0)
-             return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
-
-         else
-             return new StatusCollection(true, trans('api.continue', [], $lang));
-
-
+      return $technical;
   }
 
 
