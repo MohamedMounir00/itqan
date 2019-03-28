@@ -152,7 +152,7 @@ class OrderController extends Controller
             $price_cat=$order->category->price;
         if ($order->status=='done'||$order->status=='can_not')
         {
-if (isset($order->proudect))
+if ($order->proudect!=null)
 {
 
 
