@@ -302,7 +302,7 @@ class OrderController extends Controller
 
         $technical= User::whereHas('technical', function ($q) {
             $q->where('type', 'technical');
-         //   $q->where('active', 1);
+            $q->where('active', 1);
         })->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
         })->whereDoesntHave('check', function ($q)use($time,$date) {
