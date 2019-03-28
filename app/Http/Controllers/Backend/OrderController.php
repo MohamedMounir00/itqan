@@ -146,8 +146,15 @@ class OrderController extends Controller
 
         $status = NotfiyOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
+        if ($order->express==1)
+            $price_cat=$order->category->price_emergency;
+        else
+            $price_cat=$order->category->price;
         if ($order->status=='done'||$order->status=='can_not')
         {
+if (isset($order->proudect))
+{
+
 
         foreach ($order->proudect as $p)
        {
@@ -161,12 +168,15 @@ class OrderController extends Controller
                 return $povit['nn'];
             }, $povit)
          );
-            if ($order->express==1)
-              $price_cat=$order->category->price_emergency;
-            else
-               $price_cat=$order->category->price;
+
 
         $total_price= ($price_product+$price_cat);
+
+}
+else{
+    $total_price= $price_cat;
+
+}
         }
        // dd($total_price);
         return view('order.show', compact('order', 'status','total_price'));
