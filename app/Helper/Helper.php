@@ -14,6 +14,8 @@ use App\Storge;
 use App\User;
 use Illuminate\Support\Facades\File;
 use DB;
+use Illuminate\Support\Facades\Mail;
+
 class Helper
 {
     public static function Notifications($order_id,$user_id,$message,$type,$seen)
@@ -150,6 +152,22 @@ public  static function  assignDynamic($order)
 
 return $technical->id ;
     }
+
+    public static function NotificationsBackend($order_id,$user_id,$message,$type,$seen)
+    {
+        NotfiyOrder::create([
+            'order_id' =>$order_id,
+            'user_id' =>$user_id,
+            'message' =>serialize($message),
+            'type' =>$type,
+            'seen' =>$seen,
+        ]);
+    }
+ public static  function  mail($email,$view)
+ {
+     Mail::to($email)->send($view);
+
+ }
 
 }
 

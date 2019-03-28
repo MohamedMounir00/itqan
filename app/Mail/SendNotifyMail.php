@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class SendNotifyMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $code;
 
 
     /**
@@ -17,9 +17,9 @@ class SendNotifyMail extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($code)
     {
-        $this->user = $user;
+        $this->code = $code;
     }
 
     /**

@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Cart;
 use App\CartOrder;
+use App\CouponRel;
 use App\Helper\Helper;
 use App\Http\Resources\Api\OrderCollection;
 use App\Http\Resources\Api\StatusCollection;
+use App\Mail\SendNotifyMail;
 use App\Order;
+use App\Promotional_code;
 use App\StatusOrder;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrderTechnicalController extends Controller
 {
@@ -39,6 +43,8 @@ class OrderTechnicalController extends Controller
         $status = $request->status;
         $id     = $request->order_id;
         $reason = $request->reason;
+        $working_hours = $request->working_hours;
+        $date= $request->date;
         $user   = User::findOrFail(auth()->user()->id);
         if ($user->technical->type == 'technical')
         {
@@ -58,12 +64,43 @@ class OrderTechnicalController extends Controller
             ];
             Helper::Notifications($order->id,$order->user_id,$name,'status',0);
             if ($status=='can_not'||$status=='done')
+
             {
+                $key = mt_rand(100000, 999999);
+                $order->working_hours=$working_hours;
+                $order->save();
+                if ($status=='can_not')
+                {
+                    $coupon=Promotional_code::create([
+
+                        'code'=>$key,
+                        'expires_at'=>$date,
+                        'type_status'=>'coupon'
+                    ]);
+                }
+                elseif($status=='done'){
+                    $coupon=Promotional_code::create([
+                        'price'=>'100',
+                        'type'=>'percentage',
+                        'code'=>$key,
+                        'expires_at'=>$date,
+                        'type_status'=>'warranty'
+                    ]);
+
+                }
+                CouponRel::create([
+
+                    'order_id'=>$order->id,
+                    'code_id'=>$coupon->id
+                ]);
+            //    Mail::to()->send(new SendNotifyMail($coupon->code));
+              Helper::mail($order->user->email,new SendNotifyMail($coupon->code));
                 $name2 =[
                     'ar'=>trans('api.select_payment',[],'ar'),
                     'en'=>trans('api.select_payment',[],'ar')
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
+
             }
             return new StatusCollection(true, trans('api.status_uodated_order',[],$lang));
         }
