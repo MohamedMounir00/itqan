@@ -187,14 +187,14 @@ return $technical->id ;
 
              foreach ($order->proudect as $p)
              {
-                 $p2['nn']=($p->pivot->amount * $p->price);
+                 $p2['amount']=($p->pivot->amount * $p->price);
 
                  $povit[]=$p2;
 
              }
              $price_product=array_sum(array_map(
                      function($povit) {
-                         return $povit['nn'];
+                         return $povit['amount'];
                      }, $povit)
              );
 

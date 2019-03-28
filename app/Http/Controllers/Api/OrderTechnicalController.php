@@ -63,13 +63,13 @@ class OrderTechnicalController extends Controller
                 'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
             ];
             Helper::Notifications($order->id,$order->user_id,$name,'status',0);
-            if ($status=='can_not'||$status=='done')
+            if ($status =='can_not' || $status=='done')
 
             {
                 $key = mt_rand(100000, 999999);
                 $order->working_hours=$working_hours;
                 $order->save();
-                if ($status=='can_not')
+                if ($status== 'can_not')
                 {
                     $coupon=Promotional_code::create([
 
