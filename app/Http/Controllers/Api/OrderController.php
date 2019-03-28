@@ -295,8 +295,6 @@ class OrderController extends Controller
 
 
 
-
-
       if ($technical==0)
           return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
 

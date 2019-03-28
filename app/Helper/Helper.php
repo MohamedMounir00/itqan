@@ -148,7 +148,7 @@ public  static function  assignDynamic($order)
             'status' => 'agree',
         ]);
 
-return $technical->user_id ;
+return $technical->id ;
     }
 
 }
