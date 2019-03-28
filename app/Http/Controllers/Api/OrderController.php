@@ -310,7 +310,7 @@ class OrderController extends Controller
         })->count();
 
 
-
+return $technical;
 
 
          if ($technical==0)
