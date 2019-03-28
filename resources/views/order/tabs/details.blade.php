@@ -34,7 +34,7 @@
 
 <div class="col-md-4 col-sm-4 col-xs-12" style="border:0px solid #e5e5e5;">
 
-    <h3 class="prod_title"> {{trans('backend.cat')}}  {{trans('api.repairing').unserialize($order->category->main->name) [$lang]}}</h3>
+    <h3 class="prod_title"> {{trans('backend.category')}}  {{trans('api.repairing').unserialize($order->category->main->name) [$lang]}}</h3>
 
     <p>
         {{$order->desc}}

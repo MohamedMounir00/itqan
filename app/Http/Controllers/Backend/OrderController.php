@@ -152,18 +152,18 @@ class OrderController extends Controller
             $price_cat=($order->category->price* $order->working_hours);
         if ($order->status=='done'||$order->status=='can_not')
         {
-if ($order->proudect->count()!=0)
-{
+          if ($order->proudect->count()!=0)
+        {
 
 
         foreach ($order->proudect as $p)
-       {
+         {
           $p2['nn']=($p->pivot->amount * $p->price);
 
           $povit[]=$p2;
 
         }
-      $price_product=array_sum(array_map(
+         $price_product=array_sum(array_map(
             function($povit) {
                 return $povit['nn'];
             }, $povit)
@@ -172,11 +172,11 @@ if ($order->proudect->count()!=0)
 
         $total_price= ($price_product+$price_cat);
 
-}
-else{
+        }
+        else{
     $total_price= $price_cat;
 
-}
+        }
         }
        // dd($total_price);
         return view('order.show', compact('order', 'status','total_price'));

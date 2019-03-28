@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Helper\Helper;
 use App\Rating;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -52,7 +53,9 @@ class OrderCollection extends JsonResource
             'product'=>ProudctCollection::collection($this->proudect),
             'total_price_of_product'=>$this->proudect->sum('price'),
             'real_status'=>$this->status,
-            'rating'=>($rating==0)?false:true
+            'rating'=>($rating==0)?false:true,
+            'total_price_of_order'=>Helper::totalPrice($this->id),
+
         ];
     }
 }

@@ -10,6 +10,7 @@ namespace App\Helper;
 use App\Appseting;
 use App\Assian;
 use App\NotfiyOrder;
+use App\Order;
 use App\Storge;
 use App\User;
 use Illuminate\Support\Facades\File;
@@ -168,6 +169,48 @@ return $technical->id ;
      Mail::to($email)->send($view);
 
  }
+
+ public static  function totalPrice($id)
+
+ {
+     $order = Order::findOrFail($id);
+          if ($order->status=='done'||$order->status=='can_not')
+          {
+     if ($order->express==1)
+         $price_cat=($order->category->price_emergency * $order->working_hours);
+     else
+         $price_cat=($order->category->price* $order->working_hours);
+
+         if ($order->proudect->count()!=0)
+         {
+
+
+             foreach ($order->proudect as $p)
+             {
+                 $p2['nn']=($p->pivot->amount * $p->price);
+
+                 $povit[]=$p2;
+
+             }
+             $price_product=array_sum(array_map(
+                     function($povit) {
+                         return $povit['nn'];
+                     }, $povit)
+             );
+
+
+            return $total_price= ($price_product+$price_cat).' ريال ';
+
+         }
+         else{
+           return  $total_price= $price_cat .' ريال ';
+
+         }
+     }
+          else
+              return 'لم يتم تحديد تكلفه بعد';
+ }
+
 
 }
 
