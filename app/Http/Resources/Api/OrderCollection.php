@@ -42,6 +42,7 @@ class OrderCollection extends JsonResource
             'client'=>$this->user->name,
             'phone'=>isset($this->user->phone)?$this->user->phone :'',
             'technical'=>isset($this->technical->name ) ? $this->technical->name : '',
+            'technical_id'=>isset($this->technical_id) ? $this->technical_id: '',
             'status'=>$status,
             'category'=>trans('api.repairing',[],$lang).unserialize($this->category->main->name)[$lang],
             // ($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,

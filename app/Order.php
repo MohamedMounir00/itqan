@@ -17,6 +17,7 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1)->withPivot('amount','id')->withTrashed();
     }
+
     public function proudectnotactive()
     {
         return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',0)->withPivot('amount','id')->withTrashed();

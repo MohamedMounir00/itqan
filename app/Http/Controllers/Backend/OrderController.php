@@ -143,11 +143,29 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
 
         $status = NotfiyOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
-        return view('order.show', compact('order', 'status'));
+        foreach ($order->proudect as $p)
+       {
+          $p2['nn']=($p->pivot->amount * $p->price);
+
+          $povit[]=$p2;
+
+        }
+      $price_product=array_sum(array_map(
+            function($povit) {
+                return $povit['nn'];
+            }, $povit)
+         );
+            if ($order->express==1)
+              $price_cat=$order->category->price_emergency;
+            else
+               $price_cat=$order->category->price;
+
+        $total_price= ($price_product+$price_cat);
+       // dd($total_price);
+        return view('order.show', compact('order', 'status','total_price'));
 
     }
 
