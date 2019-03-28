@@ -200,6 +200,8 @@ return[
     'ask_reschedules'=>'هل انت موافق عل اعاده جدولت هذا الطلب',
         'reschedules_notify' => ' لقد قامت الاداره بالموافقه على اعاده جدولت طلب تصليح ',
         'reschedules_order_update' => 'تعديل اعاده جدولت طلب ',
+    'reschedules_notify_update'=>'لقد قامت الاداره بتعديل جدولت طلب تصلح',
+    'updateFash_reschedules'=>'لقد تم تعديل اعاده جدولت الطلب'
 
 
 

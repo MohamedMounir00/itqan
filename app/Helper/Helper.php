@@ -85,8 +85,7 @@ public static function make_decision()
 public  static function  assignDynamic($order)
 {
 
-    $date= $order->date;
-    $time= $order->time_id;
+
 
     $technical = Helper::assignDynamicForRescheduleds($order, "watting");
     $order->reply = 'yes';

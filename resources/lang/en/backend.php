@@ -200,6 +200,8 @@ return[
     'reschedules_notify' => ' The administration has approved the restoration of the repair order schedules  ',
     'reschedules_order_update' => 'Modify edit scheduler request',
 
+    'reschedules_notify_update'=>'The administration has modified a valid application schedule',
+    'updateFash_reschedules'=>'The request schedule has been modified'
 
 
 

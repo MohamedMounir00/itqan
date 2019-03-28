@@ -114,6 +114,8 @@ class RescheduledsController extends Controller
     public function update(Request $request, $id)
     {
         $data = Rescheduled::findOrFail($id);
+        $order=Order::find($data->order_id);
+
         $data->update([
             'technical_id'=>$request->technical_id,
             'date'=>$request->date,
@@ -122,8 +124,8 @@ class RescheduledsController extends Controller
 
         ]);
         $name = [
-            'ar' => trans('backend.reschedules_notify', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-            'en' => trans('backend.reschedules_notify', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            'ar' => trans('backend.reschedules_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('backend.reschedules_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
         Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
         if ($data)
