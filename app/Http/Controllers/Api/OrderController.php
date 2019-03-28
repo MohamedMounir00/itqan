@@ -107,7 +107,7 @@ class OrderController extends Controller
         return new AllOrderCollection($courntorder, $oldorder);
 
     }
-    public function odder_details(Request $request)
+    public function order_details(Request $request)
     {
         $id=$request->order_id;
         $odder= Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')->findOrFail($id);
