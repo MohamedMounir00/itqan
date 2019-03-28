@@ -147,9 +147,9 @@ class OrderController extends Controller
         $status = NotfiyOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
         if ($order->express==1)
-            $price_cat=$order->category->price_emergency;
+            $price_cat=($order->category->price_emergency * $order->working_hours);
         else
-            $price_cat=$order->category->price;
+            $price_cat=($order->category->price* $order->working_hours);
         if ($order->status=='done'||$order->status=='can_not')
         {
 if ($order->proudect->count()!=0)

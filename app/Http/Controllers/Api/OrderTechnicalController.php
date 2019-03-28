@@ -31,7 +31,7 @@ class OrderTechnicalController extends Controller
             $statuses_Array = ['done', 'can_not'];
             $order = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
                 ->whereIn('status', $statuses_Array)
-                ->where('technical_id', auth()->user()->id)
+                ->where('technical_id', auth()->user()->id)->orderByDesc('created_at')
                 ->get();
             return OrderCollection::collection($order);
 
