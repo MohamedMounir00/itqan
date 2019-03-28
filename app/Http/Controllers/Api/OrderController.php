@@ -278,29 +278,12 @@ class OrderController extends Controller
 
   public function  rescheduled_order(Request $request)
   {
-      $date= $request->date;
-      $time= $request->time_id;
       $lang = $request->lang;
       $order = Order::findOrFail($request->order_id);
-      $technical= User::whereHas('technical', function ($q) {
-          $q->where('type', 'technical');
-          $q->where('active', 1);
-      })->whereHas('time', function ($q)use($time) {
-          $q->where('time_id', $time);
-      })->whereDoesntHave('check', function ($q)use($time,$date) {
-          $q->where('time_id','=', $time)->where('date','=',$date);
-      })->count();
 
 
-
-
-
-      if ($technical==0)
-          return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
-
-      else
       Rescheduled::create([
-          'user_id'=> Helper::assignDynamicForRescheduleds($order),
+          'technical_id'=> Helper::assignDynamicForRescheduleds($order),
           'order_id'=>$request->order_id,
           'date'=>$request->date,
           'time_id'=>$request->time_id,
