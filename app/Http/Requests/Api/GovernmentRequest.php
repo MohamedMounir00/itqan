@@ -26,7 +26,7 @@ class GovernmentRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required|email|max:255|unique:users',
-            'phone'=>'required|min:10',
+            'phone'=>'required|min:10|unique:users',
             'country_id'=>'required',
             'city_id'=>'required',
             'password'=> 'required|min:6',

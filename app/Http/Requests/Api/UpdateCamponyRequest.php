@@ -29,7 +29,7 @@ class UpdateCamponyRequest extends FormRequest
             'name'=>'required',
             'email' => 'required|email|unique:users,email,'. $this->user()->id,
             'password' => 'nullable|min:6',
-            'phone'=>'required|min:10',
+            'phone'=>'required|min:10|unique:users,phone,'. $this->user()->id,
             'country_id'=>'required',
             'city_id'=>'required',
             'company_id'=>'required',
