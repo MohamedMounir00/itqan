@@ -30,19 +30,7 @@ class OrderController extends Controller
     {
 
         $lang = $request->lang;
-
-
-      //  $ordercount = Order::where('user_id', auth()->user()->id)
-          //  ->where('created_at', '>=', Carbon::now()->subMinutes(1))
-         //   ->count();
-
-     //   if ($ordercount != 0) {
-         //   return new StatusCollection(true, trans('عفو لا يمكنك اضافه طلب قبل 15 دقيقه'));
-
-      //  } else {
-
-
-
+        $express = $request->express == 1 ? "1" : "0";
             $order = new  Order();
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
@@ -51,7 +39,7 @@ class OrderController extends Controller
             $order->address_id = $request->address_id;
             $order->status = 'new';
             $order->user_id = auth()->user()->id;
-            $order->express = $request->express;
+            $order->express = $express;
             $order->save();
             if ($request->file_id != "")
                 $order->storge()->sync(explode(',', $request->file_id));
