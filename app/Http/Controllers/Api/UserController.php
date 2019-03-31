@@ -183,8 +183,12 @@ Helper::mail($user->email,new VerifyMail($code->code));
         $user = User::where('email', $request->email)->first();
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
-        if ($user->verification!=true)
-            return new StatusCollection(false, trans('api.login_false_activation', [], $lang));
+        if ($user->client)
+        {
+            if ($user->verification!=true)
+                return new StatusCollection(false, trans('api.login_false_activation', [], $lang));
+        }
+
 
         if (Hash::check($request->password, $user->password)) {
             $client = \Laravel\Passport\Client::where('password_client', 1)->first();
