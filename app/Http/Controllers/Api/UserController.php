@@ -180,7 +180,11 @@ Helper::mail($user->email,new VerifyMail($code->code));
             'email'    => 'required',
             'password' => 'required'
         ]);
-        $user = User::where('email', $request->email)->first();
+        if (is_numeric($request->email))
+        $user = User::where('phone', $request->email)->first();
+        else
+            $user = User::where('email', $request->email)->first();
+
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
         if ($user->client)
