@@ -2,12 +2,17 @@
 
 @section('content')
 
+    @php
+        $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()
 
+
+
+    @endphp
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>{{trans('backend.nationality_create')}}</h3>
+                    <h3>{{trans('backend.cities_create')}}</h3>
                 </div>
 
 
@@ -49,7 +54,7 @@
 
                         <div class="x_content">
 
-                                {!! Form::open(['route'=>['nationality.store'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                                {!! Form::open(['route'=>['cities.store'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
 
@@ -74,12 +79,24 @@
                             </div>
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.order_by')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.nationality')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" class="form-control" name="ordering"
-                                           required  placeholder="{{ trans('backend.order_by') }}" autocomplete="off">
+                                    <select  name="country_id" id="heard" class="form-control" >
+                                        <option value=""> {{trans('backend.chosse_nationality')}}</option>
+                                        @foreach($nationality as $c)
+                                            <option value="{{$c->id}}">
+
+                                                @if($lang=='ar')
+                                                    {{$c->name_ar}}
+                                                    @else
+                                                    {{$c->name_en}}
+                                                    @endif
+
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

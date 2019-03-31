@@ -133,6 +133,14 @@
 
                                         </ul>
                                     </li>
+                      <li><a><i class="fa fa-edit"></i> {{trans('backend.cities')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('cities.index')}}">{{trans('backend.cities')}} </a></li>
+
+                            <li><a href="{{route('cities.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                      </li>
 
 
                     <li><a href="{{route('holidays.index')}}"><i class="fa fa-edit"></i> {{trans('backend.day')}} <span class="fa fa-chevron-down"></span></a>

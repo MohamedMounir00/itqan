@@ -2,32 +2,23 @@
 
 @section('content')
 
-
-    <div class="right_col" role="main">
-        <div class="">
-            <div class="page-title">
-                <div class="title_left">
-                    <h3>{{trans('backend.nationality_create')}}</h3>
-                </div>
+    @php
+        $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()
 
 
-            </div>
+
+    @endphp
 
 
-            <div class="clearfix"></div>
-
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>
-                            </h2>
+                            <h3>{{trans('backend.cities_update')}}</h3>
+
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
 
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
+
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -49,7 +40,7 @@
 
                         <div class="x_content">
 
-                                {!! Form::open(['route'=>['nationality.store'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['cities.update',$city->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
 
@@ -59,9 +50,12 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" class="form-control" name="name_ar"
-                                           placeholder="{{ trans('backend.name') }}" required autocomplete="off">
-                                </div>
-                            </div>
+                                           value="{{$city->name_ar}}"
+                                           required
+                                           placeholder="{{ trans('backend.name') }}" autocomplete="off">
+
+                                </div>                                </div>
+
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.country_en')}} <span
@@ -69,33 +63,43 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" class="form-control" name="name_en"
-                                           required  placeholder="{{ trans('backend.name') }}" autocomplete="off">
-                                </div>
+                                           value="{{$city->name_en}}"
+                                           required
+                                           placeholder="{{ trans('backend.name') }}" autocomplete="off">                                </div>
                             </div>
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.order_by')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.nationality')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" class="form-control" name="ordering"
-                                           required  placeholder="{{ trans('backend.order_by') }}" autocomplete="off">
+                                    <select  name="country_id" id="heard" class="form-control" >
+                                        @foreach($nationality as $c)
+                                            <option value="{{$c->id}}" {{($city->country_id==$c->id)?'selected':''}}>
+
+                                                @if($lang=='ar')
+                                                    {{$c->name_ar}}
+                                                @else
+                                                    {{$c->name_en}}
+                                                @endif
+
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
 
 
 
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
+                                    <a href="{{route('cities.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
-
-                                <div class="ln_solid"></div>
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <button id="send" type="submit" class="btn btn-success">{{trans('backend.save')}}</button>
-                                        <a href="{{route('cities.index')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
-
-                                    </div>
                                 </div>
+                            </div>
 
                             {!! Form::close() !!}
 
@@ -103,11 +107,6 @@
 
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 
 @endsection
@@ -131,6 +130,4 @@
             }
         });
     </script>
-
-
 @endsection

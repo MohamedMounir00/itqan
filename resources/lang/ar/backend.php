@@ -202,6 +202,10 @@ return[
         'reschedules_order_update' => 'تعديل اعاده جدولت طلب ',
     'reschedules_notify_update'=>'لقد قامت الاداره بتعديل جدولت طلب تصلح',
     'updateFash_reschedules'=>'لقد تم تعديل اعاده جدولت الطلب',
+    'cities_update'=>'تعديل المدن',
+    'cities_create'=>'انشاء  المدن',
+    'cities'=>'المدن ',
+
 
 
 

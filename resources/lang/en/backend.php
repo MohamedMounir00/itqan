@@ -203,7 +203,9 @@ return[
     'reschedules_notify_update'=>'The administration has modified a valid application schedule',
     'updateFash_reschedules'=>'The request schedule has been modified',
 
-
+    'cities_update'=>'cities update',
+    'cities_create'=>'cities create',
+    'cities'=>'cities ',
 
 
 
