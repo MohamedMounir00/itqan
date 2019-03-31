@@ -19,7 +19,7 @@ class DataRegisterController extends Controller
 
     public function country(Request $request)
     {
-       $country= Country::all();
+       $country= Country::orderBy('ordering','asc')->get();
        return CountryCollection::collection($country);
     }
 
