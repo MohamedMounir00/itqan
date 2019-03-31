@@ -209,7 +209,8 @@ return[
 
     'chosse_nationality'=>'chosse nationality ',
 
-
+    'city_ar'=>'Name of the city in Arabic',
+    'city_en'=>'The name of the city is in English',
 
 
 

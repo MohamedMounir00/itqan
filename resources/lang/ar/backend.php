@@ -206,7 +206,8 @@ return[
     'cities_create'=>'انشاء  المدن',
     'cities'=>'المدن ',
     'chosse_nationality'=>'اختر الدوله ',
-
+    'city_ar'=>'اسم المدينه بالعربيه',
+    'city_en'=>'اسم المدينه بلانجليزيه',
 
 
 
