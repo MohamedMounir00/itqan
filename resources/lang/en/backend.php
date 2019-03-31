@@ -207,6 +207,7 @@ return[
     'cities_create'=>'cities create',
     'cities'=>'cities ',
 
+    'chosse_nationality'=>'chosse nationality ',
 
 
 

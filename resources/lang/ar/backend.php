@@ -205,6 +205,7 @@ return[
     'cities_update'=>'تعديل المدن',
     'cities_create'=>'انشاء  المدن',
     'cities'=>'المدن ',
+    'chosse_nationality'=>'اختر الدوله ',
 
 
 
