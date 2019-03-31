@@ -45,7 +45,7 @@
 
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.country_ar')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.city_ar')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -58,7 +58,7 @@
 
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.country_en')}} <span
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.city_en')}} <span
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
