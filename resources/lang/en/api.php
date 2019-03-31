@@ -43,7 +43,11 @@ return [
     'rescheduled_order'=>'The application schedule has been reset. Please wait for the response',
     'select_anoter_time'=>'This time is not available. Please select another timing',
     'continue'=>'continue',
-    'select_payment'=>'Please select your payment method'
+    'select_payment'=>'Please select your payment method',
+    'user_is_active'=>'Your account has been successfully activated',
+    'user_not_active'=>'Activation code does not match Please try again',
+    'send_cod_again'=>'The activation code has been re-sent',
+    'login_false_activation'=>'Your account is not activated Please activate your account',
 
 
 

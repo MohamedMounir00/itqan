@@ -175,7 +175,7 @@ class RescheduledsController extends Controller
                 <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
             })
             ->addColumn('order', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
             })
 
             ->addColumn('status', function ($data) {

@@ -30,6 +30,8 @@ Route::post('government_register','Api\UserController@government');
 Route::post('company_register','Api\UserController@company');
 Route::post('login','Api\UserController@login');
 Route::post('loginsochal','Api\UserController@loginsochal');
+Route::post('activation_client','Api\UserController@ActivationClient');
+Route::post('send_again_code','Api\UserController@SendAgainCode');
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('my_profile','Api\UserController@myProfile');

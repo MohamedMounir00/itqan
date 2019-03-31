@@ -15,7 +15,10 @@ use App\Http\Resources\Api\AddressCollection;
 use App\Http\Resources\Api\ProfileCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Http\Resources\Api\UserCollection;
+use App\Mail\SendNotifyMail;
+use App\Mail\VerifyMail;
 use App\User;
+use App\Verification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,7 +67,11 @@ class UserController extends Controller
             'oauth/token',
             'POST'
         );
-
+       $code= Verification::create([
+            'user_id'=>$user->id,
+            'code'=>mt_rand(1000, 9999)
+        ]);
+Helper::mail($user->email,new VerifyMail($code->code));
         //return \Route::dispatch($proxy);
         $user['token']  = $user->createToken('MyApp')->accessToken;
         $user['type']   = $client1->type;
@@ -105,6 +112,11 @@ class UserController extends Controller
             'oauth/token',
             'POST'
         );
+        $code= Verification::create([
+            'user_id'=>$user->id,
+            'code'=>mt_rand(1000, 9999)
+        ]);
+        Helper::mail($user->email,new VerifyMail($code->code));
 
         //return \Route::dispatch($proxy);
         $user['token'] = $user->createToken('MyApp')->accessToken;
@@ -147,7 +159,11 @@ class UserController extends Controller
             'oauth/token',
             'POST'
         );
-
+        $code= Verification::create([
+            'user_id'=>$user->id,
+            'code'=>mt_rand(1000, 9999)
+        ]);
+        Helper::mail($user->email,new VerifyMail($code->code));
         //return \Route::dispatch($proxy);
         $user['token'] = $user->createToken('MyApp')->accessToken;
         $user['type'] = $client1->type;
@@ -167,6 +183,8 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
+        if ($user->verification!=true)
+            return new StatusCollection(false, trans('api.login_false_activation', [], $lang));
 
         if (Hash::check($request->password, $user->password)) {
             $client = \Laravel\Passport\Client::where('password_client', 1)->first();
@@ -420,6 +438,40 @@ class UserController extends Controller
 
         }
     }
+public  function ActivationClient(Request $request)
+{
+    $lang=$request->lang;
+    $user_id=$request->user_id;
+    $code=$request->code;
+    $activation= Verification::where('user_id',$user_id)->latest()->first();
+    $user=User::findOrFail($user_id);
+    if ($activation->code==$request->code)
+    {
+        $user->verification=true;
+        $user->save();
+        return new StatusCollection(true, trans('api.user_is_active', [], $lang));
+
+    }
+    else{
+        return new StatusCollection(false, trans('api.user_not_active', [], $lang));
 
 
+    }
+
+}
+
+    public  function SendAgainCode(Request $request)
+    {
+        $lang = $request->lang;
+        $user_id = $request->user_id;
+        $user = User::findOrFail($user_id);
+
+        $code= Verification::create([
+            'user_id'=>$user->id,
+            'code'=>mt_rand(1000, 9999)
+        ]);
+        Helper::mail($user->email,new VerifyMail($code->code));
+        return new StatusCollection(true, trans('api.send_cod_again', [], $lang));
+
+    }
 }
