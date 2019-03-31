@@ -10,6 +10,7 @@ namespace App\Helper;
 use App\Appseting;
 use App\Assian;
 use App\NotfiyOrder;
+use App\NotificationBackent;
 use App\Order;
 use App\Storge;
 use App\User;
@@ -154,14 +155,13 @@ public  static function  assignDynamic($order)
 return $technical->id ;
     }
 
-    public static function NotificationsBackend($order_id,$user_id,$message,$type,$seen)
+    public static function NotificationsBackend($order_id,$user_id,$message,$seen)
     {
-        NotfiyOrder::create([
-            'order_id' =>$order_id,
-            'user_id' =>$user_id,
+        NotificationBackent::create([
+            'order_id'=>$order_id,
+            'user_id'=>$user_id,
             'message' =>serialize($message),
-            'type' =>$type,
-            'seen' =>$seen,
+            'seen'=>$seen
         ]);
     }
  public static  function  mail($email,$view)

@@ -102,6 +102,12 @@ class OrderTechnicalController extends Controller
                 Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
 
             }
+
+            $name3 = [
+                'ar' => trans('api.status_uodated_order', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.status_uodated_order', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::NotificationsBackend($order->id,$order->user_id,$name3,0);
             return new StatusCollection(true, trans('api.status_uodated_order',[],$lang));
         }
         return new StatusCollection(false, trans('api.no_premssion',[],$lang));
@@ -135,7 +141,12 @@ class OrderTechnicalController extends Controller
                         ]);
                     }
                 }
-             
+
+                    $name = [
+                        'ar' => trans('api.add_product_tech', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                        'en' => trans('api.add_product_tech', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                    ];
+                    Helper::NotificationsBackend($order->id,$order->user_id,$name,0);
                 return new StatusCollection(true, trans('api.watting_product',[],$lang));
             }
 

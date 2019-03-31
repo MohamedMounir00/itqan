@@ -70,8 +70,11 @@ class OrderController extends Controller
              if ($order->express!=1)
               Helper::assignDynamic($order);
 
-
-
+        $name = [
+            'ar' => trans('api.order_created', [], 'ar') ,
+            'en' => trans('api.order_created', [], 'en')
+        ];
+           Helper::NotificationsBackend($order->id,$order->user_id,$name,0);
             return new StatusCollection(true, trans('api.add_order_done', [], $lang));
 
         }
@@ -136,7 +139,11 @@ class OrderController extends Controller
                 'en' => trans('api.add_techainel_order', [], 'en') . unserialize($order->category->main->name)['en'] . ''
             ];
             Helper::Notifications($id, $technical_id, $name, 'order', 0);
-
+            $name2 = [
+                'ar' => trans('api.add_techainel_to_order', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.add_techainel_to_order', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
             return new StatusCollection(true, trans('api.accpeted_techaincal', [], $lang));
 
         } else {
@@ -198,6 +205,11 @@ class OrderController extends Controller
                 'en' => trans('api.accpeted_product', [], 'en') . unserialize($order->category->main->name)['en'] . ''
             ];
             Helper::Notifications($order_id, $order->technical_id, $name, 'product', 0);
+            $name2 = [
+                'ar' => trans('api.accpeted_product', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.accpeted_product', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
             return new StatusCollection(true, trans('api.addedProduct', [], $lang));
         } else {
             $product = CartOrder::findOrFail($request->id_rel);
@@ -246,7 +258,11 @@ class OrderController extends Controller
 
             ]);
         }
-
+        $name = [
+            'ar' => trans('api.addProduct', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('api.addProduct', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+        ];
+        Helper::NotificationsBackend($order->id,$order->user_id,$name,0);
         return new StatusCollection(true, trans('api.addedProduct', [], $lang));
     }
 
@@ -295,7 +311,11 @@ class OrderController extends Controller
               'status' => $request->status,
 
           ]);
-
+          $name2 = [
+              'ar' => trans('api.rescheduled_order_client', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+              'en' => trans('api.rescheduled_order_client', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+          ];
+          Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
           return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
       }
   }

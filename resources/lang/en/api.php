@@ -48,6 +48,12 @@ return [
     'user_not_active'=>'Activation code does not match Please try again',
     'send_cod_again'=>'The activation code has been re-sent',
     'login_false_activation'=>'Your account is not activated Please activate your account',
+    'order_created'=>'A new order has been created',
+    'add_techainel_to_order'=>'A technician has been appointed to order repair',
+    'addProduct'=>'The customer has purchased products for repair',
+    'rescheduled_order_client'=>'The customer has prepared a repair order schedule',
+    'add_product_tech'=>'The technician added products to a repair order'
+
 
 
 
