@@ -9,6 +9,7 @@ use App\Ministry;
 use App\Order;
 use App\TypeCompany;
 use App\User;
+use App\Verification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -73,8 +74,9 @@ class ClientsController extends Controller
         $delay=Order::where('status','delay')->where('user_id',$id)->count();
         $need_parts=Order::where('status','need_parts')->where('user_id',$id)->count();
         $another_visit_works=Order::where('status','another_visit_works')->where('user_id',$id)->count();
-
-        return View('clients.show',compact('user','new','wating','done','can_not','consultation','delay','need_parts','another_visit_works'));
+        $code= Verification::where('user_id',$id)->latest()->first();
+        $activation=$code->code;
+        return View('clients.show',compact('user','new','wating','done','can_not','consultation','delay','need_parts','another_visit_works','activation'));
     }
 
     /**

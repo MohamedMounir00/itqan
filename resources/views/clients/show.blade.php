@@ -48,6 +48,7 @@
 
                     </li>
 
+
                     <li>
 
                         <i class="fa fa-briefcase user-profile-icon"></i>
@@ -84,6 +85,11 @@
 
                     </li>
                     @endif
+
+                    <li><i class="fa fa-code user-profile-icon"></i>
+                        {{$activation}}
+
+                    </li>
                 </ul>
 
                 <a href="{{route('clients.edit', $user->id)}}" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>&nbsp;{{trans('backend.update')}}</a>
