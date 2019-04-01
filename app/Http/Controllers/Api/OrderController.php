@@ -34,10 +34,10 @@ class OrderController extends Controller
 
         if (auth()->user()->id) {
             $status_cde=false;
-             if ($request->code!=null)
+             if ($request->code != 'null' || $request->code !='')
              {
                  $copon= Promotional_code::where('code',$request->code)->first();
-                 if (!$copon)
+                 if (!isset($copon))
                  {
                      $status_cde=false;
 
