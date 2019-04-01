@@ -123,7 +123,7 @@ class OrderTechnicalController extends Controller
         $order = Order::findOrFail($id);
 
         if ($user->technical->type == 'technical') {
-            if ($order->status == 'done'||$order->status == 'done')
+            if ($order->status == 'done'||$order->status == 'can_not')
                 return new StatusCollection(false, trans('api.can_not_add_product',[],$lang));
             else
                 {

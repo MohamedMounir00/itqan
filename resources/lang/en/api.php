@@ -52,7 +52,8 @@ return [
     'add_techainel_to_order'=>'A technician has been appointed to order repair',
     'addProduct'=>'The customer has purchased products for repair',
     'rescheduled_order_client'=>'The customer has prepared a repair order schedule',
-    'add_product_tech'=>'The technician added products to a repair order'
+    'add_product_tech'=>'The technician added products to a repair order',
+    'addedProduct_fals'=>'You do not have the power to add products'
 
 
 

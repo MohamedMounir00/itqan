@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Technical extends Model
 {
     protected  $fillable=[
-        'user_id'  ,'type','identification','category_id','latitude','longitude','active'
+        'user_id'  ,'type','identification','category_id','latitude','longitude','active','role'
     ];
 
        public  function category()

@@ -227,46 +227,49 @@ class OrderController extends Controller
         $lang = $request->lang;
         $order_id = $request->order_id;
         $order = Order::findOrFail($order_id);
-        foreach (explode(',', $request->product_id) as $key => $value) {
-            $like_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->count();
-            if (explode(',', $request->amount)[$key] != 0) {
-            if ($like_product == 0) {
+        if (auth()->user()->client) {
+            foreach (explode(',', $request->product_id) as $key => $value) {
+                $like_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->count();
+                if (explode(',', $request->amount)[$key] != 0) {
+                    if ($like_product == 0) {
 
 
-                    CartOrder::create([
-                        'product_id' => $value,
-                        'order_id' => $order->id,
-                        'status' => 1,
-                        'user_id' => auth()->user()->id,
+                        CartOrder::create([
+                            'product_id' => $value,
+                            'order_id' => $order->id,
+                            'status' => 1,
+                            'user_id' => auth()->user()->id,
 
-                        'amount' => explode(',', $request->amount)[$key],
-                    ]);
+                            'amount' => explode(',', $request->amount)[$key],
+                        ]);
 
-            } else {
-                $add_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->first();
-                $add_product->update([
-                    'amount' => $add_product->amount + explode(',', $request->amount)[$key],
+                    } else {
+                        $add_product = CartOrder::where('product_id', $value)->where('order_id', $order->id)->first();
+                        $add_product->update([
+                            'amount' => $add_product->amount + explode(',', $request->amount)[$key],
+                        ]);
+                    }
+                }
+            }
+            foreach (explode(',', $request->product_id) as $key => $value) {
+
+                Cart::create([
+                    'product_id' => $value,
+                    'user_id' => auth()->user()->id,
+                    'amount' => explode(',', $request->amount)[$key],
+
                 ]);
             }
-            }
+            $name = [
+                'ar' => trans('api.addProduct', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.addProduct', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::NotificationsBackend($order->id, $order->user_id, $name, 0);
+            return new StatusCollection(true, trans('api.addedProduct', [], $lang));
         }
-        foreach (explode(',', $request->product_id) as $key => $value) {
+        return new StatusCollection(true, trans('api.addedProduct_fals', [], $lang));
 
-            Cart::create([
-                'product_id' => $value,
-                'user_id' => auth()->user()->id,
-                'amount' => explode(',', $request->amount)[$key],
-
-            ]);
-        }
-        $name = [
-            'ar' => trans('api.addProduct', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-            'en' => trans('api.addProduct', [], 'en') . unserialize($order->category->main->name)['en'] . ''
-        ];
-        Helper::NotificationsBackend($order->id,$order->user_id,$name,0);
-        return new StatusCollection(true, trans('api.addedProduct', [], $lang));
     }
-
 
     public function GetCurrentOrderWithPrice()
     {

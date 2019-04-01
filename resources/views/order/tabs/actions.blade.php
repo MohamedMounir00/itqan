@@ -31,7 +31,7 @@
                         <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary disabled"> {{trans('backend.add')}}</span></a>
 
                     @else
-                    <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.add')}}</span></a>
+                    <a href="#"><span class="btn btn-primary"> {{trans('backend.add')}}</span></a>
                   @endif
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     <p>{{trans('backend.desc_add_techanel')}} </p>
 
                     @if($order->status =='done'||$order->status =='can_not')
-                        <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
+                        <a href="#"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
 
                         @else
                         <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
@@ -101,7 +101,7 @@
 
                     <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
                      @else
-                        <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
+                        <a href="#"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
 
                     @endif
                 </div>
