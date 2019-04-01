@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Assian;
 use App\Cart;
 use App\CartOrder;
+use App\CouponRel;
 use App\Helper\Helper;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\Api\AllOrderCollection;
@@ -14,6 +15,7 @@ use App\Http\Resources\Api\ProudctCollection;
 use App\Http\Resources\Api\StatusCollection;
 use App\Order;
 use App\Product;
+use App\Promotional_code;
 use App\Rescheduled;
 use App\Technical;
 use App\User;
@@ -31,7 +33,36 @@ class OrderController extends Controller
         $lang = $request->lang;
 
         if (auth()->user()->id) {
+            $status_cde=false;
+             if ($request->code!=null)
+             {
+                 $copon= Promotional_code::where('code',$request->code)->first();
+                 if (!$copon)
+                 {
+                     $status_cde=false;
 
+                     return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
+
+                 }
+
+
+                 else{
+                     $checkusescode=CouponRel::where('order_id',$copon->order_id)->count();
+                     if ($checkusescode!=0)
+                     {
+                         $status_cde=false;
+
+                         return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
+
+                     }
+                     else{
+                         $status_cde=true;
+
+                     }
+                 }
+
+
+             }
             $express = $request->express == 1 ? "1" : "0";
             $order = new  Order();
             $order->desc = $request->desc;
@@ -43,6 +74,14 @@ class OrderController extends Controller
             $order->user_id = auth()->user()->id;
             $order->express = $express;
             $order->save();
+            if ($status_cde)
+            {
+                CouponRel::create([
+
+                    'order_id'=>$order->id,
+                    'code_id'=>$copon->id
+                ]);
+            }
             if ($request->file_id != "")
                 $order->storge()->sync(explode(',', $request->file_id));
             if ($request->product_id != "") {
