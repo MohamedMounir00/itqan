@@ -148,7 +148,7 @@ public  static function  assignDynamic($order)
         $assin = Assian::create([
             'order_id' => $id,
             'user_id' => $order->user_id,
-            'technical_id' => $technical->user_id,
+            'technical_id' => $technical->id,
             'status' => 'agree',
         ]);
 
