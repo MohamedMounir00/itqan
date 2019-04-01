@@ -12,7 +12,7 @@ class CountriesController extends Controller
 {
     public function index()
     {
-        $nationality = Country::orderBy('ordering','asc')->get();
+        $nationality = Country::where('id',178)->orderBy('ordering','asc')->get();
         return view('nationality.index',compact('nationality'));
     }
 
