@@ -34,9 +34,9 @@ class OrderController extends Controller
 
         if (auth()->user()->id) {
             $status_cde=false;
-             if ($request->code != 'null' || $request->code !='')
+             if ($request->code != null)
              {
-                 $coupon= Promotional_code::where('code', $request->code)->first();
+                 $coupon = Promotional_code::where('code', $request->code)->first();
                  if (!isset($coupon->id))
                  {
                      $status_cde=false;
@@ -44,21 +44,18 @@ class OrderController extends Controller
                      return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
                  }
                  else{
-                     $checkusescode=CouponRel::where('order_id',$coupon->order_id)->count();
-                     if ($checkusescode!=0)
+                     $checkusescode = CouponRel::where('code_id', $coupon->id)->first();
+                     if (isset($checkusescode))
                      {
                          $status_cde=false;
 
                          return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
-
                      }
                      else{
                          $status_cde=true;
 
                      }
                  }
-
-
              }
             $express = $request->express == 1 ? "1" : "0";
             $order = new  Order();
