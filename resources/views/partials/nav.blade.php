@@ -66,8 +66,9 @@
 
                         <li>
                             <div class="text-center">
-                                <a>
-                                    <strong>{{trans('backend.all_notify')}}</strong>
+                                <a href="{{route('notifications.index')}}">
+
+                                <strong>{{trans('backend.all_notify')}}</strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                             </div>
