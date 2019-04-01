@@ -75,7 +75,9 @@ class OrderTechnicalController extends Controller
 
                         'code'=>$key,
                         'expires_at'=>$date,
-                        'type_status'=>'coupon'
+                        'type_status'=>'coupon',
+                        'order_id'=>$order->id,
+
                     ]);
                 }
                 elseif($status=='done'){
@@ -84,15 +86,13 @@ class OrderTechnicalController extends Controller
                         'type'=>'percentage',
                         'code'=>$key,
                         'expires_at'=>$date,
-                        'type_status'=>'warranty'
+                        'type_status'=>'warranty',
+                        'order_id'=>$order->id,
+
                     ]);
 
                 }
-                CouponRel::create([
 
-                    'order_id'=>$order->id,
-                    'code_id'=>$coupon->id
-                ]);
             //    Mail::to()->send(new SendNotifyMail($coupon->code));
               Helper::mail($order->user->email,new SendNotifyMail($coupon->code));
                 $name2 =[

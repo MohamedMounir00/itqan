@@ -8,7 +8,7 @@ class Promotional_code extends Model
 {
 
     protected  $fillable=[
-        'price'  ,'type','details','code','expires_at','uses','type_status'
+        'price'  ,'type','details','code','expires_at','uses','type_status','order_id'
     ];
 
 
