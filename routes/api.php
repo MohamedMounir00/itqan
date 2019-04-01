@@ -42,13 +42,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('edite_imge','Api\UserController@edite_imge');
     Route::post('add_address','Api\UserController@addAddress');
     Route::get('get_all_my_aderss','Api\UserController@getAllMyaderss');
-    Route::get('times_order','Api\AllDataForOrderController@timesOrder');
-    Route::get('four_cat_proudect','Api\AllDataForOrderController@FourCatProudect');
-    Route::get('all_categories','Api\AllDataForOrderController@AllCats');
-    Route::get('all_sub','Api\AllDataForOrderController@AllSubCat');
-    Route::get('all_categories_product','Api\AllDataForOrderController@AllCatProudect');
-    Route::get('all_products','Api\AllDataForOrderController@AllProudect');
-    Route::post('upload','Api\StorgeController@store');
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');
     Route::get('all_orders_for_client','Api\OrderController@allOrdersForClient');
@@ -61,7 +54,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('get_product','Api\OrderController@getproduct');
     Route::post('update_product','Api\OrderController@updateproduct');
     Route::post('send_product_order','Api\OrderController@SendProductToOrder');
-    Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
     /////////////////////////////////rating
     Route::post('add_rating','Api\RatingController@addRating');
 
@@ -75,3 +67,13 @@ Route::middleware(['auth:api'])->group(function () {
 });
 Route::post('password-reset', 'Api\RessetPassword@sendPasswordResetToken');
 Route::post('reset-password/{token}', 'Api\RessetPassword@resetPassword');
+/////////////////////////////////////////////////data for order
+
+Route::get('times_order','Api\AllDataForOrderController@timesOrder');
+Route::get('four_cat_proudect','Api\AllDataForOrderController@FourCatProudect');
+Route::get('all_categories','Api\AllDataForOrderController@AllCats');
+Route::get('all_sub','Api\AllDataForOrderController@AllSubCat');
+Route::get('all_categories_product','Api\AllDataForOrderController@AllCatProudect');
+Route::get('all_products','Api\AllDataForOrderController@AllProudect');
+Route::post('upload','Api\StorgeController@store');
+Route::post('serch_product','Api\AllDataForOrderController@serchProduct');

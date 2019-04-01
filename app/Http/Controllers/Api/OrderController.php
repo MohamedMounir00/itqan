@@ -28,9 +28,11 @@ class OrderController extends Controller
 
     public function AddOrder(OrderRequest $request)
     {
-
         $lang = $request->lang;
-        $express = $request->express == 1 ? "1" : "0";
+
+        if (auth()->user()->id) {
+
+            $express = $request->express == 1 ? "1" : "0";
             $order = new  Order();
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
@@ -45,16 +47,16 @@ class OrderController extends Controller
                 $order->storge()->sync(explode(',', $request->file_id));
             if ($request->product_id != "") {
                 foreach (explode(',', $request->product_id) as $key => $value) {
-                        if ( explode(',', $request->amount)[$key]!=0) {
-                            CartOrder::create([
-                                'product_id' => $value,
-                                'order_id' => $order->id,
-                                'status' => 1,
-                                'user_id' => auth()->user()->id,
+                    if (explode(',', $request->amount)[$key] != 0) {
+                        CartOrder::create([
+                            'product_id' => $value,
+                            'order_id' => $order->id,
+                            'status' => 1,
+                            'user_id' => auth()->user()->id,
 
-                                'amount' => explode(',', $request->amount)[$key],
-                            ]);
-                        }
+                            'amount' => explode(',', $request->amount)[$key],
+                        ]);
+                    }
                 }
                 foreach (explode(',', $request->product_id) as $key => $value) {
                     if (explode(',', $request->amount)[$key] != 0) {
@@ -67,17 +69,21 @@ class OrderController extends Controller
                     }
                 }
             }
-             if ($order->express!=1)
-              Helper::assignDynamic($order);
+            if ($order->express != 1)
+                Helper::assignDynamic($order);
 
-        $name = [
-            'ar' => trans('api.order_created', [], 'ar') ,
-            'en' => trans('api.order_created', [], 'en')
-        ];
-           Helper::NotificationsBackend($order->id,$order->user_id,$name,0);
+            $name = [
+                'ar' => trans('api.order_created', [], 'ar'),
+                'en' => trans('api.order_created', [], 'en')
+            ];
+            Helper::NotificationsBackend($order->id, $order->user_id, $name, 0);
             return new StatusCollection(true, trans('api.add_order_done', [], $lang));
 
         }
+        else
+            return new StatusCollection(false, trans('api.not_login', [], $lang));
+
+    }
     //}
 
     public function allOrdersForClient()

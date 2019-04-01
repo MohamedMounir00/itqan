@@ -53,7 +53,8 @@ return [
     'addProduct'=>'The customer has purchased products for repair',
     'rescheduled_order_client'=>'The customer has prepared a repair order schedule',
     'add_product_tech'=>'The technician added products to a repair order',
-    'addedProduct_fals'=>'You do not have the power to add products'
+    'addedProduct_fals'=>'You do not have the power to add products',
+    'not_login'=>'login please'
 
 
 

@@ -340,22 +340,33 @@ Helper::mail($user->email,new VerifyMail($code->code));
     public function addAddress(Request $request)
     {
         $lang = $request->lang;
+            if (auth()->user()->id) {
+                $dd = Address::create([
+                    'user_id' => auth()->user()->id,
+                    'latitude' => (isset($request->latitude)) ? $request->latitude : '22.994111',
+                    'longitude' => (isset($request->longitude)) ? $request->longitude : '45.886055',
+                    'address' => $request->address,
+                    'note' => $request->note
+                ]);
+                return response()->json(['message' => trans('api.add_adderss', [], $lang), 'id' => $dd->id]);
+            }
+            else{
+                return new StatusCollection(false, trans('api.not_login', [], $lang));
 
-        $dd = Address::create([
-            'user_id'    => auth()->user()->id,
-            'latitude'   => (isset($request->latitude))?$request->latitude:'22.994111',
-            'longitude'  => (isset($request->longitude))?$request->longitude:'45.886055',
-            'address'    => $request->address,
-            'note'       => $request->note
-        ]);
-        return response()->json(['message' => trans('api.add_adderss', [], $lang), 'id' => $dd->id]);
-
+            }
     }
 
     public function getAllMyaderss()
     {
-        $address = Address::where('user_id', auth()->user()->id)->get();
-        return AddressCollection::collection($address);
+        if (auth()->user()->id) {
+
+            $address = Address::where('user_id', auth()->user()->id)->get();
+            return AddressCollection::collection($address);
+        }
+        else{
+            return new StatusCollection(false, trans('برجاء تسجيل الدخول'));
+
+        }
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
