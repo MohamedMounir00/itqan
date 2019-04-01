@@ -214,6 +214,8 @@ return[
 
     'all_notify'=>'see all',
     'message'=>'Notice',
+    'reschedules_order_desc'=>'You can view, reply to, and respond to requests for scheduling'
+
 
 
 

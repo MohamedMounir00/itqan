@@ -58,7 +58,7 @@
                               </span>
                         </span>
                                 <span class="message">
-                {{unserialize($notfay->message)[$lang]}}
+                        {{unserialize($notfay->message)[$lang]}}
                                 </span>
                             </a>
                         </li>

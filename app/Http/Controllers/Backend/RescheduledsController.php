@@ -27,6 +27,8 @@ class RescheduledsController extends Controller
         return view('reschedules.index');
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -62,7 +64,12 @@ class RescheduledsController extends Controller
     public function show($id)
     {
         //
+
+        return view('reschedules.index2',compact('id'));
+
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -172,7 +179,7 @@ class RescheduledsController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-round  btn-primary">'.trans('backend.update').'</a>
-                <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
+                        <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
             })
             ->addColumn('order', function ($data) {
                 return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
@@ -214,6 +221,65 @@ class RescheduledsController extends Controller
             ->rawColumns(['action','time','status','order','technical'])
             ->make(true);
     }
+
+
+    public function get_reschedules_order($id)
+    {
+        $data = Rescheduled::where('order_id',$id)->get();
+
+        return Datatables::of($data)
+
+            ->addColumn('action', function ($data) {
+                if ($data->reply==0)
+                {
+                    return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-round  btn-primary">'.trans('backend.update').'</a>
+                <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
+                }
+                else
+                    return trans('backend.reply_yes');
+
+            })
+            ->addColumn('order', function ($data) {
+                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+            })
+
+            ->addColumn('status', function ($data) {
+                if ($data->status=='new')
+                    return  trans('api.watting_techaincall');
+                elseif ($data->status=='wating')
+                    return  trans('api.new_order');
+                elseif ($data->status=='done')
+                    return  trans('api.done_order');
+                elseif ($data->status=='can_not')
+                    return  trans('api.can_not');
+                elseif ($data->status=='consultation')
+                    return  trans('api.consultation');
+                elseif ($data->status=='delay')
+                    return  trans('api.delay');
+                elseif ($data->status=='need_parts')
+                    return  trans('api.need_parts');
+                elseif ($data->status=='another_visit_works')
+                    return  trans('api.another_visit_works');
+            })
+            ->addColumn('time', function ($data) {
+                $lang= LaravelLocalization::getCurrentLocale();
+
+                if ($data->time->timing =='am')
+                    return trans('api.from',[],$lang).$data->time->from .trans('api.to',[],$lang).$data->time->to .'-'.trans('api.am',[],$lang);
+
+                else
+                    return trans('api.from',[],$lang).$data->time->from .trans('api.to',[],$lang).$data->time->to .'-'.trans('api.pm',[],$lang);
+
+            })
+
+            ->addColumn('technical', function ($data) {
+                return'<a href="' . route('technical.show', $data->technical_id) . '">'.$data->technical->name.'</a>';
+            })
+
+            ->rawColumns(['action','time','status','order','technical'])
+            ->make(true);
+    }
+
 
 
 

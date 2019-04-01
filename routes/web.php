@@ -132,6 +132,7 @@ Route::group([
 ///////////////////////////////////////// reschedules
 
     Route::get('reschedules/get_reschedules','Backend\RescheduledsController@getAnyDate')->name('reschedules.get_reschedules');
+    Route::get('reschedules/get_reschedules_order/{id}','Backend\RescheduledsController@get_reschedules_order')->name('reschedules.get_reschedules_order');
     Route::resource('reschedules','Backend\RescheduledsController');
 
 /////////////////////////////////notifications
