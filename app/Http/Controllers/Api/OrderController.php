@@ -130,6 +130,7 @@ class OrderController extends Controller
         $assin = Assian::findOrFail($assin_id);
         if ($status == 'yes') {
             $assin->update(['status' => 'agree']);
+            if ($order->technical_id==null)
             $order->status = 'wating';
             $order->technical_id = $technical_id;
             $order->save();
