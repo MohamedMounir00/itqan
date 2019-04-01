@@ -20,7 +20,7 @@ class Order extends Model
 
     public function proudectnotactive()
     {
-        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status_admin',0)->withPivot('amount','id')->withTrashed();
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status_admin',1)->withPivot('amount','id')->withTrashed();
     }
     public function proudect_wating_admin()
     {
