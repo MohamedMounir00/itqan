@@ -63,7 +63,7 @@ class TechnicalController extends Controller
             'country_id'  => $request->country_id,
             'image'       => Helper::UploadImge($request,'uploads/avatars/','image'),
             'password'    => bcrypt($request->password),
-
+            'role' =>'technical'
         ]);
        Technical::create([
             'user_id'          => $user->id,
