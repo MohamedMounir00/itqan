@@ -181,9 +181,9 @@ Helper::mail($user->email,new VerifyMail($code->code));
             'password' => 'required'
         ]);
         if (is_numeric($request->email))
-        $user = User::where('phone', $request->email)->first();
+        $user = User::where('phone', $request->email)->where('role',$request->role)->first();
         else
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->where('role',$request->role)->first();
 
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
@@ -218,12 +218,9 @@ Helper::mail($user->email,new VerifyMail($code->code));
                 $user['type'] = $user->technical->type;
             else
                 $user['type'] = $user->client->type;
-           if ($user->type==$request->type)
+
             return new UserCollection($user);
-           elseif ($user->type==$request->type)
-           return new UserCollection($user);
-            else
-          return new StatusCollection(false, trans('ليس لديك صلاحيه الدخول'));
+
         } else
             return new StatusCollection(false, trans('api.login_false', [], $lang));
 
