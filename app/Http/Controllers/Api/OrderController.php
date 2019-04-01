@@ -36,18 +36,15 @@ class OrderController extends Controller
             $status_cde=false;
              if ($request->code != 'null' || $request->code !='')
              {
-                 $copon= Promotional_code::where('code',$request->code)->first();
-                 if (!isset($copon))
+                 $coupon= Promotional_code::where('code', $request->code)->first();
+                 if (!isset($coupon->id))
                  {
                      $status_cde=false;
 
                      return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
-
                  }
-
-
                  else{
-                     $checkusescode=CouponRel::where('order_id',$copon->order_id)->count();
+                     $checkusescode=CouponRel::where('order_id',$coupon->order_id)->count();
                      if ($checkusescode!=0)
                      {
                          $status_cde=false;
@@ -79,7 +76,7 @@ class OrderController extends Controller
                 CouponRel::create([
 
                     'order_id'=>$order->id,
-                    'code_id'=>$copon->id
+                    'code_id'=>$coupon->id
                 ]);
             }
             if ($request->file_id != "")
