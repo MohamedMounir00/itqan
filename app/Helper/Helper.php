@@ -126,7 +126,7 @@ public  static function  assignDynamic($order)
 
 
 
-    public  static function  assignDynamicForRescheduleds($order)
+    public  static function  assignDynamicForRescheduleds($order,$date,$time)
     {
 
         $date= $order->date;

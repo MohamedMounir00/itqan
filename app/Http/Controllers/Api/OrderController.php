@@ -304,7 +304,7 @@ class OrderController extends Controller
 
       else {
           Rescheduled::create([
-              'technical_id' => Helper::assignDynamicForRescheduleds($order),
+              'technical_id' => Helper::assignDynamicForRescheduleds($order,$date,$time),
               'order_id' => $request->order_id,
               'date' => $request->date,
               'time_id' => $request->time_id,
