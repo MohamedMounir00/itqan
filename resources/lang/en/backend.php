@@ -212,6 +212,8 @@ return[
     'city_ar'=>'Name of the city in Arabic',
     'city_en'=>'The name of the city is in English',
 
+    'all_notify'=>'see all',
+    'message'=>'Notice',
 
 
 

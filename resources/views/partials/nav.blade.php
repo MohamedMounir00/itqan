@@ -43,7 +43,37 @@
                     </ul>
 
                 </li>
+                <li role="presentation" class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-green">{{\App\Helper\Helper::countNotify()}}</span>
+                    </a>
+                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                        @foreach(\App\Helper\Helper::Get_four_Notify() as $notfay)
+                        <li>
+                            <a href="{{route('order.show', $notfay->id)}}">
+                                <span>
+                          <span class="time">
+                              {{Carbon\Carbon::parse($notfay->created_at)->diffForHumans()}}
+                              </span>
+                        </span>
+                                <span class="message">
+                {{unserialize($notfay->message)[$lang]}}
+                                </span>
+                            </a>
+                        </li>
+                        @endforeach
 
+                        <li>
+                            <div class="text-center">
+                                <a>
+                                    <strong>{{trans('backend.all_notify')}}</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>

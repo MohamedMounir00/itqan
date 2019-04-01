@@ -134,7 +134,8 @@ Route::group([
     Route::get('reschedules/get_reschedules','Backend\RescheduledsController@getAnyDate')->name('reschedules.get_reschedules');
     Route::resource('reschedules','Backend\RescheduledsController');
 
-
-
+/////////////////////////////////notifications
+    Route::get('notifications/get_notifications','Backend\NotificationsController@getAnyDate')->name('notifications.get_notifications');
+    Route::resource('notifications','Backend\NotificationsController');
 });
 

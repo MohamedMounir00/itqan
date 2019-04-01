@@ -211,6 +211,17 @@ return $technical->id ;
               return 'لم يتم تحديد تكلفه بعد';
  }
 
+///////////////////////// get notifcation in backend
+     public static  function  Get_four_Notify()
+{
+   $notfit= NotificationBackent::where('seen',0)->orderBy('created_at','desc')->take(4)->get();
+   return  $notfit;
+}
 
+    public static  function  countNotify()
+{
+    $count= NotificationBackent::where('seen',0)->count();
+    return  $count;
+}
 }
 
