@@ -32,4 +32,15 @@ class NotfiyController extends Controller
 
 }
 
+
+
+    public function countNotifay(Request $request)
+    {
+
+        $notify=NotfiyOrder::
+          where('user_id',auth()->user()->id)->where('seen',0)->count();
+
+        return response()->json(['data'=>$notify]);
+    }
+
 }
