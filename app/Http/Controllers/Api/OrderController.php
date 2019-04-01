@@ -52,6 +52,7 @@ class OrderController extends Controller
                             'product_id' => $value,
                             'order_id' => $order->id,
                             'status' => 1,
+                            'status_admin' => 1,
                             'user_id' => auth()->user()->id,
 
                             'amount' => explode(',', $request->amount)[$key],
@@ -196,6 +197,8 @@ class OrderController extends Controller
 
                 $product->update([
                     'status' => 1,
+                    'status_admin' => 1,
+
                 ]);
             }
             foreach (explode(',', $request->id_rel) as $value) {
@@ -245,6 +248,7 @@ class OrderController extends Controller
                             'order_id' => $order->id,
                             'status' => 1,
                             'user_id' => auth()->user()->id,
+                            'status_admin' => 1,
 
                             'amount' => explode(',', $request->amount)[$key],
                         ]);

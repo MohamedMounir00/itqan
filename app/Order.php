@@ -15,12 +15,12 @@ class Order extends Model
 
     public function proudect()
     {
-        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1)->withPivot('amount','id')->withTrashed();
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',1)->where('status_admin',1)->withPivot('amount','id')->withTrashed();
     }
 
     public function proudectnotactive()
     {
-        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status',0)->where('status_admin',0)->withPivot('amount','id')->withTrashed();
+        return $this->belongsToMany(Product::class,'cart_orders','order_id')->where('status_admin',0)->withPivot('amount','id')->withTrashed();
     }
     public function proudect_wating_admin()
     {
