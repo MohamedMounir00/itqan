@@ -218,9 +218,12 @@ Helper::mail($user->email,new VerifyMail($code->code));
                 $user['type'] = $user->technical->type;
             else
                 $user['type'] = $user->client->type;
-
+           if ($user->type==$request->type)
             return new UserCollection($user);
-
+           elseif ($user->type==$request->type)
+           return new UserCollection($user);
+            else
+          return new StatusCollection(false, trans('ليس لديك صلاحيه الدخول'));
         } else
             return new StatusCollection(false, trans('api.login_false', [], $lang));
 
