@@ -181,9 +181,9 @@ Helper::mail($user->email,new VerifyMail($code->code));
             'password' => 'required'
         ]);
         if (is_numeric($request->email))
-        $user = User::where('phone', $request->email)->where('role',$request->role)->first();
+        $user = User::where('phone', $request->email)->where('role',$request->type)->first();
         else
-            $user = User::where('email', $request->email)->where('role',$request->role)->first();
+            $user = User::where('email', $request->email)->where('role',$request->type)->first();
 
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
