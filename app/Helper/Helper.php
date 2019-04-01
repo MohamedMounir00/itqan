@@ -129,8 +129,6 @@ public  static function  assignDynamic($order)
     public  static function  assignDynamicForRescheduleds($order,$date,$time)
     {
 
-        $date= $order->date;
-        $time= $order->time_id;
 
         $technical= User::whereHas('technical', function ($q) {
             $q->where('type', 'technical');
