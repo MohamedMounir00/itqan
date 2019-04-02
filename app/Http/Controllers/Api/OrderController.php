@@ -177,6 +177,13 @@ class OrderController extends Controller
             })->count();
             if ($technical!=0)
             {
+                $assin->update([
+
+                    'status' => 'dis_agree',
+                    'reason_rejection'=>$reason
+
+
+                ]);
                 Helper::Notificationsuodate($notyfiy, 1);
                 return new StatusCollection(false, trans('api.pleas_chooce_new_time', [], $lang));
 
