@@ -176,7 +176,15 @@ class OrderController extends Controller
 
             })->count();
             if ($technical!=0)
+            {
+                Helper::Notificationsuodate($notyfiy, 1);
                 return new StatusCollection(false, trans('api.pleas_chooce_new_time', [], $lang));
+
+
+            }
+            else{
+
+
 
         if ($status == 'yes') {
             $assin->update(['status' => 'agree']);
@@ -212,7 +220,7 @@ class OrderController extends Controller
             return new StatusCollection(true, trans('api.refused_techaincal', [], $lang));
 
         }
-
+            }
     }
 
     /////////////////////////////////////////////getproduct Not active add By Techaincal
