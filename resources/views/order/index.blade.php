@@ -50,11 +50,17 @@
                     { data: 'id', name: 'id' },
 
                     { data: 'client', name: 'client' },
-                    { data: 'status', name: 'status' },
+                    { data: 'status', name: 'status',searchable: true },
                     { data: 'created_at', name: 'created_at' },
 
-                   {data: 'action', name: 'action', orderable: false, searchable: false},
+                   {data: 'action', name: 'action'},
 
+                ],
+               columnDefs: [
+                  {
+                        "searchable": true,
+                        "targets": [ 1,2,3,4]
+                    }
                 ],
                 "language": {
                     "decimal": "",

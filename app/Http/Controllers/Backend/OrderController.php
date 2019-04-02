@@ -231,7 +231,7 @@ class OrderController extends Controller
 ////////////  get  all order
     public function getAnyDate()
     {
-        $data = Order::orderBy('updated_at', 'DESC');
+        $data = Order::orderByDesc('id')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -266,7 +266,7 @@ class OrderController extends Controller
     // Order Requests require consulting
     public function get_consultation()
     {
-        $data = Order::with('category')->where('status', 'consultation')->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->where('status', 'consultation')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -282,7 +282,7 @@ class OrderController extends Controller
     ///////////////////////// Order Requests are deferred to the clients wishes
     public function get_delay()
     {
-        $data = Order::with('category')->where('status', 'delay')->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->where('status', 'delay')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -298,7 +298,7 @@ class OrderController extends Controller
 ////////////////////////Order Requests for spare parts
     public function get_need_parts()
     {
-        $data = Order::with('category')->where('status', 'need_parts')->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->where('status', 'need_parts')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -314,7 +314,7 @@ class OrderController extends Controller
 /////////////////////////////Order request for another visit
     public function get_another_visit_works()
     {
-        $data = Order::with('category')->where('status', 'another_visit_works')->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->where('status', 'another_visit_works')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -332,7 +332,7 @@ class OrderController extends Controller
     public function get_finish()
     {
         $status=[ 'done', 'can_not'];
-        $data = Order::with('category')->whereIn('status',$status)->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->whereIn('status',$status)->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -387,7 +387,7 @@ class OrderController extends Controller
 /////////////////////////// new Order
     public function getAnyAssien()
     {
-        $data = Order::where('technical_id', null)->orderByDesc('updated_at');
+        $data = Order::where('technical_id', null)->orderByDesc('updated_at')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {

@@ -44,20 +44,28 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
         $(function() {
+           // var table = $('#example').DataTable();
+
+
+
             $('#table1').DataTable({
+
                 processing: true,
                 serverSide: true,
+                "searching": true,
+
                 ajax: '{!! route('order.get_order_assign') !!}',
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'client', name: 'client' },
-                    { data: 'reply', name: 'reply' },
+                    { data: 'client', name: 'client'  , searchable: true },
+                    { data: 'reply', name: 'reply' , searchable: true},
                     { data: 'created_at', name: 'created_at' },
 
                     {data: 'details', name: 'action', orderable: false, searchable: false},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
 
                 ],
+
                 "language": {
                     "decimal": "",
                     "emptyTable": "{{trans('backend.No_data_available_in_table')}}",

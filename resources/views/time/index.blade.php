@@ -59,6 +59,7 @@
             $('#table1').DataTable({
                 processing: true,
                 serverSide: true,
+                "searching": true,
                 ajax: '{!! route('time_work.get_time') !!}',
                 columns: [
                     { data: 'ordering', name: 'ordering' },

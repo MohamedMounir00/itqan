@@ -56,7 +56,7 @@
                 columns: [
                     { data: 'time', name: 'time' },
                     { data: 'date', name: 'date' },
-                    { data: 'status', name: 'status' },
+                    { data: 'status', name: 'status',searchable: true },
                     { data: 'technical', name: 'technical' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'order', name: 'order' },
