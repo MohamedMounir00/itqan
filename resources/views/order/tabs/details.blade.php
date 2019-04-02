@@ -148,7 +148,7 @@
                 @else
             <li>
 
-              <a href="{{route('technical.show', $data->technical_id)}}"> <span>{{$order->technical->name}}</span></a>
+              <a href="{{route('technical.show', $order->technical_id)}}"> <span>{{$order->technical->name}}</span></a>
             </li>
             <br>
             <li>
