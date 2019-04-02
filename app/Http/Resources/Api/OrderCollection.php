@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Assian;
 use App\Helper\Helper;
 use App\Rating;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,9 +19,12 @@ class OrderCollection extends JsonResource
     public function toArray($request)
     {
         $rating=Rating::where('order_id',$this->id)->count();
-
+        $assin = Assian::where('order_id',$this->id)->latest()->first();
         $lang=$request->lang;
         if ($this->status=='new')
+            if ($assin->status=='watting')
+                $status=trans('api.done_technical',[],$lang);
+             else
             $status=trans('api.watting_techaincall',[],$lang);
         elseif ($this->status=='wating')
             $status=trans('api.new_order',[],$lang);

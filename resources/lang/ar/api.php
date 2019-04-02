@@ -60,6 +60,7 @@ return [
     'done_agree_rescheduled'=>' تم الموافقه بنجاح  ',
     'done_disagree_rescheduled'=>' تم الرفض بنجاح  ',
     'no_permiision'=>'ليس لديك صلاحيه  ',
+    'done_technical'=>'تم تعين فنى'
 
 
 ];

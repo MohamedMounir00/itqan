@@ -61,6 +61,7 @@ return [
     'done_agree_rescheduled'=>' Successfully approved  ',
     'done_disagree_rescheduled'=>' Successfully rejected  ',
     'no_permiision'=>' You do not have authority ',
+    'done_technical'=>'Technician was appointed',
 
 
 
