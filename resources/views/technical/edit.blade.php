@@ -141,8 +141,28 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.city')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control m-bot15" name="city_id" required>
 
-                                <div class="item form-group">
+                                        @foreach($cities as $c)
+                                            @if(app()->getLocale()=='ar')
+                                                <option value="{{$c->id}}" {{($data->city_id==$c->id)?'selected':''}}>{{$c->name_ar}}</option>
+                                            @else
+                                                <option value="{{$c->id}}" {{($data->city_id==$c->id)?'selected':''}}>{{$c->name_en}}</option>
+                                            @endif>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span
                                         >*</span>
                                     </label>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Category;
+use App\City;
 use App\Country;
 use App\Helper\Helper;
 use App\Http\Requests\Backend\TechnicalRequest;
@@ -42,8 +43,10 @@ class TechnicalController extends Controller
         $main = Category::where('type', 'main')->get();
 
         $time=Time::all();
-        $nationality=Country::all();
-        return view('technical.create',compact('time','nationality','main'));
+        $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
+        $cities = City::where('country_id',178)->get();
+
+        return view('technical.create',compact('time','nationality','main','cities'));
 
     }
 
@@ -61,6 +64,8 @@ class TechnicalController extends Controller
             'email'       => $request->email,
             'phone'       => $request->phone,
             'country_id'  => $request->country_id,
+            'city_id'  => $request->city_id,
+
             'image'       => Helper::UploadImge($request,'uploads/avatars/','image'),
             'password'    => bcrypt($request->password),
             'role' =>'technical'
@@ -110,10 +115,10 @@ class TechnicalController extends Controller
         //
         $data =User::findOrFail($id);
         $time=Time::all();
-        $nationality=Country::all();
-        $main = Category::where('type', 'main')->get();
+        $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
+        $cities = City::where('country_id',178)->get();        $main = Category::where('type', 'main')->get();
 
-        return view('technical.edit',compact('data','time','nationality','main'));
+        return view('technical.edit',compact('data','time','nationality','main','cities'));
 
     }
 
@@ -137,6 +142,7 @@ class TechnicalController extends Controller
             'password' => 'nullable|min:6',
             'phone'=>'required|min:6',
             'country_id'=>'required',
+            'city_id'=>'required',
             'identification'=>'required|min:15|not_in:0',
             'category_id'=>'required',
 
@@ -149,6 +155,7 @@ class TechnicalController extends Controller
         $data->phone       = $request->phone;
         $data->image       = Helper::UpdateImage($request,'uploads/avatars/','image',$data->image);
         $data->country_id  = $request->country_id;
+        $data->city_id  = $request->city_id;
         if (isset($request->password))
             $data->password = bcrypt($request->password);      //  ]);
         $data->save();

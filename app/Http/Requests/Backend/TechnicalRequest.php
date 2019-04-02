@@ -32,6 +32,8 @@ class TechnicalRequest extends FormRequest
             'identification'   => 'required|min:9|max:20|not_in:0',
             'category_id'      => 'required',
             'country_id'      => 'required',
+            'city_id'=>'required',
+
         ];
     }
 }
