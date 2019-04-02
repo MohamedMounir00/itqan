@@ -165,7 +165,19 @@ class OrderController extends Controller
         $reason = $request->reason_rejection;
 
         $order = Order::findOrFail($id);
+        $date=$order->date;
+        $time=$order->time_id;
+
         $assin = Assian::findOrFail($assin_id);
+        $technical = Assian::where('technical_id',$technical_id)->where('status', 'agree')
+            ->whereHas('order', function ($q)use($date,$time) {
+
+                $q->where('time_id','=', $time)->where('date','=',$date);
+
+            })->count();
+            if ($technical!=0)
+                return new StatusCollection(false, trans('api.pleas_chooce_new_time', [], $lang));
+
         if ($status == 'yes') {
             $assin->update(['status' => 'agree']);
             $order->status = 'wating';

@@ -15,6 +15,9 @@ class Assian extends Model
 ];
     public  function  user(){
         return $this->belongsTo(User::class,'technical_id');
+    }
 
+    public  function  order(){
+        return $this->belongsTo(Order::class,'order_id');
     }
 }
