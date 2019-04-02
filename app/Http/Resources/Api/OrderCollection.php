@@ -19,13 +19,17 @@ class OrderCollection extends JsonResource
     public function toArray($request)
     {
         $rating=Rating::where('order_id',$this->id)->count();
-        $assin = Assian::where('order_id',$this->id)->latest()->first();
         $lang=$request->lang;
         if ($this->status=='new')
-            if ($assin->status=='watting')
+        {
+            $assin = Assian::where('order_id',$this->id)->where('status','watting')->latest()->first();
+
+            if ($assin)
                 $status=trans('api.done_technical',[],$lang);
-             else
-            $status=trans('api.watting_techaincall',[],$lang);
+            else
+                $status=trans('api.watting_techaincall',[],$lang);
+        }
+
         elseif ($this->status=='wating')
             $status=trans('api.new_order',[],$lang);
         elseif ($this->status=='done')
