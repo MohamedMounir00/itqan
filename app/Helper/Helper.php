@@ -92,7 +92,7 @@ public  static function  assignDynamic($order)
     $date= $order->date;
     $time= $order->time_id;
      //$city= $order->user->city_id;
-    $technical= User::where('city_id',1991)->whereHas('technical', function ($q) {
+    $technical= User::where('city_id',"1991")->whereHas('technical', function ($q) {
         $q->where('type', 'technical');
         $q->where('active', 1);
     })
