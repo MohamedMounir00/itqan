@@ -221,7 +221,6 @@ return[
     'date_work'=>'Date of work on request',
     'technical_order'=>'The current technician',
     'technical_no'=>'No technical selection yet',
-    'pleas_chooce_new_time'=>'This artwork has been selected before you can re-schedule it',
 
 
 

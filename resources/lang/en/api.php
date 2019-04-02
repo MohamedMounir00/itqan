@@ -62,6 +62,7 @@ return [
     'done_disagree_rescheduled'=>' Successfully rejected  ',
     'no_permiision'=>' You do not have authority ',
     'done_technical'=>'Technician was appointed',
+    'pleas_chooce_new_time'=>'This artwork has been selected before you can re-schedule it',
 
 
 

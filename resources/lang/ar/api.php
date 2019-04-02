@@ -60,7 +60,8 @@ return [
     'done_agree_rescheduled'=>' تم الموافقه بنجاح  ',
     'done_disagree_rescheduled'=>' تم الرفض بنجاح  ',
     'no_permiision'=>'ليس لديك صلاحيه  ',
-    'done_technical'=>'تم تعين فنى'
+    'done_technical'=>'تم تعين فنى',
+    'pleas_chooce_new_time'=>'تم اختيار هذا الفنى  من قبل برجاء عمل اعاده جدوله',
 
 
 ];
