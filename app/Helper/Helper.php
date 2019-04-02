@@ -91,13 +91,16 @@ public  static function  assignDynamic($order)
 
     $date= $order->date;
     $time= $order->time_id;
-
+     //$city= $order->user->city_id;
     $technical= User::whereHas('technical', function ($q) {
         $q->where('type', 'technical');
         $q->where('active', 1);
-    })->whereHas('time', function ($q)use($time) {
+    })
+        ->where('city_id',1991)
+        ->whereHas('time', function ($q)use($time) {
         $q->where('time_id', $time);
-    })->whereDoesntHave('check', function ($q)use($time,$date) {
+    })
+        ->whereDoesntHave('check', function ($q)use($time,$date) {
         $q->where('time_id','=', $time)->where('date','=',$date);
     })
         ->first();
@@ -128,14 +131,16 @@ public  static function  assignDynamic($order)
 
     public  static function  assignDynamicForRescheduleds($order,$date,$time)
     {
-
+        $city= $order->user->city_id;
 
         $technical= User::whereHas('technical', function ($q) {
             $q->where('type', 'technical');
             $q->where('active', 1);
         })->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
-        })->whereDoesntHave('check', function ($q)use($time,$date) {
+        })
+            ->where('city_id',$city)
+            ->whereDoesntHave('check', function ($q)use($time,$date) {
             $q->where('time_id','=', $time)->where('date','=',$date);
         })
             ->first();
