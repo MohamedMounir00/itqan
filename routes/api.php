@@ -48,12 +48,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('order_details','Api\OrderController@order_details');
     Route::get('get_current_order_price','Api\OrderController@GetCurrentOrderWithPrice');
     Route::get('get_notifications','Api\NotfiyController@getNotifay');
+    Route::post('seen_notify','Api\NotfiyController@updateNotify');
     Route::get('count_notify','Api\NotfiyController@countNotifay');
     Route::post('assgin_technical','Api\OrderController@assienTechnical');
     Route::post('rescheduled_order','Api\OrderController@rescheduled_order');
     Route::get('get_product','Api\OrderController@getproduct');
     Route::post('update_product','Api\OrderController@updateproduct');
     Route::post('send_product_order','Api\OrderController@SendProductToOrder');
+    Route::post('reschedule_reply','Api\OrderController@reschedule_reply');
     /////////////////////////////////rating
     Route::post('add_rating','Api\RatingController@addRating');
 

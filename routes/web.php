@@ -134,6 +134,8 @@ Route::group([
     Route::get('reschedules/get_reschedules','Backend\RescheduledsController@getAnyDate')->name('reschedules.get_reschedules');
     Route::get('reschedules/get_reschedules_order/{id}','Backend\RescheduledsController@get_reschedules_order')->name('reschedules.get_reschedules_order');
     Route::resource('reschedules','Backend\RescheduledsController');
+    Route::get('editdataorder/{id}','Backend\RescheduledsController@editDataOrder')->name('editdataorder');
+    Route::post('updatedataorder/{id}','Backend\RescheduledsController@updateDataOrder')->name('updatedataorder');
 
 /////////////////////////////////notifications
     Route::get('notifications/get_notifications','Backend\NotificationsController@getAnyDate')->name('notifications.get_notifications');

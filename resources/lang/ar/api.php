@@ -53,6 +53,13 @@ return [
     'rescheduled_order_client'=>' لقد قام العميل باعده جدولت طلب تصليح ',
     'add_product_tech'=>'  لقد قام الفنى باضافه منتجات على طلب تصليح',
     'addedProduct_fals'=>'ليس لديك الصلاحيه لاضافه منتجات',
-    'not_login'=>'برجاء تسجيل الدخول'
+    'not_login'=>'برجاء تسجيل الدخول',
+    'rescheduled_order_alredy'=>'هذا الطلب تم جدولته من قبل  برجاء انتظار رد الاداره',
+    'rescheduled_agree_from_client'=>' لقد قام العميل بالموافقه على تعديل اعاده جدولت  طلب تصليح  ',
+    'rescheduled_disagree_from_client'=>' لقد قام العميل برفض على تعديل اعاده جدولت  طلب تصليح  ',
+    'done_agree_rescheduled'=>' تم الموافقه بنجاح  ',
+    'done_disagree_rescheduled'=>' تم الرفض بنجاح  ',
+    'no_permiision'=>'ليس لديك صلاحيه  ',
+
 
 ];

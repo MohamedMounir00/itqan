@@ -25,10 +25,10 @@ class NotfiyController extends Controller
     public function updateNotify(Request $request)
 {
     $id      =       $request->id;
-    $seen    =       $request->seen;
     $notfay  =       NotfiyOrder::findOrFail($id);
-    $notfay  ->      seen=$seen;
+    $notfay  ->      seen=1;
     $notfay  ->      save();
+    return response()->json(['data'=>'seen']);
 
 }
 

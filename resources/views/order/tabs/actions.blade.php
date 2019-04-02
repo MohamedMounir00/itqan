@@ -1,4 +1,4 @@
-
+<div class="row">
 <div class="col-md-6 col-sm-6 antigen12">
     <div class="x_panel">
 
@@ -31,7 +31,7 @@
                         <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary disabled"> {{trans('backend.add')}}</span></a>
 
                     @else
-                    <a href="#"><span class="btn btn-primary"> {{trans('backend.add')}}</span></a>
+                    <a><span class="btn btn-primary"> {{trans('backend.add')}}</span></a>
                   @endif
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     <p>{{trans('backend.desc_add_techanel')}} </p>
 
                     @if($order->status =='done'||$order->status =='can_not')
-                        <a href="#"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
+                        <a><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
 
                         @else
                         <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
@@ -101,7 +101,7 @@
 
                     <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
                      @else
-                        <a href="#"><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
+                        <a ><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
 
                     @endif
                 </div>
@@ -142,13 +142,41 @@
                     <h3>{{trans('backend.reschedules_order')}}</h3>
                     <p>{{trans('backend.reschedules_order_desc')}} </p>
 
+                    @if($order->status =='done'||$order->status =='can_not')
+                        <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
 
+                    @else
                     <a href="{{route('reschedules.show', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
 
-
+                     @endif
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_content">
+
+                <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                        <h3>{{trans('backend.update_time_date')}}</h3>
+                        <p>{{trans('backend.desc_update_time_date')}} </p>
+
+                        @if($order->status =='done'||$order->status =='can_not')
+                            <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
+
+                        @else
+                        <a href="{{route('editdataorder', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

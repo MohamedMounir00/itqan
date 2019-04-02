@@ -36,7 +36,8 @@ class RescheduledsController extends Controller
      */
     public function create()
     {
-        //
+
+
 
     }
 
@@ -127,19 +128,19 @@ class RescheduledsController extends Controller
             'technical_id'=>$request->technical_id,
             'date'=>$request->date,
             'time_id'=>$request->time_id,
-            'reply'=>1,
 
         ]);
         $name = [
             'ar' => trans('backend.reschedules_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
             'en' => trans('backend.reschedules_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
-        Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
+        Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
         if ($data)
             Alert::success(trans('backend.updateFash_reschedules'))->persistent("Close");
 
-        return redirect()->route('reschedules.index');
+        return redirect()->route('order.show',$order->id);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -163,12 +164,74 @@ class RescheduledsController extends Controller
             'ar' => trans('backend.reschedules_notify', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
             'en' => trans('backend.reschedules_notify', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
-        Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
+        Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);
     }
 
+    public function editDataOrder($id)
+    {
+        //
+        $data = Order::findOrFail($id);
+        $holidays_arr = Holiday::where('active',0)->get()->pluck('day_number')->toArray();
+
+        $times = Time::all();
+
+
+        for ($i = 0; $i <= (7 + sizeof($holidays_arr)); $i++) {
+
+            {
+                Date::setLocale('en');
+
+                $date = Date::now()->addDays($i);
+
+                if(!in_array($date->format('N'), $holidays_arr))
+                    $dates2[] = $date->format('d-m-Y');
+
+            }
+
+
+            $users=Technical::select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
+     + sin( radians(' . $data->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance'))
+                ->orderBy('distance', 'asc')->with('user')->get();
+        }
+
+        return view('reschedules.create',compact('data','dates2','times','users'));
+
+    }
+
+    public function updateDataOrder(Request $request, $id)
+    {
+        $order=Order::find($id);
+        $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
+        if ($count==0) {
+            $data = Rescheduled::create([
+                'technical_id' => $request->technical_id,
+                'date' => $request->date,
+                'time_id' => $request->time_id,
+                'order_id' => $order->id,
+                'status' => $order->status
+
+
+            ]);
+            $name = [
+                'ar' => trans('backend.date_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('backend.date_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
+            if ($data)
+                Alert::success(trans('backend.updateFash_reschedules'))->persistent("Close");
+
+            return redirect()->route('order.show',$id);
+        }else {
+            Alert::success(trans('backend.wattingreplay_client'))->persistent("Close");
+
+            return redirect()->route('order.show',$id);
+        }
+    }
 
 
 
@@ -215,7 +278,10 @@ class RescheduledsController extends Controller
             })
 
             ->addColumn('technical', function ($data) {
+                if ($data->technical_id!=null)
                 return'<a href="' . route('technical.show', $data->technical_id) . '">'.$data->technical->name.'</a>';
+                else
+                    return trans('backend.no_technical');
             })
 
             ->rawColumns(['action','time','status','order','technical'])
@@ -273,7 +339,11 @@ class RescheduledsController extends Controller
             })
 
             ->addColumn('technical', function ($data) {
-                return'<a href="' . route('technical.show', $data->technical_id) . '">'.$data->technical->name.'</a>';
+                if ($data->technical_id!=null)
+
+                    return'<a href="' . route('technical.show', $data->technical_id) . '">'.$data->technical->name.'</a>';
+                else
+                    return trans('backend.no_technical');
             })
 
             ->rawColumns(['action','time','status','order','technical'])

@@ -19,8 +19,7 @@ class CreateNotfiyOrdersTable extends Migration
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('type',['order','product','status','rating','payment']);
-
+            $table->enum('type',['order','product','rating','status','payment','reschedule']);
             $table->text('message');
             $table->timestamps();
         });

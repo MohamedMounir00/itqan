@@ -214,7 +214,13 @@ return[
 
     'all_notify'=>'see all',
     'message'=>'Notice',
-    'reschedules_order_desc'=>'You can view, reply to, and respond to requests for scheduling'
+    'reschedules_order_desc'=>'You can view, reply to, and respond to requests for scheduling',
+    'wattingreplay_client'=>'You have made this request, please wait for the customer reply',
+    'no_technical'=>'No technical support yet',
+    'date_notify_update'=>' The administration has modified the date and time of the request ',
+
+
+
 
 
 

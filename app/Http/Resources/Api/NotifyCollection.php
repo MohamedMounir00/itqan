@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Assian;
+use App\Rescheduled;
 use App\StatusOrder;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -20,7 +21,7 @@ class NotifyCollection extends jsonResource
         $assin = Assian::with('user')->where('order_id',$this->order_id)->where('status','watting')->first();
      //   $cart = CartOrder::with('product')->where('status', 0)->where('order_id', $order->id)->get();
         $reason= StatusOrder::where('order_id',$this->order_id)->where('status',$this->order->status)->first();
-
+          $reschedule=Rescheduled::where('order_id',$this->order_id)->where('reply',0)->latest()->first();
    if ($this->type =='order')
    {
        return [
@@ -49,6 +50,7 @@ class NotifyCollection extends jsonResource
                 'technical_id'=>isset( $this->order->technical->id) ? $this->order->technical->id : '',
                 'order'=> new  OrderCollection($this->order),
                 'new_product'=>   ProudctCollection::collection($this->order->proudectnotactive),
+                'reschedule_id'=>isset($reschedule->id) ?  $reschedule->id : '',
 
             ];
         }

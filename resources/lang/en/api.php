@@ -54,7 +54,13 @@ return [
     'rescheduled_order_client'=>'The customer has prepared a repair order schedule',
     'add_product_tech'=>'The technician added products to a repair order',
     'addedProduct_fals'=>'You do not have the power to add products',
-    'not_login'=>'login please'
+    'not_login'=>'login please',
+    'rescheduled_order_alredy'=>'This order has been scheduled by please wait for the response of the administration',
+   'rescheduled_agree_from_client'=>' The customer has agreed to modify the schedule of the repair request  ',
+    'rescheduled_disagree_from_client'=>' The customer has declined to modify the restoration schedule ',
+    'done_agree_rescheduled'=>' Successfully approved  ',
+    'done_disagree_rescheduled'=>' Successfully rejected  ',
+    'no_permiision'=>' You do not have authority ',
 
 
 

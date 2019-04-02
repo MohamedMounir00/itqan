@@ -48,7 +48,6 @@ class OrderController extends Controller
                      if (isset($checkusescode))
                      {
                          $status_cde=false;
-
                          return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
                      }
                      else{
@@ -57,7 +56,7 @@ class OrderController extends Controller
                      }
                  }
              }
-            $express = $request->express == 1 ? "1" : "0";
+            $express = $request->express == "1" ? "1" : "0";
             $order = new  Order();
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
@@ -71,7 +70,6 @@ class OrderController extends Controller
             if ($status_cde)
             {
                 CouponRel::create([
-
                     'order_id'=>$order->id,
                     'code_id'=>$coupon->id
                 ]);
@@ -170,7 +168,6 @@ class OrderController extends Controller
         $assin = Assian::findOrFail($assin_id);
         if ($status == 'yes') {
             $assin->update(['status' => 'agree']);
-            if ($order->technical_id==null)
             $order->status = 'wating';
             $order->technical_id = $technical_id;
             $order->save();
@@ -334,37 +331,41 @@ class OrderController extends Controller
       $date= $request->date;
       $time= $request->time_id;
       $lang = $request->lang;
+      $count=Rescheduled::where('order_id',$request->order_id)->where('reply',0)->count();
+     if ($count==0) {
+         $technical = User::whereHas('technical', function ($q) {
+             $q->where('type', 'technical');
+             $q->where('active', 1);
+         })->whereHas('time', function ($q) use ($time) {
+             $q->where('time_id', $time);
+         })->whereDoesntHave('check', function ($q) use ($time, $date) {
+             $q->where('time_id', '=', $time)->where('date', '=', $date);
+         })->count();
 
-      $technical= User::whereHas('technical', function ($q) {
-          $q->where('type', 'technical');
-          $q->where('active', 1);
-      })->whereHas('time', function ($q)use($time) {
-          $q->where('time_id', $time);
-      })->whereDoesntHave('check', function ($q)use($time,$date) {
-          $q->where('time_id','=', $time)->where('date','=',$date);
-      })->count();
 
+         if ($technical == 0)
+             return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
 
+         else {
+             Rescheduled::create([
+                 'technical_id' => Helper::assignDynamicForRescheduleds($order, $date, $time),
+                 'order_id' => $request->order_id,
+                 'date' => $request->date,
+                 'time_id' => $request->time_id,
+                 'status' => $request->status,
 
-      if ($technical==0)
-          return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
+             ]);
+             $name2 = [
+                 'ar' => trans('api.rescheduled_order_client', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                 'en' => trans('api.rescheduled_order_client', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+             ];
+             Helper::NotificationsBackend($order->id, $order->user_id, $name2, 0);
+             return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
+         }
+     }
+     else
+         return new StatusCollection(false, trans('api.rescheduled_order_alredy', [], $lang));
 
-      else {
-          Rescheduled::create([
-              'technical_id' => Helper::assignDynamicForRescheduleds($order,$date,$time),
-              'order_id' => $request->order_id,
-              'date' => $request->date,
-              'time_id' => $request->time_id,
-              'status' => $request->status,
-
-          ]);
-          $name2 = [
-              'ar' => trans('api.rescheduled_order_client', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-              'en' => trans('api.rescheduled_order_client', [], 'en') . unserialize($order->category->main->name)['en'] . ''
-          ];
-          Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
-          return new StatusCollection(true, trans('api.rescheduled_order', [], $lang));
-      }
   }
 
   public  function check_time_order(Request $request){
@@ -394,6 +395,51 @@ class OrderController extends Controller
 
   }
 
+/////////////////////////agree or disagree reschedule by client
+     public function reschedule_reply(Request $request)
+     {
+         $lang = $request->lang;
+         $notfiy = $request->notfiy_id;
+         $id = $request->reschedule_id;
+         $status = $request->status;//yes Or no
+         if (auth()->user()->client){
+             $reschedule=Rescheduled::findOrFail($id);
+             $order = Order::findOrFail($reschedule->order_id);
+            if ($status=='yes')
+            {
+                $reschedule->reply=1;
+                $reschedule->save();
+                $order->technical_id=$reschedule->technical_id;
+                $order->time_id=$reschedule->time_id;
+                $order->date=$reschedule->date;
+                $order->save();
 
+                Helper::Notificationsuodate($notfiy, 1);
+                $name1 = [
+                    'ar' => trans('api.rescheduled_agree_from_client', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.rescheduled_agree_from_client', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                ];
+                Helper::NotificationsBackend($order->id, $order->user_id, $name1, 0);
+                return new StatusCollection(true, trans('api.done_agree_rescheduled', [], $lang));
+
+            }
+            else{
+                $reschedule->reply=1;
+                $reschedule->save();
+                Helper::Notificationsuodate($notfiy, 1);
+
+                $name2 = [
+                    'ar' => trans('api.rescheduled_disagree_from_client', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.rescheduled_disagree_from_client', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                ];
+                Helper::NotificationsBackend($order->id, $order->user_id, $name2, 0);
+                return new StatusCollection(true, trans('api.done_disagree_rescheduled', [], $lang));
+
+            }
+         }
+         else{
+             return new StatusCollection(false, trans('api.no_permiision', [], $lang));
+         }
+     }
 
 }

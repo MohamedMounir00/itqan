@@ -32,7 +32,7 @@
 
                         <div class="x_content">
 
-                            {!! Form::open(['route'=>['reschedules.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+                            {!! Form::open(['route'=>['updatedataorder',$data->id],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
 
 
                             <div class="item form-group">
@@ -76,23 +76,22 @@
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select  name="technical_id" id="heard" class="form-control" >
+                                    <select  name="technical_id" id="heard" class="form-control">
                                         @foreach($users as $user)
                                             @if($data->technical_id==null)
                                                 <option value="">{{trans('backend.no_technical')}}</option>
                                             @else
-                                                <option value="{{$user->user->id}}"{{($data->technical->id==$user->user->id)?'selected':''}} >{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
+                                            <option value="{{$user->user->id}}"{{($data->technical->id==$user->user->id)?'selected':''}} >{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
                                             @endif
 
                                         @endforeach
                                     </select>                                </div>
                             </div>
 
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.update')}}</button>
-                                    <a href="{{route('order.show', $data->order_id)}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{ route('order.show',$data->id)}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>
