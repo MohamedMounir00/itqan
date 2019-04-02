@@ -334,11 +334,11 @@ class OrderController extends Controller
       $lang = $request->lang;
       $count=Rescheduled::where('order_id',$request->order_id)->where('reply',0)->count();
      if ($count==0) {
-         $technical = User::whereHas('technical', function ($q) {
+         $technical = User::where('city_id',$city)->whereHas('technical', function ($q) {
              $q->where('type', 'technical');
              $q->where('active', 1);
          })
-             ->where('city_id',$city)
+
              ->whereHas('time', function ($q) use ($time) {
              $q->where('time_id', $time);
          })->whereDoesntHave('check', function ($q) use ($time, $date) {
@@ -376,11 +376,11 @@ class OrderController extends Controller
         $time= $request->time_id;
       $lang = $request->lang;
 
-        $technical= User::whereHas('technical', function ($q) {
+        $technical= User::where('city_id',1991)->whereHas('technical', function ($q) {
             $q->where('type', 'technical');
            $q->where('active', 1);
         })
-            ->where('city_id',1991)
+
             ->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
         })

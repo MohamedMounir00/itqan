@@ -92,11 +92,11 @@ public  static function  assignDynamic($order)
     $date= $order->date;
     $time= $order->time_id;
      //$city= $order->user->city_id;
-    $technical= User::whereHas('technical', function ($q) {
+    $technical= User::where('city_id',1991)->whereHas('technical', function ($q) {
         $q->where('type', 'technical');
         $q->where('active', 1);
     })
-        ->where('city_id',1991)
+
         ->whereHas('time', function ($q)use($time) {
         $q->where('time_id', $time);
     })
@@ -133,13 +133,13 @@ public  static function  assignDynamic($order)
     {
         $city= $order->user->city_id;
 
-        $technical= User::whereHas('technical', function ($q) {
+        $technical= User::where('city_id',$city)->whereHas('technical', function ($q) {
             $q->where('type', 'technical');
             $q->where('active', 1);
         })->whereHas('time', function ($q)use($time) {
             $q->where('time_id', $time);
         })
-            ->where('city_id',$city)
+
             ->whereDoesntHave('check', function ($q)use($time,$date) {
             $q->where('time_id','=', $time)->where('date','=',$date);
         })
