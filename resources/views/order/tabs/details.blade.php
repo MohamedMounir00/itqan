@@ -75,6 +75,19 @@
         </h2>
         <ul class="list-inline prod_size">
             <li>
+                <span> {{$order->created_at}}</span>
+            </li>
+
+        </ul>
+    </div>
+    <br/>
+
+    <div class="">
+        <h2>
+            {{trans('backend.date_work')}}
+        </h2>
+        <ul class="list-inline prod_size">
+            <li>
                 <span> {{$order->date}}</span>
             </li>
 
@@ -83,7 +96,7 @@
     <br/>
     <div class="">
         <h2>
-            {{trans('backend.time')}}
+            {{trans('backend.time_work')}}
         </h2>
         <ul class="list-inline prod_size">
             <li>
@@ -96,6 +109,57 @@
                 @endif
             </li>
 
+        </ul>
+    </div>
+
+<br>
+    <div class="row">
+
+        <ul class="list-inline prod_size pull-right">
+
+            <h2>
+                {{trans('backend.client')}}
+            </h2>
+            <li>
+
+    <a href="{{ route('clients.show', $order->user_id)}}"> <span>{{$order->user->name}}</span></a>
+            </li>
+            <br>
+            <li>
+<span>{{$order->user->email}}</span>
+            </li>
+            <br>
+            <li>
+<span>{{$order->user->phone}}</span>
+            </li>
+
+        </ul>
+
+        <ul class="list-inline prod_size pull-left">
+
+            <h2>
+                {{trans('backend.technical_order')}}
+            </h2>
+            @if($order->technical_id==null)
+                <li>
+
+                    <span>{{trans('backend.technical_no')}}</span>
+                </li>
+                @else
+            <li>
+
+              <a href="{{route('technical.show', $data->technical_id)}}"> <span>{{$order->technical->name}}</span></a>
+            </li>
+            <br>
+            <li>
+                <span>{{$order->technical->email}}</span>
+            </li>
+            <br>
+            <li>
+                <span>{{$order->technical->phone}}</span>
+
+            </li>
+          @endif
         </ul>
     </div>
 
@@ -134,3 +198,4 @@
 
     </ul>
 </div>
+

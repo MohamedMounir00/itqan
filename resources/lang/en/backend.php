@@ -218,6 +218,9 @@ return[
     'wattingreplay_client'=>'You have made this request, please wait for the customer reply',
     'no_technical'=>'No technical support yet',
     'date_notify_update'=>' The administration has modified the date and time of the request ',
+    'date_work'=>'Date of work on request',
+    'technical_order'=>'The current technician',
+    'technical_no'=>'No technical selection yet',
 
 
 
