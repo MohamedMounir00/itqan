@@ -40,6 +40,7 @@ class TimeController extends Controller
             'from'=>$request->from,
             'to'=>$request->to,
             'timing'=>$request->timing,
+            'ordering'=>$request->ordering,
         ]);
         if ($data)
         Alert::success(trans('backend.created'))->persistent("Close");
@@ -89,6 +90,7 @@ class TimeController extends Controller
             'from'=>$request->from,
             'to'=>$request->to,
             'timing'=>$request->timing,
+            'ordering'=>$request->ordering,
 
         ]);
         if ($data)
@@ -123,7 +125,7 @@ class TimeController extends Controller
 
     public function getAnyDate()
     {
-        $data = Time::all();
+        $data = Time::orderBy('ordering','asc')->get();
 
         return Datatables::of($data)
 

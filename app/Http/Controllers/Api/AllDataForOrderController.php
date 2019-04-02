@@ -21,7 +21,7 @@ class AllDataForOrderController extends Controller
 {
     //
     public function timesOrder(Request $request){
-     $times = Time::all();
+     $times = Time::orderBy('ordering','asc')->get();
 
 
           return TimeCollection::collection($times);

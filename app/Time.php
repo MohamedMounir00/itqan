@@ -8,6 +8,6 @@ class Time extends Model
 {
     //
     protected $fillable =[
-        'from','to','timing'
+        'from','to','timing','ordering'
     ];
 }

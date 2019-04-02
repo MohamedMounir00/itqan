@@ -70,9 +70,17 @@
                                     </select>                                  </div>
                             </div>
 
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.order_by')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="number" class="form-control" name="ordering"
+                                           required  placeholder="{{ trans('backend.order_by') }}" value="{{$data->ordering}}" autocomplete="off">
+                                </div>
+                            </div>
 
 
-                            >
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">

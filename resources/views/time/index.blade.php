@@ -23,6 +23,7 @@
                 <table id="table1" class="table table-striped table-bordered bulk_action table1">
                     <thead>
                     <tr>
+                        <th>{{trans('backend.order_by')}}</th>
                         <th>{{trans('backend.from')}}</th>
                         <th>{{trans('backend.to')}}</th>
                         <th>{{trans('backend.timing')}}</th>
@@ -60,6 +61,7 @@
                 serverSide: true,
                 ajax: '{!! route('time_work.get_time') !!}',
                 columns: [
+                    { data: 'ordering', name: 'ordering' },
                     { data: 'from', name: 'from' },
                     { data: 'to', name: 'to' },
                     { data: 'timing', name: 'timing' },
