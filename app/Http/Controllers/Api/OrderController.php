@@ -439,8 +439,8 @@ class OrderController extends Controller
          if (auth()->user()->client){
              $reschedule=Rescheduled::findOrFail($id);
 
-             $count=Rescheduled::where('order_id',$reschedule->order_id)->where('reply',0)->count();
-             if ($count > 0)
+            // $count=Rescheduled::where('order_id',$reschedule->order_id)->where('reply',0)->count();
+            // if ($count > 0)
                  return new StatusCollection(false, trans('api.rescheduled_order_alredy', [], $lang));
 
              $order = Order::findOrFail($reschedule->order_id);
