@@ -60,11 +60,19 @@ class OrderController extends Controller
             $order = new  Order();
             $order->desc = $request->desc;
             $order->category_id = $request->category_id;
-            $order->time_id = $request->time_id;
             if ($express == 0)
+            {
+                $order->time_id = $request->time_id;
                 $order->date = $request->date;
+
+            }
             else
+            {
+                $order->time_id = 10;
+
                 $order->date = "لم يتم اختيار تاريخ بعد";
+
+            }
             $order->address_id = $request->address_id;
             $order->status = 'new';
             $order->user_id = auth()->user()->id;
