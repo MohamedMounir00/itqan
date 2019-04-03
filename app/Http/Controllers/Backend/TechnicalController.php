@@ -42,7 +42,7 @@ class TechnicalController extends Controller
         //
         $main = Category::where('type', 'main')->get();
 
-        $time=Time::all();
+        $time=Time::where('id','!=',10)->get();
         $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
         $cities = City::where('country_id',178)->get();
 
@@ -115,7 +115,7 @@ class TechnicalController extends Controller
     {
         //
         $data =User::findOrFail($id);
-        $time=Time::all();
+        $time=Time::where('id','!=',10)->get();
         $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
         $cities = City::where('country_id',178)->get();        $main = Category::where('type', 'main')->get();
 

@@ -125,7 +125,7 @@ class TimeController extends Controller
 
     public function getAnyDate()
     {
-        $data = Time::orderBy('ordering','asc')->get();
+        $data = Time::orderBy('ordering','asc')->where('id','!=',10)->get();
 
         return Datatables::of($data)
 
