@@ -52,7 +52,7 @@
             $('#table1').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('reschedules.get_reschedules_order',$id) !!}',
+                ajax: '{!! route('get_reschedules_order',$id) !!}',
                 columns: [
                     { data: 'time', name: 'time' },
                     { data: 'date', name: 'date' },

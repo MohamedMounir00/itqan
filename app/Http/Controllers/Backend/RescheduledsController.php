@@ -66,11 +66,16 @@ class RescheduledsController extends Controller
     {
         //
 
-        return view('reschedules.index2',compact('id'));
 
     }
 
+    public function show_reschedules($id)
+    {
+        //
 
+        return view('reschedules.index2',compact('id'));
+
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -232,7 +237,27 @@ class RescheduledsController extends Controller
             return redirect()->route('order.show',$id);
         }
     }
+    public function destroy_order($id)
+    {
+        $data = Rescheduled::findOrFail($id);
 
+        $order=Order::find($data->order_id);
+        $order->technical_id=$data->technical_id;
+        $order->time_id=$data->time_id;
+        $order->date=$data->date;
+        $order->save();
+        $data->reply=1;
+        $data->save();
+
+        $name = [
+            'ar' => trans('backend.reschedules_notify', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('backend.reschedules_notify', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+        ];
+        Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
+        return response()->json([
+            'success' => 'Record has been deleted successfully!'
+        ]);
+    }
 
 
     public function getAnyDate()
@@ -299,7 +324,7 @@ class RescheduledsController extends Controller
                 if ($data->reply==0)
                 {
                     return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-round  btn-primary">'.trans('backend.update').'</a>
-                <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
+                <button class="btn btn-delete btn btn-round  btn-success" data-remote="destroy_order/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
                 }
                 else
                     return trans('backend.reply_yes');

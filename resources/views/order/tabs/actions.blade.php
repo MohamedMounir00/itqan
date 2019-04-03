@@ -167,7 +167,7 @@
                         <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
 
                     @else
-                    <a href="{{route('reschedules.show', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+                    <a href="{{route('show_reschedules', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
 
                      @endif
                 </div>

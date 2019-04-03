@@ -132,7 +132,9 @@ Route::group([
 ///////////////////////////////////////// reschedules
 
     Route::get('reschedules/get_reschedules','Backend\RescheduledsController@getAnyDate')->name('reschedules.get_reschedules');
-    Route::get('reschedules/get_reschedules_order/{id}','Backend\RescheduledsController@get_reschedules_order')->name('reschedules.get_reschedules_order');
+    Route::get('get_reschedules_order/{id}','Backend\RescheduledsController@get_reschedules_order')->name('get_reschedules_order');
+    Route::get('show_reschedules/{id}','Backend\RescheduledsController@show_reschedules')->name('show_reschedules');
+    Route::delete('show_reschedules/destroy_order/{id}','Backend\RescheduledsController@destroy_order')->name('show_reschedules.destroy_order');
     Route::resource('reschedules','Backend\RescheduledsController');
     Route::get('editdataorder/{id}','Backend\RescheduledsController@editDataOrder')->name('editdataorder');
     Route::post('updatedataorder/{id}','Backend\RescheduledsController@updateDataOrder')->name('updatedataorder');
