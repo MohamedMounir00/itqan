@@ -20,7 +20,7 @@ class TimeCollection extends JsonResource
        else
            $am=trans('api.pm',[],$lang);
 
-       if ($this->id==10)
+       if ($this->id!=10)
            $time=trans('api.from',[],$lang).$this->from .trans('api.to',[],$lang).$this->to .'-'.$am;
                else
                    $time='لم يتم اختيار وقت بعد';
