@@ -60,10 +60,10 @@ class OrderCollection extends JsonResource
             'time'=>($this->express==0)?new TimeCollection($this->time):'لم يتم اختيار وقت بعد',
             'storge'=>StorgeCollection::collection($this->storge),
             'product'=>ProudctCollection::collection($this->proudect),
-            'total_price_of_product'=>$this->proudect->sum('price'),
+            'total_price_of_product'=>$this->proudect->sum('price').'ريال',
             'real_status'=>$this->status,
             'rating'=>($rating==0)?false:true,
-            'total_price_of_order'=>Helper::totalPrice($this->id),
+            'total_price_of_order'=>Helper::totalPrice($this->id).'ريال',
             'express'=>$this->express,
 
         ];
