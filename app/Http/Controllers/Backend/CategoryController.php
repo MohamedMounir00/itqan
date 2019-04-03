@@ -34,7 +34,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        $main = Category::where('type', 'main')->get();
+        $main = Category::where('type', 'main')->where('id','!=',34)->get();
         $currency = Currency::all();
 
         return view('category.create', compact('main', 'currency'));
@@ -179,7 +179,7 @@ class CategoryController extends Controller
 
     public function getAnyDate()
     {
-        $data = Category::where('type', 'main')->where('id','!=',3)->get();
+        $data = Category::where('type', 'main')->where('id','!=',34)->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
