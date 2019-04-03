@@ -99,6 +99,7 @@
             {{trans('backend.time_work')}}
         </h2>
         <ul class="list-inline prod_size">
+            @if($order->express==0)
             <li>
 
                 @if ($order->timing =='am')
@@ -108,6 +109,11 @@
                     <span> {{trans('api.from',[],$lang).$order->time->from .trans('api.to',[],$lang).$order->time->to .'-'.trans('api.pm',[],$lang)}}</span>
                 @endif
             </li>
+                @else
+                <li>
+                    <span>لم يتم تحديد وقت بعد</span>
+                </li>
+            @endif
 
         </ul>
     </div>
