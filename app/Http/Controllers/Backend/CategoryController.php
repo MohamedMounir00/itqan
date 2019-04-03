@@ -179,7 +179,7 @@ class CategoryController extends Controller
 
     public function getAnyDate()
     {
-        $data = Category::where('type', 'main')->get();
+        $data = Category::where('type', 'main')->where('id',34)->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
