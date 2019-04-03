@@ -57,7 +57,7 @@ class OrderCollection extends JsonResource
             'sub_category'=>unserialize($this->category->name)[$lang],
             // ($request->lang =='ar') ? 'تصليح '.  unserialize($this->category->main->name)[$request->lang]:'Repairing' .unserialize($this->category->main->name)[$request->lang] ,
             'address'=>new AddressCollection($this->address),
-            'time'=>($this->express==0)?new TimeCollection($this->time):'لم يتم اختيار وقت بعد',
+            'time'=>($this->time_id!=10)?new TimeCollection($this->time):'لم يتم اختيار وقت بعد',
             'storge'=>StorgeCollection::collection($this->storge),
             'product'=>ProudctCollection::collection($this->proudect),
             'total_price_of_product'=>$this->proudect->sum('price').'ريال',

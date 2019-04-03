@@ -99,7 +99,7 @@
             {{trans('backend.time_work')}}
         </h2>
         <ul class="list-inline prod_size">
-            @if($order->express==0)
+            @if($order->time_id!=10)
             <li>
 
                 @if ($order->timing =='am')
