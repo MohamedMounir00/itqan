@@ -69,11 +69,11 @@ Route::group([
 
     /// //////////////////////////    ///////////////////////////////////////////////////
 
-
     Route::post('order/assien','Backend\OrderController@assien')->name('order.assien');
     Route::resource('order','Backend\OrderController');
     Route::post('get_product','Backend\OrderController@product')->name('get_product');
     Route::post('add_product','Backend\OrderController@add_product')->name('add_product');
+    Route::get('assigen_senior/{id}','Backend\OrderController@assigen_senior')->name('assigen_senior');
 
 ////////////////////////////////////////////////////// cat
     Route::get('category/get_category','Backend\CategoryController@getAnyDate')->name('category.get_category');

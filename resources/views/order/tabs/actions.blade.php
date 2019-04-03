@@ -51,10 +51,11 @@
                     <p>{{trans('backend.desc_add_techanel')}} </p>
 
                     @if($order->status =='done'||$order->status =='can_not')
-                        <a><span class="btn btn-primary disabled"> {{trans('backend.add_techanel')}}</span></a>
-
+                        <a><span class="btn btn-primary"> {{trans('backend.junior')}}</span></a>
+                        <a ><span class="btn btn-primary"> {{trans('backend.senior')}}</span></a>
                         @else
-                        <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.add_techanel')}}</span></a>
+                        <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.junior')}}</span></a>
+                        <a href="{{route('assigen_senior', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.senior')}}</span></a>
 
                     @endif
 

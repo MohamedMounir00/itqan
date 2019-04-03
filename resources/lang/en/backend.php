@@ -221,7 +221,9 @@ return[
     'date_work'=>'Date of work on request',
     'technical_order'=>'The current technician',
     'technical_no'=>'No technical selection yet',
-
+    'junior'=>'junior ',
+    'senior'=>'senior',
+    'experiences'=>'experiences',
 
 
 

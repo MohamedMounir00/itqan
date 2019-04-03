@@ -221,6 +221,9 @@ return[
     'date_work'=>' تاريخ العمل على الطلب',
     'technical_order'=>'الفنى الحالى',
     'technical_no'=>'لم يتم اختيار فنى بعد',
+    'junior'=>' فنى عادى ',
+    'senior'=>'فنى خبير',
+    'experiences'=>'الخبره',
 
 
 

@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <button id="send" type="submit" class="btn btn-success">{{trans('backend.assigen')}}</button>
-                                    <a href="{{route('order.get_order_view')}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                                    <a href="{{route('order.show',$data->id)}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
 
                                 </div>
                             </div>

@@ -75,6 +75,7 @@ class TechnicalController extends Controller
             'type'             => 'technical',
             'identification'   => $request->identification,
             'category_id'      => $request->category_id,
+            'role'      => $request->experiences,
         ]);
         $user->time()->sync($request->time_id);
          if ($user)
@@ -162,6 +163,8 @@ class TechnicalController extends Controller
         $data->technical->update([
             'identification'   => $request->identification,
             'category_id'      => $request->category_id,
+            'role'      => $request->experiences,
+
         ]);
 
         $data->time()->sync($request->time_id);

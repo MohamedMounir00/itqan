@@ -189,13 +189,14 @@ class OrderController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //
+        // assigen junior
 
         $data = Order::findOrFail($id);
 
-    $users=Technical::select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+    $users=Technical::where('active',1)->where('role','junior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
      * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
      + sin( radians(' . $data->address->latitude . ') ) *
      sin( radians( latitude ) ) ) ) AS distance'))
@@ -203,6 +204,23 @@ class OrderController extends Controller
         return view('order.edit', compact('data', 'users'));
 
     }
+
+    public function assigen_senior($id)
+    {
+        // assigen senior
+
+        $data = Order::findOrFail($id);
+
+        $users=Technical::where('active',1)->where('role','senior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
+     + sin( radians(' . $data->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance'))
+            ->orderBy('distance', 'asc')->with('user')->get();
+        return view('order.senior', compact('data', 'users'));
+
+    }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -377,7 +395,7 @@ class OrderController extends Controller
             Helper::Notifications($assin->order_id, $assin->user_id, $name, 'order', 0);
 
             Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent("Close");
-            return redirect()->route('order.get_order_view');
+            return redirect()->route('order.show',$id);
 
 
 
