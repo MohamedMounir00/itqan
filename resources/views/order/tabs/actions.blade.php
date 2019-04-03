@@ -132,6 +132,26 @@
         </div>
     </div>
 </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_content">
+
+                <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                        <h3>{{trans('backend.coupons')}}</h3>
+                        <p>{{trans('backend.desc_coupons')}} </p>
+
+
+                        <a href="{{route('coupons',$order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 <div class="col-md-6 col-sm-6 col-xs-12">
     <div class="x_panel">
@@ -180,4 +200,32 @@
             </div>
         </div>
     </div>
+
+
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+
+            <div class="x_content">
+
+                <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                        <h3>{{trans('backend.bill')}}</h3>
+                        <p>{{trans('backend.desc_bill')}} </p>
+
+                        @if($order->status =='done'||$order->status =='can_not')
+                            <a href="{{route('bill', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.print')}}</span></a>
+
+                        @else
+                            <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
+
+                        @endif
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 </div>
+

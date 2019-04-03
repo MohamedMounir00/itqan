@@ -5,18 +5,25 @@ namespace App\Http\Controllers\Backend;
 use App\Assian;
 use App\CartOrder;
 use App\CategoryProduct;
+use App\CouponRel;
 use App\Helper\Helper;
 use App\Http\Controllers\Controller;
 
 use App\Http\Resources\Api\ProudctCollection;
+use App\Mail\Bill;
+use App\Mail\SendNotifyMail;
 use App\NotfiyOrder;
 use App\Order;
 use App\Product;
+use App\Promotional_code;
 use App\Technical;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 use Yajra\Datatables\Datatables;
 use Alert;
 use DB;
@@ -143,13 +150,37 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-
         $status = NotfiyOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
+        $code_rel = CouponRel::where('order_id', $id)->first();
+
         if ($order->express==1)
-            $price_cat=($order->category->price_emergency * $order->working_hours);
+        {
+            $price_cat1=($order->category->price_emergency * $order->working_hours);
+            $price_cat=$price_cat1;
+        }
+
         else
-            $price_cat=($order->category->price* $order->working_hours);
+        {
+            $price_cat1=($order->category->price* $order->working_hours);
+            $price_cat=$price_cat1;
+
+        }
+
+        if (isset($code_rel))
+        {
+            $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
+
+            if ($coupon->type=='currency')
+            {
+                $price_cat=($price_cat1-$coupon->price);
+            }
+            else{
+                $price_cat=(($price_cat1)-($price_cat1*$coupon->price/100));
+
+            }
+        }
+
         if ($order->status=='done'||$order->status=='can_not')
         {
           if ($order->proudect->count()!=0)
@@ -554,6 +585,83 @@ class OrderController extends Controller
             ->make(true);
     }
 
-/////////////////////////////
+///////////////////////////// bill
 
+    public function bill($id)
+    {
+        $order=Order::with('proudect')->find($id);
+         $discount=0;
+        $price_product=0;
+        $code_rel = CouponRel::where('order_id', $id)->first();
+
+        if ($order->express==1)
+        {
+            $price_cat1=($order->category->price_emergency * $order->working_hours);
+            $price_cat=$price_cat1;
+        }
+
+        else
+        {
+            $price_cat1=($order->category->price* $order->working_hours);
+            $price_cat=$price_cat1;
+
+        }
+
+        if (isset($code_rel))
+        {
+            $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
+
+            if ($coupon->type=='currency')
+            {
+                $discount= $coupon->price.'ريال';
+                $price_cat=($price_cat1-$coupon->price);
+            }
+            else{
+                $price_cat=(($price_cat1)-($price_cat1*$coupon->price/100));
+                $discount= $coupon->price.'%';
+
+            }
+        }
+
+        if ($order->status=='done'||$order->status=='can_not')
+        {
+            if ($order->proudect->count()!=0)
+            {
+
+
+                foreach ($order->proudect as $p)
+                {
+                    $p2['nn']=($p->pivot->amount * $p->price);
+
+                    $povit[]=$p2;
+
+                }
+                $price_product=array_sum(array_map(
+                        function($povit) {
+                            return $povit['nn'];
+                        }, $povit)
+                );
+
+                $total_price= ($price_product+$price_cat);
+
+            }
+            else{
+                $total_price= $price_cat;
+
+            }
+    }
+      $pdf = PDF::loadView('bill',compact('order','total_price','discount','price_cat1','price_product'));
+
+        $pdf->save(public_path('uploads/receipt/receipt').$order->id.'.pdf');
+        $url='uploads/receipt/receipt'.$order->id.'.pdf';
+        $email=$order->user->email;
+        $name=$order->user->name;
+
+
+       Helper::mail($email,new Bill($url,$name));
+
+
+        return $pdf->stream('receipt'.$order->id.'.pdf');
+      //return view('bill',compact('order','total_price','discount','price_cat1','price_product'));
+    }
 }

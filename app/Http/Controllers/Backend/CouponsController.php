@@ -22,6 +22,14 @@ class CouponsController extends Controller
         return view('coupons.index');
     }
 
+
+    public function coupons($id)
+    {
+
+
+        return view('coupons.index',compact('id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,24 +50,6 @@ class CouponsController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->details['ar'] == null || $request->details['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
-
-        }
-        else{   Promotional_code::create([
-              'details'    => serialize($request->details),
-              'price'      =>$request->price,
-              'type'       =>$request->type,
-              'code'       =>$request->code,
-              'expires_at' =>$request->expires_at,
-              'uses'       =>$request->uses,
-        ]);
-                Alert::success(trans('backend.created'))->persistent("Close");
-
-                return redirect()->route('coupons.index');
-
-            }
         }
 
 
@@ -99,31 +89,23 @@ class CouponsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->details['ar'] == null || $request->details['en'] == null) {
-            session()->flash('error', trans('backend.filds_required'));
-            return back();
-
-        } else {
 
                 $data = Promotional_code::findOrFail($id);
 
                 $data->update([
 
-                    'details'    => serialize($request->details),
                     'price'      =>$request->price,
                     'type'       =>$request->type,
-                    'code'       =>$request->code,
-                    'expires_at' =>$request->expires_at,
-                    'uses'       =>$request->uses,
+
 
 
                 ]);
 
                 Alert::success(trans('backend.updateFash'))->persistent("Close");
 
-                return redirect()->route('coupons.index');
+                return redirect()->route('coupons',$data->order_id);
             }
-        }
+
 
 
     /**
@@ -145,22 +127,32 @@ class CouponsController extends Controller
     }
 
 
-    public function getAnyDate()
+    public function getAnyDate($id)
     {
-        $data = Promotional_code::all();
-
+        $data = Promotional_code::where('order_id',$id)->get();
+         $lang=LaravelLocalization::getCurrentLocale();
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 return '<a href="' . route('coupons.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="coupons/' . $data->id . '"><i class="fa fa-remove"></i></button>
-    
-                ';
+             ';
             })
-            ->addColumn('name', function ($data) {
-                return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];
+         //   'warranty', 'coupon'
+            ->addColumn('type_status', function ($data) {
+                if ($data->type_status=='warranty')
+                    return trans('backend.warranty_order') ;
+                else
+                    return trans('backend.coupon') ;
 
             })
-            ->rawColumns(['action', 'name'])
+            //'percentage', 'currency
+            ->addColumn('type', function ($data) {
+                if ($data->type=='percentage')
+                return trans('backend.percentage') ;
+                else
+                    return trans('backend.currency') ;
+
+            })
+            ->rawColumns(['action', 'name','type'])
             ->make(true);
     }
 

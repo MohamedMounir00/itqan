@@ -101,9 +101,9 @@ Route::group([
     Route::get('currency/get_currency','Backend\CurrencyControler@getAnyDate')->name('currency.get_currency');
     Route::resource('currency','Backend\CurrencyControler');
 //////////////////////////////////////coupons/////////////////
-    Route::get('coupons/get_coupons','Backend\CouponsController@getAnyDate')->name('coupons.get_coupons');
+    Route::get('get_coupons/{id}','Backend\CouponsController@getAnyDate')->name('get_coupons');
+    Route::get('coupons/{id}','Backend\CouponsController@coupons')->name('coupons');
     Route::resource('coupons','Backend\CouponsController');
-
 
     /////////////////////////////////////////////////////////setting
     Route::get('get_settings','Backend\AppSettingController@get_setting')->name('get_settings');
@@ -140,5 +140,9 @@ Route::group([
 /////////////////////////////////notifications
     Route::get('notifications/get_notifications','Backend\NotificationsController@getAnyDate')->name('notifications.get_notifications');
     Route::resource('notifications','Backend\NotificationsController');
+
+    /////////////////////////////////
+    Route::get('bill/{id}','Backend\OrderController@bill')->name('bill');
+
 });
 

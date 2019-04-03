@@ -9,9 +9,11 @@
 namespace App\Helper;
 use App\Appseting;
 use App\Assian;
+use App\CouponRel;
 use App\NotfiyOrder;
 use App\NotificationBackent;
 use App\Order;
+use App\Promotional_code;
 use App\Storge;
 use App\User;
 use Illuminate\Support\Facades\File;
@@ -177,12 +179,36 @@ return $technical->id ;
 
  {
      $order = Order::findOrFail($id);
-          if ($order->status=='done'||$order->status=='can_not')
+     $code_rel = CouponRel::where('order_id', $id)->first();
+
+     if ($order->status=='done'||$order->status=='can_not')
           {
-     if ($order->express==1)
-         $price_cat=($order->category->price_emergency * $order->working_hours);
-     else
-         $price_cat=($order->category->price* $order->working_hours);
+              if ($order->express==1)
+              {
+                  $price_cat1=($order->category->price_emergency * $order->working_hours);
+                  $price_cat=$price_cat1;
+              }
+
+              else
+              {
+                  $price_cat1=($order->category->price* $order->working_hours);
+                  $price_cat=$price_cat1;
+
+              }
+
+              if (isset($code_rel))
+              {
+                  $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
+
+                  if ($coupon->type=='currency')
+                  {
+                      $price_cat=($price_cat1-$coupon->price);
+                  }
+                  else{
+                      $price_cat=(($price_cat1)-($price_cat1*$coupon->price/100));
+
+                  }
+              }
 
          if ($order->proudect->count()!=0)
          {
@@ -226,5 +252,8 @@ return $technical->id ;
     $count= NotificationBackent::where('seen',0)->count();
     return  $count;
 }
+
+
+
 }
 

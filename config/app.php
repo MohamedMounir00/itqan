@@ -168,6 +168,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
 
 
     ],
@@ -227,6 +228,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
          //'LocalizedCarbon' => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
         // 'DiffFormatter'   => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
 

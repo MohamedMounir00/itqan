@@ -224,6 +224,17 @@ return[
     'junior'=>'junior ',
     'senior'=>'senior',
     'experiences'=>'experiences',
+    'type_coupon'=>'Coupon Type',
+    'type_price'=>'Discount type',
+    'date_ex'=>'Coupon Expiry Date',
+    'percentage'=>'percent',
+    'coupon'=>'Discount',
+    'warranty_order'=>'warranty',
+    'coupons'=>'coupons',
+    'desc_coupons'=>'You can modify the discount coupons and warranty',
+
+
+
 
 
 

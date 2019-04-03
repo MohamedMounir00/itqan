@@ -73,12 +73,20 @@ class OrderTechnicalController extends Controller
                 {
                     $coupon=Promotional_code::create([
 
+                        'price'=>'10',
+                        'type'=>'currency',
                         'code'=>$key,
                         'expires_at'=>$date,
                         'type_status'=>'coupon',
                         'order_id'=>$order->id,
 
                     ]);
+
+                    $name4 = [
+                        'ar' => trans('api.active_counpn', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                        'en' => trans('api.active_counpn', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                    ];
+                    Helper::NotificationsBackend($order->id,$order->user_id,$name4,0);
                 }
                 elseif($status=='done'){
                     $coupon=Promotional_code::create([
