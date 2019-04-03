@@ -104,19 +104,24 @@
                                 <td class="thick-line text-center"><strong>سعر المنتجات</strong></td>
                                 <td class="thick-line text-right">{{$price_product}}ريال </td>
                             </tr>
-
+                            <br>
+                            <br>
                             <tr>
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
                                 <td class="thick-line text-center"><strong>سعر الطلب</strong></td>
                                 <td class="thick-line text-right">{{$price_cat1}} ريال</td>
                             </tr>
+                            <br>
+                            <br>
                             <tr>
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line text-center"><strong>الخصم على الطلب</strong></td>
                                 <td class="no-line text-right">{{$discount}}</td>
                             </tr>
+                            <br>
+                            <br>
                             <tr>
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
