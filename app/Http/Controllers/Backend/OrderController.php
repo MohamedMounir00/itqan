@@ -413,6 +413,11 @@ else {
     {
         $id = $request->order_id;
         $data = Order::with('category')->findOrFail($id);
+        if ($data->time_id==10)
+        {
+            Alert::success(trans('backend.select_date_time'))->persistent("Close");
+            return back();
+        }
     $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
     if ($assien==0) {
 

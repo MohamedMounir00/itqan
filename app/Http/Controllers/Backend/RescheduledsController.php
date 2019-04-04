@@ -212,11 +212,7 @@ class RescheduledsController extends Controller
     public function updateDataOrder(Request $request, $id)
     {
         $order=Order::find($id);
-        if ($order->technical_id==null)
-        {
-            Alert::success(trans('backend.slect_tech'))->persistent("Close");
-            return back();
-        }
+
 
             $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
 
