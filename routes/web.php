@@ -62,9 +62,10 @@ Route::group([
     Route::get('order/get_status_view/{id}','Backend\OrderController@get_status_view')->name('order.get_status_view');
     Route::get('order/get_store_view/{id}','Backend\OrderController@get_store_view')->name('order.get_store_view');
     //////////////////////////////// approve product from admin
-    Route::get('order/get_product_view/{id}','Backend\OrderController@get_product_fromTechinel_view')->name('order.get_product_view');
-    Route::delete('order/get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('refused_request');
-    Route::post('order/get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('accpet_request');
+    Route::get('get_product_view/{id}','Backend\OrderController@get_product_fromTechinel_view')->name('get_product_view');
+    Route::get('getAnyProduct/{id}','Backend\OrderController@getAnyProduct')->name('getAnyProduct');
+    Route::delete('get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('get_product_view.refused_request');
+    Route::delete('get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('get_product_view.accpet_request');
 
 
     /// //////////////////////////    ///////////////////////////////////////////////////

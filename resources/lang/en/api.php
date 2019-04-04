@@ -63,8 +63,9 @@ return [
     'no_permiision'=>' You do not have authority ',
     'done_technical'=>'Technician was appointed',
     'pleas_chooce_new_time'=>'This artwork has been selected before you can re-schedule it',
-    'active_counpn'=>' A discount coupon has been activated  '
-
+    'active_counpn'=>' A discount coupon has been activated  ',
+   'pleas_chooce_new_time_services'=>' This technical is currently unavailable will be reviewed management and appointed another technician ',
+    'pleas_chooce_new_time_back'=>' No technical support has been identified. Please specify another technician ',
 
 
 

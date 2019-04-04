@@ -198,11 +198,11 @@ class OrderController extends Controller
                 Helper::Notificationsuodate($notyfiy, 1);
 
                 $name2 = [
-                    'ar' => trans('api.pleas_chooce_new_time', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-                    'en' => trans('api.pleas_chooce_new_time', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                    'ar' => trans('api.pleas_chooce_new_time_back', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.pleas_chooce_new_time_back', [], 'en') . unserialize($order->category->main->name)['en'] . ''
                 ];
                 Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
-                return new StatusCollection(false, trans('api.pleas_chooce_new_time', [], $lang));
+                return new StatusCollection(false, trans('api.pleas_chooce_new_time_services', [], $lang));
 
 
             }

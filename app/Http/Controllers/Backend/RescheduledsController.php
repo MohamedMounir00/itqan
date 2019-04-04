@@ -179,6 +179,7 @@ class RescheduledsController extends Controller
     {
         //
         $data = Order::findOrFail($id);
+
         $holidays_arr = Holiday::where('active',0)->get()->pluck('day_number')->toArray();
 
         $times = Time::all();
@@ -211,8 +212,15 @@ class RescheduledsController extends Controller
     public function updateDataOrder(Request $request, $id)
     {
         $order=Order::find($id);
-        $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
-        if ($count==0) {
+        if ($order->technical_id==null)
+        {
+            Alert::success(trans('backend.slect_tech'))->persistent("Close");
+            return back();
+        }
+
+            $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
+
+            if ($count==0) {
             $data = Rescheduled::create([
                 'technical_id' => $request->technical_id,
                 'date' => $request->date,
@@ -228,7 +236,7 @@ class RescheduledsController extends Controller
             ];
             Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
             if ($data)
-                Alert::success(trans('backend.updateFash_reschedules'))->persistent("Close");
+                Alert::success(trans('backend.updateFash'))->persistent("Close");
 
             return redirect()->route('order.show',$id);
         }else {

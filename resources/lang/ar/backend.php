@@ -98,7 +98,7 @@ return[
     'add_techanel'=>'اضف فنى',
     'finish_order'=>'الطلبات المنتهيه',
     'assigen_techinal_sccusse'=>'تم تعين الفنى لهذا الطلب',
-    'assigen_technical_alredy'=>'هذا الطلب قد رشح له فنى من قبل',
+    'assigen_technical_alredy'=>' هذا الطلب قد رشح له فنى من قبل',
     'can_not_add_product'=> 'حاله الطلب لا تسمح باضفه منتجات للطلب',
     'product_done'=> ' تم اضفه منتجات للطلب',
     'assigen_in_order'=> 'التعينات',
@@ -237,7 +237,8 @@ return[
     'bill'=>'الفاتوره',
     'reason_rejection'=>'سب رفض الفنى',
 
-
+'cant_not'=>'لا يمكنك تغير حاله الطلب',
+'slect_tech'=>'برجاء اختيار فنى الاول',
 
 
 

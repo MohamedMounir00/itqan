@@ -7,7 +7,7 @@
 
                     <div class="x_panel">
                         <div class="x_title">
-                            <h3>{{trans('backend.reschedules_order_update')}}</h3>
+                            <h3>{{trans('backend.update_time_date')}}</h3>
 
                             <ul class="nav navbar-right panel_toolbox">
 
@@ -71,22 +71,7 @@
                                 </div>
                             </div>
 
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.technical_reschedules')}}<span
-                                    >*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select  name="technical_id" id="heard" class="form-control">
-                                        @foreach($users as $user)
-                                            @if($data->technical_id==null)
-                                                <option value="">{{trans('backend.no_technical')}}</option>
-                                            @else
-                                            <option value="{{$user->user->id}}"{{($data->technical->id==$user->user->id)?'selected':''}} >{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
-                                            @endif
 
-                                        @endforeach
-                                    </select>                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">

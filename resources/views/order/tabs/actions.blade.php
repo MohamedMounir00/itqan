@@ -31,7 +31,7 @@
                         <a><span class="btn btn-primary" disabled> {{trans('backend.add')}}</span></a>
 
                     @else
-                        <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary "> {{trans('backend.add')}}</span></a>
+                        <a href="{{url('get_store_view/'.$order->id)}}"><span class="btn btn-primary "> {{trans('backend.add')}}</span></a>
 
                     @endif
                 </div>
@@ -133,7 +133,7 @@
                         <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
 
                     @else
-                        <a href="{{url('order/get_product_view/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+                        <a href="{{url('get_product_view/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
 
                     @endif
 

@@ -108,16 +108,20 @@ class OrderController extends Controller
     {
 
         $order = Order::findOrFail($request->order_id);
-        $order->status = $request->status;
-        $order->save();
-        $name =[
-            'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
-            'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
-        ];
-        Helper::Notifications($order->id,$order->user_id,$name,'order',0);
-        Alert::success(trans('backend.updateFash'))->persistent("Close");
+        if ($order->status =='done'||$order->status =='can_not')
+            Alert::success(trans('backend.cant_not'))->persistent("Close");
+else {
+    $order->status = $request->status;
+    $order->save();
+    $name = [
+        'ar' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+        'en' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['en'] . ''
+    ];
+    Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
+    Alert::success(trans('backend.updateFash'))->persistent("Close");
 
-        return back();
+    return back();
+}
     }
 
     /**
@@ -409,28 +413,34 @@ class OrderController extends Controller
     {
         $id = $request->order_id;
         $data = Order::with('category')->findOrFail($id);
-      //  $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
+    $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
+    if ($assien==0) {
 
-            $assin = Assian::create([
-                'order_id' => $id,
-                'user_id' => $data->user_id,
-                'technical_id' => $request->technical_id,
-                'status' => 'watting',
-            ]);
-            $data->reply = 'yes';
-            $data->save();
-            $technical = User::findOrFail($request->technical_id);
-            $name = [
-                'ar' => ' للعمل على طلبك ' . ' ' . trans('api.repairing', [], 'ar') . unserialize($data->category->main->name)['ar'] . ' ' . $technical->name . ' تم تعين  ',
-                'en' => $technical->name . ' ' . ' assien techamnal ' . trans('api.repairing', [], 'en') . unserialize($data->category->main->name)['en'],
+        $assin = Assian::create([
+            'order_id' => $id,
+            'user_id' => $data->user_id,
+            'technical_id' => $request->technical_id,
+            'status' => 'watting',
+        ]);
+        $data->reply = 'yes';
+        $data->save();
+        $technical = User::findOrFail($request->technical_id);
+        $name = [
+            'ar' => ' للعمل على طلبك ' . ' ' . trans('api.repairing', [], 'ar') . unserialize($data->category->main->name)['ar'] . ' ' . $technical->name . ' تم تعين  ',
+            'en' => $technical->name . ' ' . ' assien techamnal ' . trans('api.repairing', [], 'en') . unserialize($data->category->main->name)['en'],
 
-            ];
-            Helper::Notifications($assin->order_id, $assin->user_id, $name, 'order', 0);
+        ];
+        Helper::Notifications($assin->order_id, $assin->user_id, $name, 'order', 0);
 
-            Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent("Close");
-            return redirect()->route('order.show',$id);
+        Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent("Close");
+        return redirect()->route('order.show', $id);
 
-
+    }
+    else
+    {
+        Alert::success(trans('backend.assigen_technical_alredy'))->persistent("Close");
+        return redirect()->route('order.show', $id);
+    }
 
     }
 
@@ -526,9 +536,38 @@ class OrderController extends Controller
     public function get_product_fromTechinel_view($id)
     {
 
-        $cart = CartOrder::with('product')->where('order_id',$id)->where('status',0)->where('status_admin',0)->get();
+       // $cart = CartOrder::with('product')->where('order_id',$id)->where('status',0)->where('status_admin',0)->get();
 
-        return view('order.actions.get_product',compact('cart'));
+        return view('order.actions.get_product',compact('id'));
+    }
+
+    public function getAnyProduct($id)
+    {
+
+        $data =  CartOrder::with('product')->where('order_id',$id)->where('status',0)->where('status_admin',0)->get();
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '
+              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="refused_request/' . $data->id . '"><i class="fa fa-remove"></i></button>
+               <button class="btn btn-agree btn btn-round  btn-success"  data-remote="accpet_request/' . $data->id . '"><i class="fa fa-remove"></i></button>
+    
+               ';
+            })
+            ->addColumn('name', function ($data) {
+                return'<a href="' . route('product.show', $data->product->id) . '">'.unserialize($data->product->name)[LaravelLocalization::getCurrentLocale()].'</a>';
+            })
+            ->addColumn('price', function ($data) {
+                return$data->product->price;
+            })
+            ->addColumn('currency', function ($data) {
+                return unserialize($data->product->currency->name)[LaravelLocalization::getCurrentLocale()];
+
+
+            })
+
+            ->rawColumns(['action', 'name','price'])
+            ->make(true);
     }
 
     public function refused_request($id)

@@ -234,6 +234,7 @@ return[
     'desc_coupons'=>'You can modify the discount coupons and warranty',
     'reason_rejection'=>'reason rejection',
 
+    'cant_not'=>'You can not change the status of the request'
 
 
 

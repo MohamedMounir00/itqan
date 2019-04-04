@@ -44,19 +44,7 @@
 
 
                     <tbody>
-                    @foreach($cart as $a)
-                        <tr id="{{$a->id}}">
-                            <td><a href="{{route('product.show', $a->product->id)}}">{{unserialize($a->product->name)[$lang]}}</a></td>
-                            <td>{{$a->product->price}}</td>
-                            <td>{{$a->amount}}</td>
-                            <td>{{unserialize($a->product->currency->name)[$lang]}}</td>
 
-                            <td>
-                               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="refused_request/{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-remove"></i></button>
-                                <button class="btn btn-agree btn btn-round  btn-success" data-remote="accpet_request/{{$a->id }}" data-id="{{ $a->id }}"><i class="fa fa-check"></i></button>
-                            </td>
-                        </tr>
-                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -69,20 +57,52 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
-        $(document).ready(function () {
+        $(function() {
             $('#table2').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('getAnyProduct',$id) !!}',
+                columns: [
+                    { data: 'name', name: 'name' },
+                    { data: 'price', name: 'price' },
+                    { data: 'amount', name: 'amount' },
+                    { data: 'currency', name: 'currency' },
 
+
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+
+                ],
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "{{trans('backend.No_data_available_in_table')}}",
+                    "infoEmpty": "{{trans('backend.Showing_0_to_0_of_0_entries')}}",
+                    "info":           "{{trans('backend.showing')}}_START_ {{trans('backend.to')}} _END_ {{trans('backend.of')}} _TOTAL_{{trans('backend.entries')}} ",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "{{trans('backend.show_t')}}_MENU_ {{trans('backend.entries')}}",
+                    "search": "{{trans('backend.search')}}",
+                    "zeroRecords": "{{trans('backend.No_matching_records_found')}}",
+                    "processing":     "{{trans('backend.processing')}}",
+
+                    "paginate": {
+                        "first": "{{trans('backend.First')}}",
+                        "last": "{{trans('backend.Last')}}",
+                        "next": "{{trans('backend.Next')}}",
+                        "previous": "{{trans('backend.Previous')}}"
+                    }
+
+                }
             });
-
         });
     </script>
+
+
 
 
     <script>
         $('#table2').on('click', '.btn-delete[data-remote]', function (e) {
             e.preventDefault();
-
-
+            ;
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -90,7 +110,6 @@
             });
 
             var url = $(this).data('remote');
-            var id = $(this).data('id');
 
 
 
@@ -113,10 +132,7 @@
                         data: {method: '_DELETE', submit: true}
                     }).always(function (data) {
                         $('#table2').DataTable().draw(false);
-                        $('tr#'+id).remove();
-
                     });
-
                 }
                 else {
                     return false;
@@ -124,10 +140,12 @@
             })
 
         })
+    </script>
 
-</script>
+
+
+
     <script>
-
         $('#table2').on('click', '.btn-agree[data-remote]', function (e) {
             e.preventDefault();
             ;
@@ -138,7 +156,6 @@
             });
 
             var url = $(this).data('remote');
-            var id = $(this).data('id');
 
 
 
@@ -156,13 +173,11 @@
                 if (yes) {
                     $.ajax({
                         url: url,
-                        type: 'POST',
+                        type: 'DELETE',
                         dataType: 'json',
                         data: {method: '_DELETE', submit: true}
                     }).always(function (data) {
                         $('#table2').DataTable().draw(false);
-                        $('tr#'+id).remove();
-
                     });
                 }
                 else {
@@ -172,5 +187,10 @@
 
         })
     </script>
+
+
+
+
+
 
 @endsection
