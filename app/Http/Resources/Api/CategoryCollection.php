@@ -21,6 +21,7 @@ class CategoryCollection extends JsonResource
             'price_category'=>isset($this->price)?$this->price:'',
             'price_emergency'=>isset($this->price_emergency)?$this->price_emergency:'',
             'system_clocks'=>isset($this->system_clocks)?$this->system_clocks:'',
+            'currency'=>unserialize($this->currency->name)[$request->lang],
 
         ];
     }
