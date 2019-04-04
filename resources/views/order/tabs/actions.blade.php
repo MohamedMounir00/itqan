@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-md-6 col-sm-6 antigen12">
+<div class="col-md-6 col-sm-6 antigen12 " style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -18,7 +18,7 @@
 </div>
 
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -68,7 +68,7 @@
 
 
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -89,7 +89,7 @@
 </div>
 
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -132,7 +132,7 @@
         </div>
     </div>
 </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
         <div class="x_panel">
 
             <div class="x_content">
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-<div class="col-md-6 col-sm-6 col-xs-12">
+<div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
     <div class="x_panel">
 
         <div class="x_content">
@@ -176,7 +176,7 @@
         </div>
     </div>
 </div>
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
         <div class="x_panel">
 
             <div class="x_content">
@@ -202,7 +202,7 @@
     </div>
 
 
-    <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12" style="height: 382px">
         <div class="x_panel">
 
             <div class="x_content">

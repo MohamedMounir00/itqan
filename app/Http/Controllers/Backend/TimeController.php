@@ -135,8 +135,14 @@ class TimeController extends Controller
 
             ';
             })
+            ->addColumn('timing', function ($data) {
+                if ($data->timing=='am')
+                return trans('api.am');
+                else
+                    return trans('api.pm');
+            })
 
-            ->rawColumns(['action'])
+            ->rawColumns(['action','timing'])
             ->make(true);
     }
 }

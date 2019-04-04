@@ -232,6 +232,8 @@ return[
     'warranty_order'=>'warranty',
     'coupons'=>'coupons',
     'desc_coupons'=>'You can modify the discount coupons and warranty',
+    'reason_rejection'=>'reason rejection',
+
 
 
 

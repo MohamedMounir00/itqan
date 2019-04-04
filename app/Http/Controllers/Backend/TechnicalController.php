@@ -141,10 +141,10 @@ class TechnicalController extends Controller
             'name'=>'required',
             'email' => 'required|email|unique:users,email,'. $data->id,
             'password' => 'nullable|min:6',
-            'phone'=>'required|min:6',
+            'phone'=>'required|min:9',
             'country_id'=>'required',
             'city_id'=>'required',
-            'identification'=>'required|min:15|not_in:0',
+            'identification'=>'required|min:10|not_in:0',
             'category_id'=>'required',
 
         ]);

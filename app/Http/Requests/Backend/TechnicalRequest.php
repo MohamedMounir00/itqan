@@ -29,7 +29,7 @@ class TechnicalRequest extends FormRequest
             'email'=>'required|email|max:255|unique:users',
             'phone'=>'required|min:9|max:15',
             'password'=> 'required|min:6',
-            'identification'   => 'required|min:9|max:20|not_in:0',
+            'identification'=>'required|min:10|not_in:0',
             'category_id'      => 'required',
             'country_id'      => 'required',
             'city_id'=>'required',

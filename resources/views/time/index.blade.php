@@ -12,7 +12,7 @@
                 <li><a class="close-link"><i class="fa fa-close"></i></a>
                 </li>
 
-                <li><a   href="{{route('product.create')}}" class=""><i class="fa fa-plus-square"></i></a>
+                <li><a   href="{{route('time_work.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                 </li>
             </ul>
             <div class="clearfix"></div>

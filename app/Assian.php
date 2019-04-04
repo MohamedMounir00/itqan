@@ -12,6 +12,7 @@ class Assian extends Model
         'user_id',
         'technical_id',
         'status',
+        'reason_rejection'
 ];
     public  function  user(){
         return $this->belongsTo(User::class,'technical_id');

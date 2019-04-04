@@ -239,6 +239,11 @@ class OrderController extends Controller
 
 
             ]);
+            $name2 = [
+                'ar' => trans('api.refused_techaincal', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                'en' => trans('api.refused_techaincal', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            ];
+            Helper::NotificationsBackend($order->id,$order->user_id,$name2,0);
             Helper::Notificationsuodate($notyfiy, 1);
 
             return new StatusCollection(true, trans('api.refused_techaincal', [], $lang));

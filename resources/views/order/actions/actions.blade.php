@@ -28,6 +28,7 @@
                         <th>{{trans('backend.assgin_id')}}</th>
                         <th>{{trans('backend.assgin_technical')}}</th>
                         <th>{{trans('backend.assgin_status')}}</th>
+                        <th>{{trans('backend.reason_rejection')}}</th>
 
                         <th>{{trans('backend.date')}}</th>
 
@@ -50,6 +51,7 @@
                                     <span>{{trans('backend.assgin_refused')}}</span>
                                 @endif
                             </td>
+                            <td>{{$a->reason_rejection}}</td>
                             <td>{{$a->created_at}}</td>
 
                         </tr>

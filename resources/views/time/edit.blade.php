@@ -45,7 +45,7 @@
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="first-name" name="from" required class="form-control col-md-7 col-xs-12" value="{{$data->from}}">
+                                    <input type="number" id="first-name" name="from" required class="form-control col-md-7 col-xs-12" value="{{$data->from}}" min="0" step="1" pattern="\d+">
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="first-name" name="to" required class="form-control col-md-7 col-xs-12" value="{{$data->to}}">
+                                    <input type="number" id="first-name" name="to" required class="form-control col-md-7 col-xs-12" value="{{$data->to}}" min="0" step="1" pattern="\d+">
                                 </div>
                             </div>
 
@@ -76,7 +76,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" class="form-control" name="ordering"
-                                           required  placeholder="{{ trans('backend.order_by') }}" value="{{$data->ordering}}" autocomplete="off">
+                                           required  placeholder="{{ trans('backend.order_by') }}" value="{{$data->ordering}}" autocomplete="off" min="0" step="1" pattern="\d+">
                                 </div>
                             </div>
 

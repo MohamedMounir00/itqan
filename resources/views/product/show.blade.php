@@ -32,20 +32,7 @@
                             <div class="product-image">
                                 <img src="{{url($product->image)}}" alt="..."/>
                             </div>
-                            <div class="product_gallery">
-                                <a>
-                                    <img src="{{url($product->image)}}" alt="..."/>
-                                </a>
-                                <a>
-                                    <img src="{{url($product->image)}}" alt="..."/>
-                                </a>
-                                <a>
-                                    <img src="{{url($product->image)}}" alt="..."/>
-                                </a>
-                                <a>
-                                    <img src="{{url($product->image)}}" alt="..."/>
-                                </a>
-                            </div>
+
                         </div>
 
                         <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
