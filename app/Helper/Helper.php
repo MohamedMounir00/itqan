@@ -237,7 +237,7 @@ return $technical->id ;
            return  $total_price= $price_cat .' ريال ';
 
          }
-    
+
  }
 
 ///////////////////////// get notifcation in backend

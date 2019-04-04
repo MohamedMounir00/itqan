@@ -169,22 +169,13 @@
         </ul>
     </div>
 
-        @if($order->status=='done')
+   
     <div class="">
         <div class="product_price">
             <h1 class="price">{{$total_price}} ریال</h1>
             <br>
         </div>
     </div>
-            @elseif($order->status=='can_not')
-        <div class="">
-            <div class="product_price">
-                <h1 class="price">{{$total_price}} ریال</h1>
-                <br>
-            </div>
-        </div>
-
-    @endif
 
 </div>
 

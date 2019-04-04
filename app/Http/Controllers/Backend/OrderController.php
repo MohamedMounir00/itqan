@@ -153,16 +153,19 @@ class OrderController extends Controller
         $status = NotfiyOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
         $code_rel = CouponRel::where('order_id', $id)->first();
-
+        if ($order->working_hours==0)
+            $order_hores=1;
+        else
+            $order_hores=$order->working_hours;
         if ($order->express==1)
         {
-            $price_cat1=($order->category->price_emergency * $order->working_hours);
+            $price_cat1=($order->category->price_emergency * $order_hores);
             $price_cat=$price_cat1;
         }
 
         else
         {
-            $price_cat1=($order->category->price* $order->working_hours);
+            $price_cat1=($order->category->price* $order_hores);
             $price_cat=$price_cat1;
 
         }
@@ -181,8 +184,7 @@ class OrderController extends Controller
             }
         }
 
-        if ($order->status=='done'||$order->status=='can_not')
-        {
+
           if ($order->proudect->count()!=0)
         {
 
@@ -208,7 +210,7 @@ class OrderController extends Controller
     $total_price= $price_cat;
 
         }
-        }
+
        // dd($total_price);
         return view('order.show', compact('order', 'status','total_price'));
 
