@@ -8,6 +8,7 @@ use App\Helper\Helper;
 use App\Http\Requests\Api\CamponyRequest;
 use App\Http\Requests\Api\GovernmentRequest;
 use App\Http\Requests\Api\PresonalRequest;
+use App\Http\Requests\Api\UpdateAdress;
 use App\Http\Requests\Api\UpdateCamponyRequest;
 use App\Http\Requests\Api\UpdateGovernmentRequest;
 use App\Http\Requests\Api\UpdatePresonalRequest;
@@ -354,6 +355,27 @@ Helper::mail($user->email,new VerifyMail($code->code));
                 return new StatusCollection(false, trans('api.not_login', [], $lang));
 
             }
+    }
+
+    public function UpdateAddress(UpdateAdress $request)
+    {
+        $lang = $request->lang;
+        $id= $request->address_id;
+        $address=Address::find($id);
+        if (auth()->user()->id) {
+            $dd =$address->update([
+                'user_id' => auth()->user()->id,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'address' => $request->address,
+                'note' => $request->note
+            ]);
+            return response()->json(['message' => trans('api.address_update', [], $lang)]);
+        }
+        else{
+            return new StatusCollection(false, trans('api.not_login', [], $lang));
+
+        }
     }
 
     public function getAllMyaderss()

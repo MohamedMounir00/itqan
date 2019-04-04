@@ -67,6 +67,7 @@ return [
    'pleas_chooce_new_time_services'=>' This technical is currently unavailable will be reviewed management and appointed another technician ',
     'pleas_chooce_new_time_back'=>' No technical support has been identified. Please specify another technician ',
 
+    'address_update'=>'Your address has been successfully modified'
 
 
 

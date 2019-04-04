@@ -431,8 +431,9 @@ else {
         $data->save();
         $technical = User::findOrFail($request->technical_id);
         $name = [
-            'ar' => ' للعمل على طلبك ' . ' ' . trans('api.repairing', [], 'ar') . unserialize($data->category->main->name)['ar'] . ' ' . $technical->name . ' تم تعين  ',
-            'en' => $technical->name . ' ' . ' assien techamnal ' . trans('api.repairing', [], 'en') . unserialize($data->category->main->name)['en'],
+            'ar' => 'تم تعيين ' . $technical->name . " " . trans('api.repairing', [], 'ar') . unserialize($data->category->main->name)['ar'] ,
+           // 'ar' => ' للعمل على طلبك ' . ' ' . trans('api.repairing', [], 'ar') . unserialize($data->category->main->name)['ar'] . ' ' . $technical->name . ' تم تعين  ',
+            'en' => $technical->name . ' ' . ' assign technical ' . trans('api.repairing', [], 'en') . unserialize($data->category->main->name)['en'],
 
         ];
         Helper::Notifications($assin->order_id, $assin->user_id, $name, 'order', 0);

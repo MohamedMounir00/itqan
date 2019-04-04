@@ -41,6 +41,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('update_company','Api\UserController@Updatecompany');
     Route::post('edite_imge','Api\UserController@edite_imge');
     Route::post('add_address','Api\UserController@addAddress');
+    Route::post('update_address','Api\UserController@UpdateAddress');
     Route::get('get_all_my_aderss','Api\UserController@getAllMyaderss');
     Route::post('add_order','Api\OrderController@AddOrder');
     Route::get('show_order','Api\OrderController@showOrder');
