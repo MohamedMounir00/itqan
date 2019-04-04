@@ -51,8 +51,8 @@
                     <p>{{trans('backend.desc_add_techanel')}} </p>
 
                     @if($order->status =='done'||$order->status =='can_not')
-                        <a><span class="btn btn-primary"> {{trans('backend.junior')}}</span></a>
-                        <a ><span class="btn btn-primary"> {{trans('backend.senior')}}</span></a>
+                        <a><span class="btn btn-primary" disabled> {{trans('backend.junior')}}</span></a>
+                        <a ><span class="btn btn-primary" disabled> {{trans('backend.senior')}}</span></a>
                         @else
                         <a href="{{route('order.edit', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.junior')}}</span></a>
                         <a href="{{route('assigen_senior', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.senior')}}</span></a>
@@ -79,8 +79,13 @@
                     <p>{{trans('backend.desc_update_status_order')}} </p>
 
 
-                    <a href="{{url('order/update_status/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.update')}}</span></a>
+                    @if($order->status =='done'||$order->status =='can_not')
+                        <a><span class="btn btn-primary disabled"> {{trans('backend.update')}}</span></a>
 
+                    @else
+                        <a href="{{url('order/update_status/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.update')}}</span></a>
+
+                    @endif
                 </div>
             </div>
 
@@ -123,8 +128,13 @@
                     <p>{{trans('backend.desc_product_assign_techinal')}} </p>
 
 
-                    <a href="{{url('order/get_product_view/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+                    @if($order->status =='done'||$order->status =='can_not')
+                        <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
 
+                    @else
+                        <a href="{{url('order/get_product_view/'.$order->id)}}"><span class="btn btn-primary"> {{trans('backend.details')}}</span></a>
+
+                    @endif
 
                 </div>
             </div>
