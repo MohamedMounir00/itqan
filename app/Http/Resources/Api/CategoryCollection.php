@@ -19,7 +19,7 @@ class CategoryCollection extends JsonResource
             'name'=>unserialize($this->name)[$request->lang],
             'image'=>url($this->image),
             'price_category'=>isset($this->price)?$this->price:'',
-            'price_emergency'=>isset($this->rice_emergency)?$this->rice_emergency:'',
+            'price_emergency'=>isset($this->rice_emergency)?$this->price_emergency:'',
             'system_clocks'=>isset($this->system_clocks)?$this->system_clocks:'',
 
         ];
