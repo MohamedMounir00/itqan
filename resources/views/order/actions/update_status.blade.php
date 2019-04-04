@@ -38,7 +38,6 @@
                     <input type="hidden" name="order_id" value="{{$order->id}}">
                     <select class="  form-control  "
                             name="status"  >
-                        <option value="new" {{($order->status=='new'?'selected':'')}} >{{trans('api.watting_techaincall')}}</option>
                         <option value="wating" {{($order->status=='wating'?'selected':'')}} >{{trans('api.new_order')}}</option>
                         <option value="done" {{($order->status=='done'?'selected':'')}} >{{trans('api.done_order')}}</option>
                         <option value="can_not" {{($order->status=='can_not'?'selected':'')}} >{{trans('api.can_not')}}</option>

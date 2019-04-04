@@ -79,7 +79,7 @@
                     <p>{{trans('backend.desc_update_status_order')}} </p>
 
 
-                    @if($order->status =='done'||$order->status =='can_not')
+                    @if($order->status =='done'||$order->status =='can_not'||$order->status =='new')
                         <a><span class="btn btn-primary disabled"> {{trans('backend.update')}}</span></a>
 
                     @else
