@@ -28,11 +28,12 @@
                     <h3>{{trans('backend.store')}}</h3>
                      <p>{{trans('backend.desc_store')}} </p>
                     @if($order->status =='done'||$order->status =='can_not')
-                        <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary disabled"> {{trans('backend.add')}}</span></a>
+                        <a><span class="btn btn-primary" disabled> {{trans('backend.add')}}</span></a>
 
                     @else
-                    <a><span class="btn btn-primary"> {{trans('backend.add')}}</span></a>
-                  @endif
+                        <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary "> {{trans('backend.add')}}</span></a>
+
+                    @endif
                 </div>
             </div>
 
