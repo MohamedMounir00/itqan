@@ -254,6 +254,72 @@ return $technical->id ;
 }
 
 
+    public static  function fixingPrice($id)
+
+    {
+        $order = Order::findOrFail($id);
+        $code_rel = CouponRel::where('order_id', $id)->first();
+
+        if ($order->status=='done'||$order->status=='can_not')
+        {
+            if ($order->express==1)
+            {
+                $price_cat1=($order->category->price_emergency * $order->working_hours);
+                $price_cat=$price_cat1;
+            }
+
+            else
+            {
+                $price_cat1=($order->category->price* $order->working_hours);
+                $price_cat=$price_cat1;
+
+            }
+
+            if (isset($code_rel))
+            {
+                $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
+
+                if ($coupon->type=='currency')
+                {
+                    $price_cat=($price_cat1-$coupon->price);
+                }
+                else{
+                    $price_cat=(($price_cat1)-($price_cat1*$coupon->price/100));
+
+                }
+            }
+
+            if ($order->proudect->count()!=0)
+            {
+
+
+                foreach ($order->proudect as $p)
+                {
+                    $p2['amount']=($p->pivot->amount * $p->price);
+
+                    $povit[]=$p2;
+
+                }
+                $price_product=array_sum(array_map(
+                        function($povit) {
+                            return $povit['amount'];
+                        }, $povit)
+                );
+
+
+                return $total_price= $price_cat.' ريال ';
+
+            }
+            else{
+                return  $total_price= $price_cat .' ريال ';
+
+            }
+        }
+        else
+            return 'لم يتم تحديد تكلفه بعد';
+    }
+
+
 
 }
 

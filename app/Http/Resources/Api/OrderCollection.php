@@ -66,7 +66,8 @@ class OrderCollection extends JsonResource
             'total_price_of_product'=>$this->proudect->sum('price').'ريال',
             'real_status'=>$this->status,
             'rating'=>($rating==0)?false:true,
-            'total_price_of_order'=>Helper::totalPrice($this->id).'ريال',
+            'total_price_of_order'=>Helper::totalPrice($this->id),
+            'total_price_of_fixing'=>Helper::fixingPrice($this->id),
             'express'=>$this->express,
 
         ];
