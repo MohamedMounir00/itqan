@@ -6,6 +6,7 @@
             content.insertAdjacentHTML('afterbegin', config.content);
             config.content = content;
             swal(config);
+
         @else
             swal({!! Session::pull('sweet_alert.alert') !!});
         @endif

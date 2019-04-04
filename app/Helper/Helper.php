@@ -120,7 +120,7 @@ public  static function  assignDynamic($order)
     $order->save();
 
     $name = [
-        'ar' =>  'تم تعيين ' . $technical->name . " " . trans('api.repairing', [], 'ar') . unserialize($order->category->main->name)['ar'] ,
+        'ar' =>  'تم تعيين ' . $technical->name . " " . trans('api.repairing', [], 'ar') . unserialize($order->category->main->name)['ar'] .' للعمل على طلبك ' ,
        // 'ar' => ' للعمل على طلبك ' . ' ' . trans('api.repairing', [], 'ar') . unserialize($order->category->main->name)['ar'] . ' ' . $technical->name . ' تم تعين  ',
         'en' => $technical->name . ' ' . ' assien techamnal ' . trans('api.repairing', [], 'en') . unserialize($order->category->main->name)['en'],
 
