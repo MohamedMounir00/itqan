@@ -85,6 +85,20 @@ class NotificationsController extends Controller
 
     }
 
+    public function seen(Request $request)
+    {
+
+        if($request->ajax())
+        {
+
+       $notify=  NotificationBackent::find($request->id);
+       $notify->seen=1;
+       $notify->save();
+
+        }
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -119,7 +133,7 @@ class NotificationsController extends Controller
                 ';
             })
             ->addColumn('message', function ($data) {
-                return '<a href="' . route('order.show', $data->order_id) . '">'.unserialize($data->message)[LaravelLocalization::getCurrentLocale()].'</a>';
+                return '<a   href="' . route('order.show', $data->order_id) . '">'.unserialize($data->message)[LaravelLocalization::getCurrentLocale()].'</a>';
 
 
             })

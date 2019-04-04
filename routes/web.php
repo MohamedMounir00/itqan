@@ -142,6 +142,7 @@ Route::group([
 /////////////////////////////////notifications
     Route::get('notifications/get_notifications','Backend\NotificationsController@getAnyDate')->name('notifications.get_notifications');
     Route::resource('notifications','Backend\NotificationsController');
+    Route::post('seen','Backend\NotificationsController@seen')->name('seen');
 
     /////////////////////////////////
     Route::get('bill/{id}','Backend\OrderController@bill')->name('bill');

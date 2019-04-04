@@ -169,7 +169,7 @@
         </ul>
     </div>
 
-   
+
     <div class="">
         <div class="product_price">
             <h1 class="price">{{$total_price}} ریال</h1>

@@ -63,6 +63,16 @@
         }
     });
 </script>
+
+
+<script>
+    $('#notify').on('click',function(){
+        var notify_id = $(this).attr("num");
+        $.post("{{route('seen')}}",{id:notify_id},function(data){
+
+        });
+    });
+</script>
 @include('sweet::alert')
 
 @yield('scripts')

@@ -51,7 +51,7 @@
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                         @foreach(\App\Helper\Helper::Get_four_Notify() as $notfay)
                         <li>
-                            <a href="{{route('order.show', $notfay->order_id)}}">
+                            <a  id="notify"  num="{{$notfay->id}}" href="{{route('order.show', $notfay->order_id)}}">
                                 <span>
                           <span class="time">
                               {{Carbon\Carbon::parse($notfay->created_at)->diffForHumans()}}
