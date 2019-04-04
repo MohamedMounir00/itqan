@@ -180,18 +180,20 @@ return $technical->id ;
  {
      $order = Order::findOrFail($id);
      $code_rel = CouponRel::where('order_id', $id)->first();
+     if ($order->working_hours==0)
+         $order_hores=1;
+     else
+         $order_hores=$order->working_hours;
 
-     if ($order->status=='done'||$order->status=='can_not')
-          {
               if ($order->express==1)
               {
-                  $price_cat1=($order->category->price_emergency * $order->working_hours);
+                  $price_cat1=($order->category->price_emergency * $order_hores);
                   $price_cat=$price_cat1;
               }
 
               else
               {
-                  $price_cat1=($order->category->price* $order->working_hours);
+                  $price_cat1=($order->category->price* $order_hores);
                   $price_cat=$price_cat1;
 
               }
@@ -235,9 +237,7 @@ return $technical->id ;
            return  $total_price= $price_cat .' ريال ';
 
          }
-     }
-          else
-              return 'لم يتم تحديد تكلفه بعد';
+    
  }
 
 ///////////////////////// get notifcation in backend
@@ -259,18 +259,20 @@ return $technical->id ;
     {
         $order = Order::findOrFail($id);
         $code_rel = CouponRel::where('order_id', $id)->first();
+        if ($order->working_hours==0)
+            $order_hores=1;
+            else
+          $order_hores=$order->working_hours;
 
-        if ($order->status=='done'||$order->status=='can_not')
-        {
             if ($order->express==1)
             {
-                $price_cat1=($order->category->price_emergency * $order->working_hours);
+                $price_cat1=($order->category->price_emergency * $order_hores);
                 $price_cat=$price_cat1;
             }
 
             else
             {
-                $price_cat1=($order->category->price* $order->working_hours);
+                $price_cat1=($order->category->price* $order_hores);
                 $price_cat=$price_cat1;
 
             }
@@ -314,9 +316,7 @@ return $technical->id ;
                 return  $total_price= $price_cat .' ريال ';
 
             }
-        }
-        else
-            return 'لم يتم تحديد تكلفه بعد';
+
     }
 
 
