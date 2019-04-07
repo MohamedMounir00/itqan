@@ -31,7 +31,7 @@
                         <a><span class="btn btn-primary" disabled> {{trans('backend.add')}}</span></a>
 
                     @else
-                        <a href="{{url('get_store_view/'.$order->id)}}"><span class="btn btn-primary "> {{trans('backend.add')}}</span></a>
+                        <a href="{{url('order/get_store_view/'.$order->id)}}"><span class="btn btn-primary "> {{trans('backend.add')}}</span></a>
 
                     @endif
                 </div>
