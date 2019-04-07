@@ -89,7 +89,7 @@ class RescheduledsController extends Controller
         $data = Rescheduled::findOrFail($id);
         $holidays_arr = Holiday::where('active',0)->get()->pluck('day_number')->toArray();
 
-        $times = Time::all();
+        $times = Time::where('id','!=',10)->get();
 
 
         for ($i = 0; $i <= (7 + sizeof($holidays_arr)); $i++) {
@@ -182,7 +182,7 @@ class RescheduledsController extends Controller
 
         $holidays_arr = Holiday::where('active',0)->get()->pluck('day_number')->toArray();
 
-        $times = Time::all();
+        $times = Time::where('id','!=',10)->get();
 
 
         for ($i = 0; $i <= (7 + sizeof($holidays_arr)); $i++) {

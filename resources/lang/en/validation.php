@@ -170,7 +170,9 @@ return [
     'price'=>'price',
     'price_emergency'=>'Price in case of emergency',
         'name.ar'=>'Name Of Arabic',
-        'name.en'=>'Name Of English'
+        'name.en'=>'Name Of English',
+        'from'=>'from',
+        'to'=>'to',
     ],
 
 

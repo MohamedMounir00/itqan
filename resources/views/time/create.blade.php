@@ -58,7 +58,7 @@
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="first-name" name="from" required class="form-control col-md-7 col-xs-12"  min="0" step="1" pattern="\d+">
+                                    <input type="number" id="first-name" name="from" required class="form-control col-md-7 col-xs-12"  >
                                 </div>
                             </div>
 
@@ -67,7 +67,7 @@
                                     >*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" id="first-name" name="to" required class="form-control col-md-7 col-xs-12" min="0" step="1" pattern="\d+">
+                                    <input type="number" id="first-name" name="to" required class="form-control col-md-7 col-xs-12" >
                                 </div>
                             </div>
 
@@ -91,7 +91,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="number" class="form-control" name="ordering"
-                                           required  placeholder="{{ trans('backend.order_by') }}" autocomplete="off" min="0" step="1" pattern="\d+">
+                                           required  placeholder="{{ trans('backend.order_by') }}" autocomplete="off" >
                                 </div>
                             </div>
 
