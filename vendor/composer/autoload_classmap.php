@@ -79,6 +79,8 @@ return array(
     'App\\Http\\Requests\\Backend\\CategoryRequest' => $baseDir . '/app/Http/Requests/Backend/CategoryRequest.php',
     'App\\Http\\Requests\\Backend\\CitiesRequest' => $baseDir . '/app/Http/Requests/Backend/CitiesRequest.php',
     'App\\Http\\Requests\\Backend\\CompaniesRequest' => $baseDir . '/app/Http/Requests/Backend/CompaniesRequest.php',
+    'App\\Http\\Requests\\Backend\\CreateAdminRequest' => $baseDir . '/app/Http/Requests/Backend/CreateAdminRequest.php',
+    'App\\Http\\Requests\\Backend\\CreateRequest' => $baseDir . '/app/Http/Requests/Backend/CreateRequest.php',
     'App\\Http\\Requests\\Backend\\DataRequest' => $baseDir . '/app/Http/Requests/Backend/DataRequest.php',
     'App\\Http\\Requests\\Backend\\MinistriesRequest' => $baseDir . '/app/Http/Requests/Backend/MinistriesRequest.php',
     'App\\Http\\Requests\\Backend\\NationalRequest' => $baseDir . '/app/Http/Requests/Backend/NationalRequest.php',

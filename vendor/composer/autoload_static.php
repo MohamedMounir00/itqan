@@ -558,6 +558,8 @@ class ComposerStaticInit94d1148e466e71142b8dbdd69ea1baf1
         'App\\Http\\Requests\\Backend\\CategoryRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/CategoryRequest.php',
         'App\\Http\\Requests\\Backend\\CitiesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/CitiesRequest.php',
         'App\\Http\\Requests\\Backend\\CompaniesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/CompaniesRequest.php',
+        'App\\Http\\Requests\\Backend\\CreateAdminRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/CreateAdminRequest.php',
+        'App\\Http\\Requests\\Backend\\CreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/CreateRequest.php',
         'App\\Http\\Requests\\Backend\\DataRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/DataRequest.php',
         'App\\Http\\Requests\\Backend\\MinistriesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/MinistriesRequest.php',
         'App\\Http\\Requests\\Backend\\NationalRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Backend/NationalRequest.php',
