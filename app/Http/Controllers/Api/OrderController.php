@@ -23,7 +23,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use function PHPSTORM_META\type;
-
+use DB;
 class OrderController extends Controller
 {
     //
@@ -392,9 +392,15 @@ class OrderController extends Controller
              $q->where('time_id', $time);
          })->whereDoesntHave('check', function ($q) use ($time, $date) {
              $q->where('time_id', '=', $time)->where('date', '=', $date);
-         })->count();
+         })->join('technicals', function ($join) {
+                 $join->on('users.id', '=', 'technicals.user_id');
+             })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
+     + sin( radians(' . $order->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance')))
+             ->orderBy('distance', 'ASC')->count();
 
-
+//return $technical;
          if ($technical == 0)
              return new StatusCollection(false, trans('api.select_anoter_time', [], $lang));
 

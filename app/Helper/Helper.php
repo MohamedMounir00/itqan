@@ -105,7 +105,13 @@ public  static function  assignDynamic($order)
         ->whereDoesntHave('check', function ($q)use($time,$date) {
         $q->where('time_id','=', $time)->where('date','=',$date);
     })
-        ->first();
+        ->join('technicals', function ($join) {
+            $join->on('users.id', '=', 'technicals.user_id');
+        })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
+     + sin( radians(' . $order->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance')))
+        ->orderBy('distance', 'ASC')->first();
 
     $id = $order->id;
 
@@ -113,7 +119,7 @@ public  static function  assignDynamic($order)
     $assin = Assian::create([
         'order_id' => $id,
         'user_id' => $order->user_id,
-        'technical_id' => $technical->id,
+        'technical_id' => $technical->user_id,
         'status' => 'watting',
     ]);
     $order->reply = 'yes';
@@ -147,7 +153,13 @@ public  static function  assignDynamic($order)
             ->whereDoesntHave('check', function ($q)use($time,$date) {
             $q->where('time_id','=', $time)->where('date','=',$date);
         })
-            ->first();
+            ->join('technicals', function ($join) {
+                $join->on('users.id', '=', 'technicals.user_id');
+            })->selectRaw((DB::raw('*, ( 6367 * acos( cos( radians(' . $order->address->latitude . ') ) 
+     * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $order->address->longitude . ') )
+     + sin( radians(' . $order->address->latitude . ') ) *
+     sin( radians( latitude ) ) ) ) AS distance')))
+            ->orderBy('distance', 'ASC')->first();
 
         $id = $order->id;
 
@@ -155,11 +167,11 @@ public  static function  assignDynamic($order)
         $assin = Assian::create([
             'order_id' => $id,
             'user_id' => $order->user_id,
-            'technical_id' => $technical->id,
+            'technical_id' => $technical->user_id,
             'status' => 'agree',
         ]);
 
-return $technical->id ;
+return $technical->user_id ;
     }
 
     public static function NotificationsBackend($order_id,$user_id,$message,$seen)
