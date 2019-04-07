@@ -49,7 +49,7 @@ class MinistriesController extends Controller
 
                 $c= Ministry::create(['name' => serialize($request->name)]);
                 if ($c)
-                    Alert::success(trans('backend.created'))->persistent("Close");
+                    Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('ministries.index');
 
@@ -98,7 +98,7 @@ class MinistriesController extends Controller
                 $data->update(['name' => serialize($request->name)]);
 
                 if ($data)
-                    Alert::success(trans('backend.updateFash'))->persistent("Close");
+                    Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
                 return redirect()->route('ministries.index');
             }
 
@@ -114,7 +114,7 @@ class MinistriesController extends Controller
         $data = Ministry::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

@@ -6,4 +6,7 @@ return [
      * If you want to change a specific  alert chain ->autoclose(milliseconds) on the end.
      */
     'autoclose' => 1800,
+
+
+
 ];

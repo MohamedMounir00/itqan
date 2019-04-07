@@ -110,7 +110,7 @@ class NotificationsController extends Controller
         $data = NotificationBackent::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

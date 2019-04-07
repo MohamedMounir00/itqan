@@ -169,7 +169,7 @@ class TechnicalController extends Controller
 
         $data->time()->sync($request->time_id);
         if ($data)
-        Alert::success(trans('backend.updateFash'))->persistent("Close");
+        Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
         return redirect()->route('technical.index');
 
@@ -189,7 +189,7 @@ class TechnicalController extends Controller
 
         $data->delete();
         $data2->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

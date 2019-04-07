@@ -45,7 +45,7 @@ class CategoryProductController extends Controller
 
                $c= CategoryProduct::create(['name' => serialize($request->name)]);
                if ($c)
-                Alert::success(trans('backend.created'))->persistent("Close");
+                Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('category_product.index');
 
@@ -95,7 +95,7 @@ class CategoryProductController extends Controller
                 $data->update(['name' => serialize($request->name)]);
 
                 if ($data)
-                    Alert::success(trans('backend.updateFash'))->persistent("Close");
+                    Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
                 return redirect()->route('category_product.index');
             }
 

@@ -47,7 +47,7 @@ class CompaniesController extends Controller
 
         $c= TypeCompany::create(['name' => serialize($request->name)]);
         if ($c)
-            Alert::success(trans('backend.created'))->persistent("Close");
+            Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
         return redirect()->route('companies.index');
 
@@ -96,7 +96,7 @@ class CompaniesController extends Controller
         $data->update(['name' => serialize($request->name)]);
 
         if ($data)
-            Alert::success(trans('backend.updateFash'))->persistent("Close");
+            Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
         return redirect()->route('companies.index');
     }
 
@@ -112,7 +112,7 @@ class CompaniesController extends Controller
         $data = TypeCompany::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

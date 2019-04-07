@@ -57,7 +57,7 @@ class ProductController extends Controller
                     'image' => Helper::UploadImge($request, 'uploads/product/', 'image'),
                 ]);
         if ($p)
-                Alert::success(trans('backend.created'))->persistent("Close");
+                Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('product.index');
             }
@@ -116,7 +116,7 @@ class ProductController extends Controller
                     'image' => Helper::UpdateImage($request, 'uploads/category/', 'image', $data->image)
                 ]);
 if ($data)
-                Alert::success(trans('backend.updateFash'))->persistent("Close");
+                Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('product.index');
             }
@@ -133,7 +133,7 @@ if ($data)
         $data = Product::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

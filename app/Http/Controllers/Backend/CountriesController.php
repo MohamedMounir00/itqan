@@ -46,7 +46,7 @@ class CountriesController extends Controller
         //dd($medicalSuppliesDescription);
 
 
-        Alert::success(trans('backend.created'))->persistent("Close");
+        Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
         return redirect()->route('nationality.index');
     }
 
@@ -94,7 +94,7 @@ class CountriesController extends Controller
 
 
 
-        Alert::success(trans('backend.updateFash'))->persistent("Close");
+        Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
         return redirect()->route('nationality.index');
     }
 

@@ -415,7 +415,7 @@ else {
         $data = Order::with('category')->findOrFail($id);
         if ($data->time_id==10)
         {
-            Alert::success(trans('backend.select_date_time'))->persistent("Close");
+            Alert::success(trans('backend.select_date_time'))->persistent(trans('backend.close2'));
             return back();
         }
     $assien = Assian::where('order_id', $id)->where('status', 'watting')->count();
@@ -438,13 +438,13 @@ else {
         ];
         Helper::Notifications($assin->order_id, $assin->user_id, $name, 'order', 0);
 
-        Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent("Close");
+        Alert::success(trans('backend.assigen_techinal_sccusse'))->persistent(trans('backend.close2'));
         return redirect()->route('order.show', $id);
 
     }
     else
     {
-        Alert::success(trans('backend.assigen_technical_alredy'))->persistent("Close");
+        Alert::success(trans('backend.assigen_technical_alredy'))->persistent(trans('backend.close2'));
         return redirect()->route('order.show', $id);
     }
 
@@ -511,7 +511,7 @@ else {
         $order = Order::findOrFail($id);
 
         if ($order->status == 'done' || $order->status == 'done') {
-            Alert::success(trans('backend.can_not_add_product'))->persistent("Close");
+            Alert::success(trans('backend.can_not_add_product'))->persistent(trans('backend.close2'));
             return back();
         }
         else {

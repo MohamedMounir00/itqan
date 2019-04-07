@@ -95,7 +95,7 @@ class TimeController extends Controller
 
         ]);
         if ($data)
-        Alert::success(trans('backend.updateFash'))->persistent("Close");
+        Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
         return redirect()->route('time_work.index');
     }
@@ -116,7 +116,7 @@ class TimeController extends Controller
         $data = Time::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

@@ -46,7 +46,7 @@ class CurrencyControler extends Controller
 
            $c= Currency::create(['name'=>serialize($request->name)]);
            if ($c)
-            Alert::success(trans('backend.created'))->persistent("Close");
+            Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
             return redirect()->route('currency.index');
 
@@ -95,7 +95,7 @@ class CurrencyControler extends Controller
 
             $data->update(['name' => serialize($request->name)]);
          if ($data)
-            Alert::success(trans('backend.updateFash'))->persistent("Close");
+            Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
             return redirect()->route('currency.index');
         }
@@ -112,7 +112,7 @@ class CurrencyControler extends Controller
         $data = Currency::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

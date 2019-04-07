@@ -101,7 +101,7 @@ class CouponsController extends Controller
 
                 ]);
 
-                Alert::success(trans('backend.updateFash'))->persistent("Close");
+                Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('coupons',$data->order_id);
             }
@@ -119,7 +119,7 @@ class CouponsController extends Controller
         $data = Promotional_code::findOrFail($id);
 
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'

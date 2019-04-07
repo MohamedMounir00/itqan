@@ -141,7 +141,7 @@ class RescheduledsController extends Controller
         ];
         Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
         if ($data)
-            Alert::success(trans('backend.updateFash_reschedules'))->persistent("Close");
+            Alert::success(trans('backend.updateFash_reschedules'))->persistent(trans('backend.close2'));
 
         return redirect()->route('order.show',$order->id);
     }
@@ -236,7 +236,7 @@ class RescheduledsController extends Controller
 
             return redirect()->route('order.show',$id);
         }else {
-            Alert::success(trans('backend.wattingreplay_client'))->persistent("Close");
+            Alert::success(trans('backend.wattingreplay_client'))->persistent(trans('backend.close2'));
 
             return redirect()->route('order.show',$id);
         }

@@ -65,7 +65,7 @@ class CategoryController extends Controller
                 $category->currency_id = $request->currency_id;
                 $category->image = Helper::UploadImge($request, 'uploads/category/', 'image');
                 if ($category->save()) {
-                    Alert::success(trans('backend.created'))->persistent("Close");
+                    Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
                     return redirect()->route('category.index');
                 }
@@ -130,7 +130,7 @@ class CategoryController extends Controller
 
                 $category->image = Helper::UpdateImage($request, 'uploads/category/', 'image', $category->image);
                 if ($category->save())
-                    Alert::success(trans('backend.updateFash'))->persistent("Close");
+                    Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
                 return redirect()->route('category.index');
             }
@@ -153,7 +153,7 @@ class CategoryController extends Controller
         }
         $data->delete();
         if ($data)
-            Alert::success(trans('backend.updateFash'))->persistent("Close");
+            Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);
@@ -169,7 +169,7 @@ class CategoryController extends Controller
             }
         }
         $data->delete();
-        Alert::success(trans('backend.deleteFlash'))->persistent("Close");
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
 
         return response()->json([
             'success' => 'Record has been deleted successfully!'
