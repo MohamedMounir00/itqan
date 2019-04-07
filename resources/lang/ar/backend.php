@@ -239,7 +239,10 @@ return[
 
 'cant_not'=>'لا يمكنك تغير حاله الطلب',
 'select_date_time'=>'برجاء اختيار تاريخ ووقت اولا',
-    'close2'=>'اغلاق'
+    'close2'=>'اغلاق',
+    'admins'=>'المدرين',
+    'user_name_admin'=>'اسم المدير',
+    'admins_controller'=>'التحكم فى المدرين',
 
 
 

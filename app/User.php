@@ -21,7 +21,7 @@ class User extends Authenticatable
         'phone', 'name_of_head', 'house',
         'type', 'image', 'address',
         'bio', 'minstry_id', 'company_id',
-        'country_id', 'city_id','role'
+        'country_id', 'city_id','role','verification'
     ];
 
     /**

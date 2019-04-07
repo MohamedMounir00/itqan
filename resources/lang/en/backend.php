@@ -236,7 +236,10 @@ return[
 
     'cant_not'=>'You can not change the status of the request',
     'select_date_time'=>'Please select a date and time first',
-    'close2'=>'close'
+    'close2'=>'close',
+    'user_name_admin'=>' Name Admin',
+    'admins_controller'=>'Admins Controller',
+
 
 
 

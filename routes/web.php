@@ -100,6 +100,11 @@ Route::group([
     //////////////////////////////////////////////////////////// techail
     Route::get('technical/get_technical','Backend\TechnicalController@getAnyDate')->name('technical.get_technical');
     Route::resource('technical','Backend\TechnicalController');
+
+
+    //////////////////////////////////////////////////////////// Admins
+    Route::get('admins/get_admins','Backend\AdminsController@getAnyDate')->name('admins.get_admins');
+    Route::resource('admins','Backend\AdminsController');
     ////////////////////////////////////////////////////////////     Currency
 
     Route::get('currency/get_currency','Backend\CurrencyControler@getAnyDate')->name('currency.get_currency');

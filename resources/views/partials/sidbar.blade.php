@@ -28,6 +28,17 @@
             <div class="menu_section">
                 <ul class="nav side-menu">
 
+
+
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.admins_controller')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('admins.index')}}">{{trans('backend.admins')}} </a></li>
+
+                            <li><a href="{{route('admins.create')}}">{{trans('backend.create')}} </a></li>
+
+                        </ul>
+                    </li>
+
                     <li><a><i class="fa fa-edit"></i> {{trans('backend.technical_controller')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('technical.index')}}">{{trans('backend.technical')}} </a></li>

@@ -449,6 +449,10 @@ Helper::mail($user->email,new VerifyMail($code->code));
                 'name'  => $request->name,
                 'email' => $user_email,
                 'password' => null,
+                'verification'=>1,
+                'country_id'  =>178,
+                'city_id'     =>1991
+
             ]);
             $client1 = Client::create([
                 'user_id'    => $user->id,
