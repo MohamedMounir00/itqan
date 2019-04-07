@@ -62,6 +62,7 @@ class OrderController extends Controller
             $order->category_id = $request->category_id;
             if ($express == 0)
             {
+                $order->reply='yes';
                 $order->time_id = $request->time_id;
                 $order->date = $request->date;
 
