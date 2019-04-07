@@ -6,6 +6,7 @@
 
             <a href="{{route('product.show', $item->id)}}">
                 {{unserialize($item->name)[$lang]}}
+                {{'   '.trans('backend.amount')}}
                 {{$item->pivot->amount}}
 
                 <img src="{{url($item->image)}}" alt="..."/>
