@@ -57,10 +57,10 @@ class ResetPassword extends Notification
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Reset Password Notification'))
-            ->line(Lang::getFromJson('You are receiving this email because we received a password reset request for your account.'))
-            ->action(Lang::getFromJson('Reset Password'), url(config('app.url').route('password.reset', $this->token, false)))
-            ->line(Lang::getFromJson('If you did not request a password reset, no further action is required.'));
+            ->subject(Lang::getFromJson('إعادة تعيين كلمة المرور الإخطار'))
+            ->line(Lang::getFromJson('أنت تتلقى هذا البريد الإلكتروني لأننا تلقينا طلب إعادة تعيين كلمة المرور لحسابك.'))
+            ->action(Lang::getFromJson('إعادة تعيين كلمة المرور'), url(config('app.url').route('password.reset', $this->token, false)))
+            ->line(Lang::getFromJson('إذا لم تطلب إعادة تعيين كلمة المرور ، فلا يلزم اتخاذ أي إجراء آخر.'));
     }
 
     /**

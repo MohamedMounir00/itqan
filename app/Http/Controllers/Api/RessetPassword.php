@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use App\Checkcode;
+use App\Http\Resources\Api\StatusCollection;
 use App\Mail\RessetPasseord;
 use App\User;
 use DB;
@@ -31,7 +33,9 @@ class RessetPassword extends Controller
 
         $tokenData = DB::table('password_resets')->where('email', $request->email)->first();
         $user = mt_rand(100000, 999999);
-
+        DB::table('checkcodes')->insert([
+            'code' => $user, //change 60 to any length you want
+        ]);
         $token = $tokenData->token;
         Mail::to($request->email)->send(new RessetPasseord($user));
         // $email = $request->email; // or $email = $tokenData->email;
@@ -69,6 +73,15 @@ class RessetPassword extends Controller
         // If the user shouldn't reuse the token later, delete the token
         DB::table('password_resets')->where('email', $user->email)->delete();
         return response()->json(['data'=>'paswword resseted']);
+
+    }
+    public  function checkCode(Request $request)
+    {
+        $check=Checkcode::where('code',$request->code)->first();
+        if (!$check)
+            return new StatusCollection(false,'هذا الكود غير صحيح');
+else
+    return new StatusCollection(true,'هذا الكو  صحيح');
 
     }
 
