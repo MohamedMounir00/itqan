@@ -711,4 +711,47 @@ else {
         return $pdf->stream('receipt'.$order->id.'.pdf');
       //return view('bill',compact('order','total_price','discount','price_cat1','price_product'));
     }
+
+
+    public function ordderByIdStatus($id,$status)
+    {
+
+
+        return view('order.order_user',compact('id','status'));
+    }
+
+    public function getorderForeUsere($id,$status)
+    {
+        $data = Order::where('user_id',$id)->where('status',$status)->get();
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+            })
+            ->addColumn('client', function ($data) {
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
+
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status=='new')
+                    return  trans('api.watting_techaincall');
+                elseif ($data->status=='wating')
+                    return  trans('api.new_order');
+                elseif ($data->status=='done')
+                    return  trans('api.done_order');
+                elseif ($data->status=='can_not')
+                    return  trans('api.can_not');
+                elseif ($data->status=='consultation')
+                    return  trans('api.consultation');
+                elseif ($data->status=='delay')
+                    return  trans('api.delay');
+                elseif ($data->status=='need_parts')
+                    return  trans('api.need_parts');
+                elseif ($data->status=='another_visit_works')
+                    return  trans('api.another_visit_works');
+            })
+            ->rawColumns(['action', 'client'])
+            ->make(true);
+    }
+
 }

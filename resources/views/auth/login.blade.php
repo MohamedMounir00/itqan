@@ -70,6 +70,17 @@
                             <p>جميع الحقوق محفوظه 2018</p>
                         </div>
                     </div>
+
+
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+
+
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                              استرجاع كلمه المرور ؟
+                            </a>
+                        </div>
                 </form>
             </section>
         </div>

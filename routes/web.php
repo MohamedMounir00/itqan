@@ -67,7 +67,10 @@ Route::group([
     Route::delete('get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('get_product_view.refused_request');
     Route::delete('get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('get_product_view.accpet_request');
 
-
+////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+    Route::get('order/get_order_user_view/{id}/{status}','Backend\OrderController@ordderByIdStatus')->name('order.get_order_user_view');
+    Route::get('order/get_order_user/{id}/{status}','Backend\OrderController@getorderForeUsere')->name('order.get_order_user');
     /// //////////////////////////    ///////////////////////////////////////////////////
 
     Route::post('order/assien','Backend\OrderController@assien')->name('order.assien');
