@@ -558,6 +558,8 @@ class OrderController extends Controller
                  'en' => trans('api.activeWarranty', [], 'en') . unserialize($order->category->main->name)['en'] . ''
              ];
              Helper::NotificationsBackend($order->id, $order->user_id, $name2, 0);
+             return new StatusCollection(true, trans('تم تفعيل فتره الضمان برجاء انتظار  تعين فنى وقت من الاداره'));
+
          }
          return new StatusCollection(false, trans('هذا الطلب ليس منتهى حتى يتم تفعيل فتره ضمان له'));
 
