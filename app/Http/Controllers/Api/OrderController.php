@@ -120,6 +120,9 @@ class OrderController extends Controller
             }
             if ($order->express != 1)
                 Helper::assignDynamic($order);
+            if ($order->type=='fixing')
+                Helper::assignDynamic($order);
+
 
             $name = [
                 'ar' => trans('api.order_created', [], 'ar'),
