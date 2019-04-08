@@ -40,10 +40,15 @@
                                                                     data-toggle="tab" aria-controls="profile"
                                                                     aria-expanded="false">{{trans('backend.prossing_in_order')}}</a>
                                 </li>
+                                <li role="presentation" class=""><a href="#tab_content44" role="tab" id="profile-tabb4"
+                                                                    data-toggle="tab" aria-controls="profile"
+                                                                    aria-expanded="false">{{trans('backend.actions_status')}}</a>
+                                </li>
                                 <li role="presentation" class=""><a href="#tab_content33" role="tab" id="profile-tabb3"
                                                                     data-toggle="tab" aria-controls="profile"
                                                                     aria-expanded="false">{{trans('backend.actions')}}</a>
                                 </li>
+
 
 
                             </ul>
@@ -56,6 +61,10 @@
                                      aria-labelledby="profile-tab">
                                     @include('order.tabs.status')
 
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content44"
+                                     aria-labelledby="profile-tab">
+                                    @include('order.tabs.actions_status')
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content33"
                                      aria-labelledby="profile-tab">

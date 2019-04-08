@@ -78,6 +78,11 @@ Route::group([
 ////////////////////////////////////////////////////////////////////////
     Route::get('order/get_order_user_view/{id}/{status}','Backend\OrderController@ordderByIdStatus')->name('order.get_order_user_view');
     Route::get('order/get_order_user/{id}/{status}','Backend\OrderController@getorderForeUsere')->name('order.get_order_user');
+
+    Route::get('order/get_order_technical_view/{id}/{status}','Backend\OrderController@ordderByIdStatusTechinel')->name('order.get_order_technical_view');
+    Route::get('order/get_order_technical{id}/{status}','Backend\OrderController@getorderForTechinel')->name('order.get_order_technical');
+
+
     /// //////////////////////////    ///////////////////////////////////////////////////
 
     Route::post('order/assien','Backend\OrderController@assien')->name('order.assien');

@@ -240,7 +240,7 @@ return[
 'cant_not'=>'لا يمكنك تغير حاله الطلب',
 'select_date_time'=>'برجاء اختيار تاريخ ووقت اولا',
     'close2'=>'اغلاق',
-    'admins'=>'المدرين',
+    'admins'=>'المديرين',
     'user_name_admin'=>'اسم المدير',
     'admins_controller'=>'التحكم فى المدرين',
     'get_order_project'=>'طلبات المشاريع',
@@ -251,6 +251,9 @@ return[
     'project_order_status'=>'اتخاذ قرار ',
     'desc_project_order_status'=>'يمكنك الموافقه او الرفض  على هذا الطلب من نوع مشروع ',
     'choose_time'=>' برجاء اختيار موعد جديد لطلب تصليح ' ,
+    'update_status_order_reason'=>' سبب تغير الحاله ' ,
+    'persion'=>' المسؤل عن تغير حاله الطلب ' ,
+    'actions_status'=>'  تغيرات حاله الطلب' ,
 
 
 

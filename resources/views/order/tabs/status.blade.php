@@ -1,6 +1,6 @@
-<div class="table-responsive">
+      <div class="table-responsive">
 
-    <table id="table2" class="table table-striped table-bordered bulk_action table1">
+      <table id="table2" class="table table-striped table-bordered bulk_action table1">
         <thead>
         <tr>
             <th>{{trans('backend.id_pross')}}</th>
@@ -15,12 +15,12 @@
 
        <tbody>
        @foreach($status as $a)
-<tr>
-    <td>{{$a->id}}</td>
-   <td>{{unserialize($a->message)[$lang]}}</td>
-  <td>{{$a->created_at}}</td>
+     <tr>
+     <td>{{$a->id}}</td>
+     <td>{{unserialize($a->message)[$lang]}}</td>
+    <td>{{$a->created_at}}</td>
 
-</tr>
+    </tr>
            @endforeach
         </tbody>
     </table>

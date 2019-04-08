@@ -116,41 +116,40 @@
                              aria-labelledby="home-tab">
 
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'wating'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$wating}}</span>
                                 {{trans('api.new_order')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'done'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$done}}</span>
                                 {{trans('api.done_order')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'can_not'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$can_not}}</span>
                                 {{trans('api.can_not')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'consultation'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$consultation}}</span>
                                 {{trans('api.consultation')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'delay'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$delay}}</span>
                                 {{trans('api.delay')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'need_parts'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$need_parts}}</span>
                                 {{trans('api.need_parts')}}
                             </a>
 
-                            <a class="btn btn-app">
+                            <a  href="{{route('order.get_order_technical_view',[$user->id,'another_visit_works'])}}" class="btn btn-app">
                                 <span class="badge bg-red">{{$another_visit_works}}</span>
                                 {{trans('api.another_visit_works')}}
                             </a>
-
                             <!-- end recent activity -->
 
                         </div>

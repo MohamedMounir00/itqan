@@ -44,7 +44,7 @@ class TimeController extends Controller
             'ordering'=>$request->ordering,
         ]);
         if ($data)
-        Alert::success(trans('backend.created'))->persistent("Close");
+        Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
         return redirect()->route('time_work.index');
     }

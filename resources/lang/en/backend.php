@@ -247,6 +247,10 @@ return[
     'project_order_status'=>'make a decision',
     'desc_project_order_status'=>' You can approve or reject this request from a project type ',
     'choose_time'=>' Please choose a new appointment for a repair request ' ,
+    'update_status_order_reason'=>' Cause of the change of situation ' ,
+    'persion'=>' Responsible for changing the request ' ,
+
+    'actions_status'=>' Status changes ' ,
 
 
 

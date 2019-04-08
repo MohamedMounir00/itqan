@@ -16,6 +16,7 @@ use App\NotfiyOrder;
 use App\Order;
 use App\Product;
 use App\Promotional_code;
+use App\StatusOrder;
 use App\Technical;
 use App\User;
 use Carbon\Carbon;
@@ -110,9 +111,16 @@ class OrderController extends Controller
         $order = Order::findOrFail($request->order_id);
         if ($order->status =='done'||$order->status =='can_not')
             Alert::success(trans('backend.cant_not'))->persistent("Close");
-else {
+          else {
     $order->status = $request->status;
     $order->save();
+
+              StatusOrder::create([
+                  'status'=>$request->status,
+                  'user_id'=>auth()->user()->id,
+                  'order_id'=>$order->id,
+                  'reason'=>$request->reason
+              ]);
     $name = [
         'ar' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
         'en' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['en'] . ''
@@ -121,7 +129,7 @@ else {
     Alert::success(trans('backend.updateFash'))->persistent("Close");
 
     return back();
-}
+       }
     }
 
     /**
@@ -155,6 +163,7 @@ else {
     public function show($id)
     {
         $status = NotfiyOrder::where('order_id', $id)->get();
+        $status_change = StatusOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
         $code_rel = CouponRel::where('order_id', $id)->first();
         if ($order->working_hours==0)
@@ -216,7 +225,7 @@ else {
         }
 
        // dd($total_price);
-        return view('order.show', compact('order', 'status','total_price'));
+        return view('order.show', compact('order', 'status','total_price','status_change'));
 
     }
 
@@ -731,6 +740,47 @@ else {
     public function getorderForeUsere($id,$status)
     {
         $data = Order::where('user_id',$id)->where('status',$status)->get();
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+            })
+            ->addColumn('client', function ($data) {
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
+
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status=='new')
+                    return  trans('api.watting_techaincall');
+                elseif ($data->status=='wating')
+                    return  trans('api.new_order');
+                elseif ($data->status=='done')
+                    return  trans('api.done_order');
+                elseif ($data->status=='can_not')
+                    return  trans('api.can_not');
+                elseif ($data->status=='consultation')
+                    return  trans('api.consultation');
+                elseif ($data->status=='delay')
+                    return  trans('api.delay');
+                elseif ($data->status=='need_parts')
+                    return  trans('api.need_parts');
+                elseif ($data->status=='another_visit_works')
+                    return  trans('api.another_visit_works');
+            })
+            ->rawColumns(['action', 'client'])
+            ->make(true);
+    }
+///////////////////////////////techinel in profile
+    public function ordderByIdStatusTechinel($id,$status)
+    {
+
+
+        return view('order.order_technical',compact('id','status'));
+    }
+
+    public function getorderForTechinel($id,$status)
+    {
+        $data = Order::where('technical_id',$id)->where('status',$status)->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {

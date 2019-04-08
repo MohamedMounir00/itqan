@@ -69,7 +69,7 @@ class AdminsController extends Controller
 
         ]);
         if ($user)
-            Alert::success(trans('backend.created'))->persistent("Close");
+            Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
         return redirect()->route('admins.index');
     }

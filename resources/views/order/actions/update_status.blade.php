@@ -49,6 +49,17 @@
                     </select>
                 </div>
             </div>
+
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.update_status_order_reason')}} <span
+                    >*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+
+                <textarea name="reason" class="  form-control  " required></textarea>
+                </div>
+            </div>
+        </div>
             <br>
             <div class="clearfix"></div>
             <br>
