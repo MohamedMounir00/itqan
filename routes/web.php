@@ -70,8 +70,8 @@ Route::group([
     Route::get('order/get_view_project','Backend\OrderController@get_view_project')->name('order.get_view_project');
     Route::get('order/get_order_project','Backend\OrderController@get_order_project')->name('order.get_order_project');
     /////////status admin for project
-    Route::post('order/agree_project/{id}','Backend\OrderController@agree_project')->name('order.agree_project');
-    Route::post('order/disagree_project/{id}','Backend\OrderController@disagree_project')->name('order.disagree_project');
+    Route::get('order/agree_project/{id}','Backend\OrderController@agree_project')->name('order.agree_project');
+    Route::get('order/disagree_project/{id}','Backend\OrderController@disagree_project')->name('order.disagree_project');
 
 
 ////////////////////////////////////
