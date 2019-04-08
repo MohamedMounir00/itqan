@@ -250,6 +250,7 @@ return[
     'project_disagree'=>'تم الرفض  المشروع  ',
     'project_order_status'=>'اتخاذ قرار ',
     'desc_project_order_status'=>'يمكنك الموافقه او الرفض  على هذا الطلب من نوع مشروع ',
+    'choose_time'=>' برجاء اختيار موعد جديد لطلب تصليح ' ,
 
 
 

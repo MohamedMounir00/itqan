@@ -246,6 +246,7 @@ return[
     'project_disagree'=>' The project was rejected ',
     'project_order_status'=>'make a decision',
     'desc_project_order_status'=>' You can approve or reject this request from a project type ',
+    'choose_time'=>' Please choose a new appointment for a repair request ' ,
 
 
 

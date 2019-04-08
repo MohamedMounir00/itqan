@@ -532,6 +532,14 @@ else {
                 'en' => trans('api.admin_add_prodect', [], 'en') . unserialize($order->category->main->name)['en'] . ''
             ];
             Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+            if ($order->status=='need_parts')
+            {
+                $name = [
+                    'ar' => trans('backend.choose_time', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('backend.choose_time', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                ];
+                Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
+            }
             Alert::success(trans('backend.product_done'))->persistent("Close");
             return back();
         }
