@@ -70,10 +70,15 @@ class OrderController extends Controller
             else
             {
                 $order->time_id = 10;
-
                 $order->date = "لم يتم اختيار تاريخ بعد";
+            }
+            if ($request=='project')
+            {
+                $order->type='project';
+                $order->status_admin='waiting';
 
             }
+
             $order->address_id = $request->address_id;
             $order->status = 'new';
             $order->user_id = auth()->user()->id;
