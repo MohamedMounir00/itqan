@@ -23,6 +23,7 @@ class OrderCollection extends JsonResource
         $rating=Rating::where('order_id',$this->id)->count();
         $coupon = Promotional_code::where('type_status','warranty')->where('order_id',$this->id)->first();
         $coupon2 = Promotional_code::where('type_status','coupon')->where('order_id',$this->id)->first();
+        if (isset($coupon2))
         $checkusescode = CouponRel::where('code_id', $coupon2->id)->first();
 
         $lang=$request->lang;
