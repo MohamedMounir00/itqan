@@ -64,6 +64,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('all_order_for_technical','Api\OrderTechnicalController@allOrderForTechnical');
     Route::post('update_status_order','Api\OrderTechnicalController@updateStatusOrder');
     Route::post('make_proudect_for_order','Api\OrderTechnicalController@makeProudectForOrder');
+//////////////////////////////////activeWarranty
+    Route::post('active_warranty','Api\OrderTechnicalController@activeWarranty');
 
 
 
