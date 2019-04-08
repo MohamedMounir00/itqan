@@ -66,6 +66,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('make_proudect_for_order','Api\OrderTechnicalController@makeProudectForOrder');
        //////////////////////////////////activeWarranty
     Route::post('active_warranty','Api\OrderController@activeWarranty');
+    Route::post('send_bill','Api\OrderController@bill');
 
 
 

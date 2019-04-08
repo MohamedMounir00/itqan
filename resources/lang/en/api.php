@@ -68,7 +68,9 @@ return [
     'pleas_chooce_new_time_back'=>' No technical support has been identified. Please specify another technician ',
 
     'address_update'=>'Your address has been successfully modified',
-    'activeWarranty'=>' The warranty period for the repair request has been activated  '
+    'activeWarranty'=>' The warranty period for the repair request has been activated  ',
+    'send_bil'=>'The invoice has been sent to your email address',
+
 
 
 
