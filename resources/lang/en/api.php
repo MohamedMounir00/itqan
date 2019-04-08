@@ -70,6 +70,8 @@ return [
     'address_update'=>'Your address has been successfully modified',
     'activeWarranty'=>' The warranty period for the repair request has been activated  ',
     'send_bil'=>'The invoice has been sent to your email address',
+    'order_not_finsh'=>'This request is not final '
+
 
 
 

@@ -580,6 +580,9 @@ class OrderController extends Controller
         $lang=$request->lang;
         $id=$request->order_id;
         $order = Order::with('proudect')->find($id);
+        if ($order->status!='done'||$order->status!='can_not')
+            return new StatusCollection(false, trans('api.order_not_finsh', [], $lang));
+
         $discount = 0;
         $price_product = 0;
         $code_rel = CouponRel::where('order_id', $id)->first();
