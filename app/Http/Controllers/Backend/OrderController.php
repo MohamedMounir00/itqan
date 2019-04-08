@@ -619,7 +619,7 @@ else {
 
     public function get_warranty()
     {
-        $data = Order::with('category')->where('warranty', 1)->orderBy('updated_at', 'DESC');
+        $data = Order::with('category')->where('warranty', 1)->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {

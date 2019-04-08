@@ -518,4 +518,48 @@ class OrderController extends Controller
          }
      }
 
+
+     public function activeWarranty(Request $request)
+     {
+         $id = $request->order_id;
+         $order = Order::findOrFail($id);
+         if ($order->status == 'done') {
+             $status_cde = false;
+             if ($request->code != null) {
+                 $coupon = Promotional_code::where('code', $request->code)->where('type_status','warranty')->where('order_id',$id)->first();
+                 if (!isset($coupon->id)) {
+                     $status_cde = false;
+
+                     return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
+                 } else {
+                     $checkusescode = CouponRel::where('code_id', $coupon->id)->first();
+                     if (isset($checkusescode)) {
+                         $status_cde = false;
+                         return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
+                     } else {
+                         $status_cde = true;
+
+                     }
+                 }
+             }
+             $order->status='new';
+             $order->warranty=1;
+             $order->time_id = 10;
+             $order->date = "لم يتم اختيار تاريخ بعد";
+             $order->save();
+             if ($status_cde) {
+                 CouponRel::create([
+                     'order_id' => $order->id,
+                     'code_id' => $coupon->id
+                 ]);
+             }
+             $name2 = [
+                 'ar' => trans('api.activeWarranty', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                 'en' => trans('api.activeWarranty', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+             ];
+             Helper::NotificationsBackend($order->id, $order->user_id, $name2, 0);
+         }
+         return new StatusCollection(false, trans('هذا الطلب ليس منتهى حتى يتم تفعيل فتره ضمان له'));
+
+     }
 }
