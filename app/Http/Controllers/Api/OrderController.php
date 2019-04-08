@@ -72,7 +72,7 @@ class OrderController extends Controller
                 $order->time_id = 10;
                 $order->date = "لم يتم اختيار تاريخ بعد";
             }
-            if ($request=='project')
+            if ($request->type=='project')
             {
                 $order->type='project';
                 $order->status_admin='waiting';
