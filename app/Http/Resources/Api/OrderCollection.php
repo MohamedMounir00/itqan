@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Assian;
+use App\CouponRel;
 use App\Helper\Helper;
 use App\Promotional_code;
 use App\Rating;
@@ -21,6 +22,8 @@ class OrderCollection extends JsonResource
     {
         $rating=Rating::where('order_id',$this->id)->count();
         $coupon = Promotional_code::where('type_status','warranty')->where('order_id',$this->id)->first();
+        $coupon2 = Promotional_code::where('type_status','coupon')->where('order_id',$this->id)->first();
+        $checkusescode = CouponRel::where('code_id', $coupon2->id)->first();
 
         $lang=$request->lang;
         if ($this->status=='new')
@@ -75,6 +78,7 @@ class OrderCollection extends JsonResource
             'type'=>$this->type,
             'status_admin'=>$this->status_admin,
             'expires_at'=>isset($coupon) ? $coupon->expires_at: '',
+            'discount'=>isset($checkusescode) ? $coupon2->price: '',
 
         ];
     }
