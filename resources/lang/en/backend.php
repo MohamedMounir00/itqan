@@ -239,7 +239,13 @@ return[
     'close2'=>'close',
     'user_name_admin'=>' Name Admin',
     'admins_controller'=>'Admins Controller',
-
+    'get_order_project'=>'order for projects',
+    'admin_project_agree'=>' The administration has approved your project request. Please wait for a technical appointment as soon as possible ',
+    'admin_project_disagree'=>'  The administration has rejected your project request ',
+    'project_agree'=>' Project approved ',
+    'project_disagree'=>' The project was rejected ',
+    'project_order_status'=>'make a decision',
+    'desc_project_order_status'=>' You can approve or reject this request from a project type ',
 
 
 

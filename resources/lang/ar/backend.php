@@ -243,6 +243,13 @@ return[
     'admins'=>'المدرين',
     'user_name_admin'=>'اسم المدير',
     'admins_controller'=>'التحكم فى المدرين',
+    'get_order_project'=>'طلبات المشاريع',
+    'admin_project_agree'=>'لقد قامت الاداره بالموافقه على طلب مشروعك  برجاء انتظار تعين فنى فى اقرب وقت ممكن  ',
+    'admin_project_disagree'=>'لقد قامت الاداره برفض طلب مشروعك   ',
+    'project_agree'=>'تمت الموافقه على المشروع  ',
+    'project_disagree'=>'تم الرفض  المشروع  ',
+    'project_order_status'=>'اتخاذ قرار ',
+    'desc_project_order_status'=>'يمكنك الموافقه او الرفض  على هذا الطلب من نوع مشروع ',
 
 
 

@@ -70,6 +70,7 @@
                                                 <li><a href="{{route('order.get_delay_view')}}"> {{trans('backend.delay_view')}} </a></li>
                                                 <li><a href="{{route('order.get_need_parts_view')}}">{{trans('backend.need_parts')}} </a></li>
                                                 <li><a href="{{route('order.get_another_visit_works_view')}}"> {{trans('backend.another_visit')}} </a></li>
+                                                <li><a href="{{route('order.get_view_project')}}"> {{trans('backend.get_order_project')}} </a></li>
                                             </ul>
                                         </li>
 

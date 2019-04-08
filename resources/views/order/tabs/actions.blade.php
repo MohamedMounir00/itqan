@@ -1,3 +1,28 @@
+
+@if($order->status_admin=='waiting')
+<div class="row">
+    <div class="col-md-6 col-sm-6 antigen12 " style="height: 382px">
+        <div class="x_panel">
+
+            <div class="x_content">
+
+                <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                        <h3>{{trans('backend.project_order_status')}}</h3>
+                        <p>{{trans('backend.desc_project_order_status')}} </p>
+                        <a href="{{route('order.agree_project', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.yes')}}</span></a>
+                        <a href="{{route('order.disagree_project', $order->id)}}"><span class="btn btn-danger"> {{trans('backend.no')}}</span></a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endif
+
+
+
 <div class="row">
 <div class="col-md-6 col-sm-6 antigen12 " style="height: 382px">
     <div class="x_panel">

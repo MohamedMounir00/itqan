@@ -66,6 +66,13 @@ Route::group([
     Route::get('getAnyProduct/{id}','Backend\OrderController@getAnyProduct')->name('getAnyProduct');
     Route::delete('get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('get_product_view.refused_request');
     Route::delete('get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('get_product_view.accpet_request');
+//////////////////////////////////////////////////////////////////////////////////////get_order_project
+    Route::get('order/get_view_project','Backend\OrderController@get_view_project')->name('order.get_view_project');
+    Route::get('order/get_order_project','Backend\OrderController@get_order_project')->name('order.get_order_project');
+    /////////status admin for project
+    Route::post('order/agree_project/{id}','Backend\OrderController@agree_project')->name('order.agree_project');
+    Route::post('order/disagree_project/{id}','Backend\OrderController@disagree_project')->name('order.disagree_project');
+
 
 ////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////

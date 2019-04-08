@@ -286,7 +286,7 @@ else {
 ////////////  get  all order
     public function getAnyDate()
     {
-        $data = Order::orderByDesc('id')->get();
+        $data = Order::where('status_admin','agree')->orderByDesc('id')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -321,7 +321,7 @@ else {
     // Order Requests require consulting
     public function get_consultation()
     {
-        $data = Order::with('category')->where('status', 'consultation')->orderBy('updated_at', 'DESC')->get();
+        $data = Order::with('category')->where('status_admin','agree')->where('status', 'consultation')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -337,7 +337,7 @@ else {
     ///////////////////////// Order Requests are deferred to the clients wishes
     public function get_delay()
     {
-        $data = Order::with('category')->where('status', 'delay')->orderBy('updated_at', 'DESC')->get();
+        $data = Order::with('category')->where('status_admin','agree')->where('status', 'delay')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -353,7 +353,7 @@ else {
 ////////////////////////Order Requests for spare parts
     public function get_need_parts()
     {
-        $data = Order::with('category')->where('status', 'need_parts')->orderBy('updated_at', 'DESC')->get();
+        $data = Order::with('category')->where('status_admin','agree')->where('status', 'need_parts')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -369,7 +369,7 @@ else {
 /////////////////////////////Order request for another visit
     public function get_another_visit_works()
     {
-        $data = Order::with('category')->where('status', 'another_visit_works')->orderBy('updated_at', 'DESC')->get();
+        $data = Order::with('category')->where('status_admin','agree')->where('status', 'another_visit_works')->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -387,7 +387,7 @@ else {
     public function get_finish()
     {
         $status=[ 'done', 'can_not'];
-        $data = Order::with('category')->whereIn('status',$status)->orderBy('updated_at', 'DESC')->get();
+        $data = Order::with('category')->where('status_admin','agree')->whereIn('status',$status)->orderBy('updated_at', 'DESC')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -454,7 +454,7 @@ else {
 /////////////////////////// new Order
     public function getAnyAssien()
     {
-        $data = Order::where('technical_id', null)->orderByDesc('updated_at')->get();
+        $data = Order::where('technical_id', null)->where('status_admin','agree')->orderByDesc('updated_at')->get();
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
@@ -754,4 +754,68 @@ else {
             ->make(true);
     }
 
+    public function get_view_project()
+    {
+        return view('order.get_view_project');
+
+    }
+    public function get_order_project()
+    {
+        $data = Order::where('status_admin','waiting')->where('type','project')->orderByDesc('id')->get();
+
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) {
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+            })
+            ->addColumn('client', function ($data) {
+                return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
+
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status=='new')
+                    return  trans('api.watting_techaincall');
+                elseif ($data->status=='wating')
+                    return  trans('api.new_order');
+                elseif ($data->status=='done')
+                    return  trans('api.done_order');
+                elseif ($data->status=='can_not')
+                    return  trans('api.can_not');
+                elseif ($data->status=='consultation')
+                    return  trans('api.consultation');
+                elseif ($data->status=='delay')
+                    return  trans('api.delay');
+                elseif ($data->status=='need_parts')
+                    return  trans('api.need_parts');
+                elseif ($data->status=='another_visit_works')
+                    return  trans('api.another_visit_works');
+            })
+            ->rawColumns(['action', 'client'])
+            ->make(true);
+    }
+public function agree_project($id)
+{
+    $order=Order::findOrFail($id);
+    $order->status_admin='agree';
+    $order->save();
+    $name = [
+        'ar' => trans('api.admin_project_agree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+        'en' => trans('api.admin_project_agree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+    ];
+    Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+    Alert::success(trans('backend.project_agree'))->persistent(trans('backend.close2'));
+    return back();
+}
+    public function disagree_project($id)
+    {
+        $order=Order::findOrFail($id);
+        $order->status_admin='dis_agree';
+        $order->save();
+        $name = [
+            'ar' => trans('api.admin_project_disagree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('api.admin_project_disagree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+        ];
+        Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+        Alert::success(trans('backend.project_disagree'))->persistent(trans('backend.close2'));
+        return back();
+    }
 }
