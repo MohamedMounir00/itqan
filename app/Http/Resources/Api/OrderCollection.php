@@ -69,6 +69,7 @@ class OrderCollection extends JsonResource
             'total_price_of_order'=>Helper::totalPrice($this->id),
             'total_price_of_fixing'=>Helper::fixingPrice($this->id),
             'express'=>$this->express,
+            'type'=>$this->type,
 
         ];
     }

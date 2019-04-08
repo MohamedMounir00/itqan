@@ -798,10 +798,10 @@ public function agree_project($id)
     $order->status_admin='agree';
     $order->save();
     $name = [
-        'ar' => trans('api.admin_project_agree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-        'en' => trans('api.admin_project_agree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+        'ar' => trans('backend.admin_project_agree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+        'en' => trans('backend.admin_project_agree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
     ];
-    Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+    Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
     Alert::success(trans('backend.project_agree'))->persistent(trans('backend.close2'));
     return back();
 }
@@ -811,10 +811,10 @@ public function agree_project($id)
         $order->status_admin='dis_agree';
         $order->save();
         $name = [
-            'ar' => trans('api.admin_project_disagree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-            'en' => trans('api.admin_project_disagree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+            'ar' => trans('backend.admin_project_disagree', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('backend.admin_project_disagree', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
-        Helper::Notifications($order->id, $order->user_id, $name, 'product', 0);
+        Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
         Alert::success(trans('backend.project_disagree'))->persistent(trans('backend.close2'));
         return back();
     }
