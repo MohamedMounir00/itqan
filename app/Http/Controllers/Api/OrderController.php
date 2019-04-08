@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use function PHPSTORM_META\type;
 use DB;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 class OrderController extends Controller
 {
     //
