@@ -580,70 +580,72 @@ class OrderController extends Controller
         $lang=$request->lang;
         $id=$request->order_id;
         $order = Order::with('proudect')->find($id);
-        if ($order->status!='done'||$order->status!='can_not')
-            return new StatusCollection(false, trans('api.order_not_finsh', [], $lang));
+        if ($order->status=='done'||$order->status=='can_not') {
+            $discount = 0;
+            $price_product = 0;
+            $code_rel = CouponRel::where('order_id', $id)->first();
 
-        $discount = 0;
-        $price_product = 0;
-        $code_rel = CouponRel::where('order_id', $id)->first();
-
-        if ($order->express == 1) {
-            $price_cat1 = ($order->category->price_emergency * $order->working_hours);
-            $price_cat = $price_cat1;
-        } else {
-            $price_cat1 = ($order->category->price * $order->working_hours);
-            $price_cat = $price_cat1;
-
-        }
-
-        if (isset($code_rel)) {
-            $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
-
-            if ($coupon->type == 'currency') {
-                $discount = $coupon->price . 'ريال';
-                $price_cat = ($price_cat1 - $coupon->price);
+            if ($order->express == 1) {
+                $price_cat1 = ($order->category->price_emergency * $order->working_hours);
+                $price_cat = $price_cat1;
             } else {
-                $price_cat = (($price_cat1) - ($price_cat1 * $coupon->price / 100));
-                $discount = $coupon->price . '%';
+                $price_cat1 = ($order->category->price * $order->working_hours);
+                $price_cat = $price_cat1;
 
             }
-        }
 
-        if ($order->status == 'done' || $order->status == 'can_not') {
-            if ($order->proudect->count() != 0) {
+            if (isset($code_rel)) {
+                $coupon = Promotional_code::where('id', $code_rel->code_id)->first();
 
-
-                foreach ($order->proudect as $p) {
-                    $p2['nn'] = ($p->pivot->amount * $p->price);
-
-                    $povit[] = $p2;
+                if ($coupon->type == 'currency') {
+                    $discount = $coupon->price . 'ريال';
+                    $price_cat = ($price_cat1 - $coupon->price);
+                } else {
+                    $price_cat = (($price_cat1) - ($price_cat1 * $coupon->price / 100));
+                    $discount = $coupon->price . '%';
 
                 }
-                $price_product = array_sum(array_map(
-                        function ($povit) {
-                            return $povit['nn'];
-                        }, $povit)
-                );
-
-                $total_price = ($price_product + $price_cat);
-
-            } else {
-                $total_price = $price_cat;
-
             }
+
+            if ($order->status == 'done' || $order->status == 'can_not') {
+                if ($order->proudect->count() != 0) {
+
+
+                    foreach ($order->proudect as $p) {
+                        $p2['nn'] = ($p->pivot->amount * $p->price);
+
+                        $povit[] = $p2;
+
+                    }
+                    $price_product = array_sum(array_map(
+                            function ($povit) {
+                                return $povit['nn'];
+                            }, $povit)
+                    );
+
+                    $total_price = ($price_product + $price_cat);
+
+                } else {
+                    $total_price = $price_cat;
+
+                }
+            }
+            $pdf = PDF::loadView('bill', compact('order', 'total_price', 'discount', 'price_cat1', 'price_product'));
+
+            $pdf->save(public_path('uploads/receipt/receipt') . $order->id . '.pdf');
+            $url = 'uploads/receipt/receipt' . $order->id . '.pdf';
+            $email = $order->user->email;
+            $name = $order->user->name;
+
+
+            Helper::mail($email, new Bill($url, $name));
+
+
+            return new StatusCollection(true, trans('api.send_bil', [], $lang));
         }
-        $pdf = PDF::loadView('bill', compact('order', 'total_price', 'discount', 'price_cat1', 'price_product'));
+        else
+            return new StatusCollection(false, trans('api.order_not_finsh', [], $lang));
 
-        $pdf->save(public_path('uploads/receipt/receipt') . $order->id . '.pdf');
-        $url = 'uploads/receipt/receipt' . $order->id . '.pdf';
-        $email = $order->user->email;
-        $name = $order->user->name;
-
-
-        Helper::mail($email, new Bill($url, $name));
-
-
-        return new StatusCollection(true, trans('api.send_bil', [], $lang));
     }
 
 }
