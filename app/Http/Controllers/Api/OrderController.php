@@ -531,12 +531,20 @@ class OrderController extends Controller
                      $status_cde = false;
 
                      return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
-                 } else {
+                 }   elseif($coupon->expires_at < Carbon::now())
+                 {
+                     $status_cde = false;
+                     return new StatusCollection(false, trans('هذا الكبون تم انتهاء مده صلاحيته'));
+                 }
+                 else {
                      $checkusescode = CouponRel::where('code_id', $coupon->id)->first();
                      if (isset($checkusescode)) {
                          $status_cde = false;
                          return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
-                     } else {
+
+                     }
+
+                     else {
                          $status_cde = true;
 
                      }

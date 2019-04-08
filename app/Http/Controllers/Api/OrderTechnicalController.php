@@ -105,7 +105,7 @@ class OrderTechnicalController extends Controller
               Helper::mail($order->user->email,new SendNotifyMail($coupon->code));
                 $name2 =[
                     'ar'=>trans('api.select_payment',[],'ar'),
-                    'en'=>trans('api.select_payment',[],'ar')
+                    'en'=>trans('api.select_payment',[],'en')
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
 

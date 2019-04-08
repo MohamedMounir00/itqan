@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api;
 
 use App\Assian;
 use App\Helper\Helper;
+use App\Promotional_code;
 use App\Rating;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -19,6 +20,8 @@ class OrderCollection extends JsonResource
     public function toArray($request)
     {
         $rating=Rating::where('order_id',$this->id)->count();
+        $coupon = Promotional_code::where('type_status','warranty')->where('order_id',$this->id)->first();
+
         $lang=$request->lang;
         if ($this->status=='new')
         {
@@ -71,6 +74,7 @@ class OrderCollection extends JsonResource
             'express'=>$this->express,
             'type'=>$this->type,
             'status_admin'=>$this->status_admin,
+            'expires_at'=>isset($coupon) ? $coupon->expires_at: '',
 
         ];
     }
