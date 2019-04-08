@@ -150,7 +150,7 @@ class OrderController extends Controller
 
         $oldorder = Order::with('category', 'address', 'time', 'user', 'storge', 'proudect')
             ->whereIn('status', $statuses_Array2)
-            ->where('user_id', auth()->user()->id)
+            ->where('user_id', auth()->user()->id)->where('status_admin','agree')
             ->orderByDesc('created_at')
             ->get();
         return new AllOrderCollection($courntorder, $oldorder);
