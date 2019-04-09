@@ -167,6 +167,10 @@ Route::group([
 
     /////////////////////////////////
     Route::get('bill/{id}','Backend\OrderController@bill')->name('bill');
+//////////////////////////////send mail
+
+    Route::get('send_message_view','Backend\MessageController@send_message_view')->name('send_message_view');
+    Route::post('send_message','Backend\MessageController@send_message')->name('send_message');
 
 });
 

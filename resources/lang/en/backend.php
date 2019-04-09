@@ -252,6 +252,13 @@ return[
 
     'actions_status'=>' Status changes ' ,
 
+    'send_messahe_is_success'=>' Messages successfully sent ',
+    'send_message'=>' sending messages ',
+    'title_message'=>'Title',
+    'body'=>'messages',
+    'send_to'=>'send to',
+    'send'=>'send ',
+
 
 
 

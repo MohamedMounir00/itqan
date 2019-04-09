@@ -254,7 +254,12 @@ return[
     'update_status_order_reason'=>' سبب تغير الحاله ' ,
     'persion'=>' المسؤل عن تغير حاله الطلب ' ,
     'actions_status'=>'  تغيرات حاله الطلب' ,
-
+    'send_messahe_is_success'=>'  تم ارسال الرسائل بنجاح',
+    'send_message'=>' ارسال  رسائل ',
+    'title_message'=>'عنوان الرساله',
+    'body'=>'الرساله',
+    'send_to'=>'ارسال الى',
+    'send'=>'ارسال ',
 
 
 
