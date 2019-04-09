@@ -83,6 +83,8 @@ class OrderController extends Controller
             {
                 $order->type='project';
                 $order->status_admin='waiting';
+                $order->time_id = 10;
+                $order->date = "لم يتم اختيار تاريخ بعد";
 
             }
 
@@ -127,7 +129,7 @@ class OrderController extends Controller
             }
             if ($order->express != 1&&$order->type=='fixing')
                 Helper::assignDynamic($order);
-         
+
 
 
             $name = [
