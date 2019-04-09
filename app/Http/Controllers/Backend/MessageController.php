@@ -60,4 +60,28 @@ class MessageController extends Controller
             Alert::success(trans('backend.send_messahe_is_success'))->persistent("Close");
             return back();
     }
+
+
+    public function send_message_user_view($id)
+    {
+        return view('message.send_message_to_user',compact('id'));
+    }
+
+
+
+    public function send_message_user(Request $request,$id)
+    {
+        // dd($request->all());
+
+        $body=$request->body;
+        $title=$request->title;
+
+        $mail=User::find($id);
+        Mail::to($mail->email)->send(new SendMail($body,$title));
+
+
+
+        Alert::success(trans('backend.send_messahe_is_success'))->persistent("Close");
+        return back();
+    }
 }

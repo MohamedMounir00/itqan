@@ -72,7 +72,8 @@
                 <a href="{{route('technical.edit', $user->id)}}" class="btn btn-success"><i
                             class="fa fa-edit m-right-xs"></i>&nbsp;{{trans('backend.update')}}</a>
                 <a href="{{route('technical.index')}}" class="btn btn-primary">{{trans('backend.back')}}</a>
-
+                <a href="{{route('send_message_user_view', $user->id)}}" class="btn btn-warning"><i
+                            class="fa fa-envelope-o m-right-xs"></i>&nbsp;{{trans('backend.send')}}</a>
                 <br/>
 
 

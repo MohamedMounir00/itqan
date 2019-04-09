@@ -171,7 +171,8 @@ Route::group([
 
     Route::get('send_message_view','Backend\MessageController@send_message_view')->name('send_message_view');
     Route::post('send_message','Backend\MessageController@send_message')->name('send_message');
-
+    Route::get('send_message_user_view/{id}','Backend\MessageController@send_message_user_view')->name('send_message_user_view');
+    Route::post('send_message_user/{id}','Backend\MessageController@send_message_user')->name('send_message_user');
     ////////////////////////////////contact admin
     Route::get('contact_admin/get_message','Backend\ContactAdminController@getAnyDate')->name('contact_admin.get_message');
 
