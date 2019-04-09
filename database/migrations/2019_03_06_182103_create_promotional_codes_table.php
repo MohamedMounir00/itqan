@@ -21,6 +21,8 @@ class CreatePromotionalCodesTable extends Migration
             $table->integer( 'uses' )->unsigned( )->nullable( );
             $table->timestamp( 'expires_at' );
             $table->enum('type',['percentage','currency'])->default('currency');
+            $table->integer('order_id')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
