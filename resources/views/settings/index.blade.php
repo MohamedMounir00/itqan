@@ -47,13 +47,29 @@
 
                             @if($setting->key=='make_decision_time')
                                     {{trans('backend.make_decision_time')}}
+                                @elseif($setting->key=='how_it_work_ar')
+                                        {{trans('backend.how_it_work_ar')}}
+                                @elseif($setting->key=='how_it_work_en')
+                                        {{trans('backend.how_it_work_en')}}
+                                @elseif($setting->key=='contact_us_ar')
+                                        {{trans('backend.contact_us_ar')}}
+                                @elseif($setting->key=='contact_us_en')
+                                        {{trans('backend.contact_us_en')}}
+                                @elseif($setting->key=='conditions_ar')
+                                        {{trans('backend.conditions_ar')}}
+                                @elseif($setting->key=='conditions_en')
+                                        {{trans('backend.conditions_en')}}
                                 @endif
                                 </div>
                             </th>
                             <td>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @if($setting->key=='make_decision_time')
 
                                 <input type="number"  name="{{ $setting->key }}" value="{{ $setting->value  }}" class="form-control form-control-line" required>
+                                      @else
+                                        <textarea name="{{ $setting->key }}" class="form-control form-control-line" required >{{ $setting->value  }}</textarea>
+                                        @endif
                                 </div>
                             </td>
                         </tr>

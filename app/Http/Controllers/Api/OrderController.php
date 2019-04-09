@@ -88,7 +88,7 @@ class OrderController extends Controller
 
             }
 
-            
+
             $order->address_id = $request->address_id;
             $order->status = 'new';
             $order->user_id = auth()->user()->id;

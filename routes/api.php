@@ -68,6 +68,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('active_warranty','Api\OrderController@activeWarranty');
     Route::post('send_bill','Api\OrderController@bill');
 
+///////////////////////////////////////////////contact admin
+    Route::post('send_message_admin','Api\SettingController@send_message_admin');
+
 
 
 });
@@ -84,3 +87,8 @@ Route::get('all_categories_product','Api\AllDataForOrderController@AllCatProudec
 Route::get('all_products','Api\AllDataForOrderController@AllProudect');
 Route::post('upload','Api\StorgeController@store');
 Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
+///////////////////////////////////////////////setting
+
+Route::get('condition','Api\SettingController@condition');
+Route::get('how_it_wor','Api\SettingController@how_it_wor');
+Route::get('contact','Api\SettingController@contact');

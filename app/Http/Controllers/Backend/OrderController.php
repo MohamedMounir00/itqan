@@ -573,7 +573,7 @@ class OrderController extends Controller
             ->addColumn('action', function ($data) {
                 return '
               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="refused_request/' . $data->id . '"><i class="fa fa-remove"></i></button>
-               <button class="btn btn-agree btn btn-round  btn-success"  data-remote="accpet_request/' . $data->id . '"><i class="fa fa-remove"></i></button>
+               <button class="btn btn-agree btn btn-round  btn-success"  data-remote="accpet_request/' . $data->id . '"><i class="fa fa-check"></i></button>
     
                ';
             })

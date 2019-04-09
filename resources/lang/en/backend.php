@@ -258,7 +258,12 @@ return[
     'body'=>'messages',
     'send_to'=>'send to',
     'send'=>'send ',
-
+    'how_it_work_ar'=>'How to work of arabic',
+    'how_it_work_en'=>'How to work in English',
+    'contact_us_ar'=>'Contact us in Arabic',
+    'contact_us_en'=>'Contact us in English',
+    'conditions_ar'=>' Terms and conditions in Arabic ',
+    'conditions_en'=>' Terms and not the rulers of the English ',
 
 
 
