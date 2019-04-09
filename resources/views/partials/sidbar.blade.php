@@ -21,7 +21,7 @@
                 <img src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" border="0" width="40"  class="img-circle profile_img" />
 
                 @else
-               <img src='{{auth()->user()->image}}' border="0" width="40" class="img-rounded" align="center" />
+               <img src='{{auth()->user()->image}}' border="0" width="40" align="center"  class="img-circle profile_img" />
                     @endif
             </div>
 
