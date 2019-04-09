@@ -563,6 +563,7 @@ class OrderController extends Controller
              $order->warranty=1;
              $order->time_id = 10;
              $order->date = "لم يتم اختيار تاريخ بعد";
+             $order->technical_id=null;
              $order->save();
              if ($status_cde) {
                  CouponRel::create([
