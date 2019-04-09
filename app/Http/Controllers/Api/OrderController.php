@@ -125,9 +125,9 @@ class OrderController extends Controller
                     }
                 }
             }
-            if ($order->express != 1 || $order->type=='fixing')
+            if ($order->express != 1&&$order->type=='fixing')
                 Helper::assignDynamic($order);
-
+         
 
 
             $name = [
