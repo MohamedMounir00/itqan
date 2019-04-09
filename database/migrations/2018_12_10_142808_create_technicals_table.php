@@ -18,6 +18,8 @@ class CreateTechnicalsTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('type',['technical']);
+            $table->enum('role',['junior','senior']);
+
             $table->timestamps();
         });
     }
