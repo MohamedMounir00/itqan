@@ -9,6 +9,7 @@
 namespace App\Helper;
 use App\Appseting;
 use App\Assian;
+use App\ContactAdmin;
 use App\CouponRel;
 use App\NotfiyOrder;
 use App\NotificationBackent;
@@ -333,7 +334,11 @@ return $technical->user_id ;
 
     }
 
-
+public  static function count_message()
+{
+    $count=ContactAdmin::where('seen',0)->count();
+    return $count;
+}
 
 }
 

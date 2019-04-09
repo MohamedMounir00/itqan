@@ -16,8 +16,20 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
 
-            <div class="profile_info">
+            <div class="profile_pic">
+                @if (auth()->user()->image=='')
+                <img src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" border="0" width="40"  class="img-circle profile_img" />
+
+                @else
+               <img src='{{auth()->user()->image}}' border="0" width="40" class="img-rounded" align="center" />
+                    @endif
             </div>
+
+            <div class="profile_info">
+                <span>{{trans('backend.admin')}}</span>
+            <h2>{{auth()->user()->name}}</h2>
+            </div>
+
         </div>
         <!-- /menu profile quick info -->
 
@@ -160,6 +172,14 @@
                         </ul>
                     </li>
 
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.contact_admin')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('contact_admin.index')}}">{{trans('backend.contact_admin')}} </a></li>
+
+
+                        </ul>
+                    </li>
+
                     <li><a href="{{route('holidays.index')}}"><i class="fa fa-edit"></i> {{trans('backend.day')}} <span class="fa fa-chevron-down"></span></a>
 
                     </li>
@@ -199,7 +219,7 @@
             <a data-toggle="tooltip" data-placement="top" title="{{trans('backend.close')}}" class="lock_btn">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="{{trans('admin.logout')}}" href="{{ route('logout') }}"     onclick="event.preventDefault();
+            <a data-toggle="tooltip" data-placement="top" title="{{trans('backend.logout')}}" href="{{ route('logout') }}"     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>

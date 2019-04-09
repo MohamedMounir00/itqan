@@ -264,6 +264,13 @@ return[
     'contact_us_en'=>'Contact us in English',
     'conditions_ar'=>' Terms and conditions in Arabic ',
     'conditions_en'=>' Terms and not the rulers of the English ',
+    'unseen'=>'un seen ',
+    'seen'=>'seen ',
+    'username'=>'The sender name ',
+    'contact_admin'=>' Messages to admin',
+    'ask_statud'=>' Do you want to change the status of the message',
+    'admin'=>'admin',
+
 
 
 
