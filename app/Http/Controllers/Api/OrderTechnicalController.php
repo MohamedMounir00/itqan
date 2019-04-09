@@ -108,7 +108,11 @@ class OrderTechnicalController extends Controller
                     'en'=>trans('api.select_payment',[],'en')
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
-
+                $name4 =[
+                    'ar'=>trans('api.send_compun',[],'ar').unserialize($order->category->main->name)['ar'].'',
+                    'en'=>trans('api.send_compun',[],'ar').unserialize($order->category->main->name)['en'].''
+                ];
+                Helper::Notifications($order->id,$order->user_id,$name4,'order',0);
             }
 
             $name3 = [

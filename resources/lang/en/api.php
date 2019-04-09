@@ -72,7 +72,9 @@ return [
     'send_bil'=>'The invoice has been sent to your email address',
     'order_not_finsh'=>'This request is not final ',
 
-    'done_message'=>'',
+    'done_message'=>'The message has been sent to the department and you will be answered as soon as possible',
+    'send_compun'=>'Your coupon has been sent to your email address'
+
 
 
 
