@@ -270,7 +270,8 @@ return[
     'contact_admin'=>' Messages to admin',
     'ask_statud'=>' Do you want to change the status of the message',
     'admin'=>'admin',
-
+    'fixing'=>'order fixing',
+    'project'=>'order project',
 
 
 

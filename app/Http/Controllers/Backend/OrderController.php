@@ -572,7 +572,8 @@ class OrderController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 return '
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="refused_request/' . $data->id . '"><i class="fa fa-remove"></i></button>
+                
+              <a href="' . route('refused_show', $data->id) . '" class="btn btn-round  btn-danger"><i class="fa fa-remove"></i> </a>
                <button class="btn btn-agree btn btn-round  btn-success"  data-remote="accpet_request/' . $data->id . '"><i class="fa fa-check"></i></button>
     
                ';
@@ -593,16 +594,28 @@ class OrderController extends Controller
             ->make(true);
     }
 
-    public function refused_request($id)
+
+
+    public function refused_show($id)
     {
+        return view('order.refused_show',compact('id'));
+    }
+
+    public function refused_request($id ,Request $request)
+    {
+        //dd($request-reason);
         $data = CartOrder::findOrFail($id);
-
+        $order = Order::findOrFail($data->order_id);
         $data->delete();
-        //Alert::success(trans('backend.refusedFlash'))->persistent("Close");
 
-        return response()->json([
-            'success' => 'Record has been deleted successfully!'
-        ]);
+        $name = [
+            'ar' =>  trans('backend.refusedFlash',[],'ar'). $request->reason . '',
+            'en' => trans('backend.refusedFlash',[],'en') . $request->reason . ''
+        ];
+        Helper::Notifications($order->id, $order->technical_id, $name, 'order', 0);
+        Alert::success(trans('backend.refusedFlash'))->persistent("Close");
+        return redirect()->route('order.show', $order->id);
+
     }
     public function accpet_request($id)
     {

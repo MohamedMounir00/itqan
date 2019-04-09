@@ -64,6 +64,9 @@ Route::group([
     //////////////////////////////// approve product from admin
     Route::get('get_product_view/{id}','Backend\OrderController@get_product_fromTechinel_view')->name('get_product_view');
     Route::get('getAnyProduct/{id}','Backend\OrderController@getAnyProduct')->name('getAnyProduct');
+
+        Route::get('refused_show/{id}','Backend\OrderController@refused_show')->name('refused_show');
+
     Route::delete('get_product_view/refused_request/{id}','Backend\OrderController@refused_request')->name('get_product_view.refused_request');
     Route::delete('get_product_view/accpet_request/{id}','Backend\OrderController@accpet_request')->name('get_product_view.accpet_request');
 //////////////////////////////////////////////////////////////////////////////////////get_order_project

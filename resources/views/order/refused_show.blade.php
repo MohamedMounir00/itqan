@@ -30,36 +30,25 @@
 
         <div class="x_content">
 
-            {!! Form::open(['route'=>['order.assien'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+            {!! Form::open(['route'=>['get_product_view.refused_request',$id],'method'=>'DELETE','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
 
 
 
             <div class="item form-group">
-
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="hidden" id="first-name" name="order_id" required class="form-control col-md-7 col-xs-12" value="{{$data->id}}">
-                </div>
-            </div>
-            <div class="item form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.assigen_order')}}<span
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.reason')}}<span
                     >*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select  name="technical_id" id="heard" class="form-control" required>
-                        @foreach($users as $user)
-                            <option value="{{$user->user->id}}">{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
-
-
-                        @endforeach
-                    </select>                                </div>
+                    <input type="text" id="first-name" name="reason" required class="form-control col-md-7 col-xs-12">
+                </div>
             </div>
 
 
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-3">
-                    <button id="send" type="submit" class="btn btn-success">{{trans('backend.assigen')}}</button>
-                    <a href="{{route('order.show',$data->id)}}"  class="btn btn-primary">{{trans('backend.back')}}</a>
+                    <button id="send" type="submit" class="btn btn-success">{{trans('backend.delete')}}</button>
 
                 </div>
             </div>
@@ -74,4 +63,4 @@
 
 @endsection
 
-n
+

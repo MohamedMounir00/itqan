@@ -45,8 +45,15 @@
         {{$order->desc}}
     </p>
     <br/>
+<br>
+    <h3>نوع الطلب</h3>
+    @if($order->type=='fixing')
+        {{trans('backend.fixing')}}
+    @else
+        {{trans('backend.project')}}
+    @endif
 
-    <div class="">
+        <div class="">
         <h2>{{trans('backend.status')}}</h2>
         <ul class="list-inline prod_color">
             <li>
