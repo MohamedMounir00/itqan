@@ -18,6 +18,7 @@ use App\Http\Resources\Api\StatusCollection;
 use App\Http\Resources\Api\UserCollection;
 use App\Mail\SendNotifyMail;
 use App\Mail\VerifyMail;
+use App\Technical;
 use App\User;
 use App\Verification;
 use Carbon\Carbon;
@@ -517,6 +518,22 @@ public  function ActivationClient(Request $request)
         ]);
         Helper::mail($user->email,new VerifyMail($code->code));
         return new StatusCollection(true, trans('api.send_cod_again', [], $lang));
+
+    }
+
+    public function update_location(Request $request)
+    {
+        $lang = $request->lang;
+        if (auth()->user()->role == 'technical') {
+            $technical = Technical::where('user_id', auth()->user()->id)->first();
+            $technical->update([
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]);
+            return new StatusCollection(true, trans('api.address_update', [], $lang));
+
+        }
+        return new StatusCollection(false, trans('api.not_login', [], $lang));
 
     }
 }

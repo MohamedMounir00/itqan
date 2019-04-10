@@ -34,6 +34,9 @@ Route::post('activation_client','Api\UserController@ActivationClient');
 Route::post('send_again_code','Api\UserController@SendAgainCode');
 
 Route::middleware(['auth:api'])->group(function () {
+
+        Route::post('update_location','Api\UserController@update_location');
+
     Route::get('my_profile','Api\UserController@myProfile');
     Route::get('profile_technical','Api\UserController@ProfileTechnical');
     Route::post('update_personal','Api\UserController@Updatepersonal');
