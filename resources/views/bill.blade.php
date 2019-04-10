@@ -1,8 +1,58 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 <style>
+
+    body {
+        font-family: Helvetica, sans-serif;
+    }
+
+    body {
+        font-family: "Ubuntu", sans-serif;
+        font-size: 14px;
+    }
+    .container {
+        width: 1200px;
+        margin: auto;
+    }
+
+    .invoice-title {
+        width: 100%;
+        overflow: hidden;
+    }
+    .invoice-title h2 {
+        float: left
+    }
+    .invoice-title h3 {
+        float: right
+    }
+    hr {
+        margin-bottom: 20px;
+    }
+    .in-row {
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    .in-row .col-xs-6 {
+        float: left;
+        width: 50%;
+    }
+    .panel-title {
+        text-align: center;
+        background-color: #DDD;
+        padding: 10px;
+    }
+    table {
+        width: 100%;
+        border: 2px solid #DDD;
+        text-align: center;
+    }
+    table thead tr {
+        background-color: #F7f7f7;
+        padding: 10px;
+        border: 1px solid #f00;
+    }
+
+
 
     .invoice-title h2, .invoice-title h3 {
         display: inline-block;
@@ -20,8 +70,11 @@
         border-top: 2px solid;
     }
 
+
+
 </style>
-<div class="container">
+<body>
+<div class="container" style="direction: rtl">
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
@@ -30,29 +83,29 @@
             <hr>
             <div class="row">
                 <div class="col-xs-6">
-                    <address>
+
                         <strong>مقدم الطلب:</strong><br>
                         {{$order->user->name}}<br>
                         {{$order->user->phone}}<br>
 
-                    </address>
+
                 </div>
-                <div class="col-xs-6">
-                    <address>
+                <div class="col-xs-6" >
+
                         <strong>الفنى:</strong><br>
                         {{$order->technical->name}}<br>
                         {{$order->technical->phone}}<br>
 
-                    </address>
+
                 </div>
             </div>
             <div class="row">
 
                 <div class="col-xs-6 ">
-                    <address>
+
                         <strong>تاريخ الطلب</strong><br>
                        {{$order->date}}<br><br>
-                    </address>
+
                 </div>
             </div>
         </div>
@@ -136,3 +189,4 @@
         </div>
     </div>
 </div>
+</body>

@@ -166,6 +166,8 @@ class OrderController extends Controller
         $status_change = StatusOrder::where('order_id', $id)->get();
         $order = Order::with('storge', 'proudect', 'category', 'address', 'time', 'user', 'technical')->findOrFail($id);
         $code_rel = CouponRel::where('order_id', $id)->first();
+        $coupon = Promotional_code::where('type_status','warranty')->where('order_id',$id)->first();
+
         if ($order->working_hours==0)
             $order_hores=1;
         else
@@ -225,7 +227,7 @@ class OrderController extends Controller
         }
 
        // dd($total_price);
-        return view('order.show', compact('order', 'status','total_price','status_change'));
+        return view('order.show', compact('order', 'status','total_price','status_change','coupon'));
 
     }
 
@@ -739,7 +741,7 @@ class OrderController extends Controller
 
 
         return $pdf->stream('receipt'.$order->id.'.pdf');
-      //return view('bill',compact('order','total_price','discount','price_cat1','price_product'));
+    // return view('bill',compact('order','total_price','discount','price_cat1','price_product'));
     }
 
 

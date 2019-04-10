@@ -106,6 +106,7 @@
         </ul>
     </div>
     <br/>
+
     <div class="">
         <h2>
             {{trans('backend.time_work')}}
@@ -129,6 +130,21 @@
 
         </ul>
     </div>
+    <br/>
+    @if($coupon)
+        <div class="">
+            <h2>
+                تاريخ انتهاء الضمان
+            </h2>
+            <ul class="list-inline prod_size">
+                <li>
+                    <span> {{$coupon->expires_at}}</span>
+                </li>
+
+            </ul>
+        </div>
+        <br/>
+    @endif
 
 <br>
     <div class="row">
