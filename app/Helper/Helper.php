@@ -340,5 +340,44 @@ public  static function count_message()
     return $count;
 }
 
+
+
+    public static  function totalPriceProduct($id)
+
+    {
+        $order = Order::findOrFail($id);
+
+
+
+        if ($order->proudect->count()!=0)
+        {
+
+
+            foreach ($order->proudect as $p)
+            {
+                $p2['amount']=($p->pivot->amount * $p->price);
+
+                $povit[]=$p2;
+
+            }
+            $price_product=array_sum(array_map(
+                    function($povit) {
+                        return $povit['amount'];
+                    }, $povit)
+            );
+
+
+            return $price_product.' ريال ';
+
+        }
+        else{
+            return   0;
+
+        }
+
+    }
+
+
+
 }
 

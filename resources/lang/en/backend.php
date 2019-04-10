@@ -272,7 +272,8 @@ return[
     'admin'=>'admin',
     'fixing'=>'order fixing',
     'project'=>'order project',
-
+    'refused_product'=>'refused product',
+    'reason'=>'Reason'
 
 
 

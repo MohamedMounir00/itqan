@@ -7,7 +7,7 @@
 
     <div class="x_panel">
         <div class="x_title">
-            <h3>{{trans('backend.add_techanel')}}</h3>
+            <h3>{{trans('backend.refused_product')}}</h3>
 
 
             <div class="clearfix"></div>

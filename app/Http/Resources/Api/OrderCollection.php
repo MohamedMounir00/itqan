@@ -22,9 +22,10 @@ class OrderCollection extends JsonResource
     {
         $rating=Rating::where('order_id',$this->id)->count();
         $coupon = Promotional_code::where('type_status','warranty')->where('order_id',$this->id)->first();
-        $coupon2 = Promotional_code::where('type_status','coupon')->where('order_id',$this->id)->first();
-        if (isset($coupon2))
-        $checkusescode = CouponRel::where('code_id', $coupon2->id)->first();
+
+        $checkusescode = CouponRel::where('order_id', $this->id)->first();
+        if (isset($checkusescode))
+        $coupon2 = Promotional_code::where('type_status','coupon')->find($checkusescode->code_id);
 
         $lang=$request->lang;
         if ($this->status=='new')
@@ -70,7 +71,7 @@ class OrderCollection extends JsonResource
             'time'=>new TimeCollection($this->time),
             'storge'=>StorgeCollection::collection($this->storge),
             'product'=>ProudctCollection::collection($this->proudect),
-            'total_price_of_product'=>$this->proudect->sum('price').'ريال',
+            'total_price_of_product'=>Helper::totalPriceProduct($this->id),
             'real_status'=>$this->status,
             'rating'=>($rating==0)?false:true,
             'total_price_of_order'=>Helper::totalPrice($this->id),
