@@ -75,7 +75,7 @@ Route::middleware(['auth:api'])->group(function () {
 
 });
 Route::post('password-reset', 'Api\RessetPassword@sendPasswordResetToken');
-Route::post('reset-password/{token}', 'Api\RessetPassword@resetPassword');
+Route::post('reset-password', 'Api\RessetPassword@resetPassword');
 Route::post('check-code', 'Api\RessetPassword@checkCode');
 /////////////////////////////////////////////////data for order
 

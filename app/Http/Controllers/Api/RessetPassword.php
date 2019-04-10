@@ -52,8 +52,9 @@ class RessetPassword extends Controller
     }
 
 
-    public function resetPassword(Request $request,$token)
+    public function resetPassword(Request $request)
     {
+        $token=$request->token;
         $password = $request->password;
         $tokenData = DB::table('password_resets')
             ->where('token', $token)->first();
@@ -81,7 +82,7 @@ class RessetPassword extends Controller
         if (!$check)
             return new StatusCollection(false,'هذا الكود غير صحيح');
 else
-    return new StatusCollection(true,'هذا الكو  صحيح');
+    return new StatusCollection(true,'هذا الكود  صحيح');
 
     }
 
