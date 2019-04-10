@@ -170,6 +170,12 @@ class RescheduledsController extends Controller
             'en' => trans('backend.reschedules_notify', [], 'en') . unserialize($order->category->main->name)['en'] . ''
         ];
         Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
+
+        $name2 = [
+            'ar' => trans('api.add_techainel_order', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+            'en' => trans('api.add_techainel_order', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+        ];
+        Helper::Notifications($order->id, $data->technical_id, $name2, 'order', 0);
         return response()->json([
             'success' => 'Record has been deleted successfully!'
         ]);

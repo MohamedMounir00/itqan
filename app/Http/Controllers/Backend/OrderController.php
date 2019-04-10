@@ -244,7 +244,7 @@ class OrderController extends Controller
 
         $data = Order::findOrFail($id);
 
-    $users=Technical::where('active',1)->where('role','junior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+    $users=Technical::where('user_id','!=',$data->technical_id)->where('active',1)->where('role','junior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
      * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
      + sin( radians(' . $data->address->latitude . ') ) *
      sin( radians( latitude ) ) ) ) AS distance'))
@@ -259,7 +259,7 @@ class OrderController extends Controller
 
         $data = Order::findOrFail($id);
 
-        $users=Technical::where('active',1)->where('role','senior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
+        $users=Technical::where('user_id','!=',$data->technical_id)->where('active',1)->where('role','senior')->select(DB::raw('*, ( 6367 * acos( cos( radians(' . $data->address->latitude . ') ) 
      * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $data->address->longitude . ') )
      + sin( radians(' . $data->address->latitude . ') ) *
      sin( radians( latitude ) ) ) ) AS distance'))
@@ -664,7 +664,7 @@ class OrderController extends Controller
             ->make(true);
     }
 
-///////////////////////////// bill
+    ///////////////////////////// bill
 
     public function bill($id)
     {
@@ -785,7 +785,7 @@ class OrderController extends Controller
             ->rawColumns(['action', 'client'])
             ->make(true);
     }
-///////////////////////////////techinel in profile
+     ///////////////////////////////techinel in profile
     public function ordderByIdStatusTechinel($id,$status)
     {
 
@@ -865,7 +865,7 @@ class OrderController extends Controller
             ->rawColumns(['action', 'client'])
             ->make(true);
     }
-public function agree_project($id)
+    public function agree_project($id)
 {
     $order=Order::findOrFail($id);
     $order->status_admin='agree';
