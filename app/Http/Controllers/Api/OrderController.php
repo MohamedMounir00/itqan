@@ -565,6 +565,15 @@ class OrderController extends Controller
              $order->date = "لم يتم اختيار تاريخ بعد";
              $order->technical_id=null;
              $order->save();
+             $products = CartOrder::where('order_id',$order->id)->get();
+
+             foreach ($products as $product ) {
+
+                 $product->update([
+                     'warranty' => true,
+
+                 ]);
+             }
              if ($status_cde) {
                  CouponRel::create([
                      'order_id' => $order->id,

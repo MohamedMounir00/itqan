@@ -13,7 +13,8 @@ class CartOrder extends Model
         'status',
         'amount',
         'user_id',
-        'status_admin'
+        'status_admin',
+        'warranty'
         ];
 
     public function product(){
