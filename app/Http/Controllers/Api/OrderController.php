@@ -587,8 +587,46 @@ class OrderController extends Controller
              Helper::NotificationsBackend($order->id, $order->user_id, $name2, 0);
              return new StatusCollection(true, trans('تم تفعيل فتره الضمان برجاء انتظار  تعين فنى وقت من الاداره'));
 
+         }else{
+
+             if ($request->code != null)
+             {
+                 $coupon = Promotional_code::where('code', $request->code)->where('type_status','coupon')->first();
+                 if (!isset($coupon->id))
+                 {
+                     $status_cde=false;
+
+                     return new StatusCollection(false, trans('هذا الكبون غير صحيح'));
+                 }
+                 elseif($coupon->expires_at < Carbon::now())
+                 {
+                     $status_cde = false;
+                     return new StatusCollection(false, trans('هذا الكبون تم انتهاء مده صلاحيته'));
+                 }
+                 else{
+                     $checkusescode = CouponRel::where('code_id', $coupon->id)->first();
+                     if (isset($checkusescode))
+                     {
+                         $status_cde=false;
+                         return new StatusCollection(false, trans('هذا الكبون مستخدم من قبل'));
+                     }
+                     else{
+                         $status_cde=true;
+
+                     }
+                 }
+             }
+             if ($status_cde) {
+                 CouponRel::create([
+                     'order_id' => $order->id,
+                     'code_id' => $coupon->id
+                 ]);
+             }
+
+             return new StatusCollection(true, trans('تم تفعيل كوبون الخصم الخاص بك'));
+
          }
-         return new StatusCollection(false, trans('هذا الطلب ليس منتهى حتى يتم تفعيل فتره ضمان له'));
+        // return new StatusCollection(false, trans('هذا الطلب ليس منتهى حتى يتم تفعيل فتره ضمان له'));
 
      }
 
