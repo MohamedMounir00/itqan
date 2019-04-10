@@ -25,7 +25,7 @@ class OrderCollection extends JsonResource
 
         $checkusescode = CouponRel::where('order_id', $this->id)->first();
         if (isset($checkusescode))
-        $coupon2 = Promotional_code::where('type_status','coupon')->find($checkusescode->code_id);
+        $coupon2 = Promotional_code::find($checkusescode->code_id);
 
         $lang=$request->lang;
         if ($this->status=='new')
