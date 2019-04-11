@@ -234,7 +234,7 @@ class RescheduledsController extends Controller
 
 
             ]);
-                     $time=Time::find();
+                     $time=Time::find($request->time_id);
                if ($time =='am')
                 $timelang=  trans('api.from',[],$lang1).$time->from .trans('api.to',[],$lang1).$time->to .'-'.trans('api.am',[],$lang1);
 
