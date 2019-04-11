@@ -75,6 +75,7 @@ return [
     'done_message'=>'The message has been sent to the department and you will be answered as soon as possible',
     'send_compun'=>'Your coupon has been sent to your email address',
 
+    'can_not_update'=>' Order closed You can not accept or reject any products '
 
 
 

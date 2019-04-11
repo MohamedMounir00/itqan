@@ -286,6 +286,9 @@ class OrderController extends Controller
         $order_id = $request->order_id;
         $order = Order::findOrFail($order_id);
         $status = $request->status;
+        if ($order->status=='done'||$order->status=='can_not')
+            return new StatusCollection(false, trans('api.can_not_update', [], $lang));
+
         if ($status == 'yes') {
 
 
