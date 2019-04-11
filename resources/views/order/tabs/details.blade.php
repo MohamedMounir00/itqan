@@ -46,7 +46,8 @@
     </p>
     <br/>
 <br>
-    <h3>نوع الطلب</h3>
+    <h3>        {{trans('backend.type_order')}}
+    </h3>
     @if($order->type=='fixing')
         {{trans('backend.fixing')}}
     @else

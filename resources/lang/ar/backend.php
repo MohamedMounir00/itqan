@@ -275,7 +275,8 @@ return[
     'fixing'=>'طلب تصليح',
     'project'=>'طلب مشروع',
     'refused_product'=>'رفض منتجات الفنى',
-    'reason'=>'السبب'
+    'reason'=>'السبب',
+    'type_order'=>'نوع الطلب'
 
 
 

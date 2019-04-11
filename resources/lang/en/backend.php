@@ -107,6 +107,8 @@ return[
     'desc_assigen'=>'All the recruitment processes of the technicians made on this application ',
     'desc_store'=>'Add products to this application ',
     'add_techanel_period'=>'assign technical',
+    'desc_add_techanel'=>' You can assign a technician to this application ',
+
     'desc_add_techanel_period'=>'You can choose a technician during the warranty period',
     'footer'=>'All rights reserved 2018',
     'title'=>'Itqan',
@@ -273,8 +275,10 @@ return[
     'fixing'=>'order fixing',
     'project'=>'order project',
     'refused_product'=>'refused product',
-    'reason'=>'Reason'
+    'reason'=>'Reason',
 
+    'admins'=>'admins',
+    'type_order'=>'type of order'
 
 
 

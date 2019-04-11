@@ -625,7 +625,10 @@ class OrderController extends Controller
         $order = Order::findOrFail($data->order_id);
 
         $data->status_admin=true;
-        $data->save();
+       // $data->save();
+        if ($data->save())
+            NotfiyOrder::where('order_id',$data->order_id)->where('type','product')->delete();
+
     //    Alert::success(trans('backend.accpetdFlash'))->persistent("Close");
                 $name = [
                     'ar' =>  trans('api.tech_add_prodect',[],'ar'). unserialize($order->category->main->name)['ar'] . '',
