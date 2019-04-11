@@ -258,7 +258,7 @@ return $technical->user_id ;
 ///////////////////////// get notifcation in backend
      public static  function  Get_four_Notify()
 {
-   $notfit= NotificationBackent::where('seen',0)->orderBy('created_at','desc')->take(4)->get();
+   $notfit= NotificationBackent::where('seen',0)->orderBy('created_at','desc')->take(7)->get();
    return  $notfit;
 }
 

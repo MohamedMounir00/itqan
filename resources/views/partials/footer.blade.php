@@ -66,7 +66,8 @@
 
 
 <script>
-    $('#notify').on('click',function(){
+
+        $(document).on('click','#notify',function(e){
         var notify_id = $(this).attr("num");
         $.post("{{route('seen')}}",{id:notify_id},function(data){
 
