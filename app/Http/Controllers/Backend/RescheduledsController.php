@@ -219,6 +219,7 @@ class RescheduledsController extends Controller
     {
         $order=Order::find($id);
 
+        $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale();
 
             $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
 
@@ -232,9 +233,15 @@ class RescheduledsController extends Controller
 
 
             ]);
+                     $time=Time::find();
+               if ($time =='am')
+                $timelang=  trans('api.from',[],$lang).$time->from .trans('api.to',[],$lang).$time->to .'-'.trans('api.am',[],$lang);
+
+              else
+                  $timelang=trans('api.from',[],$lang).$time->from .trans('api.to',[],$lang).$time->to .'-'.trans('api.pm',[],$lang);
             $name = [
-                'ar' => trans('backend.date_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-                'en' => trans('backend.date_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . ''
+                'ar' => trans('backend.date_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . $timelang.' '.$request->date,
+                'en' => trans('backend.date_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . $timelang.' '.$request->date
             ];
             Helper::Notifications($order->id, $order->user_id, $name, 'reschedule', 0);
             if ($data)
