@@ -192,7 +192,7 @@ Helper::mail($user->email,new VerifyMail($code->code));
         if ($user->client)
         {
             if ($user->verification!=true)
-                return new StatusCollection(false, trans('api.login_false_activation', [], $lang),'verification');
+                return new StatusCollection(false, trans('api.login_false_activation', [], $lang),$user->id);
         }
 
 
