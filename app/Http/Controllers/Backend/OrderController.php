@@ -611,7 +611,7 @@ class OrderController extends Controller
         $data->delete();
 
         $name = [
-            'ar' =>  trans('backend.refusedFlash',[],'ar'). $request->reason . '',
+            'ar' =>  trans('backend.refusedFlash_ression',[],'ar'). $request->reason . '',
             'en' => trans('backend.refusedFlash',[],'en') . $request->reason . ''
         ];
         Helper::Notifications($order->id, $order->technical_id, $name, 'order', 0);

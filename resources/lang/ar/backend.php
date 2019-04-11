@@ -280,7 +280,7 @@ return[
     'disactive'=>'غير مفعل',
     'active_client'=>'مفعل',
     'verification'=>'حاله التفعيل',
-
+'refusedFlash_ression'=>' تم رفض المنتج الخاص بك : بسبب  '
 
 
 

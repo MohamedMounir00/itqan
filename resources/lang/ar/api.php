@@ -11,6 +11,8 @@ return [
     'accpeted_product' => '    تم قبول المنتجات الخاص بطلب تصليح  ',
     'status_uodated' => '   تم تغير حاله طلب تصليح ',
     'status_uodated_order' => '  تم تغير حاله الطلب ',
+    'status_uodated_chose' => ' برجاء اختيار موعد جديد   تم تغير حاله طلب تصليح ',
+
     'no_premssion' => ' ليس لديك صلاحيه ',
     'can_not_add_product' => ' هذ الطلب لايمكن اضافه منتجات فيه  ',
     'tech_add_prodect' => ' لقد قام الفنى باضافه منتجات الى طلب تصليح ',

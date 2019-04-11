@@ -95,3 +95,5 @@ Route::post('serch_product','Api\AllDataForOrderController@serchProduct');
 Route::get('condition','Api\SettingController@condition');
 Route::get('how_it_wor','Api\SettingController@how_it_wor');
 Route::get('contact','Api\SettingController@contact');
+
+

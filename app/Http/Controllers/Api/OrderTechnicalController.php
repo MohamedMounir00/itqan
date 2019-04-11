@@ -58,11 +58,7 @@ class OrderTechnicalController extends Controller
                 'order_id'=>$id,
                 'reason'=>$reason
             ]);
-            $name =[
-                'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
-                'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
-            ];
-            Helper::Notifications($order->id,$order->user_id,$name,'status',0);
+
             if ($status =='can_not' || $status=='done')
 
             {
@@ -113,6 +109,18 @@ class OrderTechnicalController extends Controller
                     'en'=>trans('api.send_compun',[],'ar').unserialize($order->category->main->name)['en'].''
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name4,'order',0);
+                $name =[
+                    'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].'',
+                    'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].''
+                ];
+                Helper::Notifications($order->id,$order->user_id,$name,'status',0);
+            }
+            else{
+                $name =[
+                    'ar'=>trans('api.status_uodated_chose',[],'ar').unserialize($order->category->main->name)['ar'].'',
+                    'en'=>trans('api.status_uodated_chose',[],'ar').unserialize($order->category->main->name)['en'].''
+                ];
+                Helper::Notifications($order->id,$order->user_id,$name,'status',0);
             }
 
             $name3 = [
