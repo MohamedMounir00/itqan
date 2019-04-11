@@ -270,7 +270,7 @@
                                         >*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="first-name" " required
+                                        <input type="text" id="first-name"  required
                                                class="form-control col-md-7 col-xs-12" value="{{trans('backend.company_of') . unserialize($user->client->company->name)[$lang]}}" disabled>
 
                                     </div>
