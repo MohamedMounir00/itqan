@@ -341,6 +341,32 @@ public  static function count_message()
 }
 
 
+    public static function orderStatus($key, $order_id, $lang) {
+        if ($key=='new')
+        {
+            $assin = Assian::where('order_id',$order_id)->where('status','watting')->latest()->first();
+            if ($assin)
+                $status=trans('api.done_technical',[],$lang);
+            else
+                $status=trans('api.watting_techaincall',[],$lang);
+        }
+        elseif ($key=='wating')
+            $status=trans('api.new_order',[],$lang);
+        elseif ($key=='done')
+            $status=trans('api.done_order',[],$lang);
+        elseif ($key=='can_not')
+            $status=trans('api.can_not',[],$lang);
+        elseif ($key=='consultation')
+            $status=trans('api.consultation',[],$lang);
+        elseif ($key=='delay')
+            $status=trans('api.delay',[],$lang);
+        elseif ($key=='need_parts')
+            $status=trans('api.need_parts',[],$lang);
+        elseif ($key=='another_visit_works')
+            $status=trans('api.another_visit_works',[],$lang);
+
+        return $status;
+    }
 
     public static  function totalPriceProduct($id)
 

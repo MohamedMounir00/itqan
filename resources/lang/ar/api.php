@@ -9,7 +9,7 @@ return [
     'accpeted_techaincal' => '  تم قبول الفنى لهذه المهمه ',
     'refused_techaincal' => '  تم رفض الفنى لهذه المهمه ',
     'accpeted_product' => '    تم قبول المنتجات الخاص بطلب تصليح  ',
-    'status_uodated' => '   تم تغير حاله طلب تصليح ',
+    'status_uodated' => '   تم تغير حاله طلب ',
     'status_uodated_order' => '  تم تغير حاله الطلب ',
     'status_uodated_chose' => ' برجاء اختيار موعد جديد   تم تغير حاله طلب تصليح ',
 

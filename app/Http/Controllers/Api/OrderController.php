@@ -48,7 +48,7 @@ class OrderController extends Controller
                  elseif($coupon->expires_at < Carbon::now())
                  {
                      $status_cde = false;
-                     return new StatusCollection(false, trans('هذا الكبون تم انتهاء مده صلاحيته'));
+                     return new StatusCollection(false, trans('هذا الكود تم انتهاء مده صلاحيته'));
                  }
                  else{
                      $checkusescode = CouponRel::where('code_id', $coupon->id)->first();
