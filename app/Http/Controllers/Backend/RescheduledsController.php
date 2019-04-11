@@ -219,7 +219,8 @@ class RescheduledsController extends Controller
     {
         $order=Order::find($id);
 
-        $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale();
+        $lang1= 'ar';
+        $lang2= 'en';
 
             $count=Rescheduled::where('order_id',$id)->where('reply',0)->count();
 
@@ -235,10 +236,10 @@ class RescheduledsController extends Controller
             ]);
                      $time=Time::find();
                if ($time =='am')
-                $timelang=  trans('api.from',[],$lang).$time->from .trans('api.to',[],$lang).$time->to .'-'.trans('api.am',[],$lang);
+                $timelang=  trans('api.from',[],$lang1).$time->from .trans('api.to',[],$lang1).$time->to .'-'.trans('api.am',[],$lang1);
 
               else
-                  $timelang=trans('api.from',[],$lang).$time->from .trans('api.to',[],$lang).$time->to .'-'.trans('api.pm',[],$lang);
+                  $timelang=trans('api.from',[],$lang2).$time->from .trans('api.to',[],$lang2).$time->to .'-'.trans('api.pm',[],$lang2);
             $name = [
                 'ar' => trans('backend.date_notify_update', [], 'ar') . unserialize($order->category->main->name)['ar'] . $timelang.' '.$request->date,
                 'en' => trans('backend.date_notify_update', [], 'en') . unserialize($order->category->main->name)['en'] . $timelang.' '.$request->date
