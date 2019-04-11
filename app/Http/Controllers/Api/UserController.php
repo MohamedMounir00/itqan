@@ -410,7 +410,7 @@ Helper::mail($user->email,new VerifyMail($code->code));
 
         }
         else{
-            $user_email = $request->email ?: "{$request->id}@{$request->name}.com";
+            $user_email = $request->email ?: "{$request->id}@Itqan.com";
             $user= User::where('email',$user_email)->first();
 
         }
@@ -442,8 +442,8 @@ Helper::mail($user->email,new VerifyMail($code->code));
 
 
         }else{
-            $user_email = $request->email ?: "{$request->id}@{$request->name}.com";
-//return $user_email;
+            $user_email = $request->email ?: "{$request->id}@Itqan.com";
+              //return $user_email;
             // $nameParts = $this->getNameParts($request->getName());
 
             $user = User::create([
