@@ -252,7 +252,7 @@
                             <a href="{{route('bill', $order->id)}}"><span class="btn btn-primary"> {{trans('backend.print')}}</span></a>
 
                         @else
-                            <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
+                            <a><span class="btn btn-primary disabled"> {{trans('backend.print')}}</span></a>
 
                         @endif
 

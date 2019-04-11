@@ -121,6 +121,7 @@ class ClientsController extends Controller
         $data->name     = $request->name;
         $data->email      = $request->email;
         $data->phone       = $request->phone;
+        $data->verification       = $request->verification;
         $data->image       = Helper::UpdateImage($request,'uploads/avatars/','image',$data->image);
         $data->country_id  = $request->country_id;
         if (isset($request->password))

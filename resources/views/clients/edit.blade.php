@@ -74,7 +74,18 @@
 
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.verification')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select  name="verification" id="heard" class="form-control"  required>
+                                        <option value="1" {{($data->verification=='1')?'selected':''}}>{{trans('backend.active_client')}}</option>
+                                        <option value="0" {{($data->verification=='0')?'selected':''}}>{{trans('backend.disactive')}}</option>
 
+                                    </select>
+                                </div>
+                            </div>
                             @if($data->client->type=='personal')
 
                             <div class="item form-group">

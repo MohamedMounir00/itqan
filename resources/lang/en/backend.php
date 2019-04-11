@@ -278,8 +278,15 @@ return[
     'reason'=>'Reason',
 
     'admins'=>'admins',
-    'type_order'=>'type of order'
-
+    'type_order'=>'type of order',
+    'disactive'=>'Not enabled',
+    'active_client'=>'enabled',
+    'verification'=>'Activation status',
+    'desc_bill'=>'Here you can print the invoice for this application and send it directly to the customer',
+'bill'=>'bill',
+    'print'=>'Print',
+    'update_time_date'=>'Modify the date and time of the request',
+    'desc_update_time_date'=>'You can modify the order time and date and wait for the customer reply',
 
 
 

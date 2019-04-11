@@ -201,7 +201,7 @@
 
     <div class="">
         <div class="product_price">
-            <h1 class="price">{{$total_price}} ریال</h1>
+            <h1 class="price">{{$total_price}} {{unserialize($order->category->currency->name)[$lang]}}</h1>
             <br>
         </div>
     </div>

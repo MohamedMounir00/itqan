@@ -276,7 +276,10 @@ return[
     'project'=>'طلب مشروع',
     'refused_product'=>'رفض منتجات الفنى',
     'reason'=>'السبب',
-    'type_order'=>'نوع الطلب'
+    'type_order'=>'نوع الطلب',
+    'disactive'=>'غير مفعل',
+    'active_client'=>'مفعل',
+    'verification'=>'حاله التفعيل',
 
 
 

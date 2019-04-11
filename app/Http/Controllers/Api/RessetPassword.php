@@ -73,7 +73,7 @@ class RessetPassword extends Controller
 
         // If the user shouldn't reuse the token later, delete the token
         DB::table('password_resets')->where('email', $user->email)->delete();
-        return response()->json(['data'=>'paswword resseted']);
+        return response()->json(['data'=>'تم اعاده تعين كلمه المرور']);
 
     }
     public  function checkCode(Request $request)
