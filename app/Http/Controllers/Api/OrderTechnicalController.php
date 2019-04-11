@@ -59,22 +59,19 @@ class OrderTechnicalController extends Controller
                 'reason'=>$reason
             ]);
 
-            if ($status =='can_not' || $status=='done')
-
-            {
+            if ($status =='can_not' || $status=='done') {
                 $key = mt_rand(100000, 999999);
-                $order->working_hours=$working_hours;
+                $order->working_hours = $working_hours;
                 $order->save();
-                if ($status== 'can_not')
-                {
-                    $coupon=Promotional_code::create([
+                if ($status == 'can_not') {
+                    $coupon = Promotional_code::create([
 
-                        'price'=>'10',
-                        'type'=>'currency',
-                        'code'=>$key,
-                        'expires_at'=>$date,
-                        'type_status'=>'coupon',
-                        'order_id'=>$order->id,
+                        'price' => '10',
+                        'type' => 'currency',
+                        'code' => $key,
+                        'expires_at' => $date,
+                        'type_status' => 'coupon',
+                        'order_id' => $order->id,
 
                     ]);
 
@@ -82,32 +79,42 @@ class OrderTechnicalController extends Controller
                         'ar' => trans('api.active_counpn', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
                         'en' => trans('api.active_counpn', [], 'en') . unserialize($order->category->main->name)['en'] . ''
                     ];
-                    Helper::NotificationsBackend($order->id,$order->user_id,$name4,0);
-                }
-                elseif($status=='done'){
-                    $coupon=Promotional_code::create([
-                        'price'=>'100',
-                        'type'=>'percentage',
-                        'code'=>$key,
-                        'expires_at'=>$date,
-                        'type_status'=>'warranty',
-                        'order_id'=>$order->id,
+                    Helper::NotificationsBackend($order->id, $order->user_id, $name4, 0);
+                } elseif ($status == 'done') {
+                    $coupon = Promotional_code::create([
+                        'price' => '100',
+                        'type' => 'percentage',
+                        'code' => $key,
+                        'expires_at' => $date,
+                        'type_status' => 'warranty',
+                        'order_id' => $order->id,
 
                     ]);
 
                 }
 
-            //    Mail::to()->send(new SendNotifyMail($coupon->code));
-              Helper::mail($order->user->email,new SendNotifyMail($coupon->code));
-                $name2 =[
-                    'ar'=>trans('api.select_payment',[],'ar'),
-                    'en'=>trans('api.select_payment',[],'en')
+                //    Mail::to()->send(new SendNotifyMail($coupon->code));
+                Helper::mail($order->user->email, new SendNotifyMail($coupon->code));
+                $name2 = [
+                    'ar' => trans('api.select_payment', [], 'ar'),
+                    'en' => trans('api.select_payment', [], 'en')
                 ];
-                Helper::Notifications($order->id,$order->user_id,$name2,'payment',0);
-                $name4 =[
-                    'ar'=>trans('api.send_compun',[],'ar').unserialize($order->category->main->name)['ar'].'',
-                    'en'=>trans('api.send_compun',[],'ar').unserialize($order->category->main->name)['en'].''
+                Helper::Notifications($order->id, $order->user_id, $name2, 'payment', 0);
+                $name4 = [
+                    'ar' => trans('api.send_compun', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
+                    'en' => trans('api.send_compun', [], 'ar') . unserialize($order->category->main->name)['en'] . ''
                 ];
+            }
+
+            $name3 = [
+                'ar' => trans('api.status_uodated_order', [], 'ar') . unserialize($order->category->main->name)['ar'] .' الي ' . Helper::orderStatus($order->status, $order->id, $lang),
+                'en' => trans('api.status_uodated_order', [], 'en') . unserialize($order->category->main->name)['en'] .' To ' . Helper::orderStatus($order->status, $order->id, $lang)
+            ];
+            Helper::NotificationsBackend($order->id,$order->user_id,$name3,0);
+
+
+            if ($status =='can_not' || $status=='done')
+            {
                 Helper::Notifications($order->id,$order->user_id,$name4,'order',0);
                 $name =[
                     'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].' الي ' . Helper::orderStatus($order->status, $order->id, $lang),
@@ -123,11 +130,6 @@ class OrderTechnicalController extends Controller
                 Helper::Notifications($order->id,$order->user_id,$name,'status',0);
             }
 
-            $name3 = [
-                'ar' => trans('api.status_uodated_order', [], 'ar') . unserialize($order->category->main->name)['ar'] .' الي ' . Helper::orderStatus($order->status, $order->id, $lang),
-                'en' => trans('api.status_uodated_order', [], 'en') . unserialize($order->category->main->name)['en'] .' To ' . Helper::orderStatus($order->status, $order->id, $lang)
-            ];
-            Helper::NotificationsBackend($order->id,$order->user_id,$name3,0);
             return new StatusCollection(true, trans('api.status_uodated_order',[],$lang));
         }
         return new StatusCollection(false, trans('api.no_premssion',[],$lang));

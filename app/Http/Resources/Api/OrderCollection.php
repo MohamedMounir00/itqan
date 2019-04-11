@@ -80,7 +80,7 @@ class OrderCollection extends JsonResource
             'type'=>$this->type,
             'warranty'=>$this->warranty,
             'status_admin'=>$this->status_admin,
-            'expires_at'=>isset($coupon) ? $coupon->expires_at: '',
+            'expires_at'=>isset($coupon) ? date('Y-m-d' , strtotime($coupon->expires_at)): '',
             'discount'=>isset($checkusescode) ? $coupon2->price: 0,
 
         ];
