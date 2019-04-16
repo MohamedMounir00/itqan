@@ -538,6 +538,8 @@ class OrderController extends Controller
 
                 ]);
             }
+            
+                NotfiyOrder::where('order_id',$order->id)->where('type','product')->delete();
             $name = [
                 'ar' => trans('api.admin_add_prodect', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
                 'en' => trans('api.admin_add_prodect', [], 'en') . unserialize($order->category->main->name)['en'] . ''
