@@ -189,14 +189,15 @@ Helper::mail($user->email,new VerifyMail($code->code));
 
         if (!$user)
             return new StatusCollection(false, trans('api.login_false', [], $lang));
-        if ($user->client)
-        {
-            if ($user->verification!=true)
-                return new StatusCollection(false, trans('api.login_false_activation', [], $lang),$user->id);
-        }
+
 
 
         if (Hash::check($request->password, $user->password)) {
+            if ($user->client)
+            {
+                if ($user->verification!=true)
+                    return new StatusCollection(false, trans('api.login_false_activation', [], $lang),$user->id);
+            }
             $client = \Laravel\Passport\Client::where('password_client', 1)->first();
 
             $request->request->add([
