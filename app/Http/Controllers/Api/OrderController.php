@@ -198,12 +198,12 @@ class OrderController extends Controller
         $time=$order->time_id;
 
         $assin = Assian::findOrFail($assin_id);
-        $technical = Assian::where('technical_id',$technical_id)->where('status', 'agree')
-            ->whereHas('order', function ($q)use($date,$time) {
+        $technical = User::
+        whereHas('check', function ($q)use($date,$time,$technical_id) {
 
-                $q->where('time_id','=', $time)->where('date','=',$date);
+            $q->where('time_id', $time)->where('date',$date)->where('technical_id',$technical_id);
 
-            })->count();
+        })->count();
             if ($technical!=0)
             {
                 $assin->update([
