@@ -112,7 +112,7 @@ class OrderController extends Controller
         if ($order->status =='done'||$order->status =='can_not')
             Alert::success(trans('backend.cant_not'))->persistent("Close");
           else {
-          
+
                $order->status = $request->status;
                $order->save();
 
@@ -124,7 +124,7 @@ class OrderController extends Controller
               ]);
     $name = [
         'ar' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-        'en' => trans('api.status_uodated', [], 'ar') . unserialize($order->category->main->name)['en'] . ''
+        'en' => trans('api.status_uodated', [], 'en') . unserialize($order->category->main->name)['en'] . ''
     ];
     Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
     Alert::success(trans('backend.updateFash'))->persistent("Close");
