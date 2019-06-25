@@ -112,11 +112,7 @@ class OrderController extends Controller
         if ($order->status =='done'||$order->status =='can_not')
             Alert::success(trans('backend.cant_not'))->persistent("Close");
           else {
-              if ($request->status =='done'|| $request->status =='can_not')
-              {
-                  $order->technical_id=null;
-                  $order->save();
-              }
+          
                $order->status = $request->status;
                $order->save();
 

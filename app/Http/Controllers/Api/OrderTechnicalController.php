@@ -62,8 +62,7 @@ class OrderTechnicalController extends Controller
             if ($status =='can_not' || $status=='done') {
                 $key = mt_rand(100000, 999999);
                 $order->working_hours = $working_hours;
-                $order->technical_id=null;
-                $order->save();
+
                 if ($status == 'can_not') {
                     $coupon = Promotional_code::create([
 
