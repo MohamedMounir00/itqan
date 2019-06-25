@@ -104,7 +104,7 @@ class OrderTechnicalController extends Controller
                 Helper::Notifications($order->id, $order->user_id, $name2, 'payment', 0);
                 $name4 = [
                     'ar' => trans('api.send_compun', [], 'ar') . unserialize($order->category->main->name)['ar'] . '',
-                    'en' => trans('api.send_compun', [], 'ar') . unserialize($order->category->main->name)['en'] . ''
+                    'en' => trans('api.send_compun', [], 'en') . unserialize($order->category->main->name)['en'] . ''
                 ];
             }
 
@@ -120,14 +120,14 @@ class OrderTechnicalController extends Controller
                 Helper::Notifications($order->id,$order->user_id,$name4,'order',0);
                 $name =[
                     'ar'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['ar'].' الي ' . Helper::orderStatus($order->status, $order->id, $lang),
-                    'en'=>trans('api.status_uodated',[],'ar').unserialize($order->category->main->name)['en'].' To ' . Helper::orderStatus($order->status, $order->id, $lang)
+                    'en'=>trans('api.status_uodated',[],'en').unserialize($order->category->main->name)['en'].' To ' . Helper::orderStatus($order->status, $order->id, $lang)
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name,'status',0);
             }
             else{
                 $name =[
                     'ar'=>trans('api.status_uodated_chose',[],'ar').unserialize($order->category->main->name)['ar'].' الي ' . Helper::orderStatus($order->status, $order->id, $lang),
-                    'en'=>trans('api.status_uodated_chose',[],'ar').unserialize($order->category->main->name)['en'].' To ' . Helper::orderStatus($order->status, $order->id, $lang)
+                    'en'=>trans('api.status_uodated_chose',[],'en').unserialize($order->category->main->name)['en'].' To ' . Helper::orderStatus($order->status, $order->id, $lang)
                 ];
                 Helper::Notifications($order->id,$order->user_id,$name,'status',0);
             }
