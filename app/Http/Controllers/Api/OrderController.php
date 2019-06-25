@@ -272,7 +272,7 @@ class OrderController extends Controller
 
     /////////////////////////////////////////////getproduct Not active add By Techaincal
 
-    public function getproduct(Request $request)
+     public function getproduct(Request $request)
     {
         $id = $request->order_id;
         $order = Order::findOrFail($id);
@@ -280,7 +280,7 @@ class OrderController extends Controller
         return CardProductCollection::collection($cart);
     }
 
-    public function updateproduct(Request $request)
+     public function updateproduct(Request $request)
     {
         $lang = $request->lang;
         $order_id = $request->order_id;
@@ -331,7 +331,7 @@ class OrderController extends Controller
     }
 
 
-    public function SendProductToOrder(Request $request)
+     public function SendProductToOrder(Request $request)
     {
         $lang = $request->lang;
         $order_id = $request->order_id;
@@ -381,7 +381,7 @@ class OrderController extends Controller
 
     }
 
-    public function GetCurrentOrderWithPrice()
+     public function GetCurrentOrderWithPrice()
     {
         $statuses_Array1 = ['new', 'wating', 'consultation', 'delay', 'need_parts', 'another_visit_works'];
 
@@ -394,7 +394,7 @@ class OrderController extends Controller
     }
 
 
-  public function  rescheduled_order(Request $request)
+    public function  rescheduled_order(Request $request)
   {
       $order = Order::findOrFail($request->order_id);
       $city= $order->user->city_id;
@@ -447,7 +447,7 @@ class OrderController extends Controller
 
   }
 
-  public  function check_time_order(Request $request){
+    public  function check_time_order(Request $request){
         $date= $request->date;
         $time= $request->time_id;
       $lang = $request->lang;

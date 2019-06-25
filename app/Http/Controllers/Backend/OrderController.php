@@ -112,8 +112,13 @@ class OrderController extends Controller
         if ($order->status =='done'||$order->status =='can_not')
             Alert::success(trans('backend.cant_not'))->persistent("Close");
           else {
-    $order->status = $request->status;
-    $order->save();
+              if ($request->status =='done'|| $request->status =='can_not')
+              {
+                  $order->technical_id=null;
+                  $order->save();
+              }
+               $order->status = $request->status;
+               $order->save();
 
               StatusOrder::create([
                   'status'=>$request->status,
@@ -128,7 +133,7 @@ class OrderController extends Controller
     Helper::Notifications($order->id, $order->user_id, $name, 'order', 0);
     Alert::success(trans('backend.updateFash'))->persistent("Close");
 
-    return back();
+    return redirect()-> route('order.show', $order->id);
        }
     }
 

@@ -76,7 +76,7 @@
                     <h3>{{trans('backend.add_techanel')}}</h3>
                     <p>{{trans('backend.desc_add_techanel')}} </p>
 
-                    @if($order->status =='done'||$order->status =='can_not')
+                    @if($order->status =='done'||$order->status =='can_not'||$order->status_admin=='waiting')
                         <a><span class="btn btn-primary" disabled> {{trans('backend.junior')}}</span></a>
                         <a ><span class="btn btn-primary" disabled> {{trans('backend.senior')}}</span></a>
                         @else
@@ -222,7 +222,7 @@
                         <h3>{{trans('backend.update_time_date')}}</h3>
                         <p>{{trans('backend.desc_update_time_date')}} </p>
 
-                        @if($order->status =='done'||$order->status =='can_not')
+                        @if($order->status =='done'||$order->status =='can_not'||$order->status_admin=='waiting')
                             <a><span class="btn btn-primary disabled"> {{trans('backend.details')}}</span></a>
 
                         @else
@@ -265,3 +265,4 @@
     </div>
 </div>
 
+</div>
