@@ -168,8 +168,8 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
-
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

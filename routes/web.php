@@ -181,6 +181,7 @@ Route::group([
 
     Route::resource('contact_admin','Backend\ContactAdminController');
 
+    Route::resource('roles','Backend\RoleController');
 
 });
 

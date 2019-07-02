@@ -11,8 +11,10 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Datatables;
 use Alert;
+use DB;
 class AdminsController extends Controller
 {
     /**
@@ -35,11 +37,12 @@ class AdminsController extends Controller
     public function create()
     {
         //
+        $roles = Role::all();
 
         $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
         $cities = City::where('country_id',178)->get();
 
-        return view('admins.create',compact('nationality','cities'));
+        return view('admins.create',compact('nationality','cities','roles'));
 
     }
 
@@ -68,6 +71,10 @@ class AdminsController extends Controller
             'type'             => 'admin',
 
         ]);
+
+        $user->assignRole($request->input('roles'));
+
+
         if ($user)
             Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
@@ -95,11 +102,13 @@ class AdminsController extends Controller
     public function edit($id)
     {
         //
+        $roles = Role::all();
+
         $data =User::findOrFail($id);
         $nationality=Country::where('id',178)->orderBy('ordering','asc')->get();
         $cities = City::where('country_id',178)->get();
 
-        return view('admins.edit',compact('data','nationality','cities'));
+        return view('admins.edit',compact('data','nationality','cities','roles'));
 
     }
 
@@ -139,7 +148,10 @@ class AdminsController extends Controller
             $data->password = bcrypt($request->password);      //  ]);
         $data->save();
 
-
+      //  if (!$data->hasRole('admin')) {
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
+            $data->assignRole($request->input('roles'));
+      //  }
         if ($data)
             Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 

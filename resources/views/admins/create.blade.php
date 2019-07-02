@@ -125,6 +125,19 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.role')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control select2" multiple="multiple"
+                                            data-placeholder="{{trans('backend.role')}}"
+                                            name="roles[]" style="width: 100%;" >
+                                        @foreach($roles as $data)
+                                            <option value="{{$data->id}}">{{$data->name}}</option>
+                                        @endforeach
+                                    </select>                                </div>
+                            </div
+                            <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">{{trans('backend.upload_image')}} <span
                                     >*</span>
                                 </label>

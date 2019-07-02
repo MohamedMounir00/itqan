@@ -156,6 +156,14 @@
 
                                         </ul>
                                     </li>
+
+                    <li><a><i class="fa fa-edit"></i> {{trans('backend.roles')}} <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="{{route('roles.index')}}">{{trans('backend.roles')}} </a></li>
+
+
+                        </ul>
+                    </li>
                       <li><a><i class="fa fa-edit"></i> {{trans('backend.cities')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('cities.index')}}">{{trans('backend.cities')}} </a></li>

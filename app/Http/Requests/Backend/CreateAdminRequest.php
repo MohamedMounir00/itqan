@@ -30,6 +30,7 @@ class CreateAdminRequest extends FormRequest
             'password'=> 'required|min:6',
             'country_id'      => 'required',
             'city_id'=>'required',
+            'roles'=>'required'
         ];
     }
 }
