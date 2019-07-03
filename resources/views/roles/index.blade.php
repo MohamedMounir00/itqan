@@ -44,7 +44,7 @@
                                 @endcan
                                 @can('role-delete')
 
-                                    {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                                    {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline', 'onsubmit' => 'return ConfirmDelete()']) !!}
 
                                     {!! Form::submit(trans('backend.delete'), ['class' => 'btn btn-danger']) !!}
                                     {!! Form::close() !!}
@@ -70,7 +70,7 @@
 
         function ConfirmDelete()
         {
-            var x = confirm("'هل انت متاكد من حذف هذه المهام؟'");
+            var x = confirm("{{trans('backend.ask_delete_role')}}");
             if (x)
                 return true;
             else

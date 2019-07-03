@@ -377,6 +377,7 @@ return[
     'send-message'=>'send message',
     'admin-message'=>'admin message',
     'setting'=>'setting',
+    'ask_delete_role'=>'Are you sure you want to delete these role'
 
 
 

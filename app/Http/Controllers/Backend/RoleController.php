@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
+use Alert;
+
 class RoleController extends Controller
 {
     /**
@@ -59,10 +61,10 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
+        Alert::success(trans('backend.created'))->persistent(trans('backend.close2'));
 
 
-        return redirect()->route('roles.index')
-            ->with('success','Role created successfully');
+        return redirect()->route('roles.index');
     }
     /**
      * Display the specified resource.
@@ -122,10 +124,11 @@ class RoleController extends Controller
 
 
         $role->syncPermissions($request->input('permission'));
+        Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
 
-        return redirect()->route('roles.index')
-            ->with('success','Role updated successfully');
+        return redirect()->route('roles.index');
+
     }
     /**
      * Remove the specified resource from storage.
@@ -136,7 +139,9 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
-            ->with('success','Role deleted successfully');
+        Alert::success(trans('backend.deleteFlash'))->persistent(trans('backend.close2'));
+
+        return redirect()->route('roles.index');
+
     }
 }
