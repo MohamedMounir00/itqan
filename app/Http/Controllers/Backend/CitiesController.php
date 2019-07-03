@@ -12,6 +12,13 @@ use Alert;
 class CitiesController extends Controller
 {
 
+    function __construct()
+    {
+        $this->middleware('permission:city-list');
+        $this->middleware('permission:city-create', ['only' => ['create','store']]);
+        $this->middleware('permission:city-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:city-delete', ['only' => ['destroy']]);
+    }
 
 
     public function index()

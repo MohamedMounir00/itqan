@@ -9,10 +9,11 @@
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
 
-             
+                    @can('technical-create')
 
                     <li><a   href="{{route('technical.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                     </li>
+                        @endcan
                 </ul>
                 <div class="clearfix"></div>
             </div>

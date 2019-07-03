@@ -41,26 +41,35 @@
                 <ul class="nav side-menu">
 
 
-
+                       @can('admin-list')
                     <li><a><i class="fa fa-edit"></i> {{trans('backend.admins_controller')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('admins.index')}}">{{trans('backend.admins')}} </a></li>
+                            @can('admin-create')
 
                             <li><a href="{{route('admins.create')}}">{{trans('backend.create')}} </a></li>
+                            @endcan
 
                         </ul>
                     </li>
+                              @endcan
+                           @can('technical-list')
 
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.technical_controller')}} <span class="fa fa-chevron-down"></span></a>
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.technical_controller')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('technical.index')}}">{{trans('backend.technical')}} </a></li>
+                            @can('technical-create')
 
                             <li><a href="{{route('technical.create')}}">{{trans('backend.create')}} </a></li>
+                            @endcan
 
                         </ul>
                     </li>
+                           @endcan
+                           @can('order-list')
 
-                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.clients_controller')}} <span class="fa fa-chevron-down"></span></a>
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.clients_controller')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('clients.index')}}">{{trans('backend.clients')}} </a></li>
 
@@ -86,99 +95,150 @@
                                             </ul>
                                         </li>
 
+                           @endcan
+                           @can('category_order-list')
 
-                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.categories')}} <span class="fa fa-chevron-down"></span></a>
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.categories')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('category.index')}}">{{trans('backend.all_categories')}} </a></li>
+                                                @can('category_order-create')
 
                                                     <li><a href="{{route('category.create')}}">{{trans('backend.create')}} </a></li>
+                                                @endcan
 
                                             </ul>
                                         </li>
-
+                           @endcan
+                           @can('category_product-list')
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.categoriesOfProduct')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('category_product.index')}}">{{trans('backend.all_categories')}} </a></li>
+                                                @can('category_product-create')
 
                                                 <li><a href="{{route('category_product.create')}}">{{trans('backend.create')}} </a></li>
+                                                @endcan
 
                                             </ul>
                                         </li>
+                           @endcan
+                           @can('product-list')
 
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.product')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('product.index')}}">{{trans('backend.product_all')}} </a></li>
+                                                @can('product-create')
 
                                                 <li><a href="{{route('product.create')}}">{{trans('backend.create')}} </a></li>
+                                                @endcan
 
                                             </ul>
                                         </li>
+                           @endcan
+                           @can('currency-list')
 
 
                                         <li><a><i class="fa fa-edit"></i> {{trans('backend.currency')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('currency.index')}}">{{trans('backend.currency_controller')}} </a></li>
+                                                @can('currency-create')
 
                                                 <li><a href="{{route('currency.create')}}">{{trans('backend.create')}} </a></li>
+                                                @endcan
 
                                             </ul>
                                         </li>
-                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.time_work')}} <span class="fa fa-chevron-down"></span></a>
+                           @endcan
+                           @can('time-list')
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.time_work')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('time_work.index')}}">{{trans('backend.time_controller')}} </a></li>
+                                                @can('time-create')
 
                                                 <li><a href="{{route('time_work.create')}}">{{trans('backend.create')}} </a></li>
+                                                @endcan
 
                                             </ul>
                                         </li>
+                           @endcan
+                           @can('ministry-list')
 
                                      <li><a><i class="fa fa-edit"></i> {{trans('backend.ministries')}} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{route('ministries.index')}}">{{trans('backend.ministries')}} </a></li>
+                                            @can('ministry-create')
 
                                             <li><a href="{{route('ministries.create')}}">{{trans('backend.create')}} </a></li>
+                                            @endcan
 
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-edit"></i> {{trans('backend.companies')}} <span class="fa fa-chevron-down"></span></a>
+                           @endcan
+                           @can('company-list')
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.companies')}} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{route('companies.index')}}">{{trans('backend.companies')}} </a></li>
+                                            @can('company-create')
 
                                             <li><a href="{{route('companies.create')}}">{{trans('backend.create')}} </a></li>
+                                            @endcan
 
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-edit"></i> {{trans('backend.nationalityl')}} <span class="fa fa-chevron-down"></span></a>
+                           @endcan
+                           @can('country-list')
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.nationalityl')}} <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="{{route('nationality.index')}}">{{trans('backend.nationality')}} </a></li>
+                                            @can('country-create')
 
                                             <li><a href="{{route('nationality.create')}}">{{trans('backend.create')}} </a></li>
+                                            @endcan
 
                                         </ul>
                                     </li>
+                           @endcan
 
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.roles')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('roles.index')}}">{{trans('backend.roles')}} </a></li>
+                           @can('city-list')
 
 
-                        </ul>
-                    </li>
-                      <li><a><i class="fa fa-edit"></i> {{trans('backend.cities')}} <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
+                            <li><a><i class="fa fa-edit"></i> {{trans('backend.cities')}} <span class="fa fa-chevron-down"></span></a>
+                           <ul class="nav child_menu">
                             <li><a href="{{route('cities.index')}}">{{trans('backend.cities')}} </a></li>
+                            @can('city-create')
 
                             <li><a href="{{route('cities.create')}}">{{trans('backend.create')}} </a></li>
 
-                        </ul>
-                      </li>
-                    <li><a><i class="fa fa-edit"></i> {{trans('backend.send_message')}} <span class="fa fa-chevron-down"></span></a>
+                          </ul>
+                               @endcan
+
+                           </li>
+                           @endcan
+
+                       @can('role-list')
+
+                               <li><a><i class="fa fa-edit"></i> {{trans('backend.roles')}} <span class="fa fa-chevron-down"></span></a>
+                                   <ul class="nav child_menu">
+                                       <li><a href="{{route('roles.index')}}">{{trans('backend.roles')}} </a></li>
+
+
+                                   </ul>
+                               </li>
+                           @endcan
+                           @can('send-message')
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.send_message')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{route('send_message_view')}}">{{trans('backend.send_message')}} </a></li>
 
 
                         </ul>
                     </li>
+                           @endcan
+                           @can('admin-message')
 
                     <li><a><i class="fa fa-edit"></i> {{trans('backend.contact_admin')}} <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
@@ -187,18 +247,24 @@
 
                         </ul>
                     </li>
+                           @endcan
+                           @can('holiday-list')
 
                     <li><a href="{{route('holidays.index')}}"><i class="fa fa-edit"></i> {{trans('backend.day')}} <span class="fa fa-chevron-down"></span></a>
 
                     </li>
+                           @endcan
+                           @can('setting')
 
-                                        <li><a><i class="fa fa-edit"></i> {{trans('backend.get_settings')}} <span class="fa fa-chevron-down"></span></a>
+
+                           <li><a><i class="fa fa-edit"></i> {{trans('backend.get_settings')}} <span class="fa fa-chevron-down"></span></a>
                                             <ul class="nav child_menu">
                                                 <li><a href="{{route('get_settings')}}">{{trans('backend.get_settingsr_controller')}} </a></li>
 
 
                                             </ul>
                                         </li>
+                           @endcan
 
 
 

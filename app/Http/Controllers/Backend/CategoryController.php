@@ -17,7 +17,13 @@ use Alert;
 class CategoryController extends Controller
 {
     //
-
+    function __construct()
+    {
+        $this->middleware('permission:category_order-list');
+        $this->middleware('permission:category_order-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category_order-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category_order-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -183,10 +189,13 @@ class CategoryController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                if (auth()->user()->can('category_order-edit'))
+                    $actions .='  <a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                if (auth()->user()->can('category_order-delete'))
+                    $actions .=' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
     
-                ';
+               return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];
@@ -217,10 +226,14 @@ class CategoryController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_sub_delete/' . $data->id . '"><i class="fa fa-remove"></i></button>
+                $actions='';
+                if (auth()->user()->can('category_order-edit'))
+                $actions .=' <a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>';
+                if (auth()->user()->can('category_order-delete'))
+
+                    $actions .=' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_sub_delete/' . $data->id . '"><i class="fa fa-remove"></i></button>';
     
-                ';
+                return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];

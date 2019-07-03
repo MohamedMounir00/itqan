@@ -13,6 +13,12 @@ use Alert;
 class MessageController extends Controller
 {
     //
+
+    function __construct()
+    {
+        $this->middleware('permission:admin-message');
+
+    }
     public function send_message_view()
     {
         return view('message.send_message');

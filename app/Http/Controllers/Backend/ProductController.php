@@ -18,6 +18,15 @@ use Alert;
 
 class ProductController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:product-list');
+        $this->middleware('permission:product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
 
@@ -147,11 +156,15 @@ if ($data)
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
-              <a href="' . route('product.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>
+                $actions='';
+                if (auth()->user()->can('product-edit'))
+                $actions .= '<a href="' . route('product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                if (auth()->user()->can('product-delete'))
+                    $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
+                $actions .= ' <a href="' . route('product.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>
     
                 ';
+                return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];

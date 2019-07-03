@@ -132,7 +132,7 @@
                                                 type="file">
                                     </div>
                                 </div>
-                        {{--   @if(auth()->user()->hasRole('admin'))
+                           @if(auth()->user()->hasRole('admin'))
                                 @if(auth()->user()->id!=$data->id)
                                     @if($data->role=='admin')--}}
                             <div class="item form-group">
@@ -157,10 +157,10 @@
 
                                                 </select>                                </div>
                                         </div>
-                    {{--    @endif
+                      @endif
                    @endif
                @endif
---}}
+
                    <div class="item form-group">
                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{trans('backend.image')}} <span
                            >*</span>

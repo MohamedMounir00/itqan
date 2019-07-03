@@ -283,11 +283,100 @@ return[
     'active_client'=>'enabled',
     'verification'=>'Activation status',
     'desc_bill'=>'Here you can print the invoice for this application and send it directly to the customer',
-'bill'=>'bill',
+    'bill'=>'bill',
     'print'=>'Print',
     'update_time_date'=>'Modify the date and time of the request',
     'desc_update_time_date'=>'You can modify the order time and date and wait for the customer reply',
+    ////// roles
+    'roles'=>'roles',
+    'role'=>'role',
+    'permission'=>'permission',
 
+    'role-list'=>'role list',
+    'role-create'=>'role create',
+    'role-edit'=>'role edit',
+    'role-delete'=>'role delete',
+    /////product/
+    'product-list'=>'product list',
+    'product-create'=>'product create',
+    'product-edit'=>'product edit',
+    'product-delete'=>'product delete',
+
+    /// admin///
+    'admin-list'=>'admin list',
+    'admin-create'=>'admin create',
+    'admin-edit'=>'admin edit',
+    'admin-delete'=>'admin delete',
+
+    /// client///
+    'client-list'=>'client list',
+    'client-create'=>'new permission',
+    'client-edit'=>'client edit',
+    'client-delete'=>'client delete',
+    /// technical///
+    'technical-list'=>'technical list',
+    'technical-create'=>'technical create',
+    'technical-edit'=>'technical edit',
+    'technical-delete'=>'technical delete',
+
+    /// order///
+    'order-list'=>'order list',
+    'order-create'=>'new permission',
+    'order-edit'=>'new permission',
+    'order-delete'=>'new permission',
+    'order-action'=>'order action',
+    /// category-order///
+    'category_order-list'=>'category order list',
+    'category_order-create'=>'category order create',
+    'category_order-edit'=>'category order edit',
+    'category_order-delete'=>'category order delete',
+
+    /// category-product///
+    'category_product-list'=>'category product list',
+    'category_product-create'=>'category product create',
+    'category_product-edit'=>'category product edit',
+    'category_product-delete'=>'category product delete',
+
+    /// time-working///
+    'time-list'=>'time list',
+    'time-create'=>'time create',
+    'time-edit'=>'time edit',
+    'time-delete'=>'time delete',
+    /// time-working///
+    'holiday-list'=>'holiday list',
+    'holiday-create'=>'new permission',
+    'holiday-edit'=>'new permission',
+    'holiday-delete'=>'new permission',
+    /// ministry///
+    'ministry-list'=>'ministry list',
+    'ministry-create'=>'ministry create',
+    'ministry-edit'=>'ministry edit',
+    'ministry-delete'=>'ministry delete',
+
+    /// company///
+    'company-list'=>'company list',
+    'company-create'=>'company create',
+    'company-edit'=>'company edit',
+    'company-delete'=>'company delete',
+    /// currency///
+    'currency-list'=>'currency list',
+    'currency-create'=>'currency create',
+    'currency-edit'=>'currency edit',
+    'currency-delete'=>'currency delete',
+    /// country///
+    'country-list'=>'country list',
+    'country-create'=>'country create',
+    'country-edit'=>'country edit',
+    'country-delete'=>'country delete',
+    /// city///
+    'city-list'=>'city list',
+    'city-create'=>'city create',
+    'city-edit'=>'city edit',
+    'city-delete'=>'city delete',
+    //////////setting
+    'send-message'=>'send message',
+    'admin-message'=>'admin message',
+    'setting'=>'setting',
 
 
 

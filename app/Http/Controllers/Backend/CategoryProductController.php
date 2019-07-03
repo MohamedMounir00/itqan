@@ -13,7 +13,13 @@ class CategoryProductController extends Controller
 {
 
     //
-
+    function __construct()
+    {
+        $this->middleware('permission:category_product-list');
+        $this->middleware('permission:category_product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category_product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category_product-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -126,10 +132,14 @@ class CategoryProductController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('category_product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                if (auth()->user()->can('category_product-edit'))
+                    $actions.= '<a href="' . route('category_product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                if (auth()->user()->can('category_product-delete'))
+                    $actions.= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
+              return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];

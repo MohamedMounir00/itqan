@@ -25,6 +25,14 @@ class TechnicalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:technical-list');
+        $this->middleware('permission:technical-create', ['only' => ['create','store']]);
+        $this->middleware('permission:technical-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:technical-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         //
@@ -207,11 +215,14 @@ class TechnicalController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('technical.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>
-                <a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
-               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                $actions .=  '<a href="' . route('technical.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                if (auth()->user()->can('technical-edit'))
+                    $actions .=' <a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                if (auth()->user()->can('technical-delete'))
+                    $actions .='  <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
     
-                ';
+               return $actions;
             })
             ->addColumn('image', function ($data) { $url=asset($data->image);
             if ($data->image=='')

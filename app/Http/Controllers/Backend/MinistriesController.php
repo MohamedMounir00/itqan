@@ -17,7 +17,13 @@ class MinistriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     //
-
+    function __construct()
+    {
+        $this->middleware('permission:ministry-list');
+        $this->middleware('permission:ministry-create', ['only' => ['create','store']]);
+        $this->middleware('permission:ministry-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:ministry-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
@@ -130,10 +136,15 @@ class MinistriesController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('ministries.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="ministries/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                if (auth()->user()->can('ministry-edit'))
+                    $actions.= '<a href="' . route('ministries.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                if (auth()->user()->can('ministry-delete'))
+
+                    $actions.= '   <button class="btn btn-delete btn btn-round  btn-danger" data-remote="ministries/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
+                return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];

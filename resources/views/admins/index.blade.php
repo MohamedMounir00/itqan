@@ -10,9 +10,11 @@
                     </li>
 
              
-
+                @can('admin-create')
                     <li><a   href="{{route('admins.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                     </li>
+                    @endcan
+
                 </ul>
                 <div class="clearfix"></div>
             </div>

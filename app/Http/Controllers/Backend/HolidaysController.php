@@ -10,7 +10,11 @@ use Yajra\Datatables\Datatables;
 class HolidaysController extends Controller
 {
     //
+    function __construct()
+    {
+        $this->middleware('permission:holiday-list');
 
+    }
 
     public function index()
     {

@@ -15,10 +15,12 @@
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
 
+                @can('country-create')
 
 
                 <li><a   href="{{route('nationality.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                 </li>
+                    @endcan
             </ul>
             <div class="clearfix"></div>
         </div>

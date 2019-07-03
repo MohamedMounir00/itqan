@@ -10,9 +10,11 @@
                     </li>
 
 
+                    @can('category_product-create')
 
                     <li><a   href="{{route('category_product.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                     </li>
+                        @endcan
                 </ul>
                 <div class="clearfix"></div>
             </div>

@@ -10,6 +10,13 @@ use Yajra\Datatables\Datatables;
 use Alert;
 class TimeController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:time-list');
+        $this->middleware('permission:time-create', ['only' => ['create','store']]);
+        $this->middleware('permission:time-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:time-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
 
@@ -131,10 +138,14 @@ class TimeController extends Controller
         return Datatables::of($data)
 
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('time_work.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
-                <button class="btn btn-delete btn btn-round  btn-danger" data-remote="time_work/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                if (auth()->user()->can('time-edit'))
+                $actions.= '<a href="' . route('time_work.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                if (auth()->user()->can('time-delete'))
+                $actions.= '   <button class="btn btn-delete btn btn-round  btn-danger" data-remote="time_work/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
 
             ';
+                return $actions;
             })
             ->addColumn('timing', function ($data) {
                 if ($data->timing=='am')

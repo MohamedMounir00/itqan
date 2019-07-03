@@ -280,7 +280,98 @@ return[
     'disactive'=>'غير مفعل',
     'active_client'=>'مفعل',
     'verification'=>'حاله التفعيل',
-'refusedFlash_ression'=>' تم رفض المنتج الخاص بك : بسبب  '
+     'refusedFlash_ression'=>' تم رفض المنتج الخاص بك : بسبب  ',
+    ////////
+    'roles'=>'المهام',
+    'role'=>'المهام',
+    'permission'=>'الصلاحيات',
+
+    'role-list'=>'عرض المهام',
+    'role-create'=>'انشاء المهام',
+    'role-edit'=>'تعديل  المهام',
+    'role-delete'=>'حذف المهام',
+    /////product/
+    'product-list'=>'عرض المنتجات',
+    'product-create'=>'انشاء المنتجات',
+    'product-edit'=>'تعديل المنتجات',
+    'product-delete'=>'حذف المنتجات',
+
+    /// admin///
+    'admin-list'=>'عرض المديرين',
+    'admin-create'=>'انشاء المديرين',
+    'admin-edit'=>'تعديل المديرين',
+    'admin-delete'=>'حذف المديرين',
+
+    /// client///
+    'client-list'=>'عرض العملاء',
+    'client-create'=>'انشاء حساب عملاء',
+    'client-edit'=>'تعديل العميل',
+    'client-delete'=>'حذف عميل',
+    /// technical///
+    'technical-list'=>'عرض الفنيين',
+    'technical-create'=>'انشاء حساب الفنيين',
+    'technical-edit'=>'تعديل حساب الفنيين',
+    'technical-delete'=>'حذف حساب الفنيين',
+
+    /// order///
+    'order-list'=>'عرض الطلبات',
+    'order-create'=>'التحكم فى انشاء الطلبات',
+    'order-edit'=>'التحكم فى تعديل الطلبات',
+    'order-delete'=>'التحكم فى اجزاء الطلبات',
+    'order-action'=>'التحكم الكلى فى الطلبات',
+    /// category-order///
+    'category_order-list'=>'عرض اقسام الطلبات',
+    'category_order-create'=>'انشاء قسم الطلبات',
+    'category_order-edit'=>'تعديل قسم الطلبات',
+    'category_order-delete'=>'حذف قسم الطلبات',
+
+    /// category-product///
+    'category_product-list'=>'عرض اقسام المنتجات',
+    'category_product-create'=>'انشاء قسم المنتجات',
+    'category_product-edit'=>'تعديل قسم المنتجات',
+    'category_product-delete'=>'حذف قسم المنتجات',
+
+    /// time-working///
+    'time-list'=>'عرض توقيت العمل',
+    'time-create'=>'انشاء توقيت العمل',
+    'time-edit'=>'تعديل توقيت العمل',
+    'time-delete'=>'حذف توقيت العمل',
+    /// time-working///
+    'holiday-list'=>'عرض الاجازت',
+    'holiday-create'=>'صلاحيات لاستخدام',
+    'holiday-edit'=>'صلاحيات لاستخدام',
+    'holiday-delete'=>'صلاحيات لاستخدام',
+    /// ministry///
+    'ministry-list'=>'عرض الوزارات',
+    'ministry-create'=>'انشاء الوزارات',
+    'ministry-edit'=>'تعديل الوزارات',
+    'ministry-delete'=>'حذف الوزرارت',
+
+    /// company///
+    'company-list'=>'عرض الشركات',
+    'company-create'=>'انشاء شركات',
+    'company-edit'=>'تعديل الشركات',
+    'company-delete'=>'حذف الشركات',
+    /// currency///
+    'currency-list'=>'عرض العملات',
+    'currency-create'=>'انشاء عمله',
+    'currency-edit'=>'تعديل عمله',
+    'currency-delete'=>'حذف العملات',
+    /// country///
+    'country-list'=>'عرض الدول',
+    'country-create'=>'انشاء الدول',
+    'country-edit'=>'تعديل الدول',
+    'country-delete'=>'حذف الدول',
+    /// city///
+    'city-list'=>'عرض المدن',
+    'city-create'=>'انشاء المدن',
+    'city-edit'=>'تعديل المدن',
+    'city-delete'=>'حذف المدن',
+    //////////setting
+    'send-message'=>'التحكم فى الرسائل',
+    'admin-message'=>'التحكم فى رسائل الاداره',
+    'setting'=>'الاعدادات',
+
 
 
 

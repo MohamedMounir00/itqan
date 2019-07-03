@@ -10,9 +10,11 @@
                 </li>
 
 
+                @can('time-create')
 
                 <li><a   href="{{route('time_work.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                 </li>
+                    @endcan
             </ul>
             <div class="clearfix"></div>
         </div>

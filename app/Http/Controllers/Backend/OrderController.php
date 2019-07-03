@@ -37,6 +37,12 @@ class OrderController extends Controller
 
         return view('order.index');
     }
+    function __construct()
+    {
+        $this->middleware('permission:order-list');
+
+    }
+
 
 //'consultation','delay','need_parts','another_visit_works'
     public function get_order_view()

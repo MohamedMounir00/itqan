@@ -20,6 +20,15 @@ class ClientsController extends Controller
 {
     //
 
+
+    function __construct()
+    {
+        $this->middleware('permission:client-list');
+        $this->middleware('permission:client-create', ['only' => ['create','store']]);
+        $this->middleware('permission:client-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:client-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -175,12 +184,14 @@ class ClientsController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '
-                <a href="' . route('clients.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>
-                <a href="' . route('clients.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
-               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>
-    
-                ';
+                $actions='';
+                $actions .='<a href="' . route('clients.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                if (auth()->user()->can('client-edit'))
+                    $actions .='<a href="' . route('clients.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                if (auth()->user()->can('client-delete'))
+                    $actions .='<button class="btn btn-delete btn btn-round  btn-danger" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>';
+                return $actions;
+
             })
             ->addColumn('image', function ($data) { $url=asset($data->image);
                 if ($data->image=='')

@@ -12,7 +12,11 @@ class ContactAdminController extends Controller
 {
     //
 
+    function __construct()
+    {
+        $this->middleware('permission:admin-message');
 
+    }
     public function index()
     {
 

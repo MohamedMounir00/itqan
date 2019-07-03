@@ -10,9 +10,11 @@
                     </li>
 
 
+                    @can('company-create')
 
                     <li><a   href="{{route('companies.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                     </li>
+                        @endcan
                 </ul>
                 <div class="clearfix"></div>
             </div>

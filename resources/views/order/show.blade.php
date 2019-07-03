@@ -44,10 +44,12 @@
                                                                     data-toggle="tab" aria-controls="profile"
                                                                     aria-expanded="false">{{trans('backend.actions_status')}}</a>
                                 </li>
+                                @can('order-action')
                                 <li role="presentation" class=""><a href="#tab_content33" role="tab" id="profile-tabb3"
                                                                     data-toggle="tab" aria-controls="profile"
                                                                     aria-expanded="false">{{trans('backend.actions')}}</a>
                                 </li>
+                                    @endcan
 
 
 
@@ -66,10 +68,13 @@
                                      aria-labelledby="profile-tab">
                                     @include('order.tabs.actions_status')
                                 </div>
+                                @can('order-action')
+
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content33"
                                      aria-labelledby="profile-tab">
                                     @include('order.tabs.actions')
                                 </div>
+                                @endcan
 
 
                             </div>

@@ -16,9 +16,11 @@
                 </li>
 
 
+                @can('city-create')
 
                 <li><a   href="{{route('cities.create')}}" class=""><i class="fa fa-plus-square"></i></a>
                 </li>
+                    @endcan
             </ul>
             <div class="clearfix"></div>
         </div>
@@ -47,8 +49,14 @@
                             @endif
                                </td>
                             <td>
+                                @can('city-edit')
+
                                 <a href="{{ route('cities.edit', $national->id)}}" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> {{trans('backend.update')}}</a>
+                              @endcan
+                                    @can('city-delete')
                                 <button class="btn btn-delete btn btn-round  btn-danger" data-remote="{{$national->id }}" data-id="{{ $national->id }}"><i class="fa fa-remove"></i>{{trans('backend.delete')}}</button>
+                                    @endcan
+
                             </td>
                         </tr>
                     @endforeach

@@ -10,6 +10,14 @@ use Alert;
 
 class CountriesController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:country-list');
+        $this->middleware('permission:country-create', ['only' => ['create','store']]);
+        $this->middleware('permission:country-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:country-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $nationality = Country::where('id',178)->orderBy('ordering','asc')->get();

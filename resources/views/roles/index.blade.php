@@ -12,12 +12,12 @@
                     <div class="pull-left">
                         <h2>{{ trans('backend.role') }}</h2>
                     </div>
-                   {{--@can('role-create')                     @endcan
---}}
+            @can('role-create')
 
                         <div class="pull-right">
                             <a class="btn btn-success" href="{{ route('roles.create') }}"> <i class="fa fa-save"></i></a>
                         </div>
+                    @endcan
                 </div>
             </div>
 

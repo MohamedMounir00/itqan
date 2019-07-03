@@ -16,7 +16,13 @@ class CompaniesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    function __construct()
+    {
+        $this->middleware('permission:company-list');
+        $this->middleware('permission:company-create', ['only' => ['create','store']]);
+        $this->middleware('permission:company-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:company-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
 
@@ -128,10 +134,14 @@ class CompaniesController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('companies.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="companies/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                $actions='';
+                if (auth()->user()->can('company-edit'))
+                    $actions .= '<a href="' . route('companies.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                if (auth()->user()->can('company-delete'))
+                    $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="companies/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
+                return $actions;
             })
             ->addColumn('name', function ($data) {
                 return unserialize($data->name)[LaravelLocalization::getCurrentLocale()];

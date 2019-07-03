@@ -22,6 +22,15 @@ class AdminsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('permission:admin-list');
+        $this->middleware('permission:admin-create', ['only' => ['create','store']]);
+        $this->middleware('permission:admin-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         //
@@ -148,10 +157,10 @@ class AdminsController extends Controller
             $data->password = bcrypt($request->password);      //  ]);
         $data->save();
 
-      //  if (!$data->hasRole('admin')) {
+       if (!$data->hasRole('admin')) {
             DB::table('model_has_roles')->where('model_id',$id)->delete();
             $data->assignRole($request->input('roles'));
-      //  }
+     }
         if ($data)
             Alert::success(trans('backend.updateFash'))->persistent(trans('backend.close2'));
 
@@ -191,12 +200,33 @@ class AdminsController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '
-                <a href="' . route('admins.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>
-               <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
-    
-                ';
+                $actions='';
+                if (auth()->user()->id == $data->id) {
+
+                    if (auth()->user()->can('admin-edit')) {
+                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>' . trans('backend.update') . '</a>';
+                        return $actions;
+
+                    }
+
+                }
+                else{
+                    if (auth()->user()->can('admin-edit')) {
+
+                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>' . trans('backend.update') . '</a>';
+                    }
+                    if (auth()->user()->can('admin-delete')) {
+
+
+                        $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="admins/' . $data->id . '"><i class="fa fa-remove"></i>' . trans('backend.delete') . '</button>';
+                    }
+                        return $actions;
+
+
+                }
+
             })
+
             ->addColumn('image', function ($data) { $url=asset($data->image);
                 if ($data->image=='')
                     return '<img src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" border="0" width="40" class="img-rounded" align="center" />';
