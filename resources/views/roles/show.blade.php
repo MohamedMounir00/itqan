@@ -26,7 +26,7 @@
                 <strong>Permissions:</strong>
                 @if(!empty($rolePermissions))
                     @foreach($rolePermissions as $v)
-                        <label class="label label-success">{{ $v->name }},</label>
+                        <label class="label label-success"> {{ trans('backend.'.$v->name) }},</label>
                     @endforeach
                 @endif
             </div>
