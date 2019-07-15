@@ -84,7 +84,11 @@ class ClientsController extends Controller
         $need_parts=Order::where('status','need_parts')->where('user_id',$id)->count();
         $another_visit_works=Order::where('status','another_visit_works')->where('user_id',$id)->count();
         $code= Verification::where('user_id',$id)->latest()->first();
+        if (isset($code))
         $activation=$code->code;
+        else
+            $activation='';
+
         return View('clients.show',compact('user','new','wating','done','can_not','consultation','delay','need_parts','another_visit_works','activation'));
     }
 
@@ -185,11 +189,11 @@ class ClientsController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 $actions='';
-                $actions .='<a href="' . route('clients.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                $actions .='<a href="' . route('clients.show', $data->id) . '" class=" cb btn btn-primary btn-square">'.trans('backend.details').'</a>';
                 if (auth()->user()->can('client-edit'))
-                    $actions .='<a href="' . route('clients.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                    $actions .='<a href="' . route('clients.edit', $data->id) . '" class=" cb btn btn-primary btn-square"> '.trans('backend.update').'</a>';
                 if (auth()->user()->can('client-delete'))
-                    $actions .='<button class="btn btn-delete btn btn-round  btn-danger" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>';
+                    $actions .='<button class=" cb btn btn-danger btn-square" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>';
                 return $actions;
 
             })
