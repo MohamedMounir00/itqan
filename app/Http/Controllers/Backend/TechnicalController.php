@@ -216,11 +216,11 @@ class TechnicalController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 $actions='';
-                $actions .=  '<a href="' . route('technical.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                $actions .=  '<a href="' . route('technical.show', $data->id) . '" class= "btn btn-info btn-square"> '.trans('backend.details').'</a>';
                 if (auth()->user()->can('technical-edit'))
-                    $actions .=' <a href="' . route('technical.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                    $actions .=' <a href="' . route('technical.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.update').'</a>';
                 if (auth()->user()->can('technical-delete'))
-                    $actions .='  <button class="btn btn-delete btn btn-round  btn-danger" data-remote="technical/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
+                    $actions .='  <button class="btn btn-delete btn-danger btn-square" data-remote="technical/' . $data->id . '">'.trans('backend.delete').'</button>';
     
                return $actions;
             })

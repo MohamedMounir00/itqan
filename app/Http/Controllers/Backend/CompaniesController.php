@@ -136,9 +136,9 @@ class CompaniesController extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('company-edit'))
-                    $actions .= '<a href="' . route('companies.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                    $actions .= '<a href="' . route('companies.edit', $data->id) . '" class="btn btn-round  btn-primary btn-square"> '.trans('backend.update').'</a>';
                 if (auth()->user()->can('company-delete'))
-                    $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="companies/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                    $actions .= ' <button class="btn btn-delete btn btn-square  btn-danger" data-remote="companies/' . $data->id . '">'.trans('backend.delete').'</button>
     
                 ';
                 return $actions;

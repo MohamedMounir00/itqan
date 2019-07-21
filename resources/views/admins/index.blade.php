@@ -2,54 +2,76 @@
 
 @section('content')
 
-    <div class="x_panel">
-            <div class="x_title">
-                <h2>{{trans('backend.admins')}}</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-
-             
-                @can('admin-create')
-                    <li><a   href="{{route('admins.create')}}" class=""><i class="fa fa-plus-square"></i></a>
-                    </li>
-                    @endcan
-
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="table-responsive">
-
-                <table id="table1" class="table table-striped table-bordered bulk_action table1">
-                    <thead>
-                    <tr>
-                        <th>{{trans('backend.name')}}</th>
-                        <th>{{trans('backend.image')}}</th>
-                        <th>{{trans('backend.email')}}</th>
-                        <th>{{trans('backend.phone')}}</th>
-                        <th>{{trans('backend.country')}}</th>
-                        <th>{{trans('backend.date')}}</th>
-                        <th>{{trans('backend.action')}}</th>
-
-                    </tr>
-                    </thead>
 
 
-                    <tbody>
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.admins')}}
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
 
-
-
-                    </tbody>
-                </table>
+                        @can('admin-create')
+                        <div class="kt-portlet__head-actions">
+                            
+                            <a href="{{route('admins.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                {{trans('backend.create')}}
+                            </a>
+                        </div>
+                        @endcan
+                        
+                    </div>
                 </div>
             </div>
-        </div>
+
+
+            <div class="kt-portlet__body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer" id="kt_table_1_wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <div class="table-responsive">
+
+                                            <table id="table1" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline">
+                                                <thead>
+                                                <tr>
+                                                    <th>{{trans('backend.name')}}</th>
+                                                    <th>{{trans('backend.image')}}</th>
+                                                    <th>{{trans('backend.email')}}</th>
+                                                    <th>{{trans('backend.phone')}}</th>
+                                                    <th>{{trans('backend.country')}}</th>
+                                                    <th>{{trans('backend.date')}}</th>
+                                                    <th>{{trans('backend.action')}}</th>
+                            
+                                                </tr>
+                                                </thead>
+                            
+                            
+                                                <tbody>
+                            
+                            
+                            
+                                                </tbody>
+                                            </table>
+                                            </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+</div>
+
+
 
   @endsection
 @section('scripts')
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    
     <script>
         $(function() {
             $('#table1').DataTable({

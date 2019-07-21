@@ -2,6 +2,100 @@
 
 @section('content')
 
+
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.day')}}
+                    </h3>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+                    <div class="dataTables_wrapper dt-bootstrap4 no-footer" id="kt_table_1_wrapper">
+                            <div class="row">
+                                <div class="col-md-12">
+                                        <div class="table-responsive">
+
+                                                <table id="table1" class="table table-striped table-bordered bulk_action table1">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>{{trans('backend.day')}}</th>
+                                
+                                                        <th>{{trans('backend.action')}}</th>
+                                
+                                                    </tr>
+                                                    </thead>
+                                
+                                
+                                                    <tbody>
+                                
+                                
+                                
+                                                    </tbody>
+                                                </table>
+                                                <br>
+                                                <span style="font-size: 14px;padding: 12px;
+                                                border-radius: 0;" class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">
+                                                     {{trans('backend.holiday')}}
+                                                </span>
+                                                <br>
+                                                <br>
+                                                <span style="font-size: 14px;padding: 12px;
+                                                border-radius: 0;" class="kt-badge kt-badge--success kt-badge--inline"> 
+                                                    {{trans('backend.working')}}
+                                                </span>
+                                                <br>
+                                                <br>
+                                                <span style="font-size: 14px;padding: 12px;
+                                                border-radius: 0;" class="kt-badge kt-badge--warning kt-badge--inline">
+                                                    {{trans('backend.friday')}}
+                                                </span>
+                                                <br><br>
+                                            </div>  
+                                </div>
+                            </div>
+                    </div>
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
+
+
     <div class="x_panel">
         <div class="x_title">
             <h2>{{trans('backend.day')}}</h2>
@@ -16,6 +110,9 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
+
+
+
             <div class="table-responsive">
 
                 <table id="table1" class="table table-striped table-bordered bulk_action table1">
@@ -36,22 +133,24 @@
                     </tbody>
                 </table>
                 <br>
-                <span > <label class="btn btn-danger"></label> {{trans('backend.holiday')}}</span>
+                <span > <label class="kt-badge kt-badge--danger kt-badge--md"></label> {{trans('backend.holiday')}}</span>
                 <br>
-                <span > <label class="btn btn-success"></label> {{trans('backend.working')}}</span>
+                <span > <label class="kt-badge kt-badge--success kt-badge--md"></label> {{trans('backend.working')}}</span>
                 <br>
                 <span class="btn btn-warning">
                     {{trans('backend.friday')}}
                 </span>
             </div>
+
+
+
         </div>
 
-    </div>
+    </div> --}}
 
 @endsection
 @section('scripts')
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
         $(function() {
             $('#table1').DataTable({

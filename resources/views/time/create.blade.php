@@ -3,6 +3,145 @@
 @section('content')
 
 
+
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.create')}}
+                    </h3>
+                </div>
+            </div>
+
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+                {!! Form::open(['route'=>['time_work.store'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.from')}} 
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="number" id="first-name" name="from" required class="form-control"  placeholder="{{trans('backend.from')}} ">
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.to')}} 
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="number" id="first-name" name="to" required class="form-control" placeholder="{{trans('backend.to')}} ">
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.timing')}} 
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select  name="timing" id="heard" class="form-control" >
+                                        <option value="am">{{trans('backend.am')}}</option>
+                                        <option value="pm" >{{trans('backend.pm')}}</option>
+
+                                    </select>                                  </div>
+                            </div>
+
+
+
+
+
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.order_by')}}
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="number" class="form-control" name="ordering"
+                                           required  placeholder="{{ trans('backend.order_by') }}" autocomplete="off" >
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                                <div class="form-group">
+                                    <div class="myBtn">
+                                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.save')}}</button>
+                                        <a href="{{route('time_work.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                                    </div>
+                                </div>
+
+                            {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
+
+
+
+
     <div class="right_col" role="main">
         <div class="">
             <div class="page-title">
@@ -117,7 +256,7 @@
         </div>
     </div>
 
-
+ --}}
 
 @endsection
 

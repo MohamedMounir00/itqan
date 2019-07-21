@@ -134,9 +134,9 @@ class CategoryProductController extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('category_product-edit'))
-                    $actions.= '<a href="' . route('category_product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                    $actions.= '<a href="' . route('category_product.edit', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.update').'</a>';
                 if (auth()->user()->can('category_product-delete'))
-                    $actions.= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                    $actions.= ' <button class="btn btn-delete btn btn-danger btn-square" data-remote="category_product/' . $data->id . '">'.trans('backend.delete').'</button>
     
                 ';
               return $actions;

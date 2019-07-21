@@ -4,6 +4,120 @@
 
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.reschedules_order_update')}}
+                    </h3>
+                </div>
+            </div>
+
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+
+                {!! Form::open(['route'=>['reschedules.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.time_reschedules')}}
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select  name="time_id" id="heard" class="form-control "   required>
+                                        @foreach($times as $t)
+                                            <option value="{{$t->id}}"
+                                                {{($t->id==$data->time_id)?'selected':''}}
+                                                        >
+
+                                                {{trans('backend.from').$t->from .'-'.trans('backend.to').$t->to.'-'.($t->timing=='am' ? trans('backend.am') : trans('backend.pm'))}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.date_reschedules')}} 
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select  name="date" id="heard" class="form-control "   required>
+                                        @foreach($dates2 as $d)
+                                            <option value="{{$d}}"
+                                                    {{($d==$data->date)?'selected':''}}
+                                            >
+                                                {{$d}}
+
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.technical_reschedules')}}
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select  name="technical_id" id="heard" class="form-control" >
+                                        @foreach($users as $user)
+                                            @if($data->technical_id==null)
+                                                <option value="">{{trans('backend.no_technical')}}</option>
+                                            @else
+                                                <option value="{{$user->user->id}}"{{($data->technical->id==$user->user->id)?'selected':''}} >{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
+                                            @endif
+
+                                        @endforeach
+                                    </select>                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="myBtn">
+                                    <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                                    <a href="{{route('order.show', $data->order_id)}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                                </div>
+                            </div>
+
+                            {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
 
                     <div class="x_panel">
                         <div class="x_title">
@@ -103,7 +217,7 @@
 
                         </div>
                     </div>
-                    </div>
+                    </div> --}}
 
 @endsection
 

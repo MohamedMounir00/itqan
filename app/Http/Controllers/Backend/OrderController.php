@@ -308,7 +308,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -343,7 +343,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -359,7 +359,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return $data->user->name;
@@ -375,7 +375,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -391,7 +391,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -409,7 +409,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -476,7 +476,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-plus-square"></i>'.trans('backend.add').'</a>';
+                return '<a href="' . route('order.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.add').'</a>';
             })
             ->addColumn('reply', function ($data) {
                 if ($data->reply == 'yes')
@@ -489,14 +489,14 @@ class OrderController extends Controller
                 $time=Helper::make_decision()->value;
                 Carbon::setLocale($language);
                 if ($data->created_at > Carbon::now()->subMinutes($time)|| $data->reply == 'yes')
-                    return '<span class="btn btn-default">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
+                    return '<span class="kt-badge kt-badge--warning kt-badge--inline">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
 
                 else
-                return '<span class="btn btn-danger">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
+                return '<span class="kt-badge kt-badge--danger kt-badge--inline">' . Carbon::parse("$data->created_at")->diffForHumans() . '</span>';
 
             })
             ->addColumn('details', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -584,8 +584,8 @@ class OrderController extends Controller
             ->addColumn('action', function ($data) {
                 return '
                 
-              <a href="' . route('refused_show', $data->id) . '" class="btn btn-round  btn-danger"><i class="fa fa-remove"></i> </a>
-               <button class="btn btn-agree btn btn-round  btn-success"  data-remote="accpet_request/' . $data->id . '"><i class="fa fa-check"></i></button>
+              <a href="' . route('refused_show', $data->id) . '" class="btn btn-danger btn-square"> </a>
+               <button class="btn btn-success btn-square"  data-remote="accpet_request/' . $data->id . '"></button>
     
                ';
             })
@@ -667,7 +667,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i> '.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square"> '.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -770,7 +770,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -811,7 +811,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';
@@ -850,7 +850,7 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
             ->addColumn('client', function ($data) {
                 return'<a href="' . route('clients.show', $data->user_id) . '">'.$data->user->name.'</a>';

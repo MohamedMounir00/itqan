@@ -2,6 +2,101 @@
 
 @section('content')
 
+
+
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.sub')}}
+                    </h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+                    <div class="kt-portlet__head-wrapper">
+                        <div class="kt-portlet__head-actions">
+                            <a href="{{route('category.create')}}" class="btn btn-brand btn-elevate btn-icon-sm">
+                                <i class="la la-plus"></i>
+                                New Record
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="kt-portlet__body">
+                    <div class="dataTables_wrapper dt-bootstrap4 no-footer" id="kt_table_1_wrapper">
+                            <div class="row">
+                                <div class="col-md-12">
+                                        <div class="table-responsive">
+
+                                                <table id="table1" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>{{trans('backend.name')}}</th>
+                                                        <th>{{trans('backend.price')}}</th>
+                                                        <th>{{trans('backend.price_emergency')}}</th>
+                                                        <th>{{trans('backend.currency')}}</th>
+                                
+                                                        <th>{{trans('backend.system_clocks')}}</th>
+                                                        <th>{{trans('backend.image')}}</th>
+                                
+                                                        <th>{{trans('backend.date')}}</th>
+                                
+                                                        <th>{{trans('backend.action')}}</th>
+                                
+                                                    </tr>
+                                                    </thead>
+                                
+                                
+                                                    <tbody>
+                                
+                                
+                                
+                                                    </tbody>
+                                
+                                                </table>
+                                                    <a href="{{route('category.index')}}"  class="btn btn-primary btn-square " style="margin: 5px auto; display: block ;width: 100px">{{trans('backend.back')}}</a>
+                                
+                                                </div>
+                                </div>
+                            </div>
+                    </div>
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
     <div class="x_panel">
             <div class="x_title">
                 <h2>{{trans('backend.sub')}}</h2>
@@ -50,10 +145,10 @@
                 </div>
             </div>
         </div>
-    </div>@endsection
+    </div> --}}
+    @endsection
 @section('scripts')
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script>
         $(function() {
             $('#table1').DataTable({

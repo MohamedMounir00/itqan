@@ -191,9 +191,9 @@ class CategoryController extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('category_order-edit'))
-                    $actions .='  <a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                    $actions .='  <a href="' . route('category.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.update').'</a>';
                 if (auth()->user()->can('category_order-delete'))
-                    $actions .=' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
+                    $actions .=' <button class="btn btn-danger btn-delete btn-square" data-remote="category/' . $data->id . '">'.trans('backend.delete').'</button>';
     
                return $actions;
             })
@@ -203,7 +203,7 @@ class CategoryController extends Controller
 
             })
             ->addColumn('sub', function ($data) {
-                return '<a href="' . route('category.sub', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('category.sub', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
 
 
             })->addColumn('image', function ($data) {
@@ -228,10 +228,10 @@ class CategoryController extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('category_order-edit'))
-                $actions .=' <a href="' . route('category.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i></a>';
+                $actions .=' <a href="' . route('category.edit', $data->id) . '" class="btn btn-primary btn-square">Edit</a>';
                 if (auth()->user()->can('category_order-delete'))
 
-                    $actions .=' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="category_sub_delete/' . $data->id . '"><i class="fa fa-remove"></i></button>';
+                    $actions .=' <button class="btn btn-delete btn-danger btn-square" data-remote="category_sub_delete/' . $data->id . '">Delete</button>';
     
                 return $actions;
             })

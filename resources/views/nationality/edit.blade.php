@@ -5,6 +5,119 @@
 
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.nationality_update')}}
+                    </h3>
+                </div>
+               
+            </div>
+
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+                {!! Form::open(['route'=>['nationality.update',$nationality->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.country_ar')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="text" class="form-control" name="name_ar"
+                                           value="{{$nationality->name_ar}}"
+                                           required
+                                           placeholder="{{ trans('backend.name') }}" autocomplete="off">
+
+                                </div>                                </div>
+
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.country_en')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="text" class="form-control" name="name_en"
+                                           value="{{$nationality->name_en}}"
+                                           required
+                                           placeholder="{{ trans('backend.name') }}" autocomplete="off">                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.order_by')}} <span
+                                    >*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="number" class="form-control" name="ordering"
+                                           required  placeholder="{{ trans('backend.order_by') }}" value="{{$nationality->ordering}}" autocomplete="off">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <div class="myBtn">
+                                    <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                                    <a href="{{route('nationality.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                                </div>
+                            </div>
+
+                            {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
+
+
                     <div class="x_panel">
                         <div class="x_title">
                             <h3>{{trans('backend.nationality_update')}}</h3>
@@ -90,7 +203,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection

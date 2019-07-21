@@ -71,7 +71,7 @@
 
                 <a href="{{route('technical.edit', $user->id)}}" class="btn btn-success"><i
                             class="fa fa-edit m-right-xs"></i>&nbsp;{{trans('backend.update')}}</a>
-                <a href="{{route('technical.index')}}" class="btn btn-primary">{{trans('backend.back')}}</a>
+                <a href="{{route('admins.index')}}" class="btn btn-primary">{{trans('backend.back')}}</a>
 
                 <br/>
 

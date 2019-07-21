@@ -120,13 +120,13 @@ class HolidaysController extends Controller
                 if ($data->active==0)
                 {
                     return '
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="holidays/' . $data->id . '">'.trans('backend.dis_active').'</button>
+              <button class="btn btn-delete btn btn-square  btn-danger" data-remote="holidays/' . $data->id . '">'.trans('backend.dis_active').'</button>
     
                 ';
                 }
              else{
                  return '
-              <button class="btn btn-delete btn btn-round  btn-success" data-remote="holidays/' . $data->id . '">'.trans('backend.active').'</button>
+              <button class="btn btn-delete btn btn-square  btn-success" data-remote="holidays/' . $data->id . '">'.trans('backend.active').'</button>
     
                 ';
              }

@@ -4,12 +4,129 @@
 
     @php
         $lang= Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale()
-
-
-
     @endphp
 
 
+
+
+
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.cities_update')}}
+                    </h3>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+                {!! Form::open(['route'=>['cities.update',$city->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.city_ar')}}
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="text" class="form-control" name="name_ar"
+                               value="{{$city->name_ar}}"
+                               required
+                               placeholder="{{ trans('backend.name') }}" autocomplete="off">
+
+                    </div>                         
+                       </div>
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.city_en')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="text" class="form-control" name="name_en"
+                               value="{{$city->name_en}}"
+                               required
+                               placeholder="{{ trans('backend.name') }}" autocomplete="off">                           
+                                 </div>
+                </div>
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.nationality')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="country_id" id="heard" class="form-control" >
+                            @foreach($nationality as $c)
+                                <option value="{{$c->id}}" {{($city->country_id==$c->id)?'selected':''}}>
+
+                                    @if($lang=='ar')
+                                        {{$c->name_ar}}
+                                    @else
+                                        {{$c->name_en}}
+                                    @endif
+
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="myBtn">
+                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                        <a href="{{route('cities.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
                     <div class="x_panel">
                         <div class="x_title">
                             <h3>{{trans('backend.cities_update')}}</h3>
@@ -106,7 +223,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection

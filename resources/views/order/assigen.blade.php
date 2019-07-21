@@ -3,7 +3,53 @@
 @section('content')
     @include('partials.messages')
 
-    <div class="x_panel">
+
+
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    {{trans('backend.order_view')}}
+                </h3>
+            </div>
+        </div>
+
+        <div class="kt-portlet__body">
+            <div class="table-responsive">
+
+                <table id="table1" class="table table-striped table-bordered bulk_action table1">
+                    <thead>
+                    <tr>
+                        <th>{{trans('backend.order_id')}}</th>
+                        <th>{{trans('backend.client')}}</th>
+                        <th>{{trans('backend.status_admin')}}</th>
+                        <th>{{trans('backend.date')}}</th>
+                        <th>{{trans('backend.details')}}</th>
+
+                        <th>{{trans('backend.add_techanel')}}</th>
+
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+
+
+
+                    </tbody>
+                </table>
+                <br>
+                <span class="kt-badge kt-badge--danger kt-badge--inline" style="margin-bottom: 30px;
+                font-size: 14px;
+                padding: 15px;">{{trans('backend.desc_assigen_index')}}</span>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="x_panel">
         <div class="x_title">
             <h2>{{trans('backend.order_view')}}</h2>
 
@@ -38,10 +84,13 @@
             </div>
         </div>
     </div>
-    </div>@endsection
+    </div>--}}
+    @endsection 
 @section('scripts')
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{asset('assets/app/custom/general/crud/datatables/advanced/column-rendering.js')}}"></script>
     <script>
         $(function() {
            // var table = $('#example').DataTable();

@@ -117,12 +117,12 @@ class ContactAdminController extends Controller
             ->addColumn('action', function ($data) {
                 if ($data->seen==0)
                 return '
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="contact_admin/' . $data->id . '"><i class="fa fa-eye"></i>'.trans('backend.unseen').'</button>
+              <button class="btn btn-delete btn btn-square  btn-danger" data-remote="contact_admin/' . $data->id . '">'.trans('backend.unseen').'</button>
     
                 ';
                 else
                     return '
-              <button class="btn btn-round  btn-primary" ><i class="fa fa-eye"></i>'.trans('backend.seen').'</button>
+              <button class="btn btn-square  btn-primary" >'.trans('backend.seen').'</button>
     
                 ';
 

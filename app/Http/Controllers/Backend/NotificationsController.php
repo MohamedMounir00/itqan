@@ -127,7 +127,7 @@ class NotificationsController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
                 return '
-              <button class="btn btn-delete btn btn-round  btn-danger" data-remote="notifications/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+              <button class="btn btn-delete btn btn-square  btn-danger" data-remote="notifications/' . $data->id . '">'.trans('backend.delete').'</button>
               
     
                 ';

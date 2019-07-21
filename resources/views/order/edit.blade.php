@@ -3,9 +3,81 @@
 @section('content')
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.add_techanel')}}
+                    </h3>
+                </div>
+            </div>
 
 
-                    <div class="x_panel">
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+                {!! Form::open(['route'=>['order.assien'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+                <div class="row  form-group">
+
+                    <div class="col-sm-12 col-md-10">
+                        <input type="hidden" id="first-name" name="order_id" required class="form-control col-md-7 col-xs-12" value="{{$data->id}}">
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.assigen_order')}}<span
+                        >*</span>
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="technical_id" id="heard" class="form-control" required>
+                            @foreach($users as $user)
+                                <option value="{{$user->user->id}}">{{ $user->user->name .' - '.$user->user->id.' - '.trans('backend.distance').' - '.' km ' .intval($user->distance)}}</option>
+
+
+                            @endforeach
+                        </select>                                </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="myBtn">
+                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.assigen')}}</button>
+                        <a href="{{route('order.show',$data->id)}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+                    {{-- <div class="x_panel">
                         <div class="x_title">
                             <h3>{{trans('backend.add_techanel')}}</h3>
 
@@ -69,7 +141,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection

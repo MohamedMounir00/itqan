@@ -284,11 +284,11 @@ class RescheduledsController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function ($data) {
-                return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-round  btn-primary">'.trans('backend.update').'</a>
-                        <button class="btn btn-delete btn btn-round  btn-success" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
+                return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.update').'</a>
+                        <button class="btn btn-delete btn-success btn-square" data-remote="reschedules/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
             })
             ->addColumn('order', function ($data) {
-                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
 
             ->addColumn('status', function ($data) {
@@ -341,15 +341,15 @@ class RescheduledsController extends Controller
             ->addColumn('action', function ($data) {
                 if ($data->reply==0)
                 {
-                    return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-round  btn-primary">'.trans('backend.update').'</a>
-                <button class="btn btn-delete btn btn-round  btn-success" data-remote="destroy_order/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
+                    return '<a href="' . route('reschedules.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.update').'</a>
+                <button class="btn btn-delete btn-success btn-square" data-remote="destroy_order/' . $data->id . '">'.trans('backend.reschedules').'</button> ';
                 }
                 else
                     return trans('backend.reply_yes');
 
             })
             ->addColumn('order', function ($data) {
-                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>';
+                return '<a href="' . route('order.show', $data->order_id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>';
             })
 
             ->addColumn('status', function ($data) {

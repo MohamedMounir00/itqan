@@ -138,10 +138,10 @@ class MinistriesController extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('ministry-edit'))
-                    $actions.= '<a href="' . route('ministries.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i> '.trans('backend.update').'</a>';
+                    $actions.= '<a href="' . route('ministries.edit', $data->id) . '" class="btn btn-round  btn-primary btn-square"> '.trans('backend.update').'</a>';
                 if (auth()->user()->can('ministry-delete'))
 
-                    $actions.= '   <button class="btn btn-delete btn btn-round  btn-danger" data-remote="ministries/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                    $actions.= '   <button class="btn btn-delete btn   btn-danger btn-square" data-remote="ministries/' . $data->id . '">'.trans('backend.delete').'</button>
     
                 ';
                 return $actions;

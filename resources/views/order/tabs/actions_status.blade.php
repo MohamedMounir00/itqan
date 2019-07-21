@@ -1,6 +1,6 @@
 <div class="table-responsive">
 
-    <table id="table2" class="table table-striped table-bordered bulk_action table1">
+    <table id="table2" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline">
         <thead>
         <tr>
             <th>{{trans('backend.persion')}}</th>

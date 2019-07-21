@@ -136,9 +136,9 @@ class CurrencyControler extends Controller
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('currency-edit'))
-                $actions .= '<a href="' . route('currency.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                $actions .= '<a href="' . route('currency.edit', $data->id) . '" class=" cb btn btn-primary btn-square">'.trans('backend.update').'</a>';
                 if (auth()->user()->can('currency-delete'))
-                    $actions .= '<button class="btn btn-delete btn btn-round  btn-danger" data-remote="currency/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
+                    $actions .= '<button class=" cb btn btn-delete btn btn-danger btn-square" data-remote="currency/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>
     
                 ';
                 return $actions;

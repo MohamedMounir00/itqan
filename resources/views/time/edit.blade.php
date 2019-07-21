@@ -4,6 +4,129 @@
 
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.update')}}
+                    </h3>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body">
+                    {!! Form::open(['route'=>['time_work.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.from')}} 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="number" id="first-name" name="from" required class="form-control" value="{{$data->from}}" placeholder="{{trans('backend.from')}} ">
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.to')}}
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="number" id="first-name" name="to" required class="form-control" value="{{$data->to}}" placeholder="{{trans('backend.to')}}">
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.timing')}} 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select  name="timing" id="heard" class="form-control" >
+                                <option value="am" {{($data->timing=='am')?'selected':''}}>{{trans('backend.am')}}</option>
+                                <option value="pm" {{($data->timing=='pm')?'selected':''}}>{{trans('backend.pm')}}</option>
+
+                            </select>                                  </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.order_by')}}
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="number" class="form-control" name="ordering"
+                                   required  placeholder="{{ trans('backend.order_by') }}" value="{{$data->ordering}}" autocomplete="off" placeholder="{{trans('backend.order_by')}}">
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="form-group">
+                        <div class="myBtn">
+                            <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                            <a href="{{route('time_work.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                        </div>
+                    </div>
+
+                    {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
 
                     <div class="x_panel">
                         <div class="x_title">
@@ -95,7 +218,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection

@@ -4,8 +4,284 @@
 
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.update')}}
+                    </h3>
+                </div>
+            </div>
 
-                    <div class="x_panel">
+
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+
+
+                {!! Form::open(['route'=>['clients.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true,'autocomplete'=>'off']) !!}
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.user_name')}}
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="text" id="first-name" name="name" required class="form-control" value="{{$data->name}}">
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.email')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="email" id="first-name" name="email" required class="form-control" value="{{$data->email}}" autocomplete="new_email">
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.password')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="password" id="first-name" name="password"  class="form-control" autocomplete="new_password">
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.phone')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="number" id="first-name" name="phone" required class="form-control" value="{{$data->phone}}" >
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.verification')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="verification" id="heard" class="form-control"  required>
+                            <option value="1" {{($data->verification=='1')?'selected':''}}>{{trans('backend.active_client')}}</option>
+                            <option value="0" {{($data->verification=='0')?'selected':''}}>{{trans('backend.disactive')}}</option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+                @if($data->client->type=='personal')
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.type_hose')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="house" id="heard" class="form-control"  required>
+                      <option value="flat" {{($data->client->house=='flat')?'selected':''}}>{{trans('backend.flat')}}</option>
+                      <option value="villa" {{($data->client->house=='villa')?'selected':''}}>{{trans('backend.villa')}}</option>
+                      <option value="palace" {{($data->client->house=='palace')?'selected':''}}>{{trans('backend.palace')}}</option>
+                        </select>
+                    </div>
+                </div>
+           @endif
+
+
+
+
+
+
+
+                @if($data->client->type=='government')
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.minstry_of')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="minstry_id" id="heard" class="form-control"  required>
+                            @foreach($ministry as $data1)
+                                <option value="{{$data1->id}}" {{($data->client->minstry_id==$data1->id)?'selected':''}}>{{unserialize($data1->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                @endif
+
+
+
+
+
+
+
+                    @if($data->client->type=='company')
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.company_of')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="company_id" id="heard" class="form-control"  required>
+                            @foreach($company as $data2)
+                                <option value="{{$data2->id}}" {{($data->client->company_id==$data2->id)?'selected':''}}>{{unserialize($data2->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                @endif
+
+
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.nationality')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="form-control m-bot15" name="country_id" required>
+
+                            @foreach($nationality as $c)
+                                @if(app()->getLocale()=='ar')
+                                    <option value="{{$c->id}}" {{($data->country_id==$c->id)?'selected':''}}>{{$c->name_ar}}</option>
+                                @else
+                                    <option value="{{$c->id}}" {{($data->country_id==$c->id)?'selected':''}}>{{$c->name_en}}</option>
+                                @endif>
+                            @endforeach
+
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.upload_image')}} 
+                        </label>
+                        <div class="col-sm-12 col-md-10">
+                            <input id="" class="form-control col-md-7 col-xs-12 dropify"
+                                   name="image"
+                                    type="file">
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.image')}} 
+                        </label>
+                        <div class="col-sm-12 col-md-10">
+                            <div class="image view view-first">
+                                @if($data->image !='')
+
+                                <img controls style="width: 300px; display: block;"src="{{url($data->image)}}">
+                                    @else
+                                    <img controls style="width: 300px; display: block;"src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png">
+
+                                @endif
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="myBtn">
+                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                        <a href="{{route('clients.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    {{-- <div class="x_panel">
                         <div class="x_title">
                             <h3>{{trans('backend.update')}}</h3>
 
@@ -196,7 +472,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection

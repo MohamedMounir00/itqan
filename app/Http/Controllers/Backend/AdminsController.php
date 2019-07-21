@@ -204,7 +204,7 @@ class AdminsController extends Controller
                 if (auth()->user()->id == $data->id) {
 
                     if (auth()->user()->can('admin-edit')) {
-                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>' . trans('backend.update') . '</a>';
+                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-primary btn-square">' . trans('backend.update') . '</a>';
                         return $actions;
 
                     }
@@ -213,12 +213,12 @@ class AdminsController extends Controller
                 else{
                     if (auth()->user()->can('admin-edit')) {
 
-                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>' . trans('backend.update') . '</a>';
+                        $actions .= ' <a href="' . route('admins.edit', $data->id) . '" class="btn btn-primary btn-square">' . trans('backend.update') . '</a>';
                     }
                     if (auth()->user()->can('admin-delete')) {
 
 
-                        $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="admins/' . $data->id . '"><i class="fa fa-remove"></i>' . trans('backend.delete') . '</button>';
+                        $actions .= ' <button class="btn btn-delete btn-danger btn-square" data-remote="admins/' . $data->id . '">' . trans('backend.delete') . '</button>';
                     }
                         return $actions;
 

@@ -9,6 +9,83 @@
 @section('content')
     @include('partials.messages')
 
+
+
+
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    {{trans('backend.update_status_order')}}
+                </h3>
+            </div>
+        </div>
+
+
+        <div class="kt-portlet__body">
+
+            {!! Form::open(['route'=>['order.update_status'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+
+            <div class="row form-group">
+                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.update_status_order')}} 
+                </label>
+                <div class="col-sm-12 col-md-10">
+                    <input type="hidden" name="order_id" value="{{$order->id}}">
+                    <select class="  form-control  "
+                            name="status"  >
+                        <option value="wating" {{($order->status=='wating'?'selected':'')}} >{{trans('api.new_order')}}</option>
+                        <option value="done" {{($order->status=='done'?'selected':'')}} >{{trans('api.done_order')}}</option>
+                        <option value="can_not" {{($order->status=='can_not'?'selected':'')}} >{{trans('api.can_not')}}</option>
+                        <option value="consultation" {{($order->status=='consultation'?'selected':'')}} >{{trans('api.consultation')}}</option>
+                        <option value="delay" {{($order->status=='delay'?'selected':'')}} >{{trans('api.delay')}}</option>
+                        <option value="need_parts" {{($order->status=='need_parts'?'selected':'')}} >{{trans('api.need_parts')}}</option>
+                        <option value="another_visit_works" {{($order->status=='another_visit_works'?'selected':'')}} >{{trans('api.another_visit_works')}}</option>
+
+                    </select>
+                </div>
+            </div>
+
+
+
+
+            <div class="row form-group">
+                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.update_status_order_reason')}} 
+                </label>
+                <div class="col-sm-12 col-md-10">
+                <textarea name="reason" class="form-control " required></textarea>
+                </div>
+            </div>
+
+
+
+            
+            <div class="form-group">
+                <div class="myBtn">
+                    <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                    <button  class="btn btn-primary btn-square"><a style="color: #FFF;" href="{{route('order.show', $order->id)}}
+                                ">{{trans('backend.back')}}</a></button>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>            
+        </div>
+ 
+
+
+
+
+
+
+
+{{-- 
+
+
     <div class="x_panel">
         <div class="x_title">
             <h2>{{trans('backend.update_status_order')}}</h2>
@@ -80,7 +157,7 @@
             {!! Form::close() !!}
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('scripts')
 @endsection

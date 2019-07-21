@@ -158,10 +158,10 @@ if ($data)
             ->addColumn('action', function ($data) {
                 $actions='';
                 if (auth()->user()->can('product-edit'))
-                $actions .= '<a href="' . route('product.edit', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-edit"></i>'.trans('backend.update').'</a>';
+                $actions .= '<a href="' . route('product.edit', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.update').'</a>';
                 if (auth()->user()->can('product-delete'))
-                    $actions .= ' <button class="btn btn-delete btn btn-round  btn-danger" data-remote="product/' . $data->id . '"><i class="fa fa-remove"></i>'.trans('backend.delete').'</button>';
-                $actions .= ' <a href="' . route('product.show', $data->id) . '" class="btn btn-round  btn-primary"><i class="fa fa-eye"></i>'.trans('backend.details').'</a>
+                    $actions .= ' <button class="btn btn-delete btn btn-danger btn-square" data-remote="product/' . $data->id . '">'.trans('backend.delete').'</button>';
+                $actions .= ' <a href="' . route('product.show', $data->id) . '" class="btn btn-primary btn-square">'.trans('backend.details').'</a>
     
                 ';
                 return $actions;
@@ -180,7 +180,7 @@ if ($data)
             })
             ->addColumn('image', function ($data) {
                 $url = asset($data->image);
-                return '<img src=' . $url . ' border="0" width="40" class="img-rounded" align="center"  />';
+                return '<a  href="'. $url .'" data-lightbox="image-1"><img src=' . $url . ' border="0" width="40" class="img-rounded" align="center"  /></a>';
             })
             ->rawColumns(['action', 'name', 'image', 'category', 'currency'])
             ->make(true);

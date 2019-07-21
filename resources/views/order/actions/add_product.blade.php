@@ -4,6 +4,88 @@
 @section('content')
     @include('partials.messages')
 
+
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand flaticon2-line-chart"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    {{trans('backend.store')}}
+                </h3>
+            </div>
+        </div>
+
+        <div class="kt-portlet__body">
+            {!! Form::open(['route'=>['add_product'],'method'=>'POST','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+
+            <div class="row form-group">
+                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.categoriesOfProduct')}} 
+                </label>
+                <div class="col-sm-12 col-md-10">
+                    <input type="hidden" name="order_id" value="{{$id}}">
+                    <select class="  form-control  " data-live-search="true" data-placeholder="Select a State"
+                            name="category_id"  required data-region-id="one" id="cat">
+                        <option value="" >{{trans('backend.chosse_category_product')}}</option>
+                        @foreach($category as $data)
+                            <option value="{{$data->id}}">{{unserialize($data->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+           
+
+
+
+            <div class="row form-group">
+                <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.product')}}
+                </label>
+                <div class="col-sm-12 col-md-10">
+                    <select class="  form-control select2 "
+                            name="product_id[]" required  id="one" multiple style="width: 100%;">
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="myBtn">
+                    <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.save')}}</button>
+                    <button  class="btn btn-primary btn-square"><a style="color:#FFF" href="{{route('order.show', $id)}}
+                                ">{{trans('backend.back')}}</a></button>
+                </div>
+            </div>
+
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
+
     <div class="x_panel">
         <div class="x_title">
             <h2>{{trans('backend.store')}}</h2>
@@ -70,7 +152,7 @@
             {!! Form::close() !!}
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('scripts')
 

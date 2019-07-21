@@ -29,11 +29,12 @@
                             @if(Session::has('errors'))
 
                                 <div class="alert alert-danger " >
-                                    <ul >
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
+                                    <ul >
+
                                         @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
+                                            <li class="myError">{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 </div>

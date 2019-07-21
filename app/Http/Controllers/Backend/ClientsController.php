@@ -193,7 +193,7 @@ class ClientsController extends Controller
                 if (auth()->user()->can('client-edit'))
                     $actions .='<a href="' . route('clients.edit', $data->id) . '" class=" cb btn btn-primary btn-square"> '.trans('backend.update').'</a>';
                 if (auth()->user()->can('client-delete'))
-                    $actions .='<button class=" cb btn btn-danger btn-square" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>';
+                    $actions .='<button class=" cb btn btn-delete btn-danger btn-square" data-remote="clients/' . $data->id . '"><i class="fa fa-remove"></i> '.trans('backend.delete').'</button>';
                 return $actions;
 
             })

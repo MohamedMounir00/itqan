@@ -3,6 +3,81 @@
 @section('content')
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.refused_product')}}
+                    </h3>
+                </div>
+            </div>
+
+
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+        
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+                {!! Form::open(['route'=>['get_product_view.refused_request',$id],'method'=>'DELETE','class'=>'form-horizontal form-label-left ','novalidate','files'=>true]) !!}
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.reason')}}
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="text" id="first-name" name="reason" required class="form-control" placeholder="{{trans('backend.reason')}}">
+                    </div>
+                </div>
+    
+    
+                <div class="form-group">
+                    <div class="myBtn">
+                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.delete')}}</button>
+    
+                    </div>
+                </div>
+    
+                {!! Form::close() !!}
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
 
 
     <div class="x_panel">
@@ -58,7 +133,7 @@
 
 
         </div>
-    </div>
+    </div> --}}
 
 
 @endsection

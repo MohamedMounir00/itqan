@@ -3,7 +3,295 @@
 @section('content')
 
 
+<div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon">
+                        <i class="kt-font-brand flaticon2-line-chart"></i>
+                    </span>
+                    <h3 class="kt-portlet__head-title">
+                            {{trans('backend.update')}}
+                    </h3>
+                </div>
+            </div>
 
+            <div class="kt-portlet__body">
+                    @if(isset($errors) > 0)
+                    @if(Session::has('errors'))
+
+                        <div class="alert alert-danger " >
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <ul >
+
+                                @foreach ($errors->all() as $error)
+                                    <li class="myError">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                @endif
+
+
+                {!! Form::open(['route'=>['technical.update',$data->id],'method'=>'PUT','class'=>'form-horizontal form-label-left ','novalidate','files'=>true,'autocomplete'=>'off']) !!}
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.user_name')}}
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="text" id="first-name" name="name" required class="form-control" value="{{$data->name}}">
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.email')}}
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="email" id="first-name" name="email" required class="form-control" value="{{$data->email}}" autocomplete="new_email">
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.password')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="password" id="first-name" name="password"  class="form-control" autocomplete="new_password">
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.phone')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="number" id="first-name" name="phone" required class="form-control" value="{{$data->phone}}" >
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.identification')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="number" id="first-name" name="identification" required class="form-control" value="{{$data->technical->identification}}" >
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.job')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="category_id" id="heard" class="form-control"  required>
+                            <option value="">{{trans('backend.job')}}</option>
+                            @foreach($main as $data1)
+                                <option value="{{$data1->id}}" {{($data->technical->category_id==$data1->id)?'selected':''}}>{{unserialize($data1->name)[ LaravelLocalization::getCurrentLocale()]}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.experiences')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="experiences" id="heard" class="form-control" required>
+                            <option value="junior" {{($data->technical->role=='junior')?'selected':''}}>{{trans('backend.junior')}}</option>
+                            <option value="senior" {{($data->technical->role=='senior')?'selected':''}}>{{trans('backend.senior')}}</option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.time_id')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select  name="time_id[]" id="heard" class="form-control select2" multiple  required>
+                            @foreach($time as $t)
+                                <option value="{{$t->id}}"
+                                        @foreach($data->time as $t2)
+                                        @if($t2->id == $t->id)
+                                        selected
+                                        @endif
+                                        @endforeach
+                                >
+
+                                    {{trans('backend.from').$t->from .'-'.trans('backend.to').$t->to.'-'.($t->timing=='am' ? trans('backend.am') : trans('backend.pm'))}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.nationality')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="form-control m-bot15" name="country_id" required>
+
+                            @foreach($nationality as $c)
+                                @if(app()->getLocale()=='ar')
+                                    <option value="{{$c->id}}" {{($data->country_id==$c->id)?'selected':''}}>{{$c->name_ar}}</option>
+                                @else
+                                    <option value="{{$c->id}}" {{($data->country_id==$c->id)?'selected':''}}>{{$c->name_en}}</option>
+                                @endif>
+                            @endforeach
+
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group">
+                    <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.city')}} 
+                    </label>
+                    <div class="col-sm-12 col-md-10">
+                        <select class="form-control m-bot15" name="city_id" required>
+
+                            @foreach($cities as $c)
+                                @if(app()->getLocale()=='ar')
+                                    <option value="{{$c->id}}" {{($data->city_id==$c->id)?'selected':''}}>{{$c->name_ar}}</option>
+                                @else
+                                    <option value="{{$c->id}}" {{($data->city_id==$c->id)?'selected':''}}>{{$c->name_en}}</option>
+                                @endif>
+                            @endforeach
+
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="">{{trans('backend.upload_image')}} 
+                        </label>
+                        <div class="col-sm-12 col-md-10">
+                            <input id="" class="form-control col-md-7 col-xs-12 dropify"
+                                   name="image"
+                                    type="file">
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="row form-group">
+                        <label class="col-form-label col-sm-12 col-md-2" for="name">{{trans('backend.image')}} 
+                        </label>
+                        <div class="col-sm-12 col-md-10">
+                            <div class="image view view-first">
+                                @if($data->image !='')
+
+                                <img controls style="width: 300px; display: block;"src="{{url($data->image)}}">
+                                    @else
+                                    <img controls style="width: 300px; display: block;"src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png">
+
+                                @endif
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="myBtn">
+                        <button id="send" type="submit" class="btn btn-success btn-square">{{trans('backend.update')}}</button>
+                        <a href="{{route('technical.index')}}"  class="btn btn-primary btn-square">{{trans('backend.back')}}</a>
+
+                    </div>
+                </div>
+
+                {!! Form::close() !!}
+
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{-- 
 
                     <div class="x_panel">
                         <div class="x_title">
@@ -216,7 +504,7 @@
 
 
                         </div>
-                    </div>
+                    </div> --}}
 
 
 @endsection
