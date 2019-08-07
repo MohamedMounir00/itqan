@@ -65,10 +65,10 @@ class UserController extends Controller
         ]);
 
         // Fire off the internal request.
-        $proxy = Request::create(
-            'oauth/token',
-            'POST'
-        );
+//        $proxy = Request::create(
+//            'oauth/token',
+//            'POST'
+//        );
        $code= Verification::create([
             'user_id'=>$user->id,
             'code'=>mt_rand(1000, 9999)
@@ -110,10 +110,10 @@ Helper::mail($user->email,new VerifyMail($code->code));
         ]);
 
         // Fire off the internal request.
-        $proxy = Request::create(
-            'oauth/token',
-            'POST'
-        );
+//        $proxy = Request::create(
+//            'oauth/token',
+//            'POST'
+//        );
         $code= Verification::create([
             'user_id'=>$user->id,
             'code'=>mt_rand(1000, 9999)
@@ -157,10 +157,10 @@ Helper::mail($user->email,new VerifyMail($code->code));
         ]);
 
         // Fire off the internal request.
-        $proxy = Request::create(
-            'oauth/token',
-            'POST'
-        );
+//        $proxy = Request::create(
+//            'oauth/token',
+//            'POST'
+//        );
         $code= Verification::create([
             'user_id'=>$user->id,
             'code'=>mt_rand(1000, 9999)
@@ -210,10 +210,10 @@ Helper::mail($user->email,new VerifyMail($code->code));
             ]);
 
             // Fire off the internal request.
-            $proxy = Request::create(
-                'oauth/token',
-                'POST'
-            );
+//            $proxy = Request::create(
+//                'oauth/token',
+//                'POST'
+//            );
 
             //return \Route::dispatch($proxy);
             $user['token']    = $user->createToken('MyApp')->accessToken;
